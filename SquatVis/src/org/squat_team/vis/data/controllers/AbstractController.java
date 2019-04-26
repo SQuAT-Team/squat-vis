@@ -10,7 +10,7 @@ import org.squat_team.vis.data.daos.IDao;
 // TODO: JavaDoc
 
 @Dependent
-public abstract class AbstractController<Data, Dao extends IDao<Long, Data>> implements IController<Data, Dao>{
+public abstract class AbstractController<Data, Dao extends IDao<Data>> implements IController<Data, Dao>{
 	protected Data datum;
 	protected List<Data> data;
 	

@@ -1,16 +1,13 @@
 package org.squat_team.vis.data.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Embeddable;
 
 import lombok.Data;
 
-@Entity
+// TODO: Keep?
+@Embeddable
 @Data
 public class ToolConnection {
-	@Id
-	@GeneratedValue
-	private Long id;
-	
+	private String toolName;
+	private String ip;
 }

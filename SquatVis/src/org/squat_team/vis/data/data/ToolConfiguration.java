@@ -13,4 +13,11 @@ public class ToolConfiguration {
 	@GeneratedValue
 	private Long id;
 	
+	private String name;
+	private String toolName;
+	private Boolean hasRealValues;
+	private Boolean hasUtilities;
+	private Boolean hasArchitectures;
+	
+	// TODO: add more
 }

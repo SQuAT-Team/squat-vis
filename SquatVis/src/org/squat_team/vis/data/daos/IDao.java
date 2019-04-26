@@ -3,15 +3,17 @@ package org.squat_team.vis.data.daos;
 import java.util.List;
 
 // TODO: Javadoc
-public abstract class IDao<K, E> {
+public interface IDao<Data> {
 
-	public abstract E newObject();
+	public Data newObject();
 
-	public abstract List<E> list();
+	public List<Data> list();
 
-	public abstract void save(E entity);
+	public Data find(Long id);
+	
+	public void save(Data entity);
 
-	public abstract void update(E entity);
+	public void update(Data entity);
 
-	public abstract void delete(E entity);
+	public void delete(Data entity);
 }

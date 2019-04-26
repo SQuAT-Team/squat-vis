@@ -16,4 +16,10 @@ public class ProjectController extends AbstractController<Project, ProjectDao> {
 	public ProjectDao getService() {
 		return service;
 	}
+	
+	@Override
+	public void add() {
+		getService().save(datum);
+		init();
+	}
 }
