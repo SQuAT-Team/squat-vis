@@ -25,6 +25,7 @@
     </plugins>
   </build>
   <repositories>
+  <!-- DATABASE -->
    	<repository>
         <id>objectdb</id>
         <name>ObjectDB Repository</name>
@@ -32,6 +33,13 @@
    	</repository>
   </repositories>
   <dependencies>
+    <!-- SQUAT VIS CONNECTOR PROJECT -->
+ 	 <dependency>
+  		<groupId>org.squat_team.vis.connector</groupId>
+  		<artifactId>SquatVisToolConnector</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>compile</scope>
+  	</dependency>
   	<!-- AUTOMATIC GETTERS AND SETTERS -->
 	<dependency>
 		<groupId>org.projectlombok</groupId>
@@ -39,11 +47,23 @@
 		<version>1.18.6</version>
 		<scope>provided</scope>
 	</dependency>
-	<!-- JPA: PERSISTENCE -->
+	<!-- DATABASE -->
 	<dependency>
         <groupId>com.objectdb</groupId>
         <artifactId>objectdb</artifactId>
         <version>2.7.6</version>
     </dependency>
+    <!-- JSF UTILITIES -->
+	<dependency>
+    	<groupId>org.omnifaces</groupId>
+    	<artifactId>omnifaces</artifactId>
+    	<version>3.2</version>
+    </dependency>
+    <!-- APPLICATION COMMUNICATION -->
+    <dependency>
+    <groupId>org.jgroups</groupId>
+    <artifactId>jgroups</artifactId>
+    <version>4.0.19.Final</version>
+</dependency>
   </dependencies>
 </project>
