@@ -10,6 +10,7 @@ import org.squat_team.vis.data.data.Project;
 @Named
 @RequestScoped
 public class ProjectController extends AbstractController<Project, ProjectDao> {
+	
 	@EJB
 	private ProjectDao service;
 
