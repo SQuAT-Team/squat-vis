@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <!-- LIBS -->
 <h:outputScript library="lib" name="d3.min.js" target="head"></h:outputScript>
@@ -18,7 +19,7 @@
 </h:head>
 <h:body>
 	#{helloBean.print()}
-	<h2>JSF 2.2 Hello World Example - hello.xhtml</h2>
+	<h2>JSF 2.2 Hello World Example - hello.xhtml</h2>  
 	<h:form>
 		<h:inputText value="#{helloBean.name}"></h:inputText>
 		<h:commandButton value="Welcome Me" action="welcome"></h:commandButton>

@@ -1,69 +1,77 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>SquatVis</groupId>
-  <artifactId>SquatVis</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.1</version>
-        <configuration>
-          <warSourceDirectory>WebContent</warSourceDirectory>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  <repositories>
-  <!-- DATABASE -->
-   	<repository>
-        <id>objectdb</id>
-        <name>ObjectDB Repository</name>
-    	<url>http://m2.objectdb.com</url>
-   	</repository>
-  </repositories>
-  <dependencies>
-    <!-- SQUAT VIS CONNECTOR PROJECT -->
- 	 <dependency>
-  		<groupId>org.squat_team.vis.connector</groupId>
-  		<artifactId>SquatVisToolConnector</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<scope>compile</scope>
-  	</dependency>
-  	<!-- AUTOMATIC GETTERS AND SETTERS -->
-	<dependency>
-		<groupId>org.projectlombok</groupId>
-		<artifactId>lombok</artifactId>
-		<version>1.18.6</version>
-		<scope>provided</scope>
-	</dependency>
-	<!-- DATABASE -->
-	<dependency>
-        <groupId>com.objectdb</groupId>
-        <artifactId>objectdb</artifactId>
-        <version>2.7.6</version>
-    </dependency>
-    <!-- JSF UTILITIES -->
-	<dependency>
-    	<groupId>org.omnifaces</groupId>
-    	<artifactId>omnifaces</artifactId>
-    	<version>3.2</version>
-    </dependency>
-    <!-- APPLICATION COMMUNICATION -->
-    <dependency>
-    <groupId>org.jgroups</groupId>
-    <artifactId>jgroups</artifactId>
-    <version>4.0.19.Final</version>
-</dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>SquatVis</groupId>
+	<artifactId>SquatVis</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.1</version>
+				<configuration>
+					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<!-- DATABASE -->
+		<repository>
+			<id>objectdb</id>
+			<name>ObjectDB Repository</name>
+			<url>http://m2.objectdb.com</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<!-- SQUAT VIS CONNECTOR PROJECT -->
+		<dependency>
+			<groupId>org.squat_team.vis.connector</groupId>
+			<artifactId>SquatVisToolConnector</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- AUTOMATIC GETTERS AND SETTERS -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- DATABASE -->
+		<dependency>
+			<groupId>com.objectdb</groupId>
+			<artifactId>objectdb</artifactId>
+			<version>2.7.6</version>
+		</dependency>
+		<!-- JSF UTILITIES -->
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>3.2</version>
+		</dependency>
+		<!-- APPLICATION COMMUNICATION -->
+		<dependency>
+			<groupId>org.jgroups</groupId>
+			<artifactId>jgroups</artifactId>
+			<version>4.0.19.Final</version>
+		</dependency>
+		<!-- PRIMEFACES UTILITY -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.0</version>
+		</dependency>
+	</dependencies>
 </project>

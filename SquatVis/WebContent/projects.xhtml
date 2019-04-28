@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <!-- LIBS -->
 <h:outputScript library="lib" name="jquery.min.js" target="head"></h:outputScript>
@@ -26,6 +27,8 @@
 	<span class="toggler" data-toggle="list"><span
 		class="entypo-list"></span></span>
 
+							<h:form>
+<h:panelGroup id="projects">
 	<ul class="surveys grid">
 		<ui:repeat var="p" value="#{projectController.data}"
 			varStatus="status">
@@ -35,27 +38,43 @@
 
 				<div class="pull-right">
 
-					<span class="survey-progress" title="#{p.status.getMessage()}"> <span
-						class="survey-progress-bg"> <span
-							class="survey-progress-fg"
-							style="width: #{p.status.getTotalProgress()}%"></span>
-					</span> <span class="survey-progress-labels"> <span
-							class="survey-progress-label">
-								#{p.status.getTotalProgress()}% </span> <span class="survey-completes">
-								#{p.getNumberOfLevels()} / #{p.getNumberOfCandidates()} </span>
+
+					<h:panelGroup styleClass="survey-progress"
+						p:title="#{p.status.getMessage()}">
+						<h:panelGroup styleClass="survey-progress-bg">
+							<h:panelGroup styleClass="survey-progress-fg"
+								style="width: #{p.status.getTotalProgress()}%">
+							</h:panelGroup>
+						</h:panelGroup>
+						<h:panelGroup styleClass="survey-progress-labels">
+
+								<h:panelGroup styleClass="survey-progress-label">
+								#{p.status.getTotalProgress()}% </h:panelGroup>
+
+							<h:panelGroup styleClass="survey-completes">
+								#{p.getNumberOfLevels()} / #{p.getNumberOfCandidates()} </h:panelGroup>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<span class="survey-end-date ended"> 2014 - May 10 </span> <span
+						class="survey-stage"> <span
+						title="#{statusMapper.mapDescription(p.status.getType())}"
+						class="stage active #{statusMapper.map(p.status.getType())}">running</span>
 					</span>
-					</span> <span class="survey-end-date ended"> 2014 - May 10 </span> <span
-						class="survey-stage"> <span title="#{statusMapper.mapDescription(p.status.getType())}" class="stage active #{statusMapper.map(p.status.getType())}">running</span>
-					</span>
-					<h:form>
-						<h:commandButton value="SELECT"
-							action="#{sessionInfo.setSelectedProject(p.id)}"
-							styleClass="button button-blue select-button">
-						</h:commandButton>
-					</h:form>
+					<!--<h:form>-->
+					<h:commandButton value="SELECT"
+						action="#{sessionInfo.setSelectedProject(p.id)}"
+						styleClass="button button-blue select-button">
+					</h:commandButton>
+					<!--  </h:form>-->
 				</div></li>
 		</ui:repeat>
 	</ul>
+</h:panelGroup>
+								<p:poll update="projects" interval="3"/>
+
+							</h:form>
+
 
 	<span class="toggler active" data-toggle="grid"><span
 		class="entypo-layout"></span></span>
