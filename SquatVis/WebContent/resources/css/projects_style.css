@@ -1,5 +1,7 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-@import url(http://weloveiconfonts.com/api/?family=entypo);
+@import url("#{resource['css:lato_google.css']}");
+/* url(http://fonts.googleapis.com/css?family=Lato:300,400,700); */
+@import url("#{resource['css:font_entypo.css']}");
+/* url(http://weloveiconfonts.com/api/?ofamily=entypo);*/
 /* entypo */
 [class*="entypo-"]:before {
   font-family: 'entypo', sans-serif;
