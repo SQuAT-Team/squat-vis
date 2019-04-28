@@ -3,12 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <!-- JAVASCRIPT -->
 <h:outputScript library="js" name="projects_script.js" target="body"></h:outputScript>
 <!-- CSS -->
 <h:outputStylesheet library="css" name="projects_style.css"
+	target="head"></h:outputStylesheet>
+<h:outputStylesheet library="css" name="squat_standard_style.css"
 	target="head"></h:outputStylesheet>
 
 <h:head>
@@ -21,6 +24,40 @@
 		class="entypo-layout"></span></span>
 	<span class="toggler" data-toggle="list"><span
 		class="entypo-list"></span></span>
+
+	<ul class="surveys grid">
+		<ui:repeat var="p" value="#{projectController.data}"
+			varStatus="status">
+			<li class="survey-item"><span class="survey-country list-only">
+					#{p.getToolName()} </span> <span class="survey-name"> #{p.name} </span> <span
+				class="survey-country grid-only"> #{p.getToolName()} </span>
+
+				<div class="pull-right">
+
+					<span class="survey-progress"> <span
+						class="survey-progress-bg"> <span
+							class="survey-progress-fg"
+							style="width: #{p.status.getTotalProgress()}%"></span>
+					</span> <span class="survey-progress-labels"> <span
+							class="survey-progress-label">
+								#{p.status.getTotalProgress()}% </span> <span class="survey-completes">
+								#{p.getNumberOfLevels()} / #{p.getNumberOfCandidates()} </span>
+					</span>
+					</span> <span class="survey-end-date ended"> 2014 - May 10 </span> <span
+						class="survey-stage"> <span class="stage draft">Draft</span>
+						<span class="stage awarded">Awarded</span> <span
+						class="stage live">Live</span> <span class="stage ended active">Ended</span>
+					</span>
+					<h:form>
+						<h:commandButton value="SELECT"
+							action="#{sessionInfo.setSelectedProject(p.id)}"
+							styleClass="button button-blue select-button">
+						</h:commandButton>
+					</h:form>
+				</div></li>
+		</ui:repeat>
+	</ul>
+
 
 	<ul class="surveys grid">
 		<li class="survey-item"><span class="survey-country list-only">
@@ -41,6 +78,7 @@
 					<span class="stage awarded">Awarded</span> <span class="stage live">Live</span>
 					<span class="stage ended active">Ended</span>
 				</span>
+				<button class="button button-blue select-button">SELECT</button>
 			</div></li>
 		<li class="survey-item"><span class="survey-country list-only">
 				US </span> <span class="survey-name"> Pepsi Tracker New Orleans </span> <span
@@ -60,6 +98,7 @@
 					<span class="stage awarded">Awarded</span> <span
 					class="stage live active">Live</span> <span class="stage ended">Ended</span>
 				</span>
+				<button class="button button-blue select-button">SELECT</button>
 			</div></li>
 		<li class="survey-item"><span class="survey-country list-only">
 				US </span> <span class="survey-name"> Global Music Brand Tracker </span> <span
@@ -71,7 +110,17 @@
 					<span class="stage awarded active">Awarded</span> <span
 					class="stage live">Live</span> <span class="stage ended">Ended</span>
 				</span>
+				<h:form>
+					<h:commandButton value="SELECT"
+						action="#{sessionInfo.setSelectedProject(3)}"
+						styleClass="button button-blue select-button">
+					</h:commandButton>
+				</h:form>
 			</div></li>
 	</ul>
+	<h:button value="SELECT" outcome="project"
+		styleClass="button button-blue select-button">
+		<f:param value="1" name="#{sessioninfo.setSelectedProject(3)}" />
+	</h:button>
 </h:body>
 </html>

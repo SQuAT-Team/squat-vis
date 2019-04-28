@@ -25,4 +25,5 @@ public class ProjectDao extends AbstractDao<Project> {
 	public Project newObject() {
 		return new Project();
 	}
+
 }

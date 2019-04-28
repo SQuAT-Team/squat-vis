@@ -122,7 +122,7 @@ body {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  height: 200px;
+  height: 220px;
   width: 250px;
   margin: 10px;
 }
@@ -154,15 +154,26 @@ body {
 .grid .survey-end-date.ended:before {
   content: 'Ended\00a0';
 }
-.grid .survey-progress {
+.grid .select-button {
   display: block;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+.grid .survey-progress {
+  display: block;
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  width: 100%;
   padding: 20px;
   border-top: 1px solid #eee;
+  border-bottom: 3px solid #eee;
   font-size: 13px;
 }
 .grid .survey-progress-bg {
