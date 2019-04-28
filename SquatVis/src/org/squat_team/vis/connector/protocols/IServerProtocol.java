@@ -7,4 +7,5 @@ import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 
 public interface IServerProtocol {
 	public void execute() throws ProtocolFailure, IOException, InvalidRequestException;
+	public IPostProtocolHandler getPostProtocolHandler();
 }

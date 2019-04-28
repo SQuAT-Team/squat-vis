@@ -37,4 +37,9 @@ public class UpdateStatusServerProtocol extends AbstractServerProtocol {
 	private void transform() throws InvalidRequestException {
 		(new StatusImporter(serverService, connection)).transform(cStatus);
 	}
+	
+	@Override
+	public IPostProtocolHandler getPostProtocolHandler() {
+		return new EmptyPostProtocolHandler();
+	}
 }

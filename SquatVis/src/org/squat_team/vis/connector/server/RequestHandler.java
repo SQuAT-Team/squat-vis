@@ -36,6 +36,7 @@ public class RequestHandler extends Thread {
 			IServerProtocol protocol = protocolDispatcher.dispatch(message);
 			protocol.execute();
 			socket.close();
+			protocol.getPostProtocolHandler().handle();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ProtocolFailure e) {

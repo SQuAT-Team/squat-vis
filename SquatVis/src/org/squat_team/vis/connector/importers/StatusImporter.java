@@ -1,5 +1,7 @@
 package org.squat_team.vis.connector.importers;
 
+import java.util.Date;
+
 import org.squat_team.vis.connector.Connection;
 import org.squat_team.vis.connector.data.CStatus;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
@@ -67,11 +69,17 @@ public class StatusImporter extends AbstractImporter<CStatus, Status> {
 	private Status transformStatus(CStatus cstatus, Status status) {
 		status.setToolProgress(cstatus.getProgress());
 		status.setToolMessage(cstatus.getMessage());
+		updateTimestamps(status);
 		return status;
 	}
-	
+
 	private void update(Project project) {
 		dao.update(project);
+	}
+
+	private void updateTimestamps(Status status) {
+		Date now = new Date();
+		status.setLastUpdate(now);
 	}
 
 }

@@ -108,6 +108,18 @@ body {
 .survey-stage .stage.active {
   background: #a1a1a4;
 }
+.survey-stage .stage.running {
+  background: #10ef26;
+}
+.survey-stage .stage.waiting {
+  background: #fcd003;
+}
+.survey-stage .stage.exception {
+  background: #ff0000;
+}
+.survey-stage .stage.terminated {
+  background: #0080ff;
+}
 .list .list-only {
   display: auto;
 }

@@ -22,7 +22,7 @@ public class Project {
 	private Integer numberOfGoals;
 	// @OneToOne
 	private ToolConfiguration configuration;
-	private Status status;
+	private Status status = new Status();
 	// @OneToOne
 	private Goal goal;
 	@OneToMany

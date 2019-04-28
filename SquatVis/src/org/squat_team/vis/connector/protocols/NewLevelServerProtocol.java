@@ -38,4 +38,9 @@ public class NewLevelServerProtocol extends AbstractServerProtocol {
 		(new LevelImporter(serverService, connection)).transform(cLevel);
 	}
 
+	@Override
+	public IPostProtocolHandler getPostProtocolHandler() {
+		return new NewLevelPostProtocolHandler(serverService, connection);
+	}
+
 }

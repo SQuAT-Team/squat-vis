@@ -56,4 +56,9 @@ public class NewProjectServerProtocol extends AbstractServerProtocol {
 		return new Connection(uniqueId);
 	}
 
+	@Override
+	public IPostProtocolHandler getPostProtocolHandler() {
+		return new EmptyPostProtocolHandler();
+	}
+
 }

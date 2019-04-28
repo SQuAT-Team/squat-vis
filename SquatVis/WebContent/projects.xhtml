@@ -35,7 +35,7 @@
 
 				<div class="pull-right">
 
-					<span class="survey-progress"> <span
+					<span class="survey-progress" title="#{p.status.getMessage()}"> <span
 						class="survey-progress-bg"> <span
 							class="survey-progress-fg"
 							style="width: #{p.status.getTotalProgress()}%"></span>
@@ -45,9 +45,7 @@
 								#{p.getNumberOfLevels()} / #{p.getNumberOfCandidates()} </span>
 					</span>
 					</span> <span class="survey-end-date ended"> 2014 - May 10 </span> <span
-						class="survey-stage"> <span class="stage draft">Draft</span>
-						<span class="stage awarded">Awarded</span> <span
-						class="stage live">Live</span> <span class="stage ended active">Ended</span>
+						class="survey-stage"> <span title="#{statusMapper.mapDescription(p.status.getType())}" class="stage active #{statusMapper.map(p.status.getType())}">running</span>
 					</span>
 					<h:form>
 						<h:commandButton value="SELECT"

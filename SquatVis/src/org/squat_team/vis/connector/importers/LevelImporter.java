@@ -13,6 +13,7 @@ import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
+import org.squat_team.vis.data.data.Status;
 
 public class LevelImporter extends AbstractImporter<CLevel, Level> {
 	private ProjectDao projectDao;
@@ -76,6 +77,12 @@ public class LevelImporter extends AbstractImporter<CLevel, Level> {
 	}
 
 	private void update(Project project) {
+		updateProjectStatus(project);
 		projectDao.update(project);
+	}
+	
+	private void updateProjectStatus(Project project) {
+		Status projectStatus = project.getStatus();
+		projectStatus.notifyLevelFinished();
 	}
 }
