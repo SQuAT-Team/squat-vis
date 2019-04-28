@@ -27,53 +27,56 @@
 	<span class="toggler" data-toggle="list"><span
 		class="entypo-list"></span></span>
 
-							<h:form>
-<h:panelGroup id="projects">
+
 	<ul class="surveys grid">
-		<ui:repeat var="p" value="#{projectController.data}"
-			varStatus="status">
-			<li class="survey-item"><span class="survey-country list-only">
-					#{p.getToolName()} </span> <span class="survey-name"> #{p.name} </span> <span
-				class="survey-country grid-only"> #{p.getToolName()} </span>
+		<h:form>
+			<h:panelGroup id="projects">
+				<ui:repeat var="p" value="#{projectController.data}"
+					varStatus="status">
+					<li class="survey-item"><span class="survey-country list-only">
+							#{p.getToolName()} </span> <span class="survey-name"> #{p.name} </span>
+						<span class="survey-country grid-only"> #{p.getToolName()}
+					</span>
 
-				<div class="pull-right">
+						<div class="pull-right">
 
 
-					<h:panelGroup styleClass="survey-progress"
-						p:title="#{p.status.getMessage()}">
-						<h:panelGroup styleClass="survey-progress-bg">
-							<h:panelGroup styleClass="survey-progress-fg"
-								style="width: #{p.status.getTotalProgress()}%">
-							</h:panelGroup>
-						</h:panelGroup>
-						<h:panelGroup styleClass="survey-progress-labels">
+							<h:panelGroup styleClass="survey-progress"
+								p:title="#{p.status.getMessage()}">
+								<h:panelGroup styleClass="survey-progress-bg">
+									<h:panelGroup styleClass="survey-progress-fg"
+										style="width: #{p.status.getTotalProgress()}%">
+									</h:panelGroup>
+								</h:panelGroup>
+								<h:panelGroup styleClass="survey-progress-labels">
 
-								<h:panelGroup styleClass="survey-progress-label">
+									<h:panelGroup styleClass="survey-progress-label">
 								#{p.status.getTotalProgress()}% </h:panelGroup>
 
-							<h:panelGroup styleClass="survey-completes">
+									<h:panelGroup styleClass="survey-completes">
 								#{p.getNumberOfLevels()} / #{p.getNumberOfCandidates()} </h:panelGroup>
-						</h:panelGroup>
-					</h:panelGroup>
+								</h:panelGroup>
+							</h:panelGroup>
 
-					<span class="survey-end-date ended"> 2014 - May 10 </span> <span
-						class="survey-stage"> <span
-						title="#{statusMapper.mapDescription(p.status.getType())}"
-						class="stage active #{statusMapper.map(p.status.getType())}">running</span>
-					</span>
-					<!--<h:form>-->
-					<h:commandButton value="SELECT"
-						action="#{sessionInfo.setSelectedProject(p.id)}"
-						styleClass="button button-blue select-button">
-					</h:commandButton>
-					<!--  </h:form>-->
-				</div></li>
-		</ui:repeat>
+							<span class="survey-end-date ended"> 2014 - May 10 </span> <span
+								class="survey-stage"> <span
+								title="#{statusMapper.mapDescription(p.status.getType())}"
+								class="stage active #{statusMapper.map(p.status.getType())}">running</span>
+							</span>
+							<!--<h:form>-->
+							<h:commandButton value="SELECT"
+								action="#{sessionInfo.setSelectedProject(p.id)}"
+								styleClass="button button-blue select-button">
+							</h:commandButton>
+							<!--  </h:form>-->
+						</div></li>
+				</ui:repeat>
+			</h:panelGroup>
+			<p:poll update="projects" interval="3" />
+		</h:form>
 	</ul>
-</h:panelGroup>
-								<p:poll update="projects" interval="3"/>
 
-							</h:form>
+
 
 
 	<span class="toggler active" data-toggle="grid"><span
