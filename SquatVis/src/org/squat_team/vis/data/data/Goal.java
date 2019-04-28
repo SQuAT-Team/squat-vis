@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -23,9 +22,15 @@ public class Goal {
 	private Double expectedResponse;
 	private Range range;
 	private int index;
-	
-	@OneToMany
+
 	private List<Goal> children = new ArrayList<Goal>();
 	@ManyToOne
 	private Goal parent;
+
+	public int getNumberOfChildren() {
+		if (children == null) {
+			return 0;
+		}
+		return children.size();
+	}
 }

@@ -22,4 +22,23 @@ public class Status {
 	public static double getVisweight() {
 		return visWeight;
 	}
+
+	public int getTotalProgress() {
+		init();
+		Double totalProgress = 100 * toolWeight * toolProgress + visWeight * visProgress;
+		return limit(totalProgress.intValue());
+	}
+
+	private int limit(int value) {
+		return Math.min(Math.max(value, 0), 100);
+	}
+
+	private void init() {
+		if (toolProgress == null) {
+			toolProgress = 0d;
+		}
+		if (visProgress == null) {
+			visProgress = 0d;
+		}
+	}
 }
