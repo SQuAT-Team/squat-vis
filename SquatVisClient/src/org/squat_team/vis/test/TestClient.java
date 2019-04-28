@@ -21,6 +21,12 @@ public class TestClient {
 	public static void main(String[] args) throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 			InvalidRequestException, InterruptedException {
 		System.out.println("STARTING TEST CLIENT");
+		runStandardProcedure();
+		runUpdateStuckProcedure();
+		System.out.println("SHUTTING DOWN TEST CLIENT");
+	}
+	
+	private static void runStandardProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException, InterruptedException {
 		makeNewProjectRequest();
 		sleep(1000);
 		makeStatusUpdate1();
@@ -28,7 +34,12 @@ public class TestClient {
 		sendLevel0();
 		sleep(1000);
 		sendLevel1();
-		System.out.println("SHUTTING DOWN TEST CLIENT");
+	}
+	
+	private static void runUpdateStuckProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException, InterruptedException {
+		makeNewProjectRequest();
+		sleep(1000);
+		makeStatusUpdate1();
 	}
 
 	private static void makeNewProjectRequest()
