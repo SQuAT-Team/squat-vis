@@ -1,11 +1,10 @@
 language: java
-
+install: true
 matrix:
   include: 
     - os: linux
       jdk: oraclejdk8
-
 script:
-  - mvn -q -B -f SquatVisToolConnector/pom.xml clean verify
-  - mvn -q -B -f SquatVis/pom.xml clean verify
+  - mvn -q -B -f SquatVisToolConnector/pom.xml clean install
+  - mvn -q -B -f SquatVis/pom.xml clean install
   
