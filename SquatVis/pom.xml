@@ -35,6 +35,12 @@
 		</repository>
 	</repositories>
 	<dependencies>
+		<!-- JPA -->
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+			<version>2.1.0</version>
+		</dependency>
 		<!-- SQUAT VIS CONNECTOR PROJECT -->
 		<dependency>
 			<groupId>org.squat_team.vis.connector</groupId>
