@@ -165,7 +165,7 @@ body {
   content: 'Created:\00a0\00a0';
 }
 .grid .survey-end-date.ended:before {
-  content: 'Modified:\00a0';
+  content: 'Updated:\00a0\00a0';
 }
 .grid .select-button {
   display: block;
@@ -260,5 +260,5 @@ body {
   background: #8dc63f;
 }
 .list-button {
-	line-height: 12.5px;
+	line-height: 12px;
 }
