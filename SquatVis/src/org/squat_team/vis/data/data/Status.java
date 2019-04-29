@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Embeddable;
 
+import org.squat_team.vis.util.DateFormatter;
+
 import lombok.Data;
 
 @Data
@@ -12,8 +14,10 @@ public class Status {
 	private static final long TOOL_UPDATE_TIMEOUT = 180000; // 3min
 
 	private static final String TOOL_LEVEL_FINISHED_MESSAGE = "Level finished";
+	private static final String TOOL_NEW_LEVEL_MESSAGE = "Started Search for Alternatives";
 	private static final String VIS_IMPORTING_MESSAGE = "Level Import in progress";
 	private static final String VIS_IMPORT_FINISHED_MESSAGE = "Level Import finished";
+	private static final String VIS_NEW_LEVEL_MESSAGE = "";
 
 	public enum StatusType {
 		RUNNING, WAITING, EXCEPTION, TERMINATED
@@ -22,15 +26,27 @@ public class Status {
 	private static final double toolWeight = 0.9;
 	private static final double visWeight = 0.1;
 
-	private Double toolProgress;
-	private Double visProgress;
-	private String toolMessage;
-	private String visMessage;
+	private Double toolProgress = 0d;
+	private Double visProgress = 0d;
+	private String toolMessage = "";
+	private String visMessage = "";
 	private Date lastUpdate;
 	private Date levelStarted;
 	private Date creationTime;
 	private boolean exception = false;
 	private boolean terminated = false;
+
+	public String getLastUpdate() {
+		return (new DateFormatter()).formatDifference(lastUpdate, new Date());
+	}
+
+	public String getLevelStarted() {
+		return (new DateFormatter()).formatDifference(levelStarted, new Date());
+	}
+
+	public String getCreationTime() {
+		return (new DateFormatter()).formatDifference(creationTime, new Date());
+	}
 
 	public static double getToolweight() {
 		return toolWeight;
@@ -71,11 +87,21 @@ public class Status {
 		this.toolProgress = 1d;
 		this.toolMessage = TOOL_LEVEL_FINISHED_MESSAGE;
 		this.visMessage = VIS_IMPORTING_MESSAGE;
+		lastUpdate = new Date();
 	}
 
 	public void notifyLevelImported() {
 		this.visProgress = 1d;
 		this.toolMessage = VIS_IMPORT_FINISHED_MESSAGE;
+		lastUpdate = new Date();
+	}
+
+	public void notifyNewLevel() {
+		this.visProgress = 0d;
+		this.toolProgress = 0d;
+		this.toolMessage = TOOL_NEW_LEVEL_MESSAGE;
+		this.visMessage = VIS_NEW_LEVEL_MESSAGE;
+		lastUpdate = new Date();
 	}
 
 	public StatusType getType() {

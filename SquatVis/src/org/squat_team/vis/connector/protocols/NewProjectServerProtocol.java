@@ -58,7 +58,7 @@ public class NewProjectServerProtocol extends AbstractServerProtocol {
 
 	@Override
 	public IPostProtocolHandler getPostProtocolHandler() {
-		return new EmptyPostProtocolHandler();
+		return new NewProjectPostProtocol(serverService, connection);
 	}
 
 }
