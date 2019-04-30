@@ -1,10 +1,19 @@
 language: java
 install: true
 matrix:
-  include: 
-    - os: linux
-      jdk: oraclejdk8
+  include:
+  - os: linux
+    jdk: oraclejdk8
 script:
-  - mvn -q -B -f SquatVisToolConnector/pom.xml clean install
-  - mvn -q -B -f SquatVis/pom.xml clean install
-  
+- mvn -q -B -f SquatVisToolConnector/pom.xml clean install
+- mvn -q -B -f SquatVis/pom.xml clean install
+deploy:
+  provider: releases
+  api_key:
+    secure: G/OgzkQG3+e5j+XvvO155yVSUjE2Wy6EvZfdLpgCJIyWr7qvao7RY7oGn8PE6SjOysIMTxPdRzKaIntA65+i7Xf2tMJIWUCC4v+JTek6DjuenR5yb8xNkPFZ7IJSqTuNl2DGm0pLczOb1HzaeAgyV2e2sKL407cLo81jkqZk+lsYbNNisGyshFtcvaOxBkrzfFLQsYY93lDgqgLZemBl760SPBD/tYi/hypk8JKm1/8V3VUPbMy2d2MwQnZ7krzpyOonxxBCxAI/yTVQE7HN33xEG3TBvPmu6LeLdknmxXi3NkYDa4ROkABZHoyTyGPjuRT8vlFWpe8GsIGoODONzOcVqrbNBu9xWBm5HDSA1Rp5yT4wktetiVhzbTqKTeyccnlNW9yKE1rPZwzKL1U7KgsTDtly8xAD+eDRRxObz+RdSob8GC9mMDM2f9XNxl4SU8U1FT4cR9nXVHcf7W19nE2qS9vJjHhJAS/wv971OINX/Yam4lypjFEN2HwnLEI/fQTL3CPutc5G7uS+AvHhQZwyBH6MC8wINQlWC6ai6u26vvQOZ93e+HEM2uiVXRmBzZ9fydPQ+qXVqxRes3WHmWlEWxGZXyQVCNnYMvLd4B+bFToNgtgu7AN/ss8UJlZAn6Rl6/m8ShLiDrZQ2N+feGr+3vaq9glKZlqwY4B5Vgc=
+  file: 
+  - SquatVis/target/SquatVis*.war
+  - SquatVisToolConnector/target/SquatVisToolConnector*.jar
+  on:
+    repo: SQuAT-Team/squat-vis
+    tags: true
