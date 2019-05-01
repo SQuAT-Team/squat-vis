@@ -30,6 +30,7 @@ public class ConnectorServer extends Thread {
 		// Singleton
 	}
 
+	@Override
 	public void run() {
 		try {
 			openSocket();
