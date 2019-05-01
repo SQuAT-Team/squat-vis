@@ -21,8 +21,23 @@ import org.squat_team.vis.connector.exceptions.ProtocolFailure;
  * @param <R> type that should be returned at the end of the protocol execution.
  */
 public interface IClientProtocol<R> extends Callable<R> {
+	/**
+	 * Executes the protocol.
+	 * 
+	 * @throws ProtocolFailure          If the actual communication deviates from
+	 *                                  the specified protocol specification.
+	 * @throws ConnectionFailure        If an error occurred based on the
+	 *                                  communication with the server.
+	 * @throws HostUnreachableException More specific than
+	 *                                  {@link ConnectionFailure}, if a connection
+	 *                                  to the specified server is not possible,
+	 *                                  because the server can not be found.
+	 * @throws InvalidRequestException  If the sent requests caused exceptions,
+	 *                                  e.g., because of missing values or
+	 *                                  constraint violations.
+	 */
 	@Override
-	public R call() throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException;
+	public R call() throws ConnectionFailure, ProtocolFailure, InvalidRequestException;
 
 	/**
 	 * Gets the current configuration of the server that the protocol communicates

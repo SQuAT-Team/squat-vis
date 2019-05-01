@@ -47,7 +47,7 @@ public abstract class AbstractClientProtocol<R> extends AbstractProtocolHelper i
 	}
 
 	@Override
-	public R call() throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
+	public R call() throws ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		R result;
 		try {
 			establishConnection();
