@@ -1,11 +1,9 @@
 package org.squat_team.vis.connector.server;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import javax.inject.Inject;
 
-import org.omnifaces.cdi.Eager;
+import org.omnifaces.cdi.Startup;
 import org.squat_team.vis.data.daos.CandidateDao;
 import org.squat_team.vis.data.daos.GoalDao;
 import org.squat_team.vis.data.daos.LevelDao;
@@ -19,20 +17,18 @@ import lombok.Data;
  * services for the data import.
  */
 @Data
-@Named
-@Eager
-@ApplicationScoped
+@Startup
 public class ConnectorService {
 
-	@EJB
+	@Inject
 	private ProjectDao projectDao;
-	@EJB
+	@Inject
 	private GoalDao goalDao;
-	@EJB
+	@Inject
 	private LevelDao levelDao;
-	@EJB
+	@Inject
 	private CandidateDao candidateDao;
-	@EJB
+	@Inject
 	private ToolConfigurationDao toolConfigurationDao;
 
 	@PostConstruct
