@@ -2,6 +2,14 @@ package org.squat_team.vis.connector.data;
 
 import java.io.Serializable;
 
+import lombok.Data;
+
+/**
+ * Describes the range that the values of a {@link CGoal} can take.
+ * {@link #setComputeMin(Boolean)} and {@link #setComputeMax(Boolean)} can be
+ * used if the server should compute these values.
+ */
+@Data
 public class CRange implements Serializable {
 
 	/**
@@ -13,37 +21,5 @@ public class CRange implements Serializable {
 	private Double rangeMax;
 	private Boolean computeMin;
 	private Boolean computeMax;
-
-	public Double getRangeMin() {
-		return rangeMin;
-	}
-
-	public void setRangeMin(Double rangeMin) {
-		this.rangeMin = rangeMin;
-	}
-
-	public Double getRangeMax() {
-		return rangeMax;
-	}
-
-	public void setRangeMax(Double rangeMax) {
-		this.rangeMax = rangeMax;
-	}
-
-	public Boolean getComputeMin() {
-		return computeMin;
-	}
-
-	public void setComputeMin(Boolean computeMin) {
-		this.computeMin = computeMin;
-	}
-
-	public Boolean getComputeMax() {
-		return computeMax;
-	}
-
-	public void setComputeMax(Boolean computeMax) {
-		this.computeMax = computeMax;
-	}
 
 }

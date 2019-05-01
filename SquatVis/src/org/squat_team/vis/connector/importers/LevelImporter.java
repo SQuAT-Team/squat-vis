@@ -3,7 +3,7 @@ package org.squat_team.vis.connector.importers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CCandidate;
 import org.squat_team.vis.connector.data.CLevel;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
@@ -19,7 +19,7 @@ public class LevelImporter extends AbstractImporter<CLevel, Level> {
 	private ProjectDao projectDao;
 	private LevelDao levelDao;
 
-	public LevelImporter(ConnectorService connectorService, Connection connection) {
+	public LevelImporter(ConnectorService connectorService, ProjectConnector connection) {
 		super(connectorService, connection);
 	}
 

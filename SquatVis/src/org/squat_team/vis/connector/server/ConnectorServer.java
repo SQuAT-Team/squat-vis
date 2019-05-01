@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.logging.Level;
 
-import org.squat_team.vis.connector.DefaultServerConfiguration;
+import org.squat_team.vis.connector.ServerConfiguration;
 
 import lombok.extern.java.Log;
 
@@ -64,7 +64,7 @@ public class ConnectorServer extends Thread {
 
 	private void openSocket() throws IOException {
 		log.log(Level.INFO, "Starting Connector Service");
-		portNumber = DefaultServerConfiguration.getInstance().getPort();
+		portNumber = ServerConfiguration.getDefault().getPort();
 		serverSocket = new ServerSocket(portNumber);
 		log.log(Level.INFO, "Connector Service listening on Port " + portNumber);
 	}

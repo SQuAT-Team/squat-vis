@@ -8,106 +8,155 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import org.squat_team.vis.connector.DefaultServerConfiguration;
+import org.squat_team.vis.connector.ServerConfiguration;
 import org.squat_team.vis.connector.exceptions.ConnectionFailure;
 import org.squat_team.vis.connector.exceptions.HostUnreachableException;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 
-public abstract class AbstractClientProtocol<T> extends AbstractProtocolHelper implements IClientProtocol<T> {
-	private final static Logger LOGGER = Logger.getLogger(AbstractClientProtocol.class.getName());
+import lombok.NonNull;
+import lombok.extern.java.Log;
 
-	private boolean initialized = false;
-	private Socket socket;
+/**
+ * Standard implementation of {@link IClientProtocol} that handles the
+ * connection to the server. Data can be send via {@link #out} and read via
+ * {@link #in}.<br/>
+ * <br/>
+ * If not specified other in
+ * {@link #setServerConfiguration(ServerConfiguration)}, communication is
+ * established to the default {@link ServerConfiguration}.
+ * 
+ * @param <R> type that should be returned at the end of the protocol execution.
+ */
+@Log
+public abstract class AbstractClientProtocol<R> extends AbstractProtocolHelper implements IClientProtocol<R> {
+	private ServerConfiguration serverConfiguration = ServerConfiguration.getDefault();
+	private Socket clientSocket;
 	protected ObjectOutputStream out;
 	protected ObjectInputStream in;
 
 	@Override
-	public T call() throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
-		T result;
+	public ServerConfiguration getServerConfiguration() {
+		return serverConfiguration;
+	}
+
+	@Override
+	public void setServerConfiguration(@NonNull ServerConfiguration serverConfiguration) {
+		this.serverConfiguration = serverConfiguration;
+	}
+
+	@Override
+	public R call() throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
+		R result;
 		try {
 			establishConnection();
 			initializeStreams();
-			checkInitialized();
 			result = executeProtocol();
-		} catch (Exception e) {
-			throw e;
 		} finally {
 			close();
 		}
 		return result;
 	}
 
-	protected abstract T executeProtocol() throws ProtocolFailure, InvalidRequestException;
+	/**
+	 * The protocol that should be executed.
+	 * 
+	 * @return
+	 * @throws ProtocolFailure
+	 * @throws InvalidRequestException
+	 */
+	protected abstract R executeProtocol() throws ProtocolFailure, InvalidRequestException, ConnectionFailure;
 
-	private void establishConnection() throws HostUnreachableException {
-		DefaultServerConfiguration configuration = DefaultServerConfiguration.getInstance();
-		Socket socket = null;
+	/**
+	 * Establishes the connection to the server. If a local server exists, it will
+	 * connect to the local server.
+	 * 
+	 * @throws ConnectionFailure If connection could not be established.
+	 */
+	private void establishConnection() throws ConnectionFailure {
 		try {
-			socket = tryLocalHostConnection(configuration);
+			this.clientSocket = tryLocalHostConnection(serverConfiguration);
 		} catch (UnknownHostException e) {
-			socket = tryRemoteHostConnection(configuration);
+			this.clientSocket = tryRemoteHostConnection(serverConfiguration);
 		}
-		this.socket = socket;
 	}
 
-	private Socket tryLocalHostConnection(DefaultServerConfiguration configuration) throws UnknownHostException {
+	/**
+	 * Tries to establish a connection to a local server.
+	 * 
+	 * @param configuration the server configuration.
+	 * @return the socket that connects to the server.
+	 * @throws UnknownHostException If there is no local server.
+	 * @throws ConnectionFailure    If connection could not be established.
+	 */
+	private Socket tryLocalHostConnection(ServerConfiguration configuration)
+			throws UnknownHostException, ConnectionFailure {
 		Socket socket = null;
 		try {
 			socket = new Socket(configuration.getLocalHost(), configuration.getPort());
-			initialized = true;
 		} catch (IOException e) {
-			initialized = false;
-			log(e);
+			throwConnectionFailure(e);
 		}
 		return socket;
 	}
 
-	private Socket tryRemoteHostConnection(DefaultServerConfiguration configuration) throws HostUnreachableException {
+	/**
+	 * Tries to establish a connection to a remote server.
+	 * 
+	 * @param configuration the server configuration.
+	 * @return the socket that connects to the server.
+	 * @throws ConnectionFailure If connection could not be established.
+	 */
+	private Socket tryRemoteHostConnection(ServerConfiguration configuration) throws ConnectionFailure {
 		Socket socket = null;
 		try {
 			socket = new Socket(configuration.getRemoteHost(), configuration.getPort());
-			initialized = true;
 		} catch (UnknownHostException e) {
 			throw new HostUnreachableException("Can not find a server, neither local nor remote");
 		} catch (IOException e) {
-			initialized = false;
-			log(e);
+			throwConnectionFailure(e);
 		}
 		return socket;
 	}
 
-	private void initializeStreams() {
+	/**
+	 * Initializes the input and output streams for the communication with the
+	 * server.
+	 * 
+	 * @throws ConnectionFailure If streams could not be initialized.
+	 */
+	private void initializeStreams() throws ConnectionFailure {
 		try {
-			this.out = new ObjectOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-			this.in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));
+			this.out = new ObjectOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
+			this.in = new ObjectInputStream(new BufferedInputStream(clientSocket.getInputStream()));
 			this.initializeProtocolHelper(in, out);
 		} catch (IOException e) {
-			initialized = false;
-			log(e);
+			throwConnectionFailure(e);
 		}
 	}
 
-	private void checkInitialized() throws ConnectionFailure {
-		if (!initialized) {
-			throw new ConnectionFailure("No connection to the visualization tool established");
-		}
-	}
-
+	/**
+	 * Closes the connection.
+	 */
 	private void close() {
 		try {
 			out.close();
 			in.close();
-			socket.close();
+			clientSocket.close();
 		} catch (IOException e) {
-			log(e);
+			log.log(Level.WARNING, "Could not close connection after Protocol finished", e);
 		}
 	}
 
-	protected void log(Exception e) {
-		LOGGER.log(Level.WARNING, "Protocol execution stopped by unexpected error", e);
+	/**
+	 * Throws a connection exception.
+	 * 
+	 * @param exception the originating exception
+	 * @throws ConnectionFailure If streams could not be initialized.
+	 */
+	private void throwConnectionFailure(Exception exception) throws ConnectionFailure {
+		throw new ConnectionFailure("No connection to the visualization tool established", exception);
 	}
 
 }

@@ -1,6 +1,6 @@
 package org.squat_team.vis.test;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CGoal;
 import org.squat_team.vis.connector.data.CLevel;
 import org.squat_team.vis.connector.data.CProject;
@@ -16,7 +16,7 @@ import org.squat_team.vis.connector.protocols.UpdateStatusClientProtocol;
 
 public class TestClient {
 
-	private static Connection connection;
+	private static ProjectConnector connection;
 
 	public static void main(String[] args) throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 			InvalidRequestException, InterruptedException {

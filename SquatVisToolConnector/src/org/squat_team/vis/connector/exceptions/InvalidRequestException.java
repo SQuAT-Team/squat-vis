@@ -1,5 +1,10 @@
 package org.squat_team.vis.connector.exceptions;
 
+/**
+ * Is thrown if a server side exception occurred an the server ends the protocol
+ * unfinished. This indicates that something is wrong with the send data, e.g.,
+ * variables not set or constraint violations.
+ */
 public class InvalidRequestException extends Exception {
 
 	/**

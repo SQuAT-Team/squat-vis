@@ -2,6 +2,14 @@ package org.squat_team.vis.connector;
 
 import java.io.Serializable;
 
+import lombok.Data;
+import lombok.NonNull;
+
+/**
+ * Messages are send between the server and client as wrapper for information.
+ * The messages is described in more detail by its {@link MessageType}.
+ */
+@Data
 public class Message implements Serializable {
 	/**
 	 * Generated
@@ -9,37 +17,20 @@ public class Message implements Serializable {
 	private static final long serialVersionUID = 6041040934465134021L;
 
 	private MessageType type;
-	private Connection connection;
+	private ProjectConnector projectConnector;
 	private Exception exception;
 
-	public Message(MessageType type, Connection connection) {
+	/**
+	 * Creates a new message.
+	 * 
+	 * @param type             Must not be null.
+	 * @param projectConnector Informs the receiver that the request is associated
+	 *                         to the specified project.
+	 */
+	public Message(@NonNull MessageType type, ProjectConnector projectConnector) {
 		super();
 		this.setType(type);
-		this.setConnection(connection);
-	}
-
-	public MessageType getType() {
-		return type;
-	}
-
-	private void setType(MessageType type) {
-		this.type = type;
-	}
-
-	public Connection getConnection() {
-		return connection;
-	}
-
-	private void setConnection(Connection connection) {
-		this.connection = connection;
-	}
-
-	public Exception getException() {
-		return exception;
-	}
-
-	public void setException(Exception exception) {
-		this.exception = exception;
+		this.setProjectConnector(projectConnector);
 	}
 
 }

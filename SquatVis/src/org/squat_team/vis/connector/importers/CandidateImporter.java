@@ -1,6 +1,6 @@
 package org.squat_team.vis.connector.importers;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CCandidate;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.server.ConnectorService;
@@ -10,7 +10,7 @@ import org.squat_team.vis.data.data.Candidate;
 public class CandidateImporter extends AbstractImporter<CCandidate, Candidate> {
 	private CandidateDao dao;
 
-	public CandidateImporter(ConnectorService connectorService, Connection connection) {
+	public CandidateImporter(ConnectorService connectorService, ProjectConnector connection) {
 		super(connectorService, connection);
 	}
 

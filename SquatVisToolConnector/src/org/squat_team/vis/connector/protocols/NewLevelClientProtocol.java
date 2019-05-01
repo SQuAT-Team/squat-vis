@@ -2,43 +2,39 @@ package org.squat_team.vis.connector.protocols;
 
 import java.io.IOException;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.Message;
 import org.squat_team.vis.connector.MessageType;
 import org.squat_team.vis.connector.data.CLevel;
-import org.squat_team.vis.connector.exceptions.InvalidRequestException;
-import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 
-public class NewLevelClientProtocol extends AbstractClientProtocol<Boolean> {
+import lombok.NonNull;
+
+/**
+ * A protocol that sends a full level of search to the server. In tools capable
+ * of interactive optimization, this is the step before user interaction can
+ * take place.<br/>
+ * <br/>
+ * Another level can be send after this protocol finished.
+ */
+public class NewLevelClientProtocol extends AbstractSimpleClientProtocol {
 	private CLevel level;
-	private Connection connection;
+	private ProjectConnector projectConnector;
 
-	public NewLevelClientProtocol(CLevel level, Connection connection) {
+	/**
+	 * Initializes the protocol.
+	 * 
+	 * @param level            the level to send. Must not be null!
+	 * @param projectConnector the project the level will be pushed to.
+	 */
+	public NewLevelClientProtocol(@NonNull CLevel level, ProjectConnector projectConnector) {
 		super();
-		if (level == null) {
-			throw new IllegalArgumentException("Provided level must not be null");
-		}
 		this.level = level;
-		this.connection = connection;
+		this.projectConnector = projectConnector;
 	}
 
 	@Override
-	protected Boolean executeProtocol() throws ProtocolFailure, InvalidRequestException {
-		boolean success = false;
-		try {
-			sendRequests();
-			Message response = receive(Message.class);
-			if (response.getType().equals(MessageType.ACCEPT)) {
-				success = true;
-			}
-		} catch (IOException e) {
-			log(e);
-		}
-		return success;
-	}
-
-	private void sendRequests() throws IOException {
-		Message request = new Message(MessageType.SEND_NEW_LEVEL, connection);
+	protected void sendRequests() throws IOException {
+		Message request = new Message(MessageType.SEND_NEW_LEVEL, projectConnector);
 		send(request);
 		send(level);
 	}

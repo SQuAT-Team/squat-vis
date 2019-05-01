@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.Message;
 import org.squat_team.vis.connector.MessageType;
 import org.squat_team.vis.connector.server.ConnectorService;
@@ -13,9 +13,9 @@ public abstract class AbstractServerProtocol extends AbstractProtocolHelper impl
 	protected ObjectInputStream in;
 	protected ObjectOutputStream out;
 	protected ConnectorService connectorService;
-	protected Connection connection;
+	protected ProjectConnector connection;
 
-	public AbstractServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService, Connection connection) {
+	public AbstractServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService, ProjectConnector connection) {
 		super();
 		this.in = in;
 		this.out = out;
@@ -24,12 +24,12 @@ public abstract class AbstractServerProtocol extends AbstractProtocolHelper impl
 		this.initializeProtocolHelper(in, out);
 	}
 	
-	protected void respondAccept(Connection connection) throws IOException {
+	protected void respondAccept(ProjectConnector connection) throws IOException {
 		Message response = new Message(MessageType.ACCEPT, connection);
 		send(response);
 	}
 
-	protected void respondDeclineWithException(Connection connection, Exception e) throws IOException {
+	protected void respondDeclineWithException(ProjectConnector connection, Exception e) throws IOException {
 		Message response = new Message(MessageType.DECLINE, connection);
 		response.setException(e);
 		send(response);

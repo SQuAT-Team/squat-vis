@@ -4,6 +4,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.squat_team.vis.connector.ProjectConnector;
+
+import lombok.Data;
+
+/**
+ * An architectural candidate. All values have to be set. <br/>
+ * <br/>
+ * Note that {@link #setCandidateId(Long)} must be a unique identifier within a
+ * {@link ProjectConnector}. <br/>
+ * {@link #setRealValues(List)} and {@link #setUtilityValues(List)} must be set
+ * in the same order as the {@link CGoal}s in {@link CProject}. Only the
+ * {@link CGoal}s without children are considered.
+ */
+@Data
 public class CCandidate implements Serializable {
 	/**
 	 * Generated
@@ -12,56 +26,9 @@ public class CCandidate implements Serializable {
 
 	private Long candidateId;
 	private Long parentId;
-	private List<Double> realValues = new ArrayList<Double>();
-	private List<Double> utilityValues = new ArrayList<Double>();
+	private List<Double> realValues = new ArrayList<>();
+	private List<Double> utilityValues = new ArrayList<>();
 	private boolean isRealValuePareto = false;
 	private boolean isUtilityValuePareto = false;
 
-	public Long getCandidateId() {
-		return candidateId;
-	}
-
-	public void setCandidateId(Long candidateId) {
-		this.candidateId = candidateId;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
-	public List<Double> getRealValues() {
-		return realValues;
-	}
-
-	public void setRealValues(List<Double> realValues) {
-		this.realValues = realValues;
-	}
-
-	public List<Double> getUtilityValues() {
-		return utilityValues;
-	}
-
-	public void setUtilityValues(List<Double> utilityValues) {
-		this.utilityValues = utilityValues;
-	}
-
-	public boolean isRealValuePareto() {
-		return isRealValuePareto;
-	}
-
-	public void setRealValuePareto(boolean isRealValuePareto) {
-		this.isRealValuePareto = isRealValuePareto;
-	}
-
-	public boolean isUtilityValuePareto() {
-		return isUtilityValuePareto;
-	}
-
-	public void setUtilityValuePareto(boolean isUtilityValuePareto) {
-		this.isUtilityValuePareto = isUtilityValuePareto;
-	}
 }

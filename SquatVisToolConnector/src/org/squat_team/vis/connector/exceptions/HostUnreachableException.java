@@ -1,6 +1,13 @@
 package org.squat_team.vis.connector.exceptions;
 
-public class HostUnreachableException extends Exception {
+import org.squat_team.vis.connector.ServerConfiguration;
+
+/**
+ * More specific than {@link ConnectionFailure}. Is thrown when the server
+ * specified by {@link ServerConfiguration} can not be found. This indicates
+ * that the configuration is wrong or the server is down.
+ */
+public class HostUnreachableException extends ConnectionFailure {
 
 	/**
 	 * Generated

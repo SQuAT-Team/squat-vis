@@ -2,7 +2,7 @@ package org.squat_team.vis.connector.importers;
 
 import java.util.List;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CGoal;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.server.ConnectorService;
@@ -17,7 +17,7 @@ public class GoalImporter extends AbstractImporter<CGoal, Goal> {
 	private GoalDao goalDao;
 	private int currentNumberOfGoals = 0;
 
-	public GoalImporter(ConnectorService connectorService, Connection connection) {
+	public GoalImporter(ConnectorService connectorService, ProjectConnector connection) {
 		super(connectorService, connection);
 	}
 

@@ -3,7 +3,7 @@ package org.squat_team.vis.connector.protocols;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.Message;
 import org.squat_team.vis.connector.MessageType;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
@@ -23,7 +23,7 @@ public class ServerProtocolDispatcher implements IServerProtocolDispatcher {
 	@Override
 	public IServerProtocol dispatch(Message message) throws ProtocolFailure {
 		MessageType type = message.getType();
-		Connection connection = message.getConnection();
+		ProjectConnector connection = message.getProjectConnector();
 		IServerProtocol protocol = null;
 		switch (type) {
 		case REQUEST_NEW_PROJECT:

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CLevel;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
@@ -15,7 +15,7 @@ public class NewLevelServerProtocol extends AbstractServerProtocol {
 	private CLevel cLevel;
 
 	public NewLevelServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService,
-			Connection connection) {
+			ProjectConnector connection) {
 		super(in, out, connectorService, connection);
 	}
 

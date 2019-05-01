@@ -4,6 +4,7 @@ import org.squat_team.vis.connector.data.CGoal;
 import org.squat_team.vis.connector.data.CProject;
 import org.squat_team.vis.connector.data.CRange;
 import org.squat_team.vis.connector.data.CToolConfiguration;
+import org.squat_team.vis.connector.data.DefaultToolConfigurations;
 
 public class TestNewProjectDataProvider {
 	private static final String PROJECT_NAME = "Default Test Project";
@@ -27,9 +28,9 @@ public class TestNewProjectDataProvider {
 	private static final double SCENARIO_2_QA_2_RESPONSE = 530;
 
 	public CToolConfiguration getConfiguration() {
-		return CToolConfiguration.getTestDefaultConfiguration();
+		return DefaultToolConfigurations.getInstance().getTestDefaultConfiguration();
 	}
-	
+
 	public CProject getProject() {
 		CProject project = new CProject(PROJECT_NAME);
 		return project;

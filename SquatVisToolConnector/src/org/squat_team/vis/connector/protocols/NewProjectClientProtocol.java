@@ -2,20 +2,33 @@ package org.squat_team.vis.connector.protocols;
 
 import java.io.IOException;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.Message;
 import org.squat_team.vis.connector.MessageType;
 import org.squat_team.vis.connector.data.CGoal;
 import org.squat_team.vis.connector.data.CProject;
 import org.squat_team.vis.connector.data.CToolConfiguration;
+import org.squat_team.vis.connector.exceptions.ConnectionFailure;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 
-public class NewProjectClientProtocol extends AbstractClientProtocol<Connection> {
+/**
+ * A protocol that initializes a new project. Data has to be pushed to the
+ * project with {@link NewLevelClientProtocol} after the project has been
+ * created.
+ */
+public class NewProjectClientProtocol extends AbstractClientProtocol<ProjectConnector> {
 	private CProject project;
 	private CToolConfiguration configuration;
 	private CGoal goal;
 
+	/**
+	 * Initializes the protocol.
+	 * 
+	 * @param project       the project to create.
+	 * @param configuration the configuration of the used optimization tool.
+	 * @param goal          the goals that are set for this project.
+	 */
 	public NewProjectClientProtocol(CProject project, CToolConfiguration configuration, CGoal goal) {
 		super();
 		if (project == null) {
@@ -30,13 +43,13 @@ public class NewProjectClientProtocol extends AbstractClientProtocol<Connection>
 	}
 
 	@Override
-	protected Connection executeProtocol() throws ProtocolFailure, InvalidRequestException {
-		Connection connection = null;
+	protected ProjectConnector executeProtocol() throws ProtocolFailure, InvalidRequestException, ConnectionFailure {
+		ProjectConnector connection = null;
 		try {
 			sendRequests();
-			connection = receive(Connection.class);
+			connection = receive(ProjectConnector.class);
 		} catch (IOException e) {
-			log(e);
+			throw new ConnectionFailure("", e);
 		}
 		return connection;
 	}

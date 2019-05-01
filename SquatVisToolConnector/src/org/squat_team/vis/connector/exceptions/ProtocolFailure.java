@@ -1,5 +1,10 @@
 package org.squat_team.vis.connector.exceptions;
 
+/**
+ * Thrown when something unexpected happened that does not correspond to the
+ * protocol. Reasons can be a bug in the protocol or a version mismatch between
+ * server and client side protocols.
+ */
 public class ProtocolFailure extends Exception {
 
 	/**

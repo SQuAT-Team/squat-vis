@@ -1,5 +1,11 @@
 package org.squat_team.vis.connector.exceptions;
 
+import org.squat_team.vis.connector.protocols.IClientProtocol;
+
+/**
+ * Thrown when something went wrong with building up a connection during the run
+ * of a {@link IClientProtocol}.
+ */
 public class ConnectionFailure extends Exception {
 
 	/**

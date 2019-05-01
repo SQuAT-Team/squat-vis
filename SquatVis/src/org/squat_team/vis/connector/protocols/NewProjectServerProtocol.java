@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CGoal;
 import org.squat_team.vis.connector.data.CProject;
 import org.squat_team.vis.connector.data.CToolConfiguration;
@@ -20,7 +20,7 @@ public class NewProjectServerProtocol extends AbstractServerProtocol {
 	private CProject cProject;
 	private CToolConfiguration cConfiguration;
 	private Project project;
-	private Connection connection;
+	private ProjectConnector connection;
 	private CGoal cGoal;
 
 	public NewProjectServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService) {
@@ -51,9 +51,9 @@ public class NewProjectServerProtocol extends AbstractServerProtocol {
 		send(connection);
 	}
 
-	private Connection createConnection(Project project) {
+	private ProjectConnector createConnection(Project project) {
 		long uniqueId = project.getId();
-		return new Connection(uniqueId);
+		return new ProjectConnector(uniqueId);
 	}
 
 	@Override

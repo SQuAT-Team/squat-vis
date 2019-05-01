@@ -2,7 +2,7 @@ package org.squat_team.vis.connector.importers;
 
 import java.util.Date;
 
-import org.squat_team.vis.connector.Connection;
+import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CStatus;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.server.ConnectorService;
@@ -13,7 +13,7 @@ import org.squat_team.vis.data.data.Status;
 public class StatusImporter extends AbstractImporter<CStatus, Status> {
 	private ProjectDao dao;
 
-	public StatusImporter(ConnectorService connectorService, Connection connection) {
+	public StatusImporter(ConnectorService connectorService, ProjectConnector connection) {
 		super(connectorService, connection);
 	}
 
