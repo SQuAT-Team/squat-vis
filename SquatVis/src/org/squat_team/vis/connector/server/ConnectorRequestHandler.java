@@ -32,27 +32,51 @@ public class ConnectorRequestHandler extends Thread {
 		this.connectorService = connectorService;
 	}
 
+	/**
+	 * Executes the correct protocol and initializes the analysis of the imported
+	 * data.
+	 */
+	@Override
 	public void run() {
 		try (ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 				ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));) {
-			Message message = getMessage(in);
-			IServerProtocolDispatcher protocolDispatcher = new ServerProtocolDispatcher(in, out, connectorService);
-			IServerProtocol protocol = protocolDispatcher.dispatch(message);
+			IServerProtocol protocol = determineCorrectProtocol(in, out);
 			protocol.execute();
-			socket.close();
 			protocol.getPostProtocolHandler().handle();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ProtocolFailure e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException | ProtocolFailure | InvalidRequestException e) {
+			log.log(Level.SEVERE, "An exception occurred during request handling", e);
+		} finally {
+			close(socket);
 		}
 	}
 
-	private Message getMessage(ObjectInputStream in) throws ProtocolFailure, IOException {
+	/**
+	 * Determines which protocol to use.
+	 * 
+	 * @param in  the input connection to the client
+	 * @param out the output connection to the client
+	 * @return the determined protocol
+	 * @throws ProtocolFailure if the actual communication deviates from the
+	 *                         protocol
+	 * @throws IOException     if an exception related to the connection occurred.
+	 */
+	private IServerProtocol determineCorrectProtocol(ObjectInputStream in, ObjectOutputStream out)
+			throws ProtocolFailure, IOException {
+		Message message = receiveMessage(in);
+		IServerProtocolDispatcher protocolDispatcher = new ServerProtocolDispatcher(in, out, connectorService);
+		return protocolDispatcher.dispatch(message);
+	}
+
+	/**
+	 * Receives a message.
+	 * 
+	 * @param in the input connection to the client
+	 * @return the received message
+	 * @throws ProtocolFailure if the actual communication deviates from the
+	 *                         protocol
+	 * @throws IOException     if an exception related to the connection occurred.
+	 */
+	private Message receiveMessage(ObjectInputStream in) throws ProtocolFailure, IOException {
 		Message message;
 		Object receivedObject;
 		try {
@@ -72,5 +96,20 @@ public class ConnectorRequestHandler extends Thread {
 			throw e;
 		}
 		return message;
+	}
+
+	/**
+	 * Closes the socket or logs if not possible.
+	 * 
+	 * @param socket the socket to close.
+	 */
+	private void close(Socket socket) {
+		try {
+			if (socket != null) {
+				socket.close();
+			}
+		} catch (IOException e) {
+			log.log(Level.WARNING, "An exception occurred while trying to close the socket", e);
+		}
 	}
 }
