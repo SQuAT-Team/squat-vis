@@ -3,15 +3,15 @@ package org.squat_team.vis.connector.importers;
 import org.squat_team.vis.connector.Connection;
 import org.squat_team.vis.connector.data.CCandidate;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.CandidateDao;
 import org.squat_team.vis.data.data.Candidate;
 
 public class CandidateImporter extends AbstractImporter<CCandidate, Candidate> {
 	private CandidateDao dao;
 
-	public CandidateImporter(ServerService serverService, Connection connection) {
-		super(serverService, connection);
+	public CandidateImporter(ConnectorService connectorService, Connection connection) {
+		super(connectorService, connection);
 	}
 
 	@Override
@@ -49,6 +49,6 @@ public class CandidateImporter extends AbstractImporter<CCandidate, Candidate> {
 	}
 
 	private void findDao() {
-		this.dao = serverService.getCandidateDao();
+		this.dao = connectorService.getCandidateDao();
 	}
 }

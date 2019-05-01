@@ -3,13 +3,13 @@ package org.squat_team.vis.connector.importers;
 import org.squat_team.vis.connector.Connection;
 import org.squat_team.vis.connector.data.CRange;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.data.Range;
 
 public class RangeImporter extends AbstractImporter<CRange, Range> {
 
-	public RangeImporter(ServerService serverService, Connection connection) {
-		super(serverService, connection);
+	public RangeImporter(ConnectorService connectorService, Connection connection) {
+		super(connectorService, connection);
 	}
 
 	@Override

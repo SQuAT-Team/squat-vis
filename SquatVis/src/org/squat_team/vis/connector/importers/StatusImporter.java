@@ -5,7 +5,7 @@ import java.util.Date;
 import org.squat_team.vis.connector.Connection;
 import org.squat_team.vis.connector.data.CStatus;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.data.data.Status;
@@ -13,8 +13,8 @@ import org.squat_team.vis.data.data.Status;
 public class StatusImporter extends AbstractImporter<CStatus, Status> {
 	private ProjectDao dao;
 
-	public StatusImporter(ServerService serverService, Connection connection) {
-		super(serverService, connection);
+	public StatusImporter(ConnectorService connectorService, Connection connection) {
+		super(connectorService, connection);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class StatusImporter extends AbstractImporter<CStatus, Status> {
 	}
 
 	private ProjectDao findDao() {
-		return serverService.getProjectDao();
+		return connectorService.getProjectDao();
 	}
 
 	private void checkProject(Project project) throws InvalidRequestException {

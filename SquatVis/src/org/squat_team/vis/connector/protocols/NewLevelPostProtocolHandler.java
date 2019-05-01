@@ -1,7 +1,7 @@
 package org.squat_team.vis.connector.protocols;
 
 import org.squat_team.vis.connector.Connection;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.data.data.Status;
@@ -10,9 +10,9 @@ public class NewLevelPostProtocolHandler extends AbstractPostProtocolHandler {
 	private ProjectDao projectDao;
 	private Project project;
 
-	public NewLevelPostProtocolHandler(ServerService serverService, Connection connection) {
-		super(serverService,  connection);
-		projectDao = serverService.getProjectDao();
+	public NewLevelPostProtocolHandler(ConnectorService connectorService, Connection connection) {
+		super(connectorService,  connection);
+		this.projectDao = connectorService.getProjectDao();
 		this.project = projectDao.find(connection.getProjectId());
 	}
 

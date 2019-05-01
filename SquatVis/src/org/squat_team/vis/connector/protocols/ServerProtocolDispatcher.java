@@ -7,15 +7,15 @@ import org.squat_team.vis.connector.Connection;
 import org.squat_team.vis.connector.Message;
 import org.squat_team.vis.connector.MessageType;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 
 public class ServerProtocolDispatcher implements IServerProtocolDispatcher {
 	protected ObjectInputStream in;
 	protected ObjectOutputStream out;
-	protected ServerService serverService;
+	protected ConnectorService connectorService;
 
-	public ServerProtocolDispatcher(ObjectInputStream in, ObjectOutputStream out, ServerService serverService) {
-		this.serverService = serverService;
+	public ServerProtocolDispatcher(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService) {
+		this.connectorService = connectorService;
 		this.in = in;
 		this.out = out;
 	}
@@ -27,13 +27,13 @@ public class ServerProtocolDispatcher implements IServerProtocolDispatcher {
 		IServerProtocol protocol = null;
 		switch (type) {
 		case REQUEST_NEW_PROJECT:
-			protocol = new NewProjectServerProtocol(in, out, serverService);
+			protocol = new NewProjectServerProtocol(in, out, connectorService);
 			break;
 		case SEND_STATUS_UPDATE:
-			protocol = new UpdateStatusServerProtocol(in, out, serverService, connection);
+			protocol = new UpdateStatusServerProtocol(in, out, connectorService, connection);
 			break;
 		case SEND_NEW_LEVEL:
-			protocol = new NewLevelServerProtocol(in, out, serverService, connection);
+			protocol = new NewLevelServerProtocol(in, out, connectorService, connection);
 			break;
 		default:
 			throw new ProtocolFailure("Unknown request type " + type);

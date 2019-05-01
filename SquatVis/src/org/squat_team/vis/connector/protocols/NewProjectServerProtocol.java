@@ -13,7 +13,7 @@ import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 import org.squat_team.vis.connector.importers.GoalImporter;
 import org.squat_team.vis.connector.importers.ProjectImporter;
 import org.squat_team.vis.connector.importers.ToolConfigurationImporter;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.data.Project;
 
 public class NewProjectServerProtocol extends AbstractServerProtocol {
@@ -23,8 +23,8 @@ public class NewProjectServerProtocol extends AbstractServerProtocol {
 	private Connection connection;
 	private CGoal cGoal;
 
-	public NewProjectServerProtocol(ObjectInputStream in, ObjectOutputStream out, ServerService serverService) {
-		super(in, out, serverService, null);
+	public NewProjectServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService) {
+		super(in, out, connectorService, null);
 	}
 
 	@Override
@@ -41,10 +41,10 @@ public class NewProjectServerProtocol extends AbstractServerProtocol {
 	}
 
 	private void transform() throws InvalidRequestException {
-		project = (new ProjectImporter(serverService)).transform(cProject);
+		project = (new ProjectImporter(connectorService)).transform(cProject);
 		connection = createConnection(project);
-		(new ToolConfigurationImporter(serverService, connection)).transform(cConfiguration);
-		(new GoalImporter(serverService, connection)).transform(cGoal);
+		(new ToolConfigurationImporter(connectorService, connection)).transform(cConfiguration);
+		(new GoalImporter(connectorService, connection)).transform(cGoal);
 	}
 
 	private void respond() throws IOException {
@@ -58,7 +58,7 @@ public class NewProjectServerProtocol extends AbstractServerProtocol {
 
 	@Override
 	public IPostProtocolHandler getPostProtocolHandler() {
-		return new NewProjectPostProtocol(serverService, connection);
+		return new NewProjectPostProtocol(connectorService, connection);
 	}
 
 }

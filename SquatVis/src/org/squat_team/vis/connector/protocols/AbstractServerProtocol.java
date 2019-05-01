@@ -7,19 +7,19 @@ import java.io.ObjectOutputStream;
 import org.squat_team.vis.connector.Connection;
 import org.squat_team.vis.connector.Message;
 import org.squat_team.vis.connector.MessageType;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 
 public abstract class AbstractServerProtocol extends AbstractProtocolHelper implements IServerProtocol {
 	protected ObjectInputStream in;
 	protected ObjectOutputStream out;
-	protected ServerService serverService;
+	protected ConnectorService connectorService;
 	protected Connection connection;
 
-	public AbstractServerProtocol(ObjectInputStream in, ObjectOutputStream out, ServerService serverService, Connection connection) {
+	public AbstractServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService, Connection connection) {
 		super();
 		this.in = in;
 		this.out = out;
-		this.serverService = serverService;
+		this.connectorService = connectorService;
 		this.connection = connection;
 		this.initializeProtocolHelper(in, out);
 	}

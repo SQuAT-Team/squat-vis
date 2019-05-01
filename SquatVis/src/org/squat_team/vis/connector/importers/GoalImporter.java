@@ -5,7 +5,7 @@ import java.util.List;
 import org.squat_team.vis.connector.Connection;
 import org.squat_team.vis.connector.data.CGoal;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.GoalDao;
 import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Goal;
@@ -17,8 +17,8 @@ public class GoalImporter extends AbstractImporter<CGoal, Goal> {
 	private GoalDao goalDao;
 	private int currentNumberOfGoals = 0;
 
-	public GoalImporter(ServerService serverService, Connection connection) {
-		super(serverService, connection);
+	public GoalImporter(ConnectorService connectorService, Connection connection) {
+		super(connectorService, connection);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class GoalImporter extends AbstractImporter<CGoal, Goal> {
 	}
 
 	private void handleRange(CGoal cgoal, Goal goal) throws InvalidRequestException {
-		RangeImporter rangeImporter = new RangeImporter(serverService, connection);
+		RangeImporter rangeImporter = new RangeImporter(connectorService, connection);
 		Range range = rangeImporter.transform(cgoal.getRange());
 		goal.setRange(range);
 	}
@@ -88,8 +88,8 @@ public class GoalImporter extends AbstractImporter<CGoal, Goal> {
 	}
 
 	private void findDaos() {
-		projectDao = serverService.getProjectDao();
-		goalDao = serverService.getGoalDao();
+		projectDao = connectorService.getProjectDao();
+		goalDao = connectorService.getGoalDao();
 	}
 
 	private Project findProject() {

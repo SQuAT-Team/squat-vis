@@ -9,14 +9,14 @@ import org.squat_team.vis.connector.data.CStatus;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 import org.squat_team.vis.connector.importers.StatusImporter;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 
 public class UpdateStatusServerProtocol extends AbstractServerProtocol {
 	private CStatus cStatus;
 
-	public UpdateStatusServerProtocol(ObjectInputStream in, ObjectOutputStream out, ServerService serverService,
+	public UpdateStatusServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService,
 			Connection connection) {
-		super(in, out, serverService, connection);
+		super(in, out, connectorService, connection);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class UpdateStatusServerProtocol extends AbstractServerProtocol {
 	}
 
 	private void transform() throws InvalidRequestException {
-		(new StatusImporter(serverService, connection)).transform(cStatus);
+		(new StatusImporter(connectorService, connection)).transform(cStatus);
 	}
 	
 	@Override

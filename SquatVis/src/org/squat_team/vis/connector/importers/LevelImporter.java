@@ -7,7 +7,7 @@ import org.squat_team.vis.connector.Connection;
 import org.squat_team.vis.connector.data.CCandidate;
 import org.squat_team.vis.connector.data.CLevel;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.LevelDao;
 import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Candidate;
@@ -19,8 +19,8 @@ public class LevelImporter extends AbstractImporter<CLevel, Level> {
 	private ProjectDao projectDao;
 	private LevelDao levelDao;
 
-	public LevelImporter(ServerService serverService, Connection connection) {
-		super(serverService, connection);
+	public LevelImporter(ConnectorService connectorService, Connection connection) {
+		super(connectorService, connection);
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class LevelImporter extends AbstractImporter<CLevel, Level> {
 	}
 
 	private void findDaos() {
-		projectDao = serverService.getProjectDao();
-		levelDao = serverService.getLevelDao();
+		projectDao = connectorService.getProjectDao();
+		levelDao = connectorService.getLevelDao();
 	}
 
 	private void checkProject(Project project) throws InvalidRequestException {
@@ -63,7 +63,7 @@ public class LevelImporter extends AbstractImporter<CLevel, Level> {
 		Level level = new Level();
 		levels.add(level);
 
-		CandidateImporter candidateImporter = new CandidateImporter(serverService, connection);
+		CandidateImporter candidateImporter = new CandidateImporter(connectorService, connection);
 		for (CCandidate ccandidate : clevel.getCandidates()) {
 			Candidate candidate = candidateImporter.transform(ccandidate);
 			level.getCandidates().add(candidate);

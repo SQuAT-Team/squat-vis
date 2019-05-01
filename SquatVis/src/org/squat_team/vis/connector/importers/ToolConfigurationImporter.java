@@ -2,7 +2,7 @@ package org.squat_team.vis.connector.importers;
 
 import org.squat_team.vis.connector.Connection;
 import org.squat_team.vis.connector.data.CToolConfiguration;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.daos.ToolConfigurationDao;
 import org.squat_team.vis.data.data.Project;
@@ -10,8 +10,8 @@ import org.squat_team.vis.data.data.ToolConfiguration;
 
 public class ToolConfigurationImporter extends AbstractImporter<CToolConfiguration, ToolConfiguration> {
 
-	public ToolConfigurationImporter(ServerService serverService, Connection connection) {
-		super(serverService, connection);
+	public ToolConfigurationImporter(ConnectorService connectorService, Connection connection) {
+		super(connectorService, connection);
 	}
 
 	@Override
@@ -29,14 +29,14 @@ public class ToolConfigurationImporter extends AbstractImporter<CToolConfigurati
 		configuration.setHasRealValues(cconfiguration.hasRealValues());
 		configuration.setHasArchitectures(cconfiguration.hasArchitectures());
 
-		ToolConfigurationDao dao = serverService.getToolConfigurationDao();
+		ToolConfigurationDao dao = connectorService.getToolConfigurationDao();
 		dao.save(configuration);
 
 		return configuration;
 	}
 
 	private void updateProject(ToolConfiguration configuration) {
-		ProjectDao dao = serverService.getProjectDao();
+		ProjectDao dao = connectorService.getProjectDao();
 		Project project = dao.find(connection.getProjectId());
 		project.setConfiguration(configuration);
 		dao.update(project);

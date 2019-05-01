@@ -3,15 +3,15 @@ package org.squat_team.vis.connector.importers;
 import java.util.Date;
 
 import org.squat_team.vis.connector.data.CProject;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.data.data.Status;
 
 public class ProjectImporter extends AbstractImporter<CProject, Project> {
 
-	public ProjectImporter(ServerService serverService) {
-		super(serverService, null);
+	public ProjectImporter(ConnectorService connectorService) {
+		super(connectorService, null);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class ProjectImporter extends AbstractImporter<CProject, Project> {
 		status.setCreationTime(currentDate);
 		status.setLevelStarted(currentDate);
 		status.setLastUpdate(currentDate);
-		ProjectDao dao = serverService.getProjectDao();
+		ProjectDao dao = connectorService.getProjectDao();
 		dao.save(project);
 
 		return project;

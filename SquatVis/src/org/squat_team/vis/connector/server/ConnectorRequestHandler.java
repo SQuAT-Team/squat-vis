@@ -16,23 +16,27 @@ import org.squat_team.vis.connector.protocols.ServerProtocolDispatcher;
 
 import lombok.extern.java.Log;
 
+/**
+ * Handles an incoming requests by a client that implements the Connector
+ * interface.
+ */
 @Log
-public class RequestHandler extends Thread {
+public class ConnectorRequestHandler extends Thread {
 	private Socket socket = null;
 
-	private ServerService serverService;
+	private ConnectorService connectorService;
 
-	public RequestHandler(Socket socket, ServerService serverService) {
+	public ConnectorRequestHandler(Socket socket, ConnectorService connectorService) {
 		super("RequestHandler");
 		this.socket = socket;
-		this.serverService = serverService;
+		this.connectorService = connectorService;
 	}
 
 	public void run() {
 		try (ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 				ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));) {
 			Message message = getMessage(in);
-			IServerProtocolDispatcher protocolDispatcher = new ServerProtocolDispatcher(in, out, serverService);
+			IServerProtocolDispatcher protocolDispatcher = new ServerProtocolDispatcher(in, out, connectorService);
 			IServerProtocol protocol = protocolDispatcher.dispatch(message);
 			protocol.execute();
 			socket.close();

@@ -1,14 +1,14 @@
 package org.squat_team.vis.connector.protocols;
 
 import org.squat_team.vis.connector.Connection;
-import org.squat_team.vis.connector.server.ServerService;
+import org.squat_team.vis.connector.server.ConnectorService;
 
 public abstract class AbstractPostProtocolHandler implements IPostProtocolHandler {
-	protected ServerService serverService;
+	protected ConnectorService connectorService;
 	protected Connection connection;
 
-	public AbstractPostProtocolHandler(ServerService serverService, Connection connection) {
-		this.serverService = serverService;
+	public AbstractPostProtocolHandler(ConnectorService connectorService, Connection connection) {
+		this.connectorService = connectorService;
 		this.connection = connection;
 	}
 

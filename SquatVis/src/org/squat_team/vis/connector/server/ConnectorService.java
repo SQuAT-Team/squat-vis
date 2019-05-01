@@ -14,11 +14,15 @@ import org.squat_team.vis.data.daos.ToolConfigurationDao;
 
 import lombok.Data;
 
+/**
+ * This service starts the {@link ConnectorServer} and holds the database access
+ * services for the data import.
+ */
 @Data
 @Named
 @Eager
 @ApplicationScoped
-public class ServerService {
+public class ConnectorService {
 
 	@EJB
 	private ProjectDao projectDao;
@@ -32,19 +36,10 @@ public class ServerService {
 	private ToolConfigurationDao toolConfigurationDao;
 
 	@PostConstruct
-	public void init() {
-		startConnectorServer();;
-		setDatabaseMode();
-	}
-	
-	private void startConnectorServer() {
-		System.out.println("Starting Connector Service");
-		MainServer server = MainServer.getInstance();
+	public void startConnectorServer() {
+		ConnectorServer server = ConnectorServer.getInstance();
+		server.setConnectorService(this);
 		server.start();
-		server.setRunner(this);
 	}
-	
-	private void setDatabaseMode() {
-		System.setProperty("objectdb.temp.no-detach", "true");
-	}
+
 }
