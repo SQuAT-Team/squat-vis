@@ -18,4 +18,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+		<!-- AUTOMATIC GETTERS AND SETTERS -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.6</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 </project>
