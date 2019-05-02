@@ -19,8 +19,8 @@ public class Candidate {
 	private Long projectId;
 	private Long candidateId;
 	private Candidate parent;
-	private List<Double> realValues = new ArrayList<Double>();
-	private List<Double> utilityValues = new ArrayList<Double>();
+	private List<Double> realValues = new ArrayList<>();
+	private List<Double> utilityValues = new ArrayList<>();
 	private boolean isRealValuePareto = false;
 	private boolean isUtilityValuePareto = false;
 }
