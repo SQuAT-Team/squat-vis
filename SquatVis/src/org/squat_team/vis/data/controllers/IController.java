@@ -2,14 +2,17 @@ package org.squat_team.vis.data.controllers;
 
 import java.util.List;
 
-// TODO: JavaDoc
-
-public interface IController<Data, Dao> {
+/**
+ * Can be used to access database objects from the frontend.
+ *
+ * @param <D> The data object type that should be controlled
+ */
+public interface IController<D> {
 	public void init();
 
 	public void add();
 
-	public Data getDatum();
+	public D getDatum();
 
-	public List<Data> getData();
+	public List<D> getData();
 }

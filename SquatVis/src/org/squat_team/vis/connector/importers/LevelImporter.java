@@ -9,80 +9,86 @@ import org.squat_team.vis.connector.data.CLevel;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.LevelDao;
-import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
-import org.squat_team.vis.data.data.Status;
 
+/**
+ * Imports {@link CLevel}s and returns {@link Level} objects, which are then
+ * stored in the database.
+ */
 public class LevelImporter extends AbstractImporter<CLevel, Level> {
-	private ProjectDao projectDao;
 	private LevelDao levelDao;
 
-	public LevelImporter(ConnectorService connectorService, ProjectConnector connection) {
-		super(connectorService, connection);
+	/**
+	 * Creates a new importer.
+	 * 
+	 * @param connectorService Provides daos for the import
+	 * @param projectConnector Specifies the project the import belongs to
+	 */
+	public LevelImporter(ConnectorService connectorService, ProjectConnector projectConnector) {
+		super(connectorService, projectConnector);
 	}
 
 	@Override
 	public Level transform(CLevel clevel) throws InvalidRequestException {
-		findDaos();
+		findDao();
 		Project project = findProject();
-		checkProject(project);
-		List<Level> levels = findLevels(project);
-		Level level = transformLevel(clevel, levels);
+		Level level = transformLevel(clevel);
 		store(level);
+		List<Level> levels = findLevels(project);
+		levels.add(level);
 		update(project);
 		return level;
 	}
 
-	private Project findProject() {
-		return projectDao.find(connection.getProjectId());
-	}
-
-	private void findDaos() {
-		projectDao = connectorService.getProjectDao();
+	/**
+	 * Sets the required daos in this class.
+	 */
+	private void findDao() {
 		levelDao = connectorService.getLevelDao();
 	}
 
-	private void checkProject(Project project) throws InvalidRequestException {
-		if (project == null) {
-			throw new InvalidRequestException("Could not find requested project");
-		}
-	}
-
+	/**
+	 * Find the list of levels in the project.
+	 * 
+	 * @param project the project to search in.
+	 * @return all levels that are known to the project.
+	 */
 	private List<Level> findLevels(Project project) {
 		List<Level> levels = project.getLevels();
 		if (levels == null) {
-			levels = new ArrayList<Level>();
+			levels = new ArrayList<>();
 			project.setLevels(levels);
 		}
 		return levels;
 	}
 
-	private Level transformLevel(CLevel clevel, List<Level> levels) throws InvalidRequestException {
+	/**
+	 * Applies the transformation on the object level and also imports contained
+	 * candidates.
+	 * 
+	 * @param clevel the level to transform.
+	 * @return the transformed level.
+	 * @throws InvalidRequestException if the specified project is not found
+	 */
+	private Level transformLevel(CLevel clevel) throws InvalidRequestException {
 		Level level = new Level();
-		levels.add(level);
-
-		CandidateImporter candidateImporter = new CandidateImporter(connectorService, connection);
+		CandidateImporter candidateImporter = new CandidateImporter(connectorService, projectConnector);
 		for (CCandidate ccandidate : clevel.getCandidates()) {
 			Candidate candidate = candidateImporter.transform(ccandidate);
 			level.getCandidates().add(candidate);
 		}
-
 		return level;
 	}
 
+	/**
+	 * Stores the level in the database.
+	 * 
+	 * @param level the level to store.
+	 */
 	private void store(Level level) {
 		levelDao.save(level);
 	}
 
-	private void update(Project project) {
-		updateProjectStatus(project);
-		projectDao.update(project);
-	}
-	
-	private void updateProjectStatus(Project project) {
-		Status projectStatus = project.getStatus();
-		projectStatus.notifyLevelFinished();
-	}
 }

@@ -7,15 +7,26 @@ import javax.enterprise.context.Dependent;
 
 import org.squat_team.vis.data.daos.IDao;
 
-// TODO: JavaDoc
-
+/**
+ * Default implementation of the {@link IController} for dao-based database
+ * access. Already implements most standard tasks like getting data from the
+ * database.
+ * 
+ * @param <D> The data object type that should be controlled
+ * @param <O> The corresponding dao type of the data object type
+ */
 @Dependent
-public abstract class AbstractController<Data, Dao extends IDao<Data>> implements IController<Data, Dao>{
-	protected Data datum;
-	protected List<Data> data;
-	
-	protected abstract Dao getService();
-	
+public abstract class AbstractController<D, O extends IDao<D>> implements IController<D> {
+	protected D datum;
+	protected List<D> data;
+
+	/**
+	 * Returns the Dao.
+	 * 
+	 * @return The Dao of the class that should be controlled.
+	 */
+	protected abstract O getService();
+
 	@PostConstruct
 	@Override
 	public void init() {
@@ -30,14 +41,14 @@ public abstract class AbstractController<Data, Dao extends IDao<Data>> implement
 	}
 
 	@Override
-	public Data getDatum() {
+	public D getDatum() {
 		return datum;
 
 	}
 
 	@Override
-	public List<Data> getData() {
+	public List<D> getData() {
 		return data;
 	}
-	
+
 }

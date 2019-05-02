@@ -8,27 +8,63 @@ import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.data.data.Status;
 
+/**
+ * Imports {@link CProject}s and returns {@link Project} objects, which are then
+ * stored in the database.
+ */
 public class ProjectImporter extends AbstractImporter<CProject, Project> {
 
+	/**
+	 * Creates a new importer.
+	 * 
+	 * @param connectorService Provides daos for the import
+	 */
 	public ProjectImporter(ConnectorService connectorService) {
 		super(connectorService, null);
 	}
 
 	@Override
 	public Project transform(CProject cproject) {
+		Project project = transformProject(cproject);
+		ProjectDao dao = connectorService.getProjectDao();
+		dao.save(project);
+		return project;
+	}
+
+	/**
+	 * Applies the transformation on the object level.
+	 * 
+	 * @param cproject the project to transform.
+	 * @return the transformed project.
+	 */
+	private Project transformProject(CProject cproject) {
 		Project project = new Project();
 		project.setName(cproject.getName());
+		handleStatus(project);
+		return project;
+	}
+
+	/**
+	 * Updates the status accordingly.
+	 * 
+	 * @param project
+	 * @return
+	 */
+	private Status handleStatus(Project project) {
 		Date currentDate = new Date();
 		Status status = findStatus(project);
 		status.setCreationTime(currentDate);
 		status.setLevelStarted(currentDate);
 		status.setLastUpdate(currentDate);
-		ProjectDao dao = connectorService.getProjectDao();
-		dao.save(project);
-
-		return project;
+		return status;
 	}
-	
+
+	/**
+	 * Finds the status of a project or creates a new one.
+	 * 
+	 * @param project the project that contains the status.
+	 * @return the status.
+	 */
 	private Status findStatus(Project project) {
 		Status status = project.getStatus();
 		if (status == null) {

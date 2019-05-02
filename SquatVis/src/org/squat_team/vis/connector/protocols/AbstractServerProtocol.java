@@ -13,24 +13,25 @@ public abstract class AbstractServerProtocol extends AbstractProtocolHelper impl
 	protected ObjectInputStream in;
 	protected ObjectOutputStream out;
 	protected ConnectorService connectorService;
-	protected ProjectConnector connection;
+	protected ProjectConnector projectConnector;
 
-	public AbstractServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService, ProjectConnector connection) {
+	public AbstractServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService,
+			ProjectConnector projectConnector) {
 		super();
 		this.in = in;
 		this.out = out;
 		this.connectorService = connectorService;
-		this.connection = connection;
+		this.projectConnector = projectConnector;
 		this.initializeProtocolHelper(in, out);
 	}
-	
-	protected void respondAccept(ProjectConnector connection) throws IOException {
-		Message response = new Message(MessageType.ACCEPT, connection);
+
+	protected void respondAccept(ProjectConnector projectConnector) throws IOException {
+		Message response = new Message(MessageType.ACCEPT, projectConnector);
 		send(response);
 	}
 
-	protected void respondDeclineWithException(ProjectConnector connection, Exception e) throws IOException {
-		Message response = new Message(MessageType.DECLINE, connection);
+	protected void respondDeclineWithException(ProjectConnector projectConnector, Exception e) throws IOException {
+		Message response = new Message(MessageType.DECLINE, projectConnector);
 		response.setException(e);
 		send(response);
 	}

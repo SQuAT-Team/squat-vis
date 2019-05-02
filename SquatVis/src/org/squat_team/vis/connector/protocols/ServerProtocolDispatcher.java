@@ -23,17 +23,17 @@ public class ServerProtocolDispatcher implements IServerProtocolDispatcher {
 	@Override
 	public IServerProtocol dispatch(Message message) throws ProtocolFailure {
 		MessageType type = message.getType();
-		ProjectConnector connection = message.getProjectConnector();
+		ProjectConnector projectConnector = message.getProjectConnector();
 		IServerProtocol protocol = null;
 		switch (type) {
 		case REQUEST_NEW_PROJECT:
 			protocol = new NewProjectServerProtocol(in, out, connectorService);
 			break;
 		case SEND_STATUS_UPDATE:
-			protocol = new UpdateStatusServerProtocol(in, out, connectorService, connection);
+			protocol = new UpdateStatusServerProtocol(in, out, connectorService, projectConnector);
 			break;
 		case SEND_NEW_LEVEL:
-			protocol = new NewLevelServerProtocol(in, out, connectorService, connection);
+			protocol = new NewLevelServerProtocol(in, out, connectorService, projectConnector);
 			break;
 		default:
 			throw new ProtocolFailure("Unknown request type " + type);

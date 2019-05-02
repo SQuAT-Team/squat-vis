@@ -11,36 +11,27 @@ import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 import org.squat_team.vis.connector.importers.LevelImporter;
 import org.squat_team.vis.connector.server.ConnectorService;
 
-public class NewLevelServerProtocol extends AbstractServerProtocol {
+public class NewLevelServerProtocol extends AbstractSimpleServerProtocol {
 	private CLevel cLevel;
 
 	public NewLevelServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService,
-			ProjectConnector connection) {
-		super(in, out, connectorService, connection);
+			ProjectConnector projectConnector) {
+		super(in, out, connectorService, projectConnector);
 	}
 
 	@Override
-	public void execute() throws ProtocolFailure, IOException {
-		try {
-			receive();
-			transform();
-			respondAccept(connection);
-		} catch (InvalidRequestException e) {
-			respondDeclineWithException(connection, e);
-		}
-	}
-
-	private void receive() throws ProtocolFailure, IOException, InvalidRequestException {
+	protected void receive() throws ProtocolFailure, IOException, InvalidRequestException {
 		cLevel = receive(CLevel.class);
 	}
 
-	private void transform() throws InvalidRequestException {
-		(new LevelImporter(connectorService, connection)).transform(cLevel);
+	@Override
+	protected void transform() throws InvalidRequestException {
+		(new LevelImporter(connectorService, projectConnector)).transform(cLevel);
 	}
 
 	@Override
 	public IPostProtocolHandler getPostProtocolHandler() {
-		return new NewLevelPostProtocolHandler(connectorService, connection);
+		return new NewLevelPostProtocolHandler(connectorService, projectConnector);
 	}
 
 }

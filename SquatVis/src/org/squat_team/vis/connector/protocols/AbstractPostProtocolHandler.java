@@ -5,11 +5,11 @@ import org.squat_team.vis.connector.server.ConnectorService;
 
 public abstract class AbstractPostProtocolHandler implements IPostProtocolHandler {
 	protected ConnectorService connectorService;
-	protected ProjectConnector connection;
+	protected ProjectConnector projectConnector;
 
-	public AbstractPostProtocolHandler(ConnectorService connectorService, ProjectConnector connection) {
+	public AbstractPostProtocolHandler(ConnectorService connectorService, ProjectConnector projectConnector) {
 		this.connectorService = connectorService;
-		this.connection = connection;
+		this.projectConnector = projectConnector;
 	}
 
 }

@@ -19,8 +19,6 @@ import org.squat_team.vis.data.data.Project;
 public class NewProjectServerProtocol extends AbstractServerProtocol {
 	private CProject cProject;
 	private CToolConfiguration cConfiguration;
-	private Project project;
-	private ProjectConnector connection;
 	private CGoal cGoal;
 
 	public NewProjectServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService) {
@@ -41,24 +39,24 @@ public class NewProjectServerProtocol extends AbstractServerProtocol {
 	}
 
 	private void transform() throws InvalidRequestException {
-		project = (new ProjectImporter(connectorService)).transform(cProject);
-		connection = createConnection(project);
-		(new ToolConfigurationImporter(connectorService, connection)).transform(cConfiguration);
-		(new GoalImporter(connectorService, connection)).transform(cGoal);
+		Project project = (new ProjectImporter(connectorService)).transform(cProject);
+		projectConnector = createProjectConnector(project);
+		(new ToolConfigurationImporter(connectorService, projectConnector)).transform(cConfiguration);
+		(new GoalImporter(connectorService, projectConnector)).transform(cGoal);
 	}
 
 	private void respond() throws IOException {
-		send(connection);
+		send(projectConnector);
 	}
 
-	private ProjectConnector createConnection(Project project) {
+	private ProjectConnector createProjectConnector(Project project) {
 		long uniqueId = project.getId();
 		return new ProjectConnector(uniqueId);
 	}
 
 	@Override
 	public IPostProtocolHandler getPostProtocolHandler() {
-		return new NewProjectPostProtocol(connectorService, connection);
+		return new NewProjectPostProtocol(connectorService, projectConnector);
 	}
 
 }

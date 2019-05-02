@@ -1,7 +1,8 @@
 	var data = [ 10, 5, 12, 15 ];
 
-	var width = 300
-	scaleFactor = 20, barHeight = 30;
+	var width = 300;
+	var scaleFactor = 20;
+	var barHeight = 30;
 
 	var graph = d3.select("body").append("svg").attr("width", width).attr(
 			"height", barHeight * data.length);
@@ -21,3 +22,4 @@
 	}).attr("y", barHeight / 2).attr("dy", "0.35em").text(function(d) {
 		return d;
 	});
+	

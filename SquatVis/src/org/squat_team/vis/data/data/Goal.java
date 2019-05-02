@@ -23,7 +23,7 @@ public class Goal {
 	private Range range;
 	private int index;
 
-	private List<Goal> children = new ArrayList<Goal>();
+	private List<Goal> children = new ArrayList<>();
 	@ManyToOne
 	private Goal parent;
 

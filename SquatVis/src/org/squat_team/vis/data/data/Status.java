@@ -19,12 +19,12 @@ public class Status {
 	private static final String VIS_IMPORT_FINISHED_MESSAGE = "Level Import finished";
 	private static final String VIS_NEW_LEVEL_MESSAGE = "";
 
+	private static final double TOOL_WEIGHT = 0.9;
+	private static final double VIS_WEIGHT = 0.1;
+
 	public enum StatusType {
 		RUNNING, WAITING, EXCEPTION, TERMINATED
 	}
-
-	private static final double toolWeight = 0.9;
-	private static final double visWeight = 0.1;
 
 	private Double toolProgress = 0d;
 	private Double visProgress = 0d;
@@ -49,16 +49,16 @@ public class Status {
 	}
 
 	public static double getToolweight() {
-		return toolWeight;
+		return TOOL_WEIGHT;
 	}
 
 	public static double getVisweight() {
-		return visWeight;
+		return VIS_WEIGHT;
 	}
 
 	public int getTotalProgress() {
 		init();
-		Double totalProgress = 100 * (toolWeight * toolProgress + visWeight * visProgress);
+		Double totalProgress = 100 * (TOOL_WEIGHT * toolProgress + VIS_WEIGHT * visProgress);
 		return limit(totalProgress.intValue());
 	}
 

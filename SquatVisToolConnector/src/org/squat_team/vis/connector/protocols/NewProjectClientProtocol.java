@@ -44,14 +44,14 @@ public class NewProjectClientProtocol extends AbstractClientProtocol<ProjectConn
 
 	@Override
 	protected ProjectConnector executeProtocol() throws ProtocolFailure, InvalidRequestException, ConnectionFailure {
-		ProjectConnector connection = null;
+		ProjectConnector projectConnector = null;
 		try {
 			sendRequests();
-			connection = receive(ProjectConnector.class);
+			projectConnector = receive(ProjectConnector.class);
 		} catch (IOException e) {
 			throw new ConnectionFailure("", e);
 		}
-		return connection;
+		return projectConnector;
 	}
 
 	private void sendRequests() throws IOException {

@@ -4,33 +4,50 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-public abstract class AbstractDao<Data> implements IDao<Data> {
-	private Class<Data> clazz;
+/**
+ * Default implementation of {@link IDao}. Supports standard tasks, like
+ * {@link #find(Long)}, {@link #save(Object)}, {@link #update(Object)}, and
+ * {@link #delete(Object)}.
+ *
+ * @param <D> The data object type that should be accessed by this dao
+ */
+public abstract class AbstractDao<D> implements IDao<D> {
+	private Class<D> clazz;
 
-	public AbstractDao(Class<Data> clazz) {
+	public AbstractDao(Class<D> clazz) {
 		this.clazz = clazz;
 	}
 
+	/**
+	 * An entity manager actually manages the database access. It must be injected
+	 * in a non-abstract class.
+	 * 
+	 * @return the entity manager
+	 */
 	protected abstract EntityManager getEntityManager();
 
-	public List<Data> list() {
+	@Override
+	public List<D> list() {
 		return getEntityManager().createQuery("SELECT c FROM " + clazz.getName() + " c", clazz).getResultList();
 	}
 
 	@Override
-	public Data find(Long id) {
+	public D find(Long id) {
 		return getEntityManager().find(clazz, id);
 	}
 
-	public void save(Data data) {
+	@Override
+	public void save(D data) {
 		getEntityManager().persist(data);
 	}
 
-	public void update(Data data) {
+	@Override
+	public void update(D data) {
 		getEntityManager().merge(data);
 	}
 
-	public void delete(Data data) {
+	@Override
+	public void delete(D data) {
 		EntityManager em = getEntityManager();
 		em.remove(em.contains(data) ? data : em.merge(data));
 	}

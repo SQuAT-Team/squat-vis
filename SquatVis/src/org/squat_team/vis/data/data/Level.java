@@ -18,7 +18,7 @@ public class Level {
 	private Long id;
 
 	@OneToMany
-	private List<Candidate> candidates = new ArrayList<Candidate>();
+	private List<Candidate> candidates = new ArrayList<>();
 	
 	public int getNumberOfCandidates() {
 		if(candidates == null) {

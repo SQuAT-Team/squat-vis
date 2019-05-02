@@ -16,7 +16,7 @@ import org.squat_team.vis.connector.protocols.UpdateStatusClientProtocol;
 
 public class TestClient {
 
-	private static ProjectConnector connection;
+	private static ProjectConnector projectConnector;
 
 	public static void main(String[] args) throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 			InvalidRequestException, InterruptedException {
@@ -58,9 +58,9 @@ public class TestClient {
 		CGoal goal = testDataProvider.getGoal();
 		CToolConfiguration configuration = testDataProvider.getConfiguration();
 		NewProjectClientProtocol protocol = new NewProjectClientProtocol(project, configuration, goal);
-		connection = protocol.call();
+		projectConnector = protocol.call();
 		System.out.println("FINSIHED REQUEST");
-		System.out.println("RECEIVED CONNECTION WITH ID: " + connection.getProjectId());
+		System.out.println("RECEIVED CONNECTION WITH ID: " + projectConnector.getProjectId());
 	}
 
 	private static void makeStatusUpdate1()
@@ -68,7 +68,7 @@ public class TestClient {
 		System.out.println("UPDATING STATUS");
 		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
 		CStatus status = testDataProvider.getStatus1of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, connection);
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
 		boolean success = protocol.call();
 		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
@@ -78,7 +78,7 @@ public class TestClient {
 		System.out.println("UPDATING STATUS");
 		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
 		CStatus status = testDataProvider.getStatus2of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, connection);
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
 		boolean success = protocol.call();
 		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
@@ -88,7 +88,7 @@ public class TestClient {
 		System.out.println("UPDATING STATUS");
 		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
 		CStatus status = testDataProvider.getStatus3of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, connection);
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
 		boolean success = protocol.call();
 		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
@@ -98,7 +98,7 @@ public class TestClient {
 		System.out.println("UPDATING STATUS");
 		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
 		CStatus status = testDataProvider.getStatus4of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, connection);
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
 		boolean success = protocol.call();
 		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
@@ -108,7 +108,7 @@ public class TestClient {
 		System.out.println("UPDATING STATUS");
 		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
 		CStatus status = testDataProvider.getStatus5of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, connection);
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
 		boolean success = protocol.call();
 		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
@@ -124,7 +124,7 @@ public class TestClient {
 		System.out.println("SEND NEW LEVEL");
 		TestNewLevelDataProvider testDataProvider = new TestNewLevelDataProvider();
 		CLevel level = testDataProvider.getLevel0();
-		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, connection);
+		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector);
 		boolean success = protocol.call();
 		System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
 	}
@@ -134,7 +134,7 @@ public class TestClient {
 		System.out.println("SEND NEW LEVEL");
 		TestNewLevelDataProvider testDataProvider = new TestNewLevelDataProvider();
 		CLevel level = testDataProvider.getLevel1();
-		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, connection);
+		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector);
 		boolean success = protocol.call();
 		System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
 	}

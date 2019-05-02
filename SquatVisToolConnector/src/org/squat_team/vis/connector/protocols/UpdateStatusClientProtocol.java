@@ -14,7 +14,7 @@ import org.squat_team.vis.connector.data.CStatus;
  */
 public class UpdateStatusClientProtocol extends AbstractSimpleClientProtocol {
 	private CStatus status;
-	private ProjectConnector connection;
+	private ProjectConnector projectConnector;
 
 	/**
 	 * Initializes the protocol.
@@ -28,11 +28,12 @@ public class UpdateStatusClientProtocol extends AbstractSimpleClientProtocol {
 			throw new IllegalArgumentException("Provided status must not be null");
 		}
 		this.status = status;
-		this.connection = projectConnector;
+		this.projectConnector = projectConnector;
 	}
 
+	@Override
 	protected void sendRequests() throws IOException {
-		Message request = new Message(MessageType.SEND_STATUS_UPDATE, connection);
+		Message request = new Message(MessageType.SEND_STATUS_UPDATE, projectConnector);
 		send(request);
 		send(status);
 	}

@@ -10,10 +10,10 @@ public class NewProjectPostProtocol extends AbstractPostProtocolHandler {
 	private ProjectDao projectDao;
 	private Project project;
 
-	public NewProjectPostProtocol(ConnectorService connectorService, ProjectConnector connection) {
-		super(connectorService, connection);
+	public NewProjectPostProtocol(ConnectorService connectorService, ProjectConnector projectConnector) {
+		super(connectorService, projectConnector);
 		this.projectDao = connectorService.getProjectDao();
-		this.project = projectDao.find(connection.getProjectId());
+		this.project = projectDao.find(projectConnector.getProjectId());
 	}
 
 	@Override

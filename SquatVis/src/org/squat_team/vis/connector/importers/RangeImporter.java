@@ -6,10 +6,20 @@ import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.data.Range;
 
+/**
+ * Imports {@link CRange}s and returns {@link Range} objects, which are then
+ * stored in the database.
+ */
 public class RangeImporter extends AbstractImporter<CRange, Range> {
 
-	public RangeImporter(ConnectorService connectorService, ProjectConnector connection) {
-		super(connectorService, connection);
+	/**
+	 * Creates a new importer.
+	 * 
+	 * @param connectorService Provides daos for the import
+	 * @param projectConnector Specifies the project the import belongs to
+	 */
+	public RangeImporter(ConnectorService connectorService, ProjectConnector projectConnector) {
+		super(connectorService, projectConnector);
 	}
 
 	@Override
@@ -17,6 +27,16 @@ public class RangeImporter extends AbstractImporter<CRange, Range> {
 		if (crange == null) {
 			return null;
 		}
+		return transformRange(crange);
+	}
+
+	/**
+	 * Applies the transformation on the object level.
+	 * 
+	 * @param crange the range to transform
+	 * @return the transformed range
+	 */
+	private Range transformRange(CRange crange) {
 		Range range = new Range();
 		range.setRangeMin(crange.getRangeMin());
 		range.setRangeMax(crange.getRangeMax());

@@ -26,7 +26,7 @@ public class Project {
 	// @OneToOne
 	private Goal goal;
 	@OneToMany
-	private List<Level> levels = new ArrayList<Level>();
+	private List<Level> levels = new ArrayList<>();
 
 	public String getToolName() {
 		if (configuration == null || configuration.getName() == null || configuration.getName().isEmpty()) {
