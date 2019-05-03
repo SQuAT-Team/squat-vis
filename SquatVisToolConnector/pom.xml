@@ -34,32 +34,17 @@
 						<goals>
 							<goal>instrument</goal>
 						</goals>
-						<configuration>
-							<includes>
-								<include>**/*test*</include>
-							</includes>
-						</configuration>
 					</execution>
 					<execution>
 						<id>default-restore-instrumented-classes</id>
 						<goals>
 							<goal>restore-instrumented-classes</goal>
 						</goals>
-						<configuration>
-							<includes>
-								<include>**/*test*</include>
-							</includes>
-						</configuration>
 					</execution>
 					<execution>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
-						<configuration>
-							<excludes>
-								<exclude>**/*test*</exclude>
-							</excludes>
-						</configuration>
 					</execution>
 					<execution>
 						<id>report</id>
@@ -108,13 +93,13 @@
 			<version>${powermock.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
-        <!--Jacoco required at runtime to build offline coverages-->
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>org.jacoco.agent</artifactId>
-            <version>${jacoco.version}</version>
-            <classifier>runtime</classifier>
-</dependency>
+
+		<!--Jacoco required at runtime to build offline coverages -->
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>org.jacoco.agent</artifactId>
+			<version>${jacoco.version}</version>
+			<classifier>runtime</classifier>
+		</dependency>
 	</dependencies>
 </project>
