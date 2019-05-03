@@ -7,6 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<powermock.version>2.0.2</powermock.version>
+		<jacoco.version>0.8.3</jacoco.version>
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco1.exec</sonar.jacoco.reportPath>
@@ -26,7 +27,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.3</version>
+				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
 						<id>default-instrument</id>
@@ -107,5 +108,13 @@
 			<version>${powermock.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+        <!--Jacoco required at runtime to build offline coverages-->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <version>${jacoco.version}</version>
+            <classifier>runtime</classifier>
+</dependency>
 	</dependencies>
 </project>
