@@ -62,7 +62,7 @@
 					</execution>
 					<execution>
 						<id>report</id>
-						<phase>prepare-package</phase>
+						<phase>prepare-install</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
