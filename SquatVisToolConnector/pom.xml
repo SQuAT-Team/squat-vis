@@ -60,10 +60,17 @@
 							</excludes>
 						</configuration>
 					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>${sonar.jacoco.reportPath}</dataFile>
+						</configuration>
+					</execution>
 				</executions>
-				<configuration>
-					<destFile>${sonar.jacoco.reportPath}</destFile>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
