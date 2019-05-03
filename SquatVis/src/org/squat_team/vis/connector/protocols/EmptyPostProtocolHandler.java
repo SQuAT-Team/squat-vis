@@ -1,6 +1,9 @@
 package org.squat_team.vis.connector.protocols;
 
-public class EmptyPostProtocolHandler extends AbstractPostProtocolHandler{
+/**
+ * The null-version of the {@link AbstractPostProtocolHandler}
+ */
+public class EmptyPostProtocolHandler extends AbstractPostProtocolHandler {
 
 	public EmptyPostProtocolHandler() {
 		super(null, null);
@@ -11,5 +14,4 @@ public class EmptyPostProtocolHandler extends AbstractPostProtocolHandler{
 		// do nothing
 	}
 
-	
 }

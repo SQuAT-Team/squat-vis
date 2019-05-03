@@ -7,6 +7,9 @@ import javax.inject.Named;
 import org.squat_team.vis.data.daos.LevelDao;
 import org.squat_team.vis.data.data.Level;
 
+/**
+ * An {@link IController} for {@link Level}s,
+ */
 @Named
 @RequestScoped
 public class LevelController extends AbstractController<Level, LevelDao>{
@@ -14,13 +17,8 @@ public class LevelController extends AbstractController<Level, LevelDao>{
 	@Inject
 	private LevelDao service;
 
+	@Override
 	public LevelDao getService() {
 		return service;
-	}
-	
-	@Override
-	public void add() {
-		getService().save(datum);
-		init();
 	}
 }

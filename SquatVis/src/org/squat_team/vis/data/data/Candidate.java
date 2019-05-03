@@ -9,13 +9,17 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
+/**
+ * Represents an architectural candidate. This can be the initial candidate or
+ * candidates that are the result of an optimization process.
+ */
 @Entity
 @Data
 public class Candidate {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private Long projectId;
 	private Long candidateId;
 	private Candidate parent;

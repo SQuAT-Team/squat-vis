@@ -10,6 +10,12 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
+/**
+ * Goals are directly linked to a {@link Project}. A goal can contain several
+ * subgoals. Thus, there are composite and atomic goals. Composite goals group
+ * other composite goals and atomic goals, while atomic goals are the actually
+ * 'measured' ones.
+ */
 @Entity
 @Data
 public class Goal {

@@ -14,6 +14,11 @@ import javax.persistence.EntityManager;
 public abstract class AbstractDao<D> implements IDao<D> {
 	private Class<D> clazz;
 
+	/**
+	 * Creates a new dao object.
+	 * 
+	 * @param clazz this should be the .class of the generic D. See {@link AbstractDao}. 
+	 */
 	public AbstractDao(Class<D> clazz) {
 		this.clazz = clazz;
 	}

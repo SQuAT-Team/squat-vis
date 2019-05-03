@@ -9,11 +9,21 @@ import org.squat_team.vis.connector.MessageType;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 import org.squat_team.vis.connector.server.ConnectorService;
 
+/**
+ * The default implementation of the {@link IServerProtocolDispatcher}.
+ */
 public class ServerProtocolDispatcher implements IServerProtocolDispatcher {
 	protected ObjectInputStream in;
 	protected ObjectOutputStream out;
 	protected ConnectorService connectorService;
 
+	/**
+	 * Creates a new dispatcher.
+	 * 
+	 * @param in               the connection from client to server.
+	 * @param out              the connection from server to client.
+	 * @param connectorService Provides daos for the import
+	 */
 	public ServerProtocolDispatcher(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService) {
 		this.connectorService = connectorService;
 		this.in = in;

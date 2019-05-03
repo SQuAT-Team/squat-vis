@@ -7,19 +7,18 @@ import javax.inject.Named;
 import org.squat_team.vis.data.daos.ArchitectureDao;
 import org.squat_team.vis.data.data.Architecture;
 
+/**
+ * An {@link IController} for {@link Architecture}s,
+ */
 @Named
 @RequestScoped
 public class ArchitectureController extends AbstractController<Architecture, ArchitectureDao> {
 	@Inject
 	private ArchitectureDao service;
 
+	@Override
 	public ArchitectureDao getService() {
 		return service;
 	}
-	
-	@Override
-	public void add() {
-		getService().save(datum);
-		init();
-	}
+
 }

@@ -13,10 +13,13 @@ public class DatabaseConfigurationService implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		ServletContextListener.super.contextInitialized(sce);
-		setDatabaseMode();
+		fixCollectionAttributes();
 	}
 
-	private void setDatabaseMode() {
+	/**
+	 * Assures that references to collections work.
+	 */
+	private void fixCollectionAttributes() {
 		System.setProperty("objectdb.temp.no-detach", "true");
 	}
 }

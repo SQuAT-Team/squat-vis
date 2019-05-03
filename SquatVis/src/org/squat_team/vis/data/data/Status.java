@@ -4,10 +4,18 @@ import java.util.Date;
 
 import javax.persistence.Embeddable;
 
-import org.squat_team.vis.util.DateFormatter;
+import org.squat_team.vis.util.DateDifferenceFormatter;
 
 import lombok.Data;
 
+/**
+ * Describes the status of the current optimization run.<br/>
+ * <br/>
+ * Note that {@link #setToolProgress(Double)} and
+ * {@link #setVisProgress(Double)} describes the progress as number between 0.0
+ * and 1.0. {@link #setToolMessage(String)} and {@link #setVisMessage(String)}
+ * are status messages that might be visible to the architect.
+ */
 @Data
 @Embeddable
 public class Status {
@@ -37,15 +45,15 @@ public class Status {
 	private boolean terminated = false;
 
 	public String getLastUpdate() {
-		return (new DateFormatter()).formatDifference(lastUpdate, new Date());
+		return (new DateDifferenceFormatter()).formatDifference(lastUpdate, new Date());
 	}
 
 	public String getLevelStarted() {
-		return (new DateFormatter()).formatDifference(levelStarted, new Date());
+		return (new DateDifferenceFormatter()).formatDifference(levelStarted, new Date());
 	}
 
 	public String getCreationTime() {
-		return (new DateFormatter()).formatDifference(creationTime, new Date());
+		return (new DateDifferenceFormatter()).formatDifference(creationTime, new Date());
 	}
 
 	public static double getToolweight() {

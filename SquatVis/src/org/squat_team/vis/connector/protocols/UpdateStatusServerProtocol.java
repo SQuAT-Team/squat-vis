@@ -11,9 +11,21 @@ import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 import org.squat_team.vis.connector.importers.StatusImporter;
 import org.squat_team.vis.connector.server.ConnectorService;
 
+/**
+ * This protocol handles an incoming status update. <br/>
+ * It is the counterpart to {@link UpdateStatusClientProtocol}.
+ */
 public class UpdateStatusServerProtocol extends AbstractSimpleServerProtocol {
 	private CStatus cStatus;
 
+	/**
+	 * Creates a new protocol.
+	 * 
+	 * @param in               the connection from client to server.
+	 * @param out              the connection from server to client.
+	 * @param connectorService Provides daos for the import
+	 * @param projectConnector Specifies the project the import belongs to
+	 */
 	public UpdateStatusServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService,
 			ProjectConnector projectConnector) {
 		super(in, out, connectorService, projectConnector);

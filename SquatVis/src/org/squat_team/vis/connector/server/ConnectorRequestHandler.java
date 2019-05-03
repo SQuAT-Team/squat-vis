@@ -23,9 +23,14 @@ import lombok.extern.java.Log;
 @Log
 public class ConnectorRequestHandler extends Thread {
 	private Socket socket = null;
-
 	private ConnectorService connectorService;
 
+	/**
+	 * Creates a new request handler
+	 * 
+	 * @param socket the socket that connects to the client.
+	 * @param connectorService contains daos to access the database
+	 */
 	public ConnectorRequestHandler(Socket socket, ConnectorService connectorService) {
 		super("RequestHandler");
 		this.socket = socket;

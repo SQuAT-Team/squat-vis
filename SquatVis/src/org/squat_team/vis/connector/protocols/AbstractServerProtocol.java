@@ -9,12 +9,24 @@ import org.squat_team.vis.connector.Message;
 import org.squat_team.vis.connector.MessageType;
 import org.squat_team.vis.connector.server.ConnectorService;
 
+/**
+ * Default implementation of {@link IPostProtocolHandler} that provides useful
+ * methods and fields.
+ */
 public abstract class AbstractServerProtocol extends AbstractProtocolHelper implements IServerProtocol {
 	protected ObjectInputStream in;
 	protected ObjectOutputStream out;
 	protected ConnectorService connectorService;
 	protected ProjectConnector projectConnector;
 
+	/**
+	 * Default Constructor.
+	 * 
+	 * @param in               the connection from client to server.
+	 * @param out              the connection from server to client.
+	 * @param connectorService Provides daos for the import
+	 * @param projectConnector Specifies the project the import belongs to
+	 */
 	public AbstractServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService,
 			ProjectConnector projectConnector) {
 		super();
@@ -25,14 +37,28 @@ public abstract class AbstractServerProtocol extends AbstractProtocolHelper impl
 		this.initializeProtocolHelper(in, out);
 	}
 
+	/**
+	 * Sends a message to the client that indicates that the request was accepted.
+	 * 
+	 * @param projectConnector Specifies the project the communication belongs to
+	 * @throws IOException if something went wrong with the communication
+	 */
 	protected void respondAccept(ProjectConnector projectConnector) throws IOException {
 		Message response = new Message(MessageType.ACCEPT, projectConnector);
 		send(response);
 	}
 
-	protected void respondDeclineWithException(ProjectConnector projectConnector, Exception e) throws IOException {
+	/**
+	 * Sends a message to the client that indicates that the request was declined.
+	 * 
+	 * @param projectConnector Specifies the project the communication belongs to
+	 * @param exception        the exception that caused the decline
+	 * @throws IOException if something went wrong with the communication
+	 */
+	protected void respondDeclineWithException(ProjectConnector projectConnector, Exception exception)
+			throws IOException {
 		Message response = new Message(MessageType.DECLINE, projectConnector);
-		response.setException(e);
+		response.setException(exception);
 		send(response);
 	}
 

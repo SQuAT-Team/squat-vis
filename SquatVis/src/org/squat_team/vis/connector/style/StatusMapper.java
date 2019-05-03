@@ -4,7 +4,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import org.squat_team.vis.data.data.Status;
+import org.squat_team.vis.data.data.Status.StatusType;
 
+/**
+ * Maps {@link StatusType}s to the correct CSS-Tags and descriptions.
+ */
 @Named
 @RequestScoped
 public class StatusMapper {
@@ -19,6 +23,12 @@ public class StatusMapper {
 	private static final String STATUS_EXCEPTION_DESCRIPTION = "Status: Tool not responding or error occurred";
 	private static final String STATUS_TERMINATED_DESCRIPTION = "Status: Project terminated";
 
+	/**
+	 * Returns the correct CSS-Tag for the correct color of the status.
+	 * 
+	 * @param statusType the current status
+	 * @return the corresponding CSS-Tag, can be placed in the class attribute
+	 */
 	public String map(Status.StatusType statusType) {
 		switch (statusType) {
 		case RUNNING:
@@ -34,6 +44,12 @@ public class StatusMapper {
 		}
 	}
 
+	/**
+	 * Returns the description for a status.
+	 * 
+	 * @param statusType the current status
+	 * @return the description, can be placed in a title attribute
+	 */
 	public String mapDescription(Status.StatusType statusType) {
 		switch (statusType) {
 		case RUNNING:

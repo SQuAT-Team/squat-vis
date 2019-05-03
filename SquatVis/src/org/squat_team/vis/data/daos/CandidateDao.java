@@ -7,15 +7,28 @@ import javax.persistence.TypedQuery;
 
 import org.squat_team.vis.data.data.Candidate;
 
+/**
+ * An {@link IDao} for {@link Candidate}s.
+ */
 @Stateless
 public class CandidateDao extends AbstractDao<Candidate> {
 	@PersistenceContext
 	private EntityManager em;
 
+	/**
+	 * Creates a new dao.
+	 */
 	public CandidateDao() {
 		super(Candidate.class);
 	}
 
+	/**
+	 * Finds a candidate within a project.
+	 * 
+	 * @param projectId the id of the project
+	 * @param candidateId the id of the candidate (project specific)
+	 * @return the candidate or null if not found
+	 */
 	public Candidate find(long projectId, long candidateId) {
 		TypedQuery<Candidate> query = getEntityManager().createQuery(
 				"SELECT c FROM Candidate  c WHERE c.projectId = :projectId AND c.candidateId = :candidateId ",
