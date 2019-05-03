@@ -5,8 +5,15 @@
 	<groupId>org.squat_team.vis.connector</groupId>
 	<artifactId>SquatVisToolConnector</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<powermock.version>2.0.2</powermock.version>
+		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -16,11 +23,23 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<destFile>${sonar.jacoco.reportPath}</destFile>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	<properties>
-		<powermock.version>2.0.2</powermock.version>
-	</properties>
 	<dependencies>
 		<!-- AUTOMATIC GETTERS AND SETTERS -->
 		<dependency>

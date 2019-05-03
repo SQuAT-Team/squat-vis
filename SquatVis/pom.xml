@@ -6,8 +6,15 @@
 	<artifactId>SquatVis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<properties>
+		<powermock.version>2.0.2</powermock.version>
+		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -22,6 +29,21 @@
 				<version>3.2.1</version>
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<destFile>${sonar.jacoco.reportPath}</destFile>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -42,9 +64,6 @@
 			<url>http://m2.objectdb.com</url>
 		</repository>
 	</repositories>
-	<properties>
-		<powermock.version>2.0.2</powermock.version>
-	</properties>
 	<dependencies>
 		<!-- JEE DEPENDENCIES -->
 		<dependency>
