@@ -42,11 +42,6 @@
 						</goals>
 					</execution>
 					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
 						<id>report</id>
 						<phase>prepare-install</phase>
 						<goals>
@@ -94,7 +89,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--Jacoco required at runtime to build offline coverages -->
 		<dependency>
 			<groupId>org.jacoco</groupId>
 			<artifactId>org.jacoco.agent</artifactId>

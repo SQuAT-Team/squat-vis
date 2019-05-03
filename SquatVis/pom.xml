@@ -8,9 +8,10 @@
 	<packaging>war</packaging>
 	<properties>
 		<powermock.version>2.0.2</powermock.version>
+		<jacoco.version>0.8.3</jacoco.version>
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco2.exec</sonar.jacoco.reportPath>
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -34,44 +35,31 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.3</version>
+				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
 						<id>default-instrument</id>
 						<goals>
 							<goal>instrument</goal>
 						</goals>
-						<configuration>
-							<includes>
-								<include>**/*test*</include>
-							</includes>
-						</configuration>
 					</execution>
 					<execution>
 						<id>default-restore-instrumented-classes</id>
 						<goals>
 							<goal>restore-instrumented-classes</goal>
 						</goals>
-						<configuration>
-							<includes>
-								<include>**/*test*</include>
-							</includes>
-						</configuration>
 					</execution>
 					<execution>
+						<id>report</id>
+						<phase>prepare-install</phase>
 						<goals>
-							<goal>prepare-agent</goal>
+							<goal>report</goal>
 						</goals>
 						<configuration>
-							<excludes>
-								<exclude>**/*test*</exclude>
-							</excludes>
+							<dataFile>${sonar.jacoco.reportPath}</dataFile>
 						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<destFile>${sonar.jacoco.reportPath}</destFile>
-				</configuration>
 			</plugin>
 		</plugins>
 		<resources>
@@ -161,6 +149,13 @@
 			<artifactId>powermock-api-mockito2</artifactId>
 			<version>${powermock.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>org.jacoco.agent</artifactId>
+			<version>${jacoco.version}</version>
+			<classifier>runtime</classifier>
 		</dependency>
 	</dependencies>
 </project>
