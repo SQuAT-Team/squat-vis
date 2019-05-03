@@ -9,7 +9,7 @@
 		<powermock.version>2.0.2</powermock.version>
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../target/jacoco1.exec</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco1.exec</sonar.jacoco.reportPath>
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -62,7 +62,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<destFile>${sonar.coverage.jacoco.xmlReportPaths}</destFile>
+					<destFile>${sonar.jacoco.reportPath}</destFile>
 				</configuration>
 			</plugin>
 		</plugins>
