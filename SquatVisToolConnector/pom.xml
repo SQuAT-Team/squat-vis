@@ -35,7 +35,7 @@
 						</goals>
 						<configuration>
 							<includes>
-								<include>**/*Test*</include>
+								<include>**/*test*</include>
 							</includes>
 						</configuration>
 					</execution>
@@ -46,7 +46,7 @@
 						</goals>
 						<configuration>
 							<includes>
-								<include>**/*Test*</include>
+								<include>**/*test*</include>
 							</includes>
 						</configuration>
 					</execution>
@@ -56,34 +56,17 @@
 						</goals>
 						<configuration>
 							<excludes>
-								<exclude>**/*Test*</exclude>
+								<exclude>**/*test*</exclude>
 							</excludes>
 						</configuration>
 					</execution>
 					<execution>
-						<id>default-report</id>
+						<id>report</id>
 						<goals>
 							<goal>report</goal>
 						</goals>
-					</execution>
-					<execution>
-						<id>default-check</id>
-						<goals>
-							<goal>check</goal>
-						</goals>
 						<configuration>
-							<rules>
-								<rule>
-									<element>CLASS</element>
-									<limits>
-										<limit>
-											<counter>LINE</counter>
-											<value>COVEREDRATIO</value>
-											<minimum>0.80</minimum>
-										</limit>
-									</limits>
-								</rule>
-							</rules>
+							<dataFile>${sonar.coverage.jacoco.xmlReportPaths}</dataFile>
 						</configuration>
 					</execution>
 				</executions>
