@@ -29,9 +29,36 @@
 				<version>0.8.3</version>
 				<executions>
 					<execution>
+						<id>default-instrument</id>
+						<goals>
+							<goal>instrument</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>**/*test*</include>
+							</includes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>default-restore-instrumented-classes</id>
+						<goals>
+							<goal>restore-instrumented-classes</goal>
+						</goals>
+						<configuration>
+							<includes>
+								<include>**/*test*</include>
+							</includes>
+						</configuration>
+					</execution>
+					<execution>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
+						<configuration>
+							<excludes>
+								<exclude>**/*test*</exclude>
+							</excludes>
+						</configuration>
 					</execution>
 				</executions>
 				<configuration>
