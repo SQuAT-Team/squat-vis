@@ -28,6 +28,9 @@ public abstract class AbstractSimpleClientProtocol extends AbstractClientProtoco
 			Message response = receive(Message.class);
 			if (response.getType().equals(MessageType.ACCEPT)) {
 				success = true;
+			} else {
+				throw new ProtocolFailure(
+						"Expected response message with Accept or Decline, but was " + response.getType());
 			}
 		} catch (IOException e) {
 			throw new ConnectionFailure("Unexpected I/O based error during protocol execution", e);

@@ -109,7 +109,7 @@ public class NewProjectClientProtocolTest extends ClientProtocolTest {
 	}
 
 	private void runAndAssert() throws ConnectionFailure, ProtocolFailure, InvalidRequestException {
-		ProjectConnector receivedProjectConnector = protocol.call();
+		ProjectConnector receivedProjectConnector = (ProjectConnector) protocol.call();
 		assertEquals(projectConnector, receivedProjectConnector);
 		assertEquals(4, output.size());
 		checKMessage(output.get(0));

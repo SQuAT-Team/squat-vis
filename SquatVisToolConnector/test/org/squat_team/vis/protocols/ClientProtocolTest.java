@@ -16,7 +16,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 import org.squat_team.vis.connector.protocols.AbstractClientProtocol;
 import org.squat_team.vis.connector.protocols.IClientProtocol;
-import org.squat_team.vis.connector.protocols.NewProjectClientProtocol;
 
 /**
  * Provides mocking for remote communication behavior for tests on classes that
@@ -28,7 +27,7 @@ import org.squat_team.vis.connector.protocols.NewProjectClientProtocol;
 public abstract class ClientProtocolTest {
 	protected ObjectInputStream in;
 	protected ObjectOutputStream out;
-	protected NewProjectClientProtocol protocol;
+	protected IClientProtocol<?> protocol;
 	protected List<Object> output = new ArrayList<Object>();
 
 	@Before
