@@ -26,7 +26,7 @@ public class NewLevelClientProtocol extends AbstractSimpleClientProtocol {
 	 * @param level            the level to send. Must not be null!
 	 * @param projectConnector the project the level will be pushed to.
 	 */
-	public NewLevelClientProtocol(@NonNull CLevel level, ProjectConnector projectConnector) {
+	public NewLevelClientProtocol(@NonNull CLevel level, @NonNull ProjectConnector projectConnector) {
 		super();
 		this.level = level;
 		this.projectConnector = projectConnector;

@@ -12,6 +12,8 @@ import org.squat_team.vis.connector.exceptions.ConnectionFailure;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 
+import lombok.NonNull;
+
 /**
  * A protocol that initializes a new project. Data has to be pushed to the
  * project with {@link NewLevelClientProtocol} after the project has been
@@ -29,14 +31,9 @@ public class NewProjectClientProtocol extends AbstractClientProtocol<ProjectConn
 	 * @param configuration the configuration of the used optimization tool.
 	 * @param goal          the goals that are set for this project.
 	 */
-	public NewProjectClientProtocol(CProject project, CToolConfiguration configuration, CGoal goal) {
+	public NewProjectClientProtocol(@NonNull CProject project, @NonNull CToolConfiguration configuration,
+			@NonNull CGoal goal) {
 		super();
-		if (project == null) {
-			throw new IllegalArgumentException("Provided project must not be null");
-		}
-		if (goal == null) {
-			throw new IllegalArgumentException("Provided goals must not be null");
-		}
 		this.project = project;
 		this.configuration = configuration;
 		this.goal = goal;

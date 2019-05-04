@@ -7,6 +7,8 @@ import org.squat_team.vis.connector.Message;
 import org.squat_team.vis.connector.MessageType;
 import org.squat_team.vis.connector.data.CStatus;
 
+import lombok.NonNull;
+
 /**
  * A protocol that sends updates about the optimization progress to the SquatVis
  * tool. Updates are optional, but SquatVis might assume that the optimization
@@ -22,11 +24,8 @@ public class UpdateStatusClientProtocol extends AbstractSimpleClientProtocol {
 	 * @param status           the new status
 	 * @param projectConnector identifies the project to update
 	 */
-	public UpdateStatusClientProtocol(CStatus status, ProjectConnector projectConnector) {
+	public UpdateStatusClientProtocol(@NonNull CStatus status, @NonNull ProjectConnector projectConnector) {
 		super();
-		if (status == null) {
-			throw new IllegalArgumentException("Provided status must not be null");
-		}
 		this.status = status;
 		this.projectConnector = projectConnector;
 	}
