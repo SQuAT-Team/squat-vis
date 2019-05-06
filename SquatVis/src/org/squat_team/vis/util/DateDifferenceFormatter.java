@@ -70,8 +70,8 @@ public class DateDifferenceFormatter {
 			return formatedDifference;
 		}
 		String dateEarlierDayString = formatDay.format(dateEarlier);
-		String dateLaterDayString = formatDay.format(dateEarlier);
-		long diffInHours = getDateDiff(dateEarlier, dateLater, TimeUnit.MINUTES);
+		String dateLaterDayString = formatDay.format(dateLater);
+		long diffInHours = getDateDiff(dateEarlier, dateLater, TimeUnit.HOURS);
 		if (dateEarlierDayString.equals(dateLaterDayString)) {
 			return formatHours(diffInHours) + " " + formatMinutes(diffInMinutes) + " " + formatSeconds(diffInSeconds);
 		}

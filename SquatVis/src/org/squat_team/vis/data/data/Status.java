@@ -39,9 +39,9 @@ public class Status {
 	private Double visProgress = 0d;
 	private String toolMessage = "";
 	private String visMessage = "";
-	private Date lastUpdate;
+	private Date lastUpdate = new Date();
 	private Date levelStarted;
-	private Date creationTime;
+	private Date creationTime = new Date();
 	private boolean exception = false;
 	private boolean terminated = false;
 
@@ -122,6 +122,11 @@ public class Status {
 		lastUpdate = new Date();
 	}
 
+	public void notifyException() {
+		this.exception = true;
+		lastUpdate = new Date();
+	}
+
 	public StatusType getType() {
 		if (isTerminated()) {
 			return StatusType.TERMINATED;
@@ -138,7 +143,7 @@ public class Status {
 	private boolean isException() {
 		Date now = new Date();
 		long timeSinceLastUpdate = now.getTime() - lastUpdate.getTime();
-		boolean timeout = timeSinceLastUpdate > TOOL_UPDATE_TIMEOUT;
+		boolean timeout = timeSinceLastUpdate >= TOOL_UPDATE_TIMEOUT;
 		boolean toolFinished = toolProgress.equals(1d);
 		return exception || (!toolFinished && timeout);
 	}
