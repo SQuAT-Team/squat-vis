@@ -12,6 +12,7 @@ import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 import org.squat_team.vis.connector.protocols.NewLevelClientProtocol;
 import org.squat_team.vis.connector.protocols.NewProjectClientProtocol;
+import org.squat_team.vis.connector.protocols.ProjectTerminatedClientProtocol;
 import org.squat_team.vis.connector.protocols.UpdateStatusClientProtocol;
 
 public class TestClient {
@@ -25,8 +26,9 @@ public class TestClient {
 		runUpdateStuckProcedure();
 		System.out.println("SHUTTING DOWN TEST CLIENT");
 	}
-	
-	private static void runStandardProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException, InterruptedException {
+
+	private static void runStandardProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
+			InvalidRequestException, InterruptedException {
 		makeNewProjectRequest();
 		sleep(1000);
 		makeStatusUpdate1();
@@ -34,9 +36,12 @@ public class TestClient {
 		sendLevel0();
 		sleep(1000);
 		sendLevel1();
+		sleep(5000);
+		terminateProject();
 	}
-	
-	private static void runUpdateStuckProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException, InterruptedException {
+
+	private static void runUpdateStuckProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
+			InvalidRequestException, InterruptedException {
 		makeNewProjectRequest();
 		sleep(10000);
 		makeStatusUpdate1();
@@ -72,7 +77,7 @@ public class TestClient {
 		boolean success = protocol.call();
 		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
-	
+
 	private static void makeStatusUpdate2()
 			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		System.out.println("UPDATING STATUS");
@@ -82,7 +87,7 @@ public class TestClient {
 		boolean success = protocol.call();
 		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
-	
+
 	private static void makeStatusUpdate3()
 			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		System.out.println("UPDATING STATUS");
@@ -92,7 +97,7 @@ public class TestClient {
 		boolean success = protocol.call();
 		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
-	
+
 	private static void makeStatusUpdate4()
 			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		System.out.println("UPDATING STATUS");
@@ -102,7 +107,7 @@ public class TestClient {
 		boolean success = protocol.call();
 		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
-	
+
 	private static void makeStatusUpdate5()
 			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		System.out.println("UPDATING STATUS");
@@ -137,6 +142,13 @@ public class TestClient {
 		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector);
 		boolean success = protocol.call();
 		System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
+	}
+
+	private static void terminateProject() throws ConnectionFailure, ProtocolFailure, InvalidRequestException {
+		System.out.println("TERMINATE PROJECT");
+		ProjectTerminatedClientProtocol protocol = new ProjectTerminatedClientProtocol(projectConnector);
+		boolean success = protocol.call();
+		System.out.println("TERMINATE PROJECT SUCCESSFUL: " + success);
 	}
 
 }

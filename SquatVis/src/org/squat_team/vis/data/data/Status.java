@@ -20,12 +20,13 @@ import lombok.Data;
 @Embeddable
 public class Status {
 	private static final long TOOL_UPDATE_TIMEOUT = 180000; // 3min
-
 	private static final String TOOL_LEVEL_FINISHED_MESSAGE = "Level finished";
 	private static final String TOOL_NEW_LEVEL_MESSAGE = "Started Search for Alternatives";
+	private static final String TOOL_TERMINATED_MESSAGE = "Search finished";
 	private static final String VIS_IMPORTING_MESSAGE = "Level Import in progress";
 	private static final String VIS_IMPORT_FINISHED_MESSAGE = "Level Import finished";
 	private static final String VIS_NEW_LEVEL_MESSAGE = "";
+	private static final String VIS_TERMINATED_MESSAGE = "Search finished";
 
 	private static final double TOOL_WEIGHT = 0.9;
 	private static final double VIS_WEIGHT = 0.1;
@@ -109,6 +110,15 @@ public class Status {
 		this.toolProgress = 0d;
 		this.toolMessage = TOOL_NEW_LEVEL_MESSAGE;
 		this.visMessage = VIS_NEW_LEVEL_MESSAGE;
+		lastUpdate = new Date();
+	}
+
+	public void notifyTerminated() {
+		this.toolProgress = 1d;
+		this.visProgress = 1d;
+		this.toolMessage = TOOL_TERMINATED_MESSAGE;
+		this.visMessage = VIS_TERMINATED_MESSAGE;
+		this.terminated = true;
 		lastUpdate = new Date();
 	}
 

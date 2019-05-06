@@ -45,6 +45,9 @@ public class ServerProtocolDispatcher implements IServerProtocolDispatcher {
 		case SEND_NEW_LEVEL:
 			protocol = new NewLevelServerProtocol(in, out, connectorService, projectConnector);
 			break;
+		case SEND_PROJECT_TERMINATED:
+			protocol = new ProjectTerminatedServerProtocol(in, out, connectorService, projectConnector);
+			break;
 		default:
 			throw new ProtocolFailure("Unknown request type " + type);
 		}
