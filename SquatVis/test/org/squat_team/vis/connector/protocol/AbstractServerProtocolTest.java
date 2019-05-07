@@ -28,7 +28,7 @@ import org.squat_team.vis.data.data.Project;
  * {@link AbstractServerProtocol}s.
  */
 @RunWith(PowerMockRunner.class)
-public class AbstractServerProtocolTest {
+public abstract class AbstractServerProtocolTest {
 	protected static final long PROJECT_MOCK_ID = 123;
 
 	protected ObjectInputStream in;
