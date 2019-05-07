@@ -24,4 +24,5 @@ public class ToolConfiguration {
 	private Boolean hasRealValues;
 	private Boolean hasUtilities;
 	private Boolean hasArchitectures;
+	private Boolean hasParents;
 }

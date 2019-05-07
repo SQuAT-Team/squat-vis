@@ -47,6 +47,7 @@ public class ToolConfigurationImporter extends AbstractImporter<CToolConfigurati
 		configuration.setHasUtilities(cconfiguration.getHasUtilities());
 		configuration.setHasRealValues(cconfiguration.getHasRealValues());
 		configuration.setHasArchitectures(cconfiguration.getHasArchitectures());
+		configuration.setHasParents(cconfiguration.getHasParents());
 		return configuration;
 	}
 
