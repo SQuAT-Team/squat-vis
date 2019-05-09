@@ -72,30 +72,29 @@ public class LevelResponseServerProtocol extends AbstractServerProtocol {
 	 * @throws InvalidRequestException if the received data violates constraints.
 	 */
 	private synchronized void prepareResponse() throws InvalidRequestException {
-		boolean responseAlreadyThere;
+		boolean responseAvailable;
 		// lock so there will be no response notification before the thread is actually
 		// waiting
 		synchronized (connectorService.getResponseManager()) {
-			responseAlreadyThere = tryToFindResponses();
-			if (!responseAlreadyThere) {
+			responseAvailable = tryToFindResponses();
+			while (!responseAvailable) {
 				waitForResponse();
+				responseAvailable = tryToFindResponses();
 			}
-		}
-		if (!responseAlreadyThere) {
-			tryToFindResponses();
 		}
 	}
 
 	/**
 	 * Waits until the response is available.
 	 */
-	private void waitForResponse() {
+	private synchronized void waitForResponse() {
 		connectorService.getResponseManager()
 				.waitForResponse(new ResponseIdentifier(projectConnector.getProjectId(), levelNumber), this);
 		try {
 			this.wait();
 		} catch (InterruptedException e) {
 			log.log(java.util.logging.Level.WARNING, "Interrupted waiting thread", e);
+			Thread.currentThread().interrupt(); // reinterrupt
 		}
 	}
 

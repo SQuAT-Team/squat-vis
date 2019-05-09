@@ -84,7 +84,7 @@ public class LevelResponseService implements Serializable {
 	 * @return the ids of all candidates in the specified level
 	 */
 	private List<Long> getAllCandidateIds(Level level) {
-		List<Long> allCandidates = new ArrayList<Long>();
+		List<Long> allCandidates = new ArrayList<>();
 		for (Candidate candidate : level.getCandidates()) {
 			allCandidates.add(candidate.getCandidateId());
 		}

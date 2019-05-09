@@ -34,6 +34,8 @@ import org.squat_team.vis.session.LevelResponseService;
 import org.squat_team.vis.session.SessionInfo;
 import org.squat_team.vis.util.ResponseManager;
 
+import lombok.Getter;
+
 /**
  * Tests the {@link LevelResponseServerProtocol} and its importers.
  */
@@ -117,7 +119,7 @@ public class LevelResponseServerProtocolTest extends AbstractServerProtocolTest 
 	 */
 	@Test
 	public synchronized void protocolHasToWaitForResponseTest()
-			throws InterruptedException, ClassNotFoundException, IOException {
+			throws InterruptedException, ClassNotFoundException, IOException, ProtocolFailure, InvalidRequestException {
 		mockInputStream();
 		executeProtocolWithLateResponse();
 		checkResults();
@@ -129,7 +131,7 @@ public class LevelResponseServerProtocolTest extends AbstractServerProtocolTest 
 	 */
 	@Test
 	public synchronized void protocolAlreadyHasResponseTest()
-			throws InterruptedException, ClassNotFoundException, IOException {
+			throws InterruptedException, ClassNotFoundException, IOException, ProtocolFailure, InvalidRequestException {
 		mockInputStream();
 		executeProtocolWithEarlyResponse();
 		checkResults();
@@ -139,7 +141,8 @@ public class LevelResponseServerProtocolTest extends AbstractServerProtocolTest 
 	 * First executes the protocol, then provide the response when the protocol
 	 * waits for it.
 	 */
-	private void executeProtocolWithLateResponse() throws InterruptedException {
+	private void executeProtocolWithLateResponse()
+			throws InterruptedException, ProtocolFailure, IOException, InvalidRequestException {
 		LevelResponseServerProtocol protocol = new LevelResponseServerProtocol(in, out, connectorService,
 				projectConnector);
 		ProtocolThread protocolThread = new ProtocolThread(protocol);
@@ -148,18 +151,21 @@ public class LevelResponseServerProtocolTest extends AbstractServerProtocolTest 
 		assertEquals(0, output.size());
 		weld.select(LevelResponseService.class).get().respondCompleteLastLevel();
 		waitUntilThreadTerminates(protocolThread);
+		checkThreadForException(protocolThread);
 	}
 
 	/**
 	 * First provide the response, then execute the protocol.
 	 */
-	private void executeProtocolWithEarlyResponse() throws InterruptedException {
+	private void executeProtocolWithEarlyResponse()
+			throws InterruptedException, ProtocolFailure, IOException, InvalidRequestException {
 		weld.select(LevelResponseService.class).get().respondCompleteLastLevel();
 		LevelResponseServerProtocol protocol = new LevelResponseServerProtocol(in, out, connectorService,
 				projectConnector);
 		ProtocolThread protocolThread = new ProtocolThread(protocol);
 		protocolThread.start();
 		waitUntilThreadTerminates(protocolThread);
+		checkThreadForException(protocolThread);
 	}
 
 	/**
@@ -196,11 +202,28 @@ public class LevelResponseServerProtocolTest extends AbstractServerProtocolTest 
 	 * @param thread the thread that should be waited for.
 	 */
 	private void waitUntilThreadTerminates(Thread thread) throws InterruptedException {
-		int waitedCounter = 0;
-		while (thread.isAlive()) {
-			checkTimeout(waitedCounter);
-			wait(10);
-			waitedCounter++;
+		thread.join();
+	}
+
+	/**
+	 * Checks whether an exception was thrown in the thread. If yes, then throws it
+	 * in this thread again.
+	 * 
+	 * @param protocolThread the thread to check for an exception.
+	 */
+	private void checkThreadForException(ProtocolThread protocolThread)
+			throws ProtocolFailure, IOException, InvalidRequestException {
+		ProtocolFailure protocolFailure = protocolThread.getProtocolFailure();
+		if (protocolFailure != null) {
+			throw protocolFailure;
+		}
+		IOException ioException = protocolThread.getIoException();
+		if (ioException != null) {
+			throw ioException;
+		}
+		InvalidRequestException invalidRequestException = protocolThread.getInvalidRequestException();
+		if (invalidRequestException != null) {
+			throw invalidRequestException;
 		}
 	}
 
@@ -270,7 +293,11 @@ public class LevelResponseServerProtocolTest extends AbstractServerProtocolTest 
 	/**
 	 * Executes a protocol as own thread.
 	 */
+	@Getter
 	private class ProtocolThread extends Thread {
+		private ProtocolFailure protocolFailure;
+		private IOException ioException;
+		private InvalidRequestException invalidRequestException;
 		private final IServerProtocol protocol;
 
 		public ProtocolThread(IServerProtocol protocol) {
@@ -281,9 +308,12 @@ public class LevelResponseServerProtocolTest extends AbstractServerProtocolTest 
 		public void run() {
 			try {
 				protocol.execute();
-			} catch (ProtocolFailure | IOException | InvalidRequestException e) {
-				e.printStackTrace();
-				fail();
+			} catch (ProtocolFailure e) {
+				protocolFailure = e;
+			} catch (IOException e) {
+				ioException = e;
+			} catch (InvalidRequestException e) {
+				invalidRequestException = e;
 			}
 		}
 	}

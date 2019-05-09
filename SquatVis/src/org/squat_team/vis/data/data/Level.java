@@ -32,7 +32,7 @@ public class Level {
 	 * Stores the candidates that are selected for the optimization in the next
 	 * level
 	 */
-	private List<Long> selectedCandidates = new ArrayList<Long>();
+	private List<Long> selectedCandidates = new ArrayList<>();
 	private boolean candidatesSelected = false;
 
 	/**

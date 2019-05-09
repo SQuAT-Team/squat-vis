@@ -41,7 +41,7 @@ public class ResponseManager {
 		LevelResponseServerProtocol protocol = protocolsWaitingForResponse.remove(responseIdentifier);
 		if (protocol != null) {
 			synchronized (protocol) {
-				protocol.notify();
+				protocol.notifyAll();
 			}
 		}
 	}
