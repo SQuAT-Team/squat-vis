@@ -34,4 +34,19 @@ public interface IController<D> {
 	 * @return all data objects of the specified type
 	 */
 	public List<D> getData();
+
+	/**
+	 * Finds the object with the specified id.
+	 * 
+	 * @param id the id
+	 * @return the object of the specified type
+	 */
+	public D find(long id);
+
+	/**
+	 * Updates the entity in the database.
+	 * 
+	 * @param datum the data to update
+	 */
+	public void update(D datum);
 }

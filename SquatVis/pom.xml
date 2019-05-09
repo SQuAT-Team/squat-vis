@@ -13,6 +13,7 @@
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco2.exec</sonar.jacoco.reportPath>
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+		<version.weld-junit>2.0.0.Final</version.weld-junit>
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -163,12 +164,23 @@
 			<version>${powermock.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jacoco</groupId>
 			<artifactId>org.jacoco.agent</artifactId>
 			<version>${jacoco.version}</version>
 			<classifier>runtime</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld</groupId>
+			<artifactId>weld-junit4</artifactId>
+			<version>${version.weld-junit}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.weld.se</groupId>
+			<artifactId>weld-se-core</artifactId>
+			<version>3.0.0.Final</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

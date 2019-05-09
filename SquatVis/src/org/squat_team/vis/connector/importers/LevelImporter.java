@@ -34,7 +34,7 @@ public class LevelImporter extends AbstractImporter<CLevel, Level> {
 	public Level transform(CLevel clevel) throws InvalidRequestException {
 		findDao();
 		Project project = findProject();
-		Level level = transformLevel(clevel);
+		Level level = transformLevel(clevel, project);
 		store(level);
 		List<Level> levels = findLevels(project);
 		levels.add(level);
@@ -68,12 +68,14 @@ public class LevelImporter extends AbstractImporter<CLevel, Level> {
 	 * Applies the transformation on the object level and also imports contained
 	 * candidates.
 	 * 
-	 * @param clevel the level to transform.
+	 * @param clevel  the level to transform.
+	 * @param project the project that contains the level.
 	 * @return the transformed level.
 	 * @throws InvalidRequestException if the specified project is not found
 	 */
-	private Level transformLevel(CLevel clevel) throws InvalidRequestException {
+	private Level transformLevel(CLevel clevel, Project project) throws InvalidRequestException {
 		Level level = new Level();
+		level.setProject(project);
 		CandidateImporter candidateImporter = new CandidateImporter(connectorService, projectConnector);
 		for (CCandidate ccandidate : clevel.getCandidates()) {
 			Candidate candidate = candidateImporter.transform(ccandidate);

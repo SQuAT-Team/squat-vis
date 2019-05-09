@@ -12,6 +12,8 @@ public enum MessageType {
 	SEND_NEW_LEVEL,
 	/** Notifies that the project should be marked as terminated */
 	SEND_PROJECT_TERMINATED,
+	/** A request to send the (human selected) candidates for the next level */
+	REQUEST_LEVEL_RESPONSE,
 	/** An answer that states that the receiver accepted the request */
 	ACCEPT,
 	/** An answer that states that the receiver declined the request */

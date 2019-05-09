@@ -28,6 +28,7 @@ import org.squat_team.vis.data.data.ToolConfiguration;
 /**
  * Tests the {@link NewProjectServerProtocol} and its importers.
  */
+@PrepareForTest(NewProjectServerProtocol.class)
 public class NewProjectServerProtocolTest extends AbstractServerProtocolTest {
 	// Project settings
 	private static final String PROJECT_NAME = "Project Name";
@@ -54,7 +55,6 @@ public class NewProjectServerProtocolTest extends AbstractServerProtocolTest {
 	 * imported.
 	 */
 	@Test
-	@PrepareForTest(NewProjectServerProtocol.class)
 	public void defaultProtocolExecutionTest()
 			throws ClassNotFoundException, IOException, ProtocolFailure, InvalidRequestException {
 		mockProtocolInput(initializeProject(), initializeConfiguration(), initializeGoals());

@@ -51,4 +51,14 @@ public abstract class AbstractController<D, O extends IDao<D>> implements IContr
 		return data;
 	}
 
+	@Override
+	public D find(long id) {
+		return getService().find(id);
+	}
+
+	@Override
+	public void update(D datum) {
+		getService().update(datum);
+	}
+
 }

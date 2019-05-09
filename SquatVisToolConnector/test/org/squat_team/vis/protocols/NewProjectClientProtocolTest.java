@@ -38,6 +38,7 @@ public class NewProjectClientProtocolTest extends ClientProtocolTest {
 		this.project = null;
 		this.configuration = null;
 		this.goal = null;
+		this.projectConnector = null;
 	}
 
 	/**

@@ -11,5 +11,8 @@
 </h:head>
 <h:body bgcolor="white">
 	<h2>Project Id: #{sessionInfo.selectedProject}</h2>
+	<h:form>
+		<h:commandButton value="Respond" action="#{levelResponseService.respondCompleteLastLevel()}" />
+	</h:form>
 </h:body>
 </html>

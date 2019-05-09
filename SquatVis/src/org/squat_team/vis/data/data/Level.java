@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
@@ -23,8 +24,16 @@ public class Level {
 	@GeneratedValue
 	private Long id;
 
+	@ManyToOne
+	private Project project;
 	@OneToMany
 	private List<Candidate> candidates = new ArrayList<>();
+	/**
+	 * Stores the candidates that are selected for the optimization in the next
+	 * level
+	 */
+	private List<Long> selectedCandidates = new ArrayList<Long>();
+	private boolean candidatesSelected = false;
 
 	/**
 	 * Gets the number of all candidates in the level.

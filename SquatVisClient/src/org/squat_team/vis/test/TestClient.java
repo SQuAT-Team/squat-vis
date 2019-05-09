@@ -1,5 +1,7 @@
 package org.squat_team.vis.test;
 
+import java.util.List;
+
 import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CGoal;
 import org.squat_team.vis.connector.data.CLevel;
@@ -10,6 +12,7 @@ import org.squat_team.vis.connector.exceptions.ConnectionFailure;
 import org.squat_team.vis.connector.exceptions.HostUnreachableException;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
+import org.squat_team.vis.connector.protocols.LevelResponseClientProtocol;
 import org.squat_team.vis.connector.protocols.NewLevelClientProtocol;
 import org.squat_team.vis.connector.protocols.NewProjectClientProtocol;
 import org.squat_team.vis.connector.protocols.ProjectTerminatedClientProtocol;
@@ -34,6 +37,10 @@ public class TestClient {
 		makeStatusUpdate1();
 		sleep(1000);
 		sendLevel0();
+		sleep(1000);
+		waitForResponse(0);
+		sleep(1000);
+		makeStatusUpdate1();
 		sleep(1000);
 		sendLevel1();
 		sleep(5000);
@@ -149,6 +156,15 @@ public class TestClient {
 		ProjectTerminatedClientProtocol protocol = new ProjectTerminatedClientProtocol(projectConnector);
 		boolean success = protocol.call();
 		System.out.println("TERMINATE PROJECT SUCCESSFUL: " + success);
+	}
+
+	private static void waitForResponse(int levelNumber)
+			throws ConnectionFailure, ProtocolFailure, InvalidRequestException {
+		System.out.println("WAIT FOR RESPONSE");
+		LevelResponseClientProtocol protocol = new LevelResponseClientProtocol(levelNumber, projectConnector);
+		List<Long> success = protocol.call();
+		System.out.println("RECEIVED RESPONSE");
+		System.out.println("LEVEL RESPONSES: " + success);
 	}
 
 }

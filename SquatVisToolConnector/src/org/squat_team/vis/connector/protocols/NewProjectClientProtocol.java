@@ -46,7 +46,7 @@ public class NewProjectClientProtocol extends AbstractClientProtocol<ProjectConn
 			sendRequests();
 			projectConnector = receive(ProjectConnector.class);
 		} catch (IOException e) {
-			throw new ConnectionFailure("", e);
+			throw new ConnectionFailure("A problem in the communication occurred", e);
 		}
 		return projectConnector;
 	}
