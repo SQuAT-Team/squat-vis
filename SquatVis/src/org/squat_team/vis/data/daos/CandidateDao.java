@@ -1,5 +1,7 @@
 package org.squat_team.vis.data.daos;
 
+import java.io.Serializable;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,7 +13,13 @@ import org.squat_team.vis.data.data.Candidate;
  * An {@link IDao} for {@link Candidate}s.
  */
 @Stateless
-public class CandidateDao extends AbstractDao<Candidate> {
+public class CandidateDao extends AbstractDao<Candidate> implements Serializable{
+	
+	/**
+	 * Generated
+	 */
+	private static final long serialVersionUID = 7038388113264871488L;
+	
 	@PersistenceContext
 	private EntityManager em;
 

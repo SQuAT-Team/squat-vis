@@ -1,5 +1,7 @@
 package org.squat_team.vis.data.daos;
 
+import java.io.Serializable;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,8 +12,13 @@ import org.squat_team.vis.data.data.ToolConfiguration;
  * An {@link IDao} for {@link ToolConfiguration}s.
  */
 @Stateless
-public class ToolConfigurationDao extends AbstractDao<ToolConfiguration> {
+public class ToolConfigurationDao extends AbstractDao<ToolConfiguration> implements Serializable {
 
+	/**
+	 * Generated
+	 */
+	private static final long serialVersionUID = 8576220919035495402L;
+	
 	@PersistenceContext
 	private EntityManager em;
 
