@@ -1,0 +1,14 @@
+.text-input {
+	border: none;
+	background: rgba(0, 0, 0, 0);
+	display: inline;
+	font-family: inherit;
+	font-size: inherit;
+	padding: none;
+	width: auto;
+}
+
+.invisible {
+	visibility: hidden;
+	position: absolute;
+}

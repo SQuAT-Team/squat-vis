@@ -4,15 +4,62 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+>
 
+<!-- LIBS -->
+<h:outputScript library="lib" name="jquery.min.js" target="head"></h:outputScript>
+<!-- CSS -->
+<h:outputStylesheet library="css" name="squat_standard_style.css"
+	target="head"></h:outputStylesheet>
+<h:outputStylesheet library="css" name="header.css"
+	target="head"></h:outputStylesheet>
+	
+	
 <h:head>
-	<title>Project #{sessioninfo.currentprojectid}</title>
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+		crossorigin="anonymous"/>
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+	<title>Project #{sessionInfo.project.name}</title>
 </h:head>
 <h:body bgcolor="white">
+
+	<!-- As a heading -->
+	<nav class="navbar navbar-light navbar-fixed-top bg-dark">
+	<div class="navbar-brand mb-0 h1" >
+		 <h:form>
+		 	<h:panelGroup id="status">
+		 		<h:panelGroup  pt:title="#{statusMapper.mapDescription(projectController.find(sessionInfo.selectedProject).status.getType())}" styleClass="status #{statusMapper.map(projectController.find(sessionInfo.selectedProject).status.getType())} mr-2 mb-1"/>
+		 	</h:panelGroup>
+		 	<pf:poll update="status" interval="1" />
+		 	<h:inputText value="#{sessionInfo.project.name}" styleClass="text-input text-white"></h:inputText>
+  			<h:commandButton action="#{sessionInfo.updateProject()}" styleClass="invisible" />
+		</h:form>		
+	</div>
+		<h:form>
+			<h:link outcome="projects">
+				<h:panelGroup styleClass="fa fa-level-down fa-2x text-white"></h:panelGroup>
+			</h:link>
+		</h:form>
+	</nav>
+	
 	<h2>Project Id: #{sessionInfo.selectedProject}</h2>
 	<h:form>
-		<h:commandButton value="Respond" action="#{levelResponseService.respondCompleteLastLevel()}" />
+		<h:commandButton value="Respond"
+			action="#{levelResponseService.respondCompleteLastLevel()}" />
 	</h:form>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 </h:body>
 </html>

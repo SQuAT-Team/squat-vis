@@ -9,6 +9,34 @@
 	font-size: 100%;
 }
 
+.status {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0 2px;
+  background: #f2f2f2;
+  text-indent: -9999px;
+  color: transparent;
+  line-height: 16px;
+}
+
+.running {
+  background: #449D44;
+}
+.waiting {
+  background: #F0AD4E;
+}
+.exception {
+  background: #D9534F;
+}
+.terminated {
+  background: #0080ff;
+}
+
 .button-green {
 	background-color: #4CAF50;
 }
