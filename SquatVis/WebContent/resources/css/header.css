@@ -12,3 +12,7 @@
 	visibility: hidden;
 	position: absolute;
 }
+
+body { 
+    padding-top: 65px; 
+}
