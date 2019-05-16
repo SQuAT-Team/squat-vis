@@ -18,11 +18,13 @@ import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 import org.squat_team.vis.connector.protocols.NewProjectServerProtocol;
 import org.squat_team.vis.data.daos.GoalDao;
 import org.squat_team.vis.data.daos.ProjectDao;
+import org.squat_team.vis.data.daos.StatusLogDao;
 import org.squat_team.vis.data.daos.ToolConfigurationDao;
 import org.squat_team.vis.data.data.Goal;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.data.data.Status;
 import org.squat_team.vis.data.data.Status.StatusType;
+import org.squat_team.vis.data.data.StatusLog;
 import org.squat_team.vis.data.data.ToolConfiguration;
 
 /**
@@ -196,6 +198,7 @@ public class NewProjectServerProtocolTest extends AbstractServerProtocolTest {
 		assertNotNull(status.getLevelStarted());
 		assertNotNull(status.getCreationTime());
 		assertNotNull(status.getMessage());
+		checkStatusLogDao(status.getStatusLog());
 	}
 
 	/**
@@ -243,6 +246,16 @@ public class NewProjectServerProtocolTest extends AbstractServerProtocolTest {
 	private void checkGoalDao(Goal goal) {
 		GoalDao goalDao = this.connectorService.getGoalDao();
 		Mockito.verify(goalDao).save(goal);
+	}
+
+	/**
+	 * Checks whether the status log DAO stored the status log.
+	 * 
+	 * @param project the statusLog
+	 */
+	private void checkStatusLogDao(StatusLog statusLog) {
+		StatusLogDao statusLogDao = this.connectorService.getStatusLogDao();
+		Mockito.verify(statusLogDao).save(statusLog);
 	}
 
 	/**

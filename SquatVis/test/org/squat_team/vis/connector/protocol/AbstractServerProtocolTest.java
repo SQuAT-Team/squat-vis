@@ -20,6 +20,7 @@ import org.squat_team.vis.data.daos.CandidateDao;
 import org.squat_team.vis.data.daos.GoalDao;
 import org.squat_team.vis.data.daos.LevelDao;
 import org.squat_team.vis.data.daos.ProjectDao;
+import org.squat_team.vis.data.daos.StatusLogDao;
 import org.squat_team.vis.data.daos.ToolConfigurationDao;
 import org.squat_team.vis.data.data.Project;
 
@@ -68,6 +69,7 @@ public abstract class AbstractServerProtocolTest {
 		connectorService.setCandidateDao(PowerMockito.mock(CandidateDao.class));
 		connectorService.setGoalDao(PowerMockito.mock(GoalDao.class));
 		connectorService.setLevelDao(PowerMockito.mock(LevelDao.class));
+		connectorService.setStatusLogDao(PowerMockito.mock(StatusLogDao.class));
 	}
 
 	/**
