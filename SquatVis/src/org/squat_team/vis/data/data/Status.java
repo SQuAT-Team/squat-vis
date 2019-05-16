@@ -44,6 +44,7 @@ public class Status {
 	private Date creationTime = new Date();
 	private boolean exception = false;
 	private boolean terminated = false;
+	private StatusLog statusLog = new StatusLog();
 
 	public String getLastUpdate() {
 		return (new DateDifferenceFormatter()).formatDifference(lastUpdate, new Date());
@@ -92,17 +93,22 @@ public class Status {
 		}
 	}
 
+	public void update() {
+		lastUpdate = new Date();
+		statusLog.getEntries().add(new StatusLogEntry().initialize(lastUpdate, getType(), getMessage()));
+	}
+
 	public void notifyLevelFinished() {
 		this.toolProgress = 1d;
 		this.toolMessage = TOOL_LEVEL_FINISHED_MESSAGE;
 		this.visMessage = VIS_IMPORTING_MESSAGE;
-		lastUpdate = new Date();
+		this.update();
 	}
 
 	public void notifyLevelImported() {
 		this.visProgress = 1d;
-		this.toolMessage = VIS_IMPORT_FINISHED_MESSAGE;
-		lastUpdate = new Date();
+		this.visMessage = VIS_IMPORT_FINISHED_MESSAGE;
+		this.update();
 	}
 
 	public void notifyNewLevel() {
@@ -110,7 +116,7 @@ public class Status {
 		this.toolProgress = 0d;
 		this.toolMessage = TOOL_NEW_LEVEL_MESSAGE;
 		this.visMessage = VIS_NEW_LEVEL_MESSAGE;
-		lastUpdate = new Date();
+		this.update();
 	}
 
 	public void notifyTerminated() {
@@ -119,12 +125,12 @@ public class Status {
 		this.toolMessage = TOOL_TERMINATED_MESSAGE;
 		this.visMessage = VIS_TERMINATED_MESSAGE;
 		this.terminated = true;
-		lastUpdate = new Date();
+		this.update();
 	}
 
 	public void notifyException() {
 		this.exception = true;
-		lastUpdate = new Date();
+		this.update();
 	}
 
 	public StatusType getType() {

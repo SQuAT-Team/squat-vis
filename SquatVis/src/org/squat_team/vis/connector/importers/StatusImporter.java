@@ -1,7 +1,5 @@
 package org.squat_team.vis.connector.importers;
 
-import java.util.Date;
-
 import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CStatus;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
@@ -92,8 +90,7 @@ public class StatusImporter extends AbstractImporter<CStatus, Status> {
 	 * @param status
 	 */
 	private void updateTimestamps(Status status) {
-		Date now = new Date();
-		status.setLastUpdate(now);
+		status.update();
 	}
 
 }

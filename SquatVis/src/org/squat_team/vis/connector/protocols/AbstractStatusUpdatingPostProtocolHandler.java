@@ -3,17 +3,23 @@ package org.squat_team.vis.connector.protocols;
 import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.ProjectDao;
+import org.squat_team.vis.data.daos.StatusLogDao;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.data.data.Status;
 
+/**
+ * Provides methods to update the status of a project.
+ */
 public abstract class AbstractStatusUpdatingPostProtocolHandler extends AbstractPostProtocolHandler {
 	private ProjectDao projectDao;
+	private StatusLogDao statusLogDao;
 	private Project project;
 
 	public AbstractStatusUpdatingPostProtocolHandler(ConnectorService connectorService,
 			ProjectConnector projectConnector) {
 		super(connectorService, projectConnector);
 		this.projectDao = connectorService.getProjectDao();
+		this.statusLogDao = connectorService.getStatusLogDao();
 		this.project = projectDao.find(projectConnector.getProjectId());
 	}
 
@@ -24,8 +30,9 @@ public abstract class AbstractStatusUpdatingPostProtocolHandler extends Abstract
 		Status status = project.getStatus();
 		status.notifyNewLevel();
 		projectDao.update(project);
+		updateDatabaseStatusLog();
 	}
-	
+
 	/**
 	 * Notifies the status of the project that all post import tasks are finished.
 	 */
@@ -33,6 +40,7 @@ public abstract class AbstractStatusUpdatingPostProtocolHandler extends Abstract
 		Status status = project.getStatus();
 		status.notifyLevelImported();
 		projectDao.update(project);
+		updateDatabaseStatusLog();
 	}
 
 	/**
@@ -43,5 +51,10 @@ public abstract class AbstractStatusUpdatingPostProtocolHandler extends Abstract
 		Status status = project.getStatus();
 		status.notifyLevelFinished();
 		projectDao.update(project);
+		updateDatabaseStatusLog();
+	}
+
+	private void updateDatabaseStatusLog() {
+		statusLogDao.update(project.getStatus().getStatusLog());
 	}
 }

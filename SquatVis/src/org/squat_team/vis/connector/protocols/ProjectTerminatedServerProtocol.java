@@ -9,8 +9,10 @@ import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.ProjectDao;
+import org.squat_team.vis.data.daos.StatusLogDao;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.data.data.Status;
+import org.squat_team.vis.data.data.StatusLog;
 
 /**
  * This protocol handles an incoming request to terminate an existing project.
@@ -19,6 +21,7 @@ import org.squat_team.vis.data.data.Status;
  */
 public class ProjectTerminatedServerProtocol extends AbstractSimpleServerProtocol {
 	private ProjectDao projectDao;
+	private StatusLogDao statusLogDao;
 
 	/**
 	 * Creates a new protocol.
@@ -50,6 +53,7 @@ public class ProjectTerminatedServerProtocol extends AbstractSimpleServerProtoco
 		Status projectStatus = project.getStatus();
 		projectStatus.notifyTerminated();
 		update(project);
+		update(project.getStatus().getStatusLog());
 	}
 
 	/**
@@ -73,6 +77,7 @@ public class ProjectTerminatedServerProtocol extends AbstractSimpleServerProtoco
 	 */
 	private void findDaos() {
 		projectDao = connectorService.getProjectDao();
+		statusLogDao = connectorService.getStatusLogDao();
 	}
 
 	/**
@@ -82,6 +87,15 @@ public class ProjectTerminatedServerProtocol extends AbstractSimpleServerProtoco
 	 */
 	private void update(Project project) {
 		projectDao.update(project);
+	}
+
+	/**
+	 * Updates the status log in the database.
+	 * 
+	 * @param statusLog the project to update
+	 */
+	private void update(StatusLog statusLog) {
+		statusLogDao.update(statusLog);
 	}
 
 }

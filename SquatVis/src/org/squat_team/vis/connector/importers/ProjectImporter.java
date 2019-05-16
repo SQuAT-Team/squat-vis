@@ -5,8 +5,10 @@ import java.util.Date;
 import org.squat_team.vis.connector.data.CProject;
 import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.ProjectDao;
+import org.squat_team.vis.data.daos.StatusLogDao;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.data.data.Status;
+import org.squat_team.vis.data.data.StatusLog;
 
 /**
  * Imports {@link CProject}s and returns {@link Project} objects, which are then
@@ -27,6 +29,7 @@ public class ProjectImporter extends AbstractImporter<CProject, Project> {
 	public Project transform(CProject cproject) {
 		Project project = transformProject(cproject);
 		ProjectDao dao = connectorService.getProjectDao();
+		initializeStatusLog(project);
 		dao.save(project);
 		return project;
 	}
@@ -45,6 +48,19 @@ public class ProjectImporter extends AbstractImporter<CProject, Project> {
 	}
 
 	/**
+	 * Stores the {@link StatusLog} in the database.
+	 * 
+	 * @param project the project the log belongs to.
+	 * @return the stored log
+	 */
+	private StatusLog initializeStatusLog(Project project) {
+		StatusLogDao statusLogDao = connectorService.getStatusLogDao();
+		StatusLog statusLog = project.getStatus().getStatusLog();
+		statusLogDao.save(statusLog);
+		return statusLog;
+	}
+
+	/**
 	 * Updates the status accordingly.
 	 * 
 	 * @param project
@@ -55,7 +71,7 @@ public class ProjectImporter extends AbstractImporter<CProject, Project> {
 		Status status = findStatus(project);
 		status.setCreationTime(currentDate);
 		status.setLevelStarted(currentDate);
-		status.setLastUpdate(currentDate);
+		status.update();
 		return status;
 	}
 

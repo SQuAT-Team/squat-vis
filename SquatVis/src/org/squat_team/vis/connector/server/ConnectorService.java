@@ -8,6 +8,7 @@ import org.squat_team.vis.data.daos.CandidateDao;
 import org.squat_team.vis.data.daos.GoalDao;
 import org.squat_team.vis.data.daos.LevelDao;
 import org.squat_team.vis.data.daos.ProjectDao;
+import org.squat_team.vis.data.daos.StatusLogDao;
 import org.squat_team.vis.data.daos.ToolConfigurationDao;
 import org.squat_team.vis.util.ResponseManager;
 
@@ -31,6 +32,8 @@ public class ConnectorService {
 	private CandidateDao candidateDao;
 	@Inject
 	private ToolConfigurationDao toolConfigurationDao;
+	@Inject
+	private StatusLogDao statusLogDao;
 	@Inject
 	private ResponseManager responseManager;
 
