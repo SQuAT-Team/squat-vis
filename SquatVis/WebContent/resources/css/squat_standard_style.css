@@ -10,31 +10,56 @@
 }
 
 .status {
-  display: inline-block;
-  vertical-align: middle;
-  width: 16px;
-  height: 16px;
-  overflow: hidden;
-  border-radius: 50%;
-  padding: 0;
-  margin: 0 2px;
-  background: #f2f2f2;
-  text-indent: -9999px;
-  color: transparent;
-  line-height: 16px;
+	display: inline-block;
+	vertical-align: middle;
+	width: 16px;
+	height: 16px;
+	overflow: hidden;
+	border-radius: 50%;
+	padding: 0;
+	margin: 0 2px;
+	background: #f2f2f2;
+	text-indent: -9999px;
+	color: transparent;
+	line-height: 16px;
+}
+
+.status .small {
+	width: 12px;
+	height: 12px;
+}
+
+.text-small {
+	font-size: 12px;
+}
+
+.list-group {
+	max-height: 300px;
+	height: 300px;
+	margin-bottom: 10px;
+	overflow-y: auto;
+	border-style: solid;
+	border-width: 1px;
+}
+
+h3.no-break {
+	display: inline
 }
 
 .running {
-  background: #449D44;
+	background-color: #449D44 !important;
 }
+
 .waiting {
-  background: #F0AD4E;
+	background-color: #F0AD4E !important;
 }
+
 .exception {
-  background: #D9534F;
+	background-color: #D9534F !important;
 }
+
 .terminated {
-  background: #0080ff;
+	background-color: #0080ff !important;
 }
 
 .button-green {
