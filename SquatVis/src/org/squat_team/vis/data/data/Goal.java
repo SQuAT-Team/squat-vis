@@ -24,10 +24,9 @@ public class Goal {
 	private Long id;
 	private String name;
 	private String description;
-	private String color;
 	private Double expectedResponse;
 	private Range range;
-	private int index;
+	private int index = -1;
 
 	private List<Goal> children = new ArrayList<>();
 	@ManyToOne

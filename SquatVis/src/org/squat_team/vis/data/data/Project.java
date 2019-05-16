@@ -1,7 +1,6 @@
 package org.squat_team.vis.data.data;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,7 +21,6 @@ public class Project {
 	@GeneratedValue
 	private Long id;
 	private String name;
-	private Date lastModified;
 	private Integer numberOfGoals;
 	private ToolConfiguration configuration;
 	private Status status = new Status();
