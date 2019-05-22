@@ -1,5 +1,6 @@
 package org.squat_team.vis.data.daos;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,7 +12,12 @@ import javax.persistence.EntityManager;
  *
  * @param <D> The data object type that should be accessed by this dao
  */
-public abstract class AbstractDao<D> implements IDao<D> {
+public abstract class AbstractDao<D> implements IDao<D>, Serializable {
+	/**
+	 * Generated
+	 */
+	private static final long serialVersionUID = -5615602401327131730L;
+	
 	private Class<D> clazz;
 
 	/**
@@ -22,7 +28,7 @@ public abstract class AbstractDao<D> implements IDao<D> {
 	public AbstractDao(Class<D> clazz) {
 		this.clazz = clazz;
 	}
-
+	
 	/**
 	 * An entity manager actually manages the database access. It must be injected
 	 * in a non-abstract class.

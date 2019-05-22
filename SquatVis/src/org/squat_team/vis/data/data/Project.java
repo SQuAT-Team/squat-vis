@@ -1,5 +1,6 @@
 package org.squat_team.vis.data.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,12 @@ import lombok.Data;
  */
 @Entity
 @Data
-public class Project {
+public class Project implements Serializable {
+	/**
+	 * Generated
+	 */
+	private static final long serialVersionUID = -2498312975989441119L;
+	
 	@Id
 	@GeneratedValue
 	private Long id;

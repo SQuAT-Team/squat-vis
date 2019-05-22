@@ -20,7 +20,7 @@ public class StatusLogDao extends AbstractDao<StatusLog> implements Serializable
 	private static final long serialVersionUID = -2067478205534423715L;
 
 	@PersistenceContext
-	private EntityManager em;
+	private transient EntityManager em;
 
 	/**
 	 * Creates a new dao.

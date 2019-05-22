@@ -20,7 +20,7 @@ public class ToolConfigurationDao extends AbstractDao<ToolConfiguration> impleme
 	private static final long serialVersionUID = 8576220919035495402L;
 	
 	@PersistenceContext
-	private EntityManager em;
+	private transient EntityManager em;
 
 	/**
 	 * Creates a new dao.

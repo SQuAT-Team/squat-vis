@@ -20,7 +20,7 @@ public class ProjectDao extends AbstractDao<Project> implements Serializable {
 	private static final long serialVersionUID = 6847276165850332599L;
 	
 	@PersistenceContext
-	private EntityManager em;
+	private transient EntityManager em;
 
 	/**
 	 * Creates a new dao.

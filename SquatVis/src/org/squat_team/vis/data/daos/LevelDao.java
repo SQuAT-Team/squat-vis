@@ -20,7 +20,7 @@ public class LevelDao extends AbstractDao<Level> implements Serializable{
 	private static final long serialVersionUID = 4158852310631289193L;
 	
 	@PersistenceContext
-	private EntityManager em;
+	private transient EntityManager em;
 
 	/**
 	 * Creates a new dao.

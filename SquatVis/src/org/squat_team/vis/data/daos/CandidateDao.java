@@ -21,7 +21,7 @@ public class CandidateDao extends AbstractDao<Candidate> implements Serializable
 	private static final long serialVersionUID = 7038388113264871488L;
 	
 	@PersistenceContext
-	private EntityManager em;
+	private transient EntityManager em;
 
 	/**
 	 * Creates a new dao.

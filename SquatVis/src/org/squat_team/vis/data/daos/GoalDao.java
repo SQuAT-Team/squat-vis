@@ -20,7 +20,7 @@ public class GoalDao extends AbstractDao<Goal> implements Serializable {
 	private static final long serialVersionUID = 4213492899795504685L;
 
 	@PersistenceContext
-	private EntityManager em;
+	private transient EntityManager em;
 
 	/**
 	 * Creates a new dao.

@@ -20,7 +20,7 @@ public class ArchitectureDao extends AbstractDao<Architecture> implements Serial
 	private static final long serialVersionUID = 1302708640948499897L;
 
 	@PersistenceContext
-	private EntityManager em;
+	private transient EntityManager em;
 
 	/**
 	 * Creates a new dao.
