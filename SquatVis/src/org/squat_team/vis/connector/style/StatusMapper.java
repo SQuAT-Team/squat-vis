@@ -6,6 +6,8 @@ import javax.inject.Named;
 import org.squat_team.vis.data.data.Status;
 import org.squat_team.vis.data.data.Status.StatusType;
 
+import lombok.NonNull;
+
 /**
  * Maps {@link StatusType}s to the correct CSS-Tags and descriptions.
  */
@@ -29,7 +31,7 @@ public class StatusMapper {
 	 * @param statusType the current status
 	 * @return the corresponding CSS-Tag, can be placed in the class attribute
 	 */
-	public String map(Status.StatusType statusType) {
+	public String map(@NonNull Status.StatusType statusType) {
 		switch (statusType) {
 		case RUNNING:
 			return STATUS_RUNNING_CSS;
@@ -50,7 +52,7 @@ public class StatusMapper {
 	 * @param statusType the current status
 	 * @return the description, can be placed in a title attribute
 	 */
-	public String mapDescription(Status.StatusType statusType) {
+	public String mapDescription(@NonNull Status.StatusType statusType) {
 		switch (statusType) {
 		case RUNNING:
 			return STATUS_RUNNING_DESCRIPTION;
