@@ -20,16 +20,15 @@ import lombok.Data;
 @SessionScoped
 public class SessionInfo implements Serializable {
 
-	@Inject
-	private ProjectDao projectDao;
-
 	/**
 	 * Generated
 	 */
 	private static final long serialVersionUID = 6462742507992003369L;
-
+	
+	@Inject
+	private ProjectDao projectDao;
 	private long selectedProject;
-	private Project project;
+	private transient Project project;
 
 	/**
 	 * Sets the project and navigates to the project page.
