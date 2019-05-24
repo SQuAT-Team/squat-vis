@@ -1,5 +1,7 @@
 package org.squat_team.vis.test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.squat_team.vis.connector.ProjectConnector;
@@ -17,17 +19,28 @@ import org.squat_team.vis.connector.protocols.NewLevelClientProtocol;
 import org.squat_team.vis.connector.protocols.NewProjectClientProtocol;
 import org.squat_team.vis.connector.protocols.ProjectTerminatedClientProtocol;
 import org.squat_team.vis.connector.protocols.UpdateStatusClientProtocol;
+import org.squat_team.vis.test.exporter.CsvExporter;
 
 public class TestClient {
-
+	private static final String EXPORT_DIRECTORY_PATH = "." + File.separator + "SquatVisExports";
 	private static ProjectConnector projectConnector;
 
 	public static void main(String[] args) throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
-			InvalidRequestException, InterruptedException {
+			InvalidRequestException, InterruptedException, IOException {
+		exportData();
 		System.out.println("STARTING TEST CLIENT");
 		runStandardProcedure();
 		runUpdateStuckProcedure();
 		System.out.println("SHUTTING DOWN TEST CLIENT");
+	}
+
+	private static void exportData() throws IOException {
+		System.out.println("EXPORT TO OTHER FORMATS");
+		TestNewProjectDataProvider testProjectDataProvider = new TestNewProjectDataProvider();
+		TestNewLevelDataProvider testLevelDataProvider = new TestNewLevelDataProvider();
+		CsvExporter csvExporter = new CsvExporter(EXPORT_DIRECTORY_PATH);
+		csvExporter.export(testProjectDataProvider.getProject(), testProjectDataProvider.getGoal(),
+				testLevelDataProvider.getAllLevels(), testProjectDataProvider.getConfiguration());
 	}
 
 	private static void runStandardProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,

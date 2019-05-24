@@ -1,5 +1,6 @@
 package org.squat_team.vis.test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +16,13 @@ public class TestNewLevelDataProvider {
 
 	private static final List<Double> LEVEL1_CANDIDATE2_REAL_VALUES = Arrays.asList(1.2, 2.1, 350.0, 500.0);
 	private static final List<Double> LEVEL1_CANDIDATE2_UTILITY_VALUES = Arrays.asList(0.8, 0.3, 1.0, 1.0);
+
+	public List<CLevel> getAllLevels() {
+		List<CLevel> levels = new ArrayList<CLevel>();
+		levels.add(getLevel0());
+		levels.add(getLevel1());
+		return levels;
+	}
 
 	public CLevel getLevel0() {
 		CLevel level = new CLevel();
