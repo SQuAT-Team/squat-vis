@@ -25,6 +25,7 @@ public class DefaultToolConfigurations {
 		configuration.setHasRealValues(true);
 		configuration.setHasUtilities(true);
 		configuration.setHasParents(true);
+		configuration.setSupportSuggestions(true);
 		return configuration;
 	}
 
@@ -39,6 +40,7 @@ public class DefaultToolConfigurations {
 		configuration.setHasRealValues(true);
 		configuration.setHasUtilities(true);
 		configuration.setHasParents(true);
+		configuration.setSupportSuggestions(true);
 		return configuration;
 	}
 

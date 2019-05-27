@@ -13,6 +13,7 @@ public class HelpTextProvider {
 	private static final String UTILITIES_DESCRIPTION = "Utility values are real values that are evaluated with respect to the architects preferences. A value of 0 represents the worst utility, while a value of 1 represents the highest utility.";
 	private static final String HAS_ARCHITECTURES_DESCRIPTION = "A candidate has an architecture, if some architectural model, e.g., an instance of the Palladio Component Model, is available and sent to the visualization tool. Otherwise only values are sent.";
 	private static final String HAS_PARENTS_DESCRIPTION = "The parent of a candidate is a candidate that has been used to derive the child candidate.";
+	private static final String SUGGESTIONS_DESCRIPTION = "Suggestions are candidates that the optimization tool proposes for an analysis in the next level.";
 
 	public String getRealValueText() {
 		return REAL_VALUE_DESCRIPTION;
@@ -30,4 +31,7 @@ public class HelpTextProvider {
 		return HAS_PARENTS_DESCRIPTION;
 	}
 
+	public String getSuggestionsText() {
+		return SUGGESTIONS_DESCRIPTION;
+	}
 }

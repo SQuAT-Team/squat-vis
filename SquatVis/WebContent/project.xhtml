@@ -157,7 +157,7 @@
 
 					<!-- CONFIGURATION CARDS ROW 1 -->
 					<div class="row text-center mx-2 mb-2">
-						<div class="col">
+						<div class="col-3">
 							<div class="card">
 								<span class="card-header"><h3 class="no-break">Real
 										Values</h3> <tp:helpTag
@@ -166,7 +166,7 @@
 									class="card-body text-white #{booleanToBootstrapColorMapper.map(c.hasRealValues)}">#{c.hasRealValues}</div>
 							</div>
 						</div>
-						<div class="col">
+						<div class="col-3">
 							<div class="card">
 								<span class="card-header"><h3 class="no-break">Utility
 										Values</h3> <tp:helpTag
@@ -175,7 +175,7 @@
 									class="card-body text-white #{booleanToBootstrapColorMapper.map(c.hasUtilities)}">#{c.hasUtilities}</div>
 							</div>
 						</div>
-						<div class="col">
+						<div class="col-3">
 							<div class="card">
 								<span class="card-header"><h3 class="no-break">Architectures</h3>
 									<tp:helpTag
@@ -184,12 +184,22 @@
 									class="card-body text-white #{booleanToBootstrapColorMapper.map(c.hasArchitectures)}">#{c.hasArchitectures}</div>
 							</div>
 						</div>
-						<div class="col">
+						<div class="col-3">
 							<div class="card">
 								<span class="card-header"><h3 class="no-break">Parent</h3>
 									<tp:helpTag helpText="#{helpTextProvider.getParentsText()}" /></span>
 								<div
 									class="card-body text-white #{booleanToBootstrapColorMapper.map(c.hasParents)}">#{c.hasParents}</div>
+							</div>
+						</div>
+					</div>
+										<div class="row text-center mx-2 mb-2">
+																<div class="col-3">
+							<div class="card">
+								<span class="card-header"><h3 class="no-break">Suggestions</h3>
+									<tp:helpTag helpText="#{helpTextProvider.getSuggestionsText()}" /></span>
+								<div
+									class="card-body text-white #{booleanToBootstrapColorMapper.map(c.getSupportSuggestions())}">#{c.getSupportSuggestions()}</div>
 							</div>
 						</div>
 					</div>

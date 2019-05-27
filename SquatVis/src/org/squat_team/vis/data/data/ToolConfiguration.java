@@ -25,4 +25,5 @@ public class ToolConfiguration {
 	private Boolean hasUtilities;
 	private Boolean hasArchitectures;
 	private Boolean hasParents;
+	private Boolean supportSuggestions;
 }

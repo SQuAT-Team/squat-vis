@@ -44,6 +44,7 @@ public class TestNewLevelDataProvider {
 		candidate.setUtilityValues(INITIAL_UTILITY_VALUES);
 		candidate.setRealValuePareto(false);
 		candidate.setUtilityValuePareto(false);
+		candidate.setSuggested(true);
 		return candidate;
 	}
 
@@ -54,6 +55,7 @@ public class TestNewLevelDataProvider {
 		candidate.setUtilityValues(LEVEL1_CANDIDATE1_UTILITY_VALUES);
 		candidate.setRealValuePareto(false);
 		candidate.setUtilityValuePareto(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
@@ -64,6 +66,7 @@ public class TestNewLevelDataProvider {
 		candidate.setUtilityValues(LEVEL1_CANDIDATE2_UTILITY_VALUES);
 		candidate.setRealValuePareto(false);
 		candidate.setUtilityValuePareto(false);
+		candidate.setSuggested(true);
 		return candidate;
 	}
 

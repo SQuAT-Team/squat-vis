@@ -27,4 +27,5 @@ public class Candidate {
 	private List<Double> utilityValues = new ArrayList<>();
 	private boolean isRealValuePareto = false;
 	private boolean isUtilityValuePareto = false;
+	private boolean isSuggested = false;
 }

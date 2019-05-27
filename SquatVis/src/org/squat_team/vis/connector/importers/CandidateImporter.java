@@ -48,6 +48,7 @@ public class CandidateImporter extends AbstractImporter<CCandidate, Candidate> {
 		candidate.setUtilityValues(ccandidate.getUtilityValues());
 		candidate.setRealValuePareto(ccandidate.isRealValuePareto());
 		candidate.setUtilityValuePareto(ccandidate.isUtilityValuePareto());
+		candidate.setSuggested(ccandidate.isSuggested());
 		return candidate;
 	}
 

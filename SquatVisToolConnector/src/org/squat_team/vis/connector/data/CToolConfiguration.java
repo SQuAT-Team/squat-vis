@@ -25,6 +25,7 @@ public class CToolConfiguration implements Serializable {
 	private Boolean hasArchitectures;
 	private Boolean hasUtilities;
 	private Boolean hasParents;
+	private Boolean supportSuggestions;
 
 	public CToolConfiguration(@NonNull String name) {
 		super();
