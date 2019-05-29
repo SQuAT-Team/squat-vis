@@ -11,9 +11,9 @@ import org.squat_team.vis.data.data.Status;
  * Provides methods to update the status of a project.
  */
 public abstract class AbstractStatusUpdatingPostProtocolHandler extends AbstractPostProtocolHandler {
-	private ProjectDao projectDao;
+	protected ProjectDao projectDao;
 	private StatusLogDao statusLogDao;
-	private Project project;
+	protected Project project;
 
 	public AbstractStatusUpdatingPostProtocolHandler(ConnectorService connectorService,
 			ProjectConnector projectConnector) {
@@ -57,4 +57,5 @@ public abstract class AbstractStatusUpdatingPostProtocolHandler extends Abstract
 	private void updateDatabaseStatusLog() {
 		statusLogDao.update(project.getStatus().getStatusLog());
 	}
+
 }

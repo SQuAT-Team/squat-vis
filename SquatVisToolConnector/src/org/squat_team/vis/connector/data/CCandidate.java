@@ -28,8 +28,6 @@ public class CCandidate implements Serializable {
 	private Long parentId;
 	private List<Double> realValues = new ArrayList<>();
 	private List<Double> utilityValues = new ArrayList<>();
-	private boolean isRealValuePareto = false;
-	private boolean isUtilityValuePareto = false;
 	private boolean isSuggested = false;
 
 }

@@ -18,7 +18,7 @@
 	<title>JSF 2.2 Hello World</title>
 </h:head>
 <h:body>
-	<h2>JSF 2.2 Hello World Example - hello.xhtml</h2>  
+	<h2>JSF 2.2 Hello World Example - hello.xhtml</h2>
 	<h:form>
 		<h:inputText value="#{helloBean.name}"></h:inputText>
 		<h:commandButton value="Welcome Me" action="welcome"></h:commandButton>
@@ -35,7 +35,7 @@
 		<h:column>
 			<f:facet name="header">Project Name</f:facet>#{project.name}
 		</h:column>
-				<h:column>
+		<h:column>
 			<f:facet name="header">Level Numbers</f:facet>#{project.getNumberOfLevels()}
 		</h:column>
 	</h:dataTable>
@@ -43,7 +43,7 @@
 		<h:column>
 			<f:facet name="header">Config Name</f:facet>#{c.name}
 		</h:column>
-		
+
 	</h:dataTable>
 	<ui:repeat var="l" value="#{levelController.data}" varStatus="status">
 		<h:outputText value="This is a level: #{l.getNumberOfCandidates()}"></h:outputText>
@@ -58,12 +58,13 @@
 	</div>
 	<ui:repeat var="c" value="#{candidateController.data}"
 		varStatus="status">
-		<h:outputText value="This is a candidate"></h:outputText>
+		<h:outputText
+			value="This is a candidate #{c.isUtilityValueParetoLevelBased()} #{c.isRealValueParetoLevelBased()} #{c.isUtilityValueParetoPopulationBased()} #{c.isRealValueParetoPopulationBased()}"></h:outputText>
 		<br />
 	</ui:repeat>
-		<ui:repeat var="g" value="#{goalController.data}"
-		varStatus="status">
-		<h:outputText value="This is a goal with children: #{g.getNumberOfChildren()}"></h:outputText>
+	<ui:repeat var="g" value="#{goalController.data}" varStatus="status">
+		<h:outputText
+			value="This is a goal with children: #{g.getNumberOfChildren()}"></h:outputText>
 		<br />
 	</ui:repeat>
 </h:body>

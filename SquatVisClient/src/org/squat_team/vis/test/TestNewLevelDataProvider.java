@@ -16,6 +16,9 @@ public class TestNewLevelDataProvider {
 
 	private static final List<Double> LEVEL1_CANDIDATE2_REAL_VALUES = Arrays.asList(1.2, 2.1, 350.0, 500.0);
 	private static final List<Double> LEVEL1_CANDIDATE2_UTILITY_VALUES = Arrays.asList(0.8, 0.3, 1.0, 1.0);
+	
+	private static final List<Double> LEVEL1_CANDIDATE3_REAL_VALUES = Arrays.asList(1.8, 2.4, 500.0, 700.0);
+	private static final List<Double> LEVEL1_CANDIDATE3_UTILITY_VALUES = Arrays.asList(0.5, 0.2, 0.5, 0.6);
 
 	public List<CLevel> getAllLevels() {
 		List<CLevel> levels = new ArrayList<CLevel>();
@@ -34,6 +37,7 @@ public class TestNewLevelDataProvider {
 		CLevel level = new CLevel();
 		level.getCandidates().add(getLevel1Candidate1());
 		level.getCandidates().add(getLevel1Candidate2());
+		level.getCandidates().add(getLevel1Candidate3());
 		return level;
 	}
 
@@ -42,8 +46,6 @@ public class TestNewLevelDataProvider {
 		candidate.setCandidateId(1L);
 		candidate.setRealValues(INITIAL_REAL_VALUES);
 		candidate.setUtilityValues(INITIAL_UTILITY_VALUES);
-		candidate.setRealValuePareto(false);
-		candidate.setUtilityValuePareto(false);
 		candidate.setSuggested(true);
 		return candidate;
 	}
@@ -53,8 +55,6 @@ public class TestNewLevelDataProvider {
 		candidate.setCandidateId(2L);
 		candidate.setRealValues(LEVEL1_CANDIDATE1_REAL_VALUES);
 		candidate.setUtilityValues(LEVEL1_CANDIDATE1_UTILITY_VALUES);
-		candidate.setRealValuePareto(false);
-		candidate.setUtilityValuePareto(false);
 		candidate.setSuggested(false);
 		return candidate;
 	}
@@ -64,9 +64,16 @@ public class TestNewLevelDataProvider {
 		candidate.setCandidateId(3L);
 		candidate.setRealValues(LEVEL1_CANDIDATE2_REAL_VALUES);
 		candidate.setUtilityValues(LEVEL1_CANDIDATE2_UTILITY_VALUES);
-		candidate.setRealValuePareto(false);
-		candidate.setUtilityValuePareto(false);
 		candidate.setSuggested(true);
+		return candidate;
+	}
+	
+	public CCandidate getLevel1Candidate3() {
+		CCandidate candidate = new CCandidate();
+		candidate.setCandidateId(3L);
+		candidate.setRealValues(LEVEL1_CANDIDATE3_REAL_VALUES);
+		candidate.setUtilityValues(LEVEL1_CANDIDATE3_UTILITY_VALUES);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
