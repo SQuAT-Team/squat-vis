@@ -16,15 +16,19 @@ import org.squat_team.vis.data.data.Project;
  * This handler should be called after the import of a new level of search.
  */
 public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProtocolHandler {
+	private boolean noResponse;
 
 	/**
 	 * Creates a new handler.
 	 * 
 	 * @param connectorService Provides daos for the import
 	 * @param projectConnector Specifies the project the import belongs to
+	 * @param noResponse       True if the client does not expect a response.
 	 */
-	public NewLevelPostProtocolHandler(ConnectorService connectorService, ProjectConnector projectConnector) {
+	public NewLevelPostProtocolHandler(ConnectorService connectorService, ProjectConnector projectConnector,
+			boolean noResponse) {
 		super(connectorService, projectConnector);
+		this.noResponse = noResponse;
 	}
 
 	@Override
@@ -32,7 +36,9 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 		updateStatusFinishLevel();
 		startParetoAnalysis();
 		updateStatusFinishLevelImport();
-
+		if (noResponse) {
+			updateStatusStartLevel();
+		}
 	}
 
 	/**

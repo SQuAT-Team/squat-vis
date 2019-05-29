@@ -18,6 +18,7 @@ import org.squat_team.vis.connector.server.ConnectorService;
  */
 public class NewLevelServerProtocol extends AbstractSimpleServerProtocol {
 	private CLevel cLevel;
+	private boolean noResponse;
 
 	/**
 	 * Creates a new protocol.
@@ -34,7 +35,8 @@ public class NewLevelServerProtocol extends AbstractSimpleServerProtocol {
 
 	@Override
 	protected void receive() throws ProtocolFailure, IOException, InvalidRequestException {
-		cLevel = receive(CLevel.class);
+		this.cLevel = receive(CLevel.class);
+		this.noResponse = receive(Boolean.class);
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class NewLevelServerProtocol extends AbstractSimpleServerProtocol {
 
 	@Override
 	public IPostProtocolHandler getPostProtocolHandler() {
-		return new NewLevelPostProtocolHandler(connectorService, projectConnector);
+		return new NewLevelPostProtocolHandler(connectorService, projectConnector, noResponse);
 	}
 
 }

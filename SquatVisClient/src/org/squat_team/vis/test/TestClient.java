@@ -51,8 +51,6 @@ public class TestClient {
 		sleep(1000);
 		sendLevel0();
 		sleep(1000);
-		waitForResponse(0);
-		sleep(1000);
 		makeStatusUpdate1();
 		sleep(1000);
 		sendLevel1();
@@ -149,7 +147,7 @@ public class TestClient {
 		System.out.println("SEND NEW LEVEL");
 		TestNewLevelDataProvider testDataProvider = new TestNewLevelDataProvider();
 		CLevel level = testDataProvider.getLevel0();
-		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector);
+		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector, true);
 		boolean success = protocol.call();
 		System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
 	}
@@ -159,7 +157,7 @@ public class TestClient {
 		System.out.println("SEND NEW LEVEL");
 		TestNewLevelDataProvider testDataProvider = new TestNewLevelDataProvider();
 		CLevel level = testDataProvider.getLevel1();
-		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector);
+		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector, false);
 		boolean success = protocol.call();
 		System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
 	}

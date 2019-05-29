@@ -106,10 +106,24 @@ public class ParetoAnalyzer {
 		}
 	}
 
+	/**
+	 * Tests whether the two values are equal.
+	 * 
+	 * @param candidateValue
+	 * @param paretoCandidateValue
+	 * @return
+	 */
 	private boolean isEqual(Double candidateValue, Double paretoCandidateValue) {
 		return candidateValue.equals(paretoCandidateValue);
 	}
 	
+	/**
+	 * Tests wether the candidate value is better than the current pareto candidate value.
+	 * 
+	 * @param candidateValue
+	 * @param paretoCandidateValue
+	 * @return
+	 */
 	private boolean isBetterThan(Double candidateValue, Double paretoCandidateValue) {
 		if (useUtility) {
 			return candidateValue > paretoCandidateValue;
@@ -118,6 +132,12 @@ public class ParetoAnalyzer {
 		}
 	}
 
+	/**
+	 * Gets the (goal) values of the candidate.
+	 * 
+	 * @param candidate
+	 * @return
+	 */
 	private List<Double> getValues(Candidate candidate) {
 		if (useUtility) {
 			return candidate.getUtilityValues();

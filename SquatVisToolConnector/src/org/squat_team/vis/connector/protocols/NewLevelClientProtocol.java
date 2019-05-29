@@ -19,17 +19,20 @@ import lombok.NonNull;
 public class NewLevelClientProtocol extends AbstractSimpleClientProtocol {
 	private CLevel level;
 	private ProjectConnector projectConnector;
+	private boolean noResponse;
 
 	/**
 	 * Initializes the protocol.
 	 * 
 	 * @param level            the level to send. Must not be null!
 	 * @param projectConnector the project the level will be pushed to.
+	 * @param noResponse	   let the server know that no response is expected.
 	 */
-	public NewLevelClientProtocol(@NonNull CLevel level, @NonNull ProjectConnector projectConnector) {
+	public NewLevelClientProtocol(@NonNull CLevel level, @NonNull ProjectConnector projectConnector, boolean noResponse) {
 		super();
 		this.level = level;
 		this.projectConnector = projectConnector;
+		this.noResponse = noResponse;
 	}
 
 	@Override
@@ -37,6 +40,7 @@ public class NewLevelClientProtocol extends AbstractSimpleClientProtocol {
 		Message request = new Message(MessageType.SEND_NEW_LEVEL, projectConnector);
 		send(request);
 		send(level);
+		send(noResponse);
 	}
 
 }

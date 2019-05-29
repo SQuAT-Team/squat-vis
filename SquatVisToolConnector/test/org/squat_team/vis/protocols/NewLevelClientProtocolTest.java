@@ -23,6 +23,7 @@ import org.squat_team.vis.connector.protocols.NewLevelClientProtocol;
  */
 @PrepareForTest(NewLevelClientProtocol.class)
 public class NewLevelClientProtocolTest extends ClientProtocolTest {
+	private static final boolean NO_RESPONSE_VALUE = true;
 	private ProjectConnector projectConnector;
 	private CLevel level;
 
@@ -77,7 +78,7 @@ public class NewLevelClientProtocolTest extends ClientProtocolTest {
 	private void initializeProtocol() {
 		level = new CLevel();
 		projectConnector = new ProjectConnector(123);
-		protocol = PowerMockito.spy(new NewLevelClientProtocol(level, projectConnector));
+		protocol = PowerMockito.spy(new NewLevelClientProtocol(level, projectConnector, NO_RESPONSE_VALUE));
 	}
 
 	private void mockCorrectInputStreamResponses() throws ClassNotFoundException, IOException {
@@ -105,8 +106,9 @@ public class NewLevelClientProtocolTest extends ClientProtocolTest {
 	private void runAndAssert() throws ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		Boolean response = (Boolean) protocol.call();
 		assertEquals(true, response);
-		assertEquals(2, output.size());
+		assertEquals(3, output.size());
 		checKMessage(output.get(0));
 		assertEquals(this.level, output.get(1));
+		assertEquals(NO_RESPONSE_VALUE, output.get(2));
 	}
 }
