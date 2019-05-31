@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Project;
+import org.squat_team.vis.transformers.CsvExporter;
 
 import lombok.Data;
 
@@ -29,7 +30,7 @@ public class SessionInfo implements Serializable {
 	private ProjectDao projectDao;
 	private long selectedProject;
 	private transient Project project;
-
+	
 	/**
 	 * Sets the project and navigates to the project page.
 	 * 
@@ -49,4 +50,9 @@ public class SessionInfo implements Serializable {
 		projectDao.update(project);
 	}
 
+	public String getProjectDataAsCSV() {
+		CsvExporter exporter = new CsvExporter();
+		return exporter.export(project);
+	}
+	
 }
