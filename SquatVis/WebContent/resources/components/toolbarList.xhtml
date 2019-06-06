@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components">
+
+<composite:interface>
+	<composite:attribute name="render" />
+	<composite:attribute name="heading" />
+	<composite:attribute name="badgeNumber" />
+	<composite:attribute name="badgeColor" />
+	<composite:attribute name="updateBadgeCommand" />
+	<composite:attribute name="updateBadgeId" />
+	<composite:attribute name="updateListCommand" />
+	<composite:attribute name="updateListId" />
+	<composite:attribute name="iconClass" />
+	<composite:attribute name="iconColorClass" />
+	<composite:attribute name="search" />
+	<composite:attribute name="button" />
+	<composite:attribute name="buttonOneName" />
+	<composite:attribute name="buttonOneFunction" />
+	<composite:attribute name="buttonTwoName" />
+	<composite:attribute name="buttonTwoFunction" />
+	<composite:attribute name="comparison" required="true" />
+</composite:interface>
+
+<composite:implementation>
+	<div class="panel panel-default mt-3 mb-3">
+
+		<!-- HEADING -->
+		<div class="panel-heading">
+			<h:form>
+				<span class="panel-title">
+					<h3 style="display: inline"
+						class="accordion-toggle collapsed font-weight-bold align-text-bottom"
+						data-toggle="collapse" data-parent="#accordion"
+						href="#collapseToolbar#{cc.attrs.heading}">&ensp;#{cc.attrs.heading}
+					</h3> <h:panelGroup id="#{cc.attrs.updateBadgeId}"
+						styleClass="badge badge-pill badge-primary align-top small"
+						pt:style="background-color:#{cc.attrs.badgeColor};">
+												#{cc.attrs.badgeNumber}
+					</h:panelGroup> <h:panelGroup styleClass="float-right #{cc.attrs.iconColorClass}">
+						<i class="#{cc.attrs.iconClass} fa-lg align-bottom" />
+					</h:panelGroup>
+				</span>
+				<pf:remoteCommand name="#{cc.attrs.updateBadgeCommand}"
+					update="#{cc.attrs.updateBadgeId}" />
+			</h:form>
+		</div>
+
+		<!-- CONTENT -->
+		<div id="collapseToolbar#{cc.attrs.heading}"
+			class="panel-collapse collapse fade in mt-1">
+			<div class="panel-body">
+
+				<!-- SEARCH BAR -->
+				<c:if test="${cc.attrs.search}">
+					<div class="has-search mt-2 mb-2">
+						<span class="fa fa-search form-control-feedback"></span> <input
+							type="text" class="form-control" placeholder="Search" onkeyup="toolbarSearch(this)" />
+					</div>
+				</c:if>
+
+				<!-- LIST -->
+				<h:form>
+					<h:panelGroup layout="block"
+						styleClass="list-group candidate-list #{cc.attrs.updateListId}"
+						id="#{cc.attrs.updateListId}">
+						<tp:candidateList render="#{cc.attrs.render}"
+							comparison="#{cc.attrs.comparison}" />
+					</h:panelGroup>
+					<pf:remoteCommand name="#{cc.attrs.updateListCommand}"
+						update="#{cc.attrs.updateListId}" />
+				</h:form>
+
+				<!-- BUTONS -->
+				<c:if test="${cc.attrs.button}">
+					<div class="row no-gutters mt-1 ml-3">
+						<div class="col mx-1">
+							<button type="button" onclick="#{cc.attrs.buttonOneFunction}"
+								class="btn btn-block btn-secondary">#{cc.attrs.buttonOneName}</button>
+						</div>
+						<div class="col mx-1">
+							<button type="button" onclick="#{cc.attrs.buttonTwoFunction}"
+								class="btn btn-block btn-secondary">#{cc.attrs.buttonTwoName}</button>
+						</div>
+					</div>
+				</c:if>
+
+
+			</div>
+		</div>
+	</div>
+
+</composite:implementation>
+
+</html>

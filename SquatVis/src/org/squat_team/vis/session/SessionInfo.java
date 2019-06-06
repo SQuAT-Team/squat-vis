@@ -1,12 +1,18 @@
 package org.squat_team.vis.session;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.squat_team.vis.data.daos.ProjectDao;
+import org.squat_team.vis.data.data.Candidate;
+import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.transformers.CsvExporter;
 
@@ -25,12 +31,34 @@ public class SessionInfo implements Serializable {
 	 * Generated
 	 */
 	private static final long serialVersionUID = 6462742507992003369L;
-	
+
 	@Inject
 	private ProjectDao projectDao;
 	private long selectedProject;
 	private transient Project project;
-	
+	private Map<Long, ProjectInfo> projectInfos = new HashMap<>();
+
+	public ProjectInfo getCurrentProjectInfo() {
+		if (project == null) {
+			return null;
+		}
+		long projectId = project.getId();
+		ProjectInfo projectInfo = projectInfos.get(projectId);
+		if (projectInfo == null) {
+			projectInfo = new ProjectInfo();
+			projectInfos.put(projectId, projectInfo);
+		}
+		return projectInfo;
+	}
+
+	public List<Candidate> getAllCandidates() {
+		List<Candidate> candidates = new ArrayList<Candidate>();
+		for (Level level : project.getLevels()) {
+			candidates.addAll(level.getCandidates());
+		}
+		return candidates;
+	}
+
 	/**
 	 * Sets the project and navigates to the project page.
 	 * 
@@ -52,7 +80,7 @@ public class SessionInfo implements Serializable {
 
 	public String getProjectDataAsCSV() {
 		CsvExporter exporter = new CsvExporter();
-		return exporter.export(project);
+		return exporter.export(project, getCurrentProjectInfo());
 	}
-	
+
 }

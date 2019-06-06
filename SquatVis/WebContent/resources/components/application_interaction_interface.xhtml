@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<composite:interface>
+</composite:interface>
+
+<composite:implementation>
+	<h:form>
+		<pf:remoteCommand name="setCandidateColor_application"
+			action="#{sessionInfo.getCurrentProjectInfo().colorInfo.setColor}" />
+	</h:form>
+
+	<h:form>
+		<pf:remoteCommand name="setSelectorCurrent_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.setSelectorCurrent}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="resetSelectorCurrent_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.resetSelectorCurrent}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setSelectorComparison_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.setSelectorComparison}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="resetSelectorComparison_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.resetSelectorComparison}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setSelectorMarked_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.setSelectorMarked}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="resetSelectorMarked_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.resetSelectorMarked}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setSelectorSelected_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.setSelectorSelected}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="resetSelectorSelected_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.resetSelectorSelected}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setAllSelectorCurrent_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.setAllSelectorCurrent}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="resetAllSelectorCurrent_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.resetAllSelectorCurrent}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setAllSelectorComparison_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.setAllSelectorComparison}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="resetAllSelectorComparison_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.resetAllSelectorComparison}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setAllSelectorMarked_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.setAllSelectorMarked}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="resetAllSelectorMarked_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.resetAllSelectorMarked}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setAllSelectorSelected_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.setAllSelectorSelected}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="resetAllSelectorSelected_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.resetAllSelectorSelected}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorLevelUp_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorLevelUp}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorLevelUpAll_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorLevelUpAll}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorClearCurrent_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorClearCurrent}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorClearComparison_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorClearComparison}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorClearMarked_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorClearMarked}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorClearSelected_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorClearSelected}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorMarkAllCurrent_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorMarkAllCurrent}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorSelectAllComparison_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorSelectAllComparison}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorSelectAllMarked_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorSelectAllMarked}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="selectorExportAllSelected_application"
+			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorExportAllSelected}" />
+	</h:form>
+</composite:implementation>
+
+</html>

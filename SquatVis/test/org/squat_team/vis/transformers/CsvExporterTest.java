@@ -9,13 +9,14 @@ import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Goal;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
+import org.squat_team.vis.session.ProjectInfo;
 
 /**
  * Tests the {@link CsvExporter}.
  */
 public class CsvExporterTest {
 
-	private final static String expectedResult = "ID,P1,P2,M1,M2\\n0,0.01,0.02,0.03,0.04\\n1,0.11,0.12,0.13,0.14\\n2,0.21,0.22,0.23,0.24\\n3,0.31,0.32,0.33,0.34\\n4,0.41,0.42,0.43,0.44\\n5,0.51,0.52,0.53,0.54\\n6,0.61,0.62,0.63,0.64\\n7,0.71,0.72,0.73,0.74\\n8,0.81,0.82,0.83,0.84\\n";
+	private final static String expectedResult = "ID,InitialTags,P1,P2,M1,M2\\n0,   ,0.01,0.02,0.03,0.04\\n1,   ,0.11,0.12,0.13,0.14\\n2,   ,0.21,0.22,0.23,0.24\\n3,   ,0.31,0.32,0.33,0.34\\n4,   ,0.41,0.42,0.43,0.44\\n5,   ,0.51,0.52,0.53,0.54\\n6,   ,0.61,0.62,0.63,0.64\\n7,   ,0.71,0.72,0.73,0.74\\n8,   ,0.81,0.82,0.83,0.84\\n";
 
 	/**
 	 * A complex test that consists of 9 candidates in 3 levels.
@@ -24,7 +25,7 @@ public class CsvExporterTest {
 	public void test() {
 		Project project = initializeTestProject();
 		CsvExporter csvExporter = new CsvExporter();
-		assertEquals(expectedResult, csvExporter.export(project));
+		assertEquals(expectedResult, csvExporter.export(project, new ProjectInfo()));
 	}
 
 	private Project initializeTestProject() {
@@ -92,6 +93,11 @@ public class CsvExporterTest {
 		candidate.setCandidateId(0l);
 		Double[] values = { 0.01, 0.02, 0.03, 0.04 };
 		candidate.setUtilityValues(Arrays.asList(values));
+		candidate.setRealValueParetoLevelBased(false);
+		candidate.setRealValueParetoPopulationBased(false);
+		candidate.setUtilityValueParetoLevelBased(false);
+		candidate.setUtilityValueParetoPopulationBased(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
@@ -100,6 +106,11 @@ public class CsvExporterTest {
 		candidate.setCandidateId(1l);
 		Double[] values = { 0.11, 0.12, 0.13, 0.14 };
 		candidate.setUtilityValues(Arrays.asList(values));
+		candidate.setRealValueParetoLevelBased(false);
+		candidate.setRealValueParetoPopulationBased(false);
+		candidate.setUtilityValueParetoLevelBased(false);
+		candidate.setUtilityValueParetoPopulationBased(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
@@ -108,6 +119,11 @@ public class CsvExporterTest {
 		candidate.setCandidateId(2l);
 		Double[] values = { 0.21, 0.22, 0.23, 0.24 };
 		candidate.setUtilityValues(Arrays.asList(values));
+		candidate.setRealValueParetoLevelBased(false);
+		candidate.setRealValueParetoPopulationBased(false);
+		candidate.setUtilityValueParetoLevelBased(false);
+		candidate.setUtilityValueParetoPopulationBased(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
@@ -116,6 +132,11 @@ public class CsvExporterTest {
 		candidate.setCandidateId(3l);
 		Double[] values = { 0.31, .32, 0.33, 0.34 };
 		candidate.setUtilityValues(Arrays.asList(values));
+		candidate.setRealValueParetoLevelBased(false);
+		candidate.setRealValueParetoPopulationBased(false);
+		candidate.setUtilityValueParetoLevelBased(false);
+		candidate.setUtilityValueParetoPopulationBased(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
@@ -124,6 +145,11 @@ public class CsvExporterTest {
 		candidate.setCandidateId(4l);
 		Double[] values = { 0.41, .42, 0.43, 0.44 };
 		candidate.setUtilityValues(Arrays.asList(values));
+		candidate.setRealValueParetoLevelBased(false);
+		candidate.setRealValueParetoPopulationBased(false);
+		candidate.setUtilityValueParetoLevelBased(false);
+		candidate.setUtilityValueParetoPopulationBased(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
@@ -132,6 +158,11 @@ public class CsvExporterTest {
 		candidate.setCandidateId(5l);
 		Double[] values = { 0.51, .52, 0.53, 0.54 };
 		candidate.setUtilityValues(Arrays.asList(values));
+		candidate.setRealValueParetoLevelBased(false);
+		candidate.setRealValueParetoPopulationBased(false);
+		candidate.setUtilityValueParetoLevelBased(false);
+		candidate.setUtilityValueParetoPopulationBased(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
@@ -140,6 +171,11 @@ public class CsvExporterTest {
 		candidate.setCandidateId(6l);
 		Double[] values = { 0.61, .62, 0.63, 0.64 };
 		candidate.setUtilityValues(Arrays.asList(values));
+		candidate.setRealValueParetoLevelBased(false);
+		candidate.setRealValueParetoPopulationBased(false);
+		candidate.setUtilityValueParetoLevelBased(false);
+		candidate.setUtilityValueParetoPopulationBased(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
@@ -148,6 +184,11 @@ public class CsvExporterTest {
 		candidate.setCandidateId(7l);
 		Double[] values = { 0.71, .72, 0.73, 0.74 };
 		candidate.setUtilityValues(Arrays.asList(values));
+		candidate.setRealValueParetoLevelBased(false);
+		candidate.setRealValueParetoPopulationBased(false);
+		candidate.setUtilityValueParetoLevelBased(false);
+		candidate.setUtilityValueParetoPopulationBased(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 
@@ -156,6 +197,11 @@ public class CsvExporterTest {
 		candidate.setCandidateId(8l);
 		Double[] values = { 0.81, .82, 0.83, 0.84 };
 		candidate.setUtilityValues(Arrays.asList(values));
+		candidate.setRealValueParetoLevelBased(false);
+		candidate.setRealValueParetoPopulationBased(false);
+		candidate.setUtilityValueParetoLevelBased(false);
+		candidate.setUtilityValueParetoPopulationBased(false);
+		candidate.setSuggested(false);
 		return candidate;
 	}
 }

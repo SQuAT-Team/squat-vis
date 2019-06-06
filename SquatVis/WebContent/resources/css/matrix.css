@@ -1,0 +1,57 @@
+svg {
+	font: 10px sans-serif;
+}
+
+rect {
+	cursor: default !important;
+}
+
+.axis, .frame {
+	shape-rendering: crispEdges;
+}
+
+.axis line {
+	stroke: #ddd;
+}
+
+.axis path {
+	display: none;
+}
+
+.cell text {
+	fill: black;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+.frame {
+	fill: none;
+	stroke: #aaa;
+}
+
+circle {
+	fill: #000000;
+	fill-opacity: .5;
+}
+
+circle.current {
+	stroke: #00ffff !important;
+}
+
+circle.marked:not(.current) {
+	fill: #0080ff !important;
+}
+
+circle.comparison {
+	
+}
+
+circle.selected:not(.current) {
+	fill: #8000ff !important;
+}
+
+.selection {
+	fill: #000;
+	fill-opacity: .125;
+	stroke: #fff;
+}

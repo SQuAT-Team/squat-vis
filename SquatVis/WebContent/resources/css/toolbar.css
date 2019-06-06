@@ -1,0 +1,112 @@
+#sidebar {
+	height: 100% !important;
+	overflow-x: auto;
+	overflow-y: auto;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 100;
+	box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+	padding: 65px 0 0;
+}
+
+.selected {
+
+}
+
+.marked {
+	
+}
+
+.comparison {
+	
+}
+
+.current {
+	border-color: #00ffff;
+	border-width: thin;
+}
+
+.candidate-list {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 3px;
+    padding-left: 3px;
+  	min-height: 0.1em;
+	max-height: 14em;
+	height: auto;
+}
+
+.candidate-item {
+	margin-bottom: 2px;
+}
+
+.search-hide {
+	display: none;
+}
+
+.candidate-id {
+	display:none;
+}
+
+.candidate-item .fa-star {
+	color: #eeeeee;
+}
+
+.selected .fa-star {
+	color: #8000ff;
+}
+
+.marked .fa-star {
+	color: #0080ff;
+}
+
+.candidate-pareto:not(.pareto-on) {
+	display: none;
+}
+
+.candidate-suggestion:not(.suggestion-on) {
+	display: none;
+}
+
+#context-menu {
+	position: relative;
+}
+
+#context-item {
+	position: relative;
+}
+
+.panel-heading .accordion-toggle:after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
+    font-size:16px;
+    content: "\f068";
+    float: left;
+    color: black;
+    line-height: 40px;
+}
+
+.panel-heading .accordion-toggle.collapsed:after {
+    content: "\e080";
+    font-weight: 600;
+    content: "\f067";
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+

@@ -70,7 +70,7 @@ public class TestNewLevelDataProvider {
 	
 	public CCandidate getLevel1Candidate3() {
 		CCandidate candidate = new CCandidate();
-		candidate.setCandidateId(3L);
+		candidate.setCandidateId(4L);
 		candidate.setRealValues(LEVEL1_CANDIDATE3_REAL_VALUES);
 		candidate.setUtilityValues(LEVEL1_CANDIDATE3_UTILITY_VALUES);
 		candidate.setSuggested(false);

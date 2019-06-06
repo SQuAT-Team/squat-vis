@@ -1,0 +1,217 @@
+// INTERACE
+
+function setSelectorCurrent_toolbar(id) {
+	addElement(id, "current");
+}
+
+function resetSelectorCurrent_toolbar(id) {
+	removeElement(id, "current");
+}
+
+function setSelectorComparison_toolbar(id) {
+	addElement(id, "comparison");
+}
+
+function resetSelectorComparison_toolbar(id) {
+	removeElement(id, "comparison");
+}
+
+function setSelectorMarked_toolbar(id) {
+	addElement(id, "marked");
+}
+
+function resetSelectorMarked_toolbar(id) {
+	removeElement(id, "marked");
+}
+
+function setSelectorSelected_toolbar(id) {
+	addElement(id, "selected");
+}
+
+function resetSelectorSelected_toolbar(id) {
+	removeElement(id, "selected");
+}
+
+function setAllSelectorCurrent_toolbar(ids) {
+	for (let i = 0; i < ids.length; i++) {
+		addElement(ids[i], "current");
+	}
+}
+
+function resetAllSelectorCurrent_toolbar(ids) {
+	for (let i = 0; i < ids.length; i++) {
+		removeElement(ids[i], "current");
+	}
+}
+
+function setAllSelectorComparison_toolbar(ids) {
+	for (let i = 0; i < ids.length; i++) {
+		addElement(ids[i], "comparison");
+	}
+}
+
+function resetAllSelectorComparison_toolbar(ids) {
+	for (let i = 0; i < ids.length; i++) {
+		removeElement(ids[i], "comparison");
+	}
+}
+
+function setAllSelectorMarked_toolbar(ids) {
+	for (let i = 0; i < ids.length; i++) {
+		addElement(ids[i], "marked");
+	}
+}
+
+function resetAllSelectorMarked_toolbar(ids) {
+	for (let i = 0; i < ids.length; i++) {
+		removeElement(ids[i], "marked");
+	}
+}
+
+function setAllSelectorSelected_toolbar(ids) {
+	for (let i = 0; i < ids.length; i++) {
+		addElement(ids[i], "selected");
+	}
+}
+
+function resetAllSelectorSelected_toolbar(ids) {
+	for (let i = 0; i < ids.length; i++) {
+		removeElement(ids[i], "selected");
+	}
+}
+
+function selectorLevelUp_toolbar(id) {
+	levelUp(id);
+}
+
+function selectorLevelUpAll_toolbar(ids) {
+	for (let i = 0; i < ids.length; i++) {
+		levelUp(ids[i]);
+	}
+}
+
+function setCandidateColor_toolbar(id, color) {
+}
+
+function selectorClearCurrent_toolbar() {
+	removeElementFromAll("current");
+}
+
+function selectorClearComparison_toolbar() {
+	removeElementFromAll("comparison");
+}
+
+function selectorClearMarked_toolbar() {
+	removeElementFromAll("marked");
+}
+
+function selectorClearSelected_toolbar() {
+	removeElementFromAll("selected");
+}
+
+function selectorMarkAllCurrent_toolbar() {
+	var candidateItems = $("div.candidate-item.current");
+	for (let i = 0; i < candidateItems.length; i++) {
+		var classes = candidateItems[i].classList;
+		if (!classes.contains("marked") && !classes.contains("selected")) {
+			classes.add("marked");
+		}
+	}
+}
+
+function selectorSelectAllComparison_toolbar() {
+	var candidateItems = $("div.candidate-item.comparison");
+	for (let i = 0; i < candidateItems.length; i++) {
+		var starItem = $(candidateItems[i]).find(".candidate-star").find("i")[0];
+		var classes = candidateItems[i].classList;
+		if (!classes.contains("selected")) {
+			if (starItem) {
+				starItem.classList.remove("far");
+				starItem.classList.add("fas");
+			}
+			classes.add("selected");
+			classes.remove("marked");
+		}
+	}
+}
+
+function selectorSelectAllMarked_toolbar() {
+	var candidateItems = $("div.candidate-item.marked");
+	for (let i = 0; i < candidateItems.length; i++) {
+		var starItem = $(candidateItems[i]).find(".candidate-star").find("i")[0];
+		var classes = candidateItems[i].classList;
+		if (starItem) {
+			starItem.classList.remove("far");
+			starItem.classList.add("fas");
+		}
+		classes.remove("marked");
+		classes.add("selected");
+	}
+}
+
+function selectorExportAllSelected_toolbar() {
+
+}
+
+// HELPERS
+
+function addElement(id, element) {
+	// find candidate item with id
+	var candidateItems = $("div.candidate-item" + ".c" + id);
+	for (let i = 0; i < candidateItems.length; i++) {
+		var candidateItem = candidateItems[i];
+		var classes = candidateItem.classList;
+		if (!classes.contains(element)) {
+			classes.add(element);
+		}
+	}
+}
+
+function removeElement(id, element) {
+	// find candidate item with id
+	var candidateItems = $("div.candidate-item" + ".c" + id);
+	for (let i = 0; i < candidateItems.length; i++) {
+		var candidateItem = candidateItems[i];
+		var classes = candidateItem.classList;
+		if (classes.contains(element)) {
+			classes.remove(element);
+		}
+	}
+}
+
+function removeElementFromAll(element) {
+	var candidateItems = $("div.candidate-item");
+	for (let i = 0; i < candidateItems.length; i++) {
+		var classes = candidateItems[i].classList;
+		classes.remove(element);
+	}
+}
+
+function levelUp(id) {
+	// find candidate item with id
+	var candidateItems = $("div.candidate-item" + ".c" + id);
+
+	// change all items
+	for (let i = 0; i < candidateItems.length; i++) {
+		var candidateItem = candidateItems[i];
+		var classes = candidateItem.classList;
+		var starItem = $(candidateItem).find(".candidate-star").find("i")[0];
+
+		if (classes.contains("marked")) {
+			classes.remove("marked");
+			classes.add("selected");
+			if (starItem) {
+				starItem.classList.remove("far");
+				starItem.classList.add("fas");
+			}
+		} else if (classes.contains("selected")) {
+			classes.remove("selected");
+			if (starItem) {
+				starItem.classList.remove("fas");
+				starItem.classList.add("far");
+			}
+		} else {
+			classes.add("marked");
+		}
+	}
+}

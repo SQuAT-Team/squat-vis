@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<composite:interface>
+</composite:interface>
+
+<composite:implementation>
+	<nav id="sidebar" class="col-2 bg-light sidebar">
+	<div class="sidebar-sticky px-2">
+
+		<div class="row">
+			<div class="col-12">
+
+				<!-- TAB CONTROL -->
+				<nav>
+				<div class="nav nav-tabs btn-group btn-block" id="nav-tab"
+					role="tablist">
+					<a class="btn btn-outline-primary active" id="tab-selectors-tab"
+						data-toggle="tab" href="#tab-selectors" role="tab"
+						aria-controls="tab-selectors" aria-selected="true">Selectors </a>
+					<a class="btn btn-outline-primary" id="tab-options-tab"
+						data-toggle="tab" href="#tab-options" role="tab"
+						aria-controls="tab-options" aria-selected="false">Options</a>
+				</div>
+				</nav>
+
+				<!-- TAB CONTENT -->
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="tab-selectors"
+						role="tabpanel" aria-labelledby="tab-selectors-tab">
+						<!-- SELECTORS START -->
+
+						<div class="panel-group ml-2" id="accordion">
+
+							<tp:toolbarList
+								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isComparison(candidate.candidateId)}"
+								heading="COMPARISON"
+								badgeNumber="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getNumberOfComparison()}"
+								badgeColor="#ffa500"
+								updateBadgeCommand="updateToolbarComparisonCounter"
+								updateBadgeId="toolbarComparisonCounter"
+								updateListCommand="updateToolbarComparison"
+								iconClass=""
+								iconColorClass=""
+								search="false"
+								button="true"
+								buttonOneName="Selected"
+								buttonOneFunction="selectorSelectAllComparison()"
+								buttonTwoName="Clear"
+								buttonTwoFunction="selectorClearComparison()"
+								updateListId="toolbarComparison" comparison="true" />
+
+							<tp:toolbarList
+								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isCurrent(candidate.candidateId)}"
+								heading="CURRENT"
+								badgeNumber="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getNumberOfCurrent()}"
+								badgeColor="#00ffff"
+								updateBadgeCommand="updateToolbarCurrentCounter"
+								updateBadgeId="toolbarCurrentCounter"
+								updateListCommand="updateToolbarCurrent"
+								iconClass=""
+								iconColorClass=""
+								search="false"
+								button="true"
+								buttonOneName="Marked"
+								buttonOneFunction="selectorMarkAllCurrent()"
+								buttonTwoName="Clear"
+								buttonTwoFunction="selectorClearCurrent()"
+								updateListId="toolbarCurrent" comparison="false" />
+
+							<tp:toolbarList
+								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isMarked(candidate.candidateId)}"
+								heading="MARKED"
+								badgeNumber="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getNumberOfMarked()}"
+								badgeColor="#0080ff"
+								updateBadgeCommand="updateToolbarMarkedCounter"
+								updateBadgeId="toolbarMarkedCounter"
+								updateListCommand="updateToolbarMarked"
+								iconClass="far fa-star"
+								iconColorClass="marked"
+								search="false"
+								button="true"
+								buttonOneName="Selected"
+								buttonOneFunction="selectorSelectAllMarked()"
+								buttonTwoName="Clear"
+								buttonTwoFunction="selectorClearMarked()"
+								updateListId="toolbarMarked" comparison="false" />
+
+							<tp:toolbarList
+								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isSelected(candidate.candidateId)}"
+								heading="SELECTED"
+								badgeNumber="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getNumberOfSelected()}"
+								badgeColor="#8000ff"
+								updateBadgeCommand="updateToolbarSelectedCounter"
+								updateBadgeId="toolbarSelectedCounter"
+								updateListCommand="updateToolbarSelected"
+								iconClass="fas fa-star"
+								iconColorClass="selected"
+								search="false"
+								button="true"
+								buttonOneName="Export"
+								buttonOneFunction="selectorExportAllSelected()"
+								buttonTwoName="Clear"
+								buttonTwoFunction="selectorClearSelected()"
+								updateListId="toolbarSelected" comparison="false" />
+
+							<tp:toolbarList
+								render="true"
+								heading="ALL"
+								badgeNumber="#{sessionInfo.project.getNumberOfCandidates()}"
+								badgeColor="#000000"
+								updateBadgeCommand="updateToolbarAllCounter"
+								updateBadgeId="toolbarAllCounter"
+								updateListCommand="updateToolbarAll"
+								iconClass=""
+								iconColorClass=""
+								search="true"
+								button="false"
+								buttonOneName=""
+								buttonOneFunction=""
+								buttonTwoName=""
+								buttonTwoFunction=""
+								updateListId="toolbarAll" comparison="false" />
+
+
+					</div>
+					<!-- SELECTORS END -->
+				</div>
+				<div class="tab-pane fade" id="tab-options" role="tabpanel"
+					aria-labelledby="tab-options-tab">
+					<!-- OPTIONS START -->
+
+					<!-- OPTIONS END -->
+				</div>
+			</div>
+			<!-- END TAB CONTENT -->
+
+		</div>
+	</div>
+	</div>
+	</nav>
+
+</composite:implementation>
+
+</html>

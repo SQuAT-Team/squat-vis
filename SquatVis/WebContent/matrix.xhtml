@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pf="http://primefaces.org/ui"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
@@ -14,243 +15,94 @@ MODIFIED: Sebastian Frank
  -->
 
 <!-- LIBS -->
+<h:outputScript library="lib" name="jquery.min.js" target="body"></h:outputScript>
+<h:outputScript library="lib" name="popper.min.js" target="body"></h:outputScript>
+<h:outputScript name="tether-1.3.3/dist/js/popper.min.js" target="body"></h:outputScript>
+<h:outputStylesheet name="fontawesome/css/all.css" target="head"></h:outputStylesheet>
+<h:outputScript library="lib" name="jquery.contextMenu.min.js"
+	target="body"></h:outputScript>
+<h:outputScript library="lib" name="jquery.ui.position.min.js"
+	target="body"></h:outputScript>
+<h:outputScript library="lib" name="popper.min.js" target="body"></h:outputScript>
+<h:outputStylesheet library="lib" name="jquery.contextMenu.min.css"
+	target="head"></h:outputStylesheet>
 <h:outputScript library="lib" name="d3.min.js" target="head"></h:outputScript>
-<!-- JAVASCRIPT -->
-<!-- CSS -->
+<h:outputScript name="bootstrap-4.3.1-dist/js/bootstrap.min.js"
+	target="body"></h:outputScript>
+<h:outputStylesheet name="bootstrap-4.3.1-dist/css/bootstrap.min.css"
+	target="head"></h:outputStylesheet>
 
+<!-- JAVASCRIPT -->
+<h:outputScript library="js" name="popover_activator.js" target="body"></h:outputScript>
+<h:outputScript library="js" name="toolbar.js" target="body"></h:outputScript>
+<h:outputScript library="js" name="interaction_interface.js"
+	target="body"></h:outputScript>
+<h:outputScript library="js" name="toolbar_interaction_interface.js"
+	target="body"></h:outputScript>
+<h:outputScript library="js" name="backend_interaction_interface.js"
+	target="body"></h:outputScript>
+<h:outputScript library="js" name="matrix_interaction_interface.js"
+	target="body"></h:outputScript>
+
+<!-- CSS -->
+<h:outputStylesheet library="css" name="squat_standard_style.css"
+	target="head"></h:outputStylesheet>
+<h:outputStylesheet library="css" name="header.css" target="head"></h:outputStylesheet>
+<h:outputStylesheet library="css" name="toolbar.css" target="head"></h:outputStylesheet>
+<h:outputStylesheet library="css" name="matrix.css" target="head"></h:outputStylesheet>
+
+<!-- D3 Visualizations -->
+<h:outputScript library="d3" name="d3_matrix.js" target="body"></h:outputScript>
 
 <h:head>
 	<title>Matrix</title>
 	<!-- Matrix style -->
-	<style>
-svg {
-	font: 10px sans-serif;
-}
-
-rect {
-	cursor: default !important;
-}
-
-.axis, .frame {
-	shape-rendering: crispEdges;
-}
-
-.axis line {
-	stroke: #ddd;
-}
-
-.axis path {
-	display: none;
-}
-
-.cell text {
-	fill: black;
-	font-weight: bold;
-	text-transform: capitalize;
-}
-
-.frame {
-	fill: none;
-	stroke: #aaa;
-}
-
-circle {
-	fill-opacity: .7;
-}
-
-circle.selected {
-	fill: #FFF !important;
-}
-
-.selection {
-	fill: #000;
-	fill-opacity: .125;
-	stroke: #fff;
-}
-</style>
-	<!-- Matrix style -->
-	<style>
-.wrapper {
-	display: flex;
-	width: 100%;
-}
-
-#sidebar {
-	width: 250px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100vh;
-	z-index: 999;
-	background: #7386D5;
-	color: #fff;
-	transition: all 0.3s;
-}
-</style>
-
 </h:head>
-<h:body>
-	<script>
-	var candidateValues = '#{sessionInfo.getProjectDataAsCSV()}';
-	</script>
+<h:body styleClass="fullscreen-view">
+	<!-- NAVBAR -->
+	<tp:header>
+	</tp:header>
 
-	<script>
-	var width = 960,
-    size = 130,
-    padding = 20;
+	<div class="container-fluid h-100">
+		<div class="row h-100">
 
-var x = d3.scaleLinear()
-    .range([padding / 2, size - padding / 2]);
+			<!-- SIDEBAR START -->
+			<tp:toolbar>
+			</tp:toolbar>
+			<!-- SIDEBAR END -->
 
-var y = d3.scaleLinear()
-    .range([size - padding / 2, padding / 2]);
+			<div id="content" class="ml-auto col-10 px-4 mb-2">
+				<div class="row h-100">
+					<div id="matrixDetails" class="col-5 h-100">
+						<div class="row h-75 mh-75">
+							<div class="card w-100 mb-2">
+								<div class="card-header font-weight-bold">Detail</div>
+								<div id="matrixDetailedContent" class="card-body scrollable"></div>
+							</div>
+						</div>
+						<div class="row h-25 mh-25">
+							<div class="card w-100">
+								<div class="card-header font-weight-bold">Current</div>
+								<div id="matrixCurrentContent" class="card-body scrollable"></div>
+							</div>
+						</div>
+					</div>
+					<div id="matrix" class="col-7">
+						<div class="card w-100 h-100 mh-100">
+							<div class="card-header font-weight-bold">Overview</div>
+							<div id="matrixContent" class="card-body scrollable"></div>
+						</div>
+					</div>
+				</div>
 
-var xAxis = d3.axisBottom(x)
-    .ticks(6);
+				<script>
+					var candidateValues = '#{sessionInfo.getProjectDataAsCSV()}';
+				</script>
 
-var yAxis = d3.axisLeft(y)
-    .ticks(6);
-
-var color = d3.scaleOrdinal(d3.schemeCategory10);
-
-render(d3.csvParse(candidateValues));
-
-function render(data) {
-  var domainByTrait = {},
-      traits = d3.keys(data[0]).filter(function(d) { return d !== "ID"; }),
-      n = traits.length;
-
-  traits.forEach(function(trait) {
-	  domainByTrait[trait] = d3.extent([0.0,1.0]);
-	  // automatic
-	  // domainByTrait[trait] = d3.extent(data, function(d) { return d[trait]; });
-  });
-
-  xAxis.tickSize(size * n);
-  yAxis.tickSize(-size * n);
-
-  var brush = d3.brush().extent([[x.range()[0], y.range()[1]], [x.range()[1], y.range()[0]]])
-      .on("start", brushstart)
-      .on("brush", brushmove)
-      .on("end", brushend);
-
-  var svg = d3.select("body").append("svg")
-      .attr("width", size * n + padding)
-      .attr("height", size * n + padding)
-    .append("g")
-      .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
-
-  svg.selectAll(".x.axis")
-      .data(traits)
-    .enter().append("g")
-      .attr("class", "x axis")
-      .attr("transform", function(d, i) { return "translate(" + (n - i - 1) * size + ",0)"; })
-      .each(function(d) { x.domain(domainByTrait[d]); d3.select(this).call(xAxis); });
-
-  svg.selectAll(".y.axis")
-      .data(traits)
-    .enter().append("g")
-      .attr("class", "y axis")
-      .attr("transform", function(d, i) { return "translate(0," + i * size + ")"; })
-      .each(function(d) { y.domain(domainByTrait[d]); d3.select(this).call(yAxis); });
-
-  var cell = svg.selectAll(".cell")
-      .data(cross(traits, traits))
-    .enter().append("g")
-      .attr("class", "cell")
-      .attr("transform", function(d) { return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")"; })
-      .each(plot);
-
-  // Titles for the diagonal.
-  cell.filter(function(d) { return d.i === d.j; }).append("text")
-      .attr("x", padding)
-      .attr("y", padding)
-      .attr("dy", ".71em")
-      .text(function(d) { return d.x; });
-
-  cell.call(brush);
-
-  function plot(p) {
-    var cell = d3.select(this);
-
-    x.domain(domainByTrait[p.x]);
-    y.domain(domainByTrait[p.y]);
-
-    cell.append("rect")
-        .attr("class", "frame")
-        .attr("x", padding / 2)
-        .attr("y", padding / 2)
-        .attr("width", size - padding)
-        .attr("height", size - padding);
-
-    cell.selectAll("circle")
-        .data(data)
-      .enter().append("circle")
-        .attr("cx", function(d) { return x(d[p.x]); })
-        .attr("cy", function(d) { return y(d[p.y]); })
-        .attr("r", 2)
-        .style("fill", function(d) { return color(d.species); });
-  }
-
-  var brushCell;
-
-  // Clear the previously-active brush, if any.
-  function brushstart(p) {
-    if (brushCell !== this) {
-      d3.select(brushCell).call(brush.move, null);
-      x.domain(domainByTrait[p.x]);
-      y.domain(domainByTrait[p.y]);
-      brushCell = this;
-    }
-  }
-
-  // Highlight the selected circles.
-  function brushmove(p) {
-	if (!d3.event.selection) return; // Ignore empty selections.
-	var e = d3.event.selection;
-    svg.selectAll("circle").classed("selected", function(d) {
-    	var isSelected = x(d[p.x]) >= e[0][0] &amp;&amp; e[1][0] >= x(d[p.x])
-        &amp;&amp; y(d[p.y]) >= e[0][1] &amp;&amp; e[1][1] >= y(d[p.y]);
-        if(isSelected){
-        	select([{name:'param', value:d["ID"]}]);
-        }
-    return isSelected;
-    });
-  }
-
-  // If the brush is empty, select all circles.
-  function brushend() {
-    if (d3.event.selection === null){
-    	svg.selectAll(".selected").classed("selected", false);
-    	deselectAll();
-    }
-  }
-};
-
-function cross(a, b) {
-  var c = [], n = a.length, m = b.length, i, j;
-  for (i = -1;n > ++i;){
-	  for (j = -1;m > ++j; ){
-		  c.push({x: a[i], i: i, y: b[j], j: j});
-	  }
-	}
-  return c;
-};
-
-
-</script>
-	<h:form>
-		<pf:remoteCommand name="select" action="#{selectorInfo.addSelected}" />
-	</h:form>
-	<h:form>
-		<pf:remoteCommand name="deselectAll"
-			action="#{selectorInfo.removeAllSelected}" />
-	</h:form>
-
-	<h:dataTable value="#{selectorInfo.selected}" var="selected">
-		<h:column>
-			<f:facet name="header">ID</f:facet>#{selected}
-		</h:column>
-	</h:dataTable>
+				<tp:application_interaction_interface>
+				</tp:application_interaction_interface>
+			</div>
+		</div>
+	</div>
 </h:body>
 </html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components">
+
+<composite:interface>
+	<composite:attribute name="render" />
+	<composite:attribute name="comparison" required="true" />
+</composite:interface>
+
+<composite:implementation>
+	<ui:repeat value="#{sessionInfo.getAllCandidates()}" var="candidate">
+		<tp:candidateItem render="#{cc.attrs.render}" candidate="#{candidate}" comparison="#{cc.attrs.comparison}" />
+	</ui:repeat>
+</composite:implementation>
+
+</html>

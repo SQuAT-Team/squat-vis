@@ -41,6 +41,9 @@
 	<div class="container-fluid">
 		<div class="container">
 
+			<h:form>
+				<h:button value="Visualization" outcome="matrix"></h:button>
+			</h:form>
 			<!-- TOP PROJECT NAME -->
 			<div class="jumbotron mt-2 pb-4 pt-4 mb-3">
 				<h1 class="display-4">#{sessionInfo.project.name} (ID:
@@ -193,8 +196,8 @@
 							</div>
 						</div>
 					</div>
-										<div class="row text-center mx-2 mb-2">
-																<div class="col-3">
+					<div class="row text-center mx-2 mb-2">
+						<div class="col-3">
 							<div class="card">
 								<span class="card-header"><h3 class="no-break">Suggestions</h3>
 									<tp:helpTag helpText="#{helpTextProvider.getSuggestionsText()}" /></span>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="render" required="true" />
+	<composite:attribute name="candidate" required="true" />
+	<composite:attribute name="comparison" required="true" />
+</composite:interface>
+
+<composite:implementation>
+	<h:panelGroup layout="block" rendered="#{cc.attrs.render}"
+		styleClass="list-group-item candidate-item c#{cc.attrs.candidate.candidateId} #{sessionInfo.getCurrentProjectInfo().selectorInfo.getSelectorsType(cc.attrs.candidate.candidateId)} p-2">
+		<div class="d-flex">
+			<div class="candidate-id">#{cc.attrs.candidate.candidateId}</div>
+			<c:if test="${cc.attrs.comparison}">
+				<input type="color" name="head"
+					onChange="setCandidateColor(#{candidate.candidateId}, this.value)"
+					value="#{sessionInfo.getCurrentProjectInfo().colorInfo.getColor(candidate.candidateId)}" />
+			</c:if>
+			<c:if test="${!cc.attrs.comparison}">
+				<div class="candidate-star px-1"
+					onclick="selectorLevelUp(#{cc.attrs.candidate.candidateId})">
+					<i
+						class="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getCandidateStarType(cc.attrs.candidate.candidateId)} fa-star"></i>
+				</div>
+			</c:if>
+
+			<div class="candidate-name px-1 font-weight-bold">Candidate
+				#{cc.attrs.candidate.candidateId}</div>
+			<div class="ml-auto text-center font-weight-bold d-flex">
+				<div
+					class="candidate-suggestion text-primary px-1 #{sessionInfo.getCurrentProjectInfo().tagInfo.getSuggestionTag(cc.attrs.candidate)}">S</div>
+				<div
+					class="candidate-pareto text-danger px-1 #{sessionInfo.getCurrentProjectInfo().tagInfo.getParetoTag(cc.attrs.candidate)}">P</div>
+			</div>
+		</div>
+	</h:panelGroup>
+</composite:implementation>
+
+</html>
