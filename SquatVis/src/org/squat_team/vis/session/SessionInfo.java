@@ -43,16 +43,12 @@ public class SessionInfo implements Serializable {
 			return null;
 		}
 		long projectId = project.getId();
-		ProjectInfo projectInfo = projectInfos.get(projectId);
-		if (projectInfo == null) {
-			projectInfo = new ProjectInfo();
-			projectInfos.put(projectId, projectInfo);
-		}
+		ProjectInfo projectInfo = projectInfos.computeIfAbsent(projectId, k -> new ProjectInfo());
 		return projectInfo;
 	}
 
 	public List<Candidate> getAllCandidates() {
-		List<Candidate> candidates = new ArrayList<Candidate>();
+		List<Candidate> candidates = new ArrayList<>();
 		for (Level level : project.getLevels()) {
 			candidates.addAll(level.getCandidates());
 		}

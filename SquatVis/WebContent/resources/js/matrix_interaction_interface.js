@@ -70,38 +70,38 @@ function selectorLevelUpAll_d3(ids) {
 
 }
 
-function setCandidateColor_d3(id, color){
+function setCandidateColor_d3(id, color) {
 
 }
 
-function selectorClearCurrent_d3(){
+function selectorClearCurrent_d3() {
 
 }
 
-function selectorClearComparison_d3(){
-	
+function selectorClearComparison_d3() {
+
 }
 
-function selectorClearMarked_d3(){
-	
+function selectorClearMarked_d3() {
+
 }
 
-function selectorClearSelected_d3(){
-	
+function selectorClearSelected_d3() {
+
 }
 
-function selectorMarkAllCurrent_d3(){
-	
+function selectorMarkAllCurrent_d3() {
+
 }
 
-function selectorSelectAllComparison_d3(){
-	
+function selectorSelectAllComparison_d3() {
+
 }
 
-function selectorSelectAllMarked_d3(){
-	
+function selectorSelectAllMarked_d3() {
+
 }
 
-function selectorExportAllSelected_d3(){
-	
+function selectorExportAllSelected_d3() {
+
 }

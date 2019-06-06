@@ -14,8 +14,6 @@ var xAxis = d3.axisBottom(x)
 var yAxis = d3.axisLeft(y)
     .ticks(6);
 
-var color = d3.scaleOrdinal(d3.schemeCategory10);
-
 render(d3.csvParse(candidateValues));
 
 function render(data) {
@@ -48,29 +46,45 @@ function render(data) {
       .data(traits)
     .enter().append("g")
       .attr("class", "x axis")
-      .attr("transform", function(d, i) { return "translate(" + (n - i - 1) * size + ",0)"; })
-      .each(function(d) { x.domain(domainByTrait[d]); d3.select(this).call(xAxis); });
+      .attr("transform", function(d, i) {
+    	  return "translate(" + (n - i - 1) * size + ",0)";
+      })
+      .each(function(d) {
+    	  x.domain(domainByTrait[d]);
+    	  d3.select(this).call(xAxis);
+      });
 
   svg.selectAll(".y.axis")
       .data(traits)
     .enter().append("g")
       .attr("class", "y axis")
-      .attr("transform", function(d, i) { return "translate(0," + i * size + ")"; })
-      .each(function(d) { y.domain(domainByTrait[d]); d3.select(this).call(yAxis); });
+      .attr("transform", function(d, i) {
+    	  return "translate(0," + i * size + ")";
+      })
+      .each(function(d) {
+    	  y.domain(domainByTrait[d]);
+    	  d3.select(this).call(yAxis);
+      });
 
   var cell = svg.selectAll(".cell")
       .data(cross(traits, traits))
     .enter().append("g")
       .attr("class", "cell")
-      .attr("transform", function(d) { return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")"; })
+      .attr("transform", function(d) {
+    	  return "translate(" + (n - d.i - 1) * size + "," + d.j * size + ")";
+      })
       .each(plot);
 
   // Titles for the diagonal.
-  cell.filter(function(d) { return d.i === d.j; }).append("text")
+  cell.filter(function(d) {
+	  	return d.i === d.j;
+	  }).append("text")
       .attr("x", padding)
       .attr("y", padding)
       .attr("dy", ".71em")
-      .text(function(d) { return d.x; });
+      .text(function(d) {
+    	  return d.x;
+      });
 
   cell.call(brush);
 
@@ -89,12 +103,16 @@ function render(data) {
 
     cell.selectAll("circle")
         .data(data)
-      .enter().append("circle").attr("class", function(d) { return d["InitialTags"];})
-        .attr("cx", function(d) { return x(d[p.x]); })
-        .attr("cy", function(d) { return y(d[p.y]); })
+      .enter().append("circle").attr("class", function(d) {
+    	  return d["InitialTags"];
+      	})
+        .attr("cx", function(d) {
+        	return x(d[p.x]);
+       	})
+        .attr("cy", function(d) {
+        	return y(d[p.y]);
+       	})
         .attr("r", 2)
-        // not used
-        // .style("fill", function(d) { return color(d.species); });
   }
 
   var brushCell;
@@ -131,7 +149,7 @@ function render(data) {
         });
     }
   }
-};
+}
 
 function cross(a, b) {
   var c = [], n = a.length, m = b.length, i, j;
@@ -141,4 +159,4 @@ function cross(a, b) {
 	  }
 	}
   return c;
-};
+}

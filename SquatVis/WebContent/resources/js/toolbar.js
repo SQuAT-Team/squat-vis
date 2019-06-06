@@ -1,5 +1,6 @@
 function toolbarSearch(element) {
-	var toSearch = element.value.trim().replace(/\s+/g, ' ');
+	var doNotShowCssClass = "search-hide";
+	var toSearch = element.value.trim().replace(/\s+/g, ' ').toLowerCase();
 	// search for items in all list
 	var candidateItems = $("div.list-group.candidate-list.toolbarAll")
 			.children(".candidate-item");
@@ -7,26 +8,24 @@ function toolbarSearch(element) {
 		var itemName = $(candidateItems[i]).find(".candidate-name").text();
 		var classes = candidateItems[i].classList;
 		// set correct search css class in each element
-		if (!itemName.trim().replace(/\s+/g, ' ').includes(toSearch)) {
-			if (!classes.contains("search-hide")) {
-				classes.add("search-hide");
+		if (!itemName.trim().replace(/\s+/g, ' ').toLowerCase().includes(toSearch)) {
+			if (!classes.contains(doNotShowCssClass)) {
+				classes.add(doNotShowCssClass);
 			}
 		} else {
-			classes.remove("search-hide");
+			classes.remove(doNotShowCssClass);
 		}
 	}
 }
 
 // Activates Right Click Menu For Candidates
 $(function() {
+	var candidateIdCssClass = ".candidate-id";
 	$
 			.contextMenu({
 				selector : '.candidate-item',
 				callback : function(key, options) {
-					var m = "clicked: " + key;
-					console.log($(this).find(".candidate-id").text());
-					console.log(this);
-					console.log(m) || alert(m);
+					// do nothing
 				},
 				items : {
 					"Current" : {
@@ -35,7 +34,7 @@ $(function() {
 							return (opt.$trigger.hasClass("current"));
 						},
 						callback : function(key, opt) {
-							var id = opt.$trigger.find(".candidate-id").text();
+							var id = opt.$trigger.find(candidateIdCssClass).text();
 							setSelectorCurrent(id);
 						}
 					},
@@ -45,7 +44,7 @@ $(function() {
 							return (opt.$trigger.hasClass("comparison"));
 						},
 						callback : function(key, opt) {
-							var id = opt.$trigger.find(".candidate-id").text();
+							var id = opt.$trigger.find(candidateIdCssClass).text();
 							setSelectorComparison(id);
 						}
 					},
@@ -55,7 +54,7 @@ $(function() {
 							return (opt.$trigger.hasClass("marked"));
 						},
 						callback : function(key, opt) {
-							var id = opt.$trigger.find(".candidate-id").text();
+							var id = opt.$trigger.find(candidateIdCssClass).text();
 							setSelectorMarked(id);
 						}
 					},
@@ -65,7 +64,7 @@ $(function() {
 							return (opt.$trigger.hasClass("selected"));
 						},
 						callback : function(key, opt) {
-							var id = opt.$trigger.find(".candidate-id").text();
+							var id = opt.$trigger.find(candidateIdCssClass).text();
 							setSelectorSelected(id);
 						}
 					},
@@ -82,7 +81,7 @@ $(function() {
 									.parent().hasClass("toolbarSelected")));
 						},
 						callback : function(key, opt) {
-							var id = opt.$trigger.find(".candidate-id").text();
+							var id = opt.$trigger.find(candidateIdCssClass).text();
 							if (opt.$trigger.parent()
 									.hasClass("toolbarCurrent")) {
 								resetSelectorCurrent(id);

@@ -70,38 +70,38 @@ function selectorLevelUpAll_toolbar(ids) {
 
 }
 
-function setCandidateColor_toolbar(id, color){
+function setCandidateColor_toolbar(id, color) {
 
 }
 
-function selectorClearCurrent_toolbar(){
+function selectorClearCurrent_toolbar() {
 
 }
 
-function selectorClearComparison_toolbar(){
-	
+function selectorClearComparison_toolbar() {
+
 }
 
-function selectorClearMarked_toolbar(){
-	
+function selectorClearMarked_toolbar() {
+
 }
 
-function selectorClearSelected_toolbar(){
-	
+function selectorClearSelected_toolbar() {
+
 }
 
-function selectorMarkAllCurrent_toolbar(){
-	
+function selectorMarkAllCurrent_toolbar() {
+
 }
 
-function selectorSelectAllComparison_toolbar(){
-	
+function selectorSelectAllComparison_toolbar() {
+
 }
 
-function selectorSelectAllMarked_toolbar(){
-	
+function selectorSelectAllMarked_toolbar() {
+
 }
 
-function selectorExportAllSelected_toolbar(){
-	
+function selectorExportAllSelected_toolbar() {
+
 }

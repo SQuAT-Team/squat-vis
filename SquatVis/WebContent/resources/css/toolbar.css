@@ -89,7 +89,6 @@
 }
 
 .panel-heading .accordion-toggle.collapsed:after {
-    content: "\e080";
     font-weight: 600;
     content: "\f067";
 }

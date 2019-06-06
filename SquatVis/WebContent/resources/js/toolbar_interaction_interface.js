@@ -1,5 +1,8 @@
 // INTERACE
 
+var candidateStarCssTag = ".candidate-star";
+var queryCssCandidateItem = "div.candidate-item";
+
 function setSelectorCurrent_toolbar(id) {
 	addElement(id, "current");
 }
@@ -110,7 +113,7 @@ function selectorClearSelected_toolbar() {
 }
 
 function selectorMarkAllCurrent_toolbar() {
-	var candidateItems = $("div.candidate-item.current");
+	var candidateItems = $(queryCssCandidateItem + ".current");
 	for (let i = 0; i < candidateItems.length; i++) {
 		var classes = candidateItems[i].classList;
 		if (!classes.contains("marked") && !classes.contains("selected")) {
@@ -120,9 +123,9 @@ function selectorMarkAllCurrent_toolbar() {
 }
 
 function selectorSelectAllComparison_toolbar() {
-	var candidateItems = $("div.candidate-item.comparison");
+	var candidateItems = $(queryCssCandidateItem + ".comparison");
 	for (let i = 0; i < candidateItems.length; i++) {
-		var starItem = $(candidateItems[i]).find(".candidate-star").find("i")[0];
+		var starItem = $(candidateItems[i]).find(candidateStarCssTag).find("i")[0];
 		var classes = candidateItems[i].classList;
 		if (!classes.contains("selected")) {
 			if (starItem) {
@@ -136,9 +139,9 @@ function selectorSelectAllComparison_toolbar() {
 }
 
 function selectorSelectAllMarked_toolbar() {
-	var candidateItems = $("div.candidate-item.marked");
+	var candidateItems = $(queryCssCandidateItem + ".marked");
 	for (let i = 0; i < candidateItems.length; i++) {
-		var starItem = $(candidateItems[i]).find(".candidate-star").find("i")[0];
+		var starItem = $(candidateItems[i]).find(candidateStarCssTag).find("i")[0];
 		var classes = candidateItems[i].classList;
 		if (starItem) {
 			starItem.classList.remove("far");
@@ -157,7 +160,7 @@ function selectorExportAllSelected_toolbar() {
 
 function addElement(id, element) {
 	// find candidate item with id
-	var candidateItems = $("div.candidate-item" + ".c" + id);
+	var candidateItems = $(queryCssCandidateItem + ".c" + id);
 	for (let i = 0; i < candidateItems.length; i++) {
 		var candidateItem = candidateItems[i];
 		var classes = candidateItem.classList;
@@ -169,7 +172,7 @@ function addElement(id, element) {
 
 function removeElement(id, element) {
 	// find candidate item with id
-	var candidateItems = $("div.candidate-item" + ".c" + id);
+	var candidateItems = $(queryCssCandidateItem + ".c" + id);
 	for (let i = 0; i < candidateItems.length; i++) {
 		var candidateItem = candidateItems[i];
 		var classes = candidateItem.classList;
@@ -180,7 +183,7 @@ function removeElement(id, element) {
 }
 
 function removeElementFromAll(element) {
-	var candidateItems = $("div.candidate-item");
+	var candidateItems = $(queryCssCandidateItem);
 	for (let i = 0; i < candidateItems.length; i++) {
 		var classes = candidateItems[i].classList;
 		classes.remove(element);
@@ -189,13 +192,13 @@ function removeElementFromAll(element) {
 
 function levelUp(id) {
 	// find candidate item with id
-	var candidateItems = $("div.candidate-item" + ".c" + id);
+	var candidateItems = $(queryCssCandidateItem + ".c" + id);
 
 	// change all items
 	for (let i = 0; i < candidateItems.length; i++) {
 		var candidateItem = candidateItems[i];
 		var classes = candidateItem.classList;
-		var starItem = $(candidateItem).find(".candidate-star").find("i")[0];
+		var starItem = $(candidateItem).find(candidateStarCssTag).find("i")[0];
 
 		if (classes.contains("marked")) {
 			classes.remove("marked");
