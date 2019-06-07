@@ -74,23 +74,43 @@ MODIFIED: Sebastian Frank
 			<div id="content" class="ml-auto col-10 px-4 mb-2">
 				<div class="row h-100">
 					<div id="matrixDetails" class="col-5 h-100">
-						<div class="row h-75 mh-75">
+						<div class="row h-75">
 							<div class="card w-100 mb-2">
 								<div class="card-header font-weight-bold">Detail</div>
-								<div id="matrixDetailedContent" class="card-body scrollable"></div>
+								<div class="card-body">
+									<div id="matrixDetailedToolbar" class="">
+										<div class="dropdown">
+											<button class="btn btn-light dropdown-toggle"
+												type="button" id="dropdownMenuButton" data-toggle="dropdown"
+												aria-haspopup="true" aria-expanded="false">
+												Dropdown button</button>
+											<div class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
+											</div>
+										</div>
+									</div>
+									<div id="matrixDetailedContent" class="h-100 w-100 scrollable"></div>
+								</div>
 							</div>
 						</div>
-						<div class="row h-25 mh-25">
+						<div class="row h-25">
 							<div class="card w-100">
 								<div class="card-header font-weight-bold">Current</div>
-								<div id="matrixCurrentContent" class="card-body scrollable"></div>
+								<div class="card-body">
+									<div id="matrixCurrentContent" class="h-100 w-100 scrollable"></div>
+								</div>
 							</div>
 						</div>
 					</div>
 					<div id="matrix" class="col-7">
 						<div class="card w-100 h-100 mh-100">
 							<div class="card-header font-weight-bold">Overview</div>
-							<div id="matrixContent" class="card-body scrollable"></div>
+							<div class="card-body">
+								<div id="matrixContent" class="h-100 w-100 scrollable"></div>
+							</div>
 						</div>
 					</div>
 				</div>

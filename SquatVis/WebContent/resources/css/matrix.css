@@ -26,19 +26,21 @@ rect {
 
 .frame {
 	fill: none;
-	stroke: #aaa;
+	stroke: #000;
 }
 
 circle {
 	fill: #000000;
-	fill-opacity: .5;
+	fill-opacity: 1.0;
+	stroke-width: 1px;
 }
 
 circle.current {
 	stroke: #00ffff !important;
+	stroke-width: 2px !important;
 }
 
-circle.marked:not(.current) {
+circle.marked {
 	fill: #0080ff !important;
 }
 
@@ -46,12 +48,12 @@ circle.comparison {
 	
 }
 
-circle.selected:not(.current) {
+circle.selected {
 	fill: #8000ff !important;
 }
 
 .selection {
 	fill: #000;
-	fill-opacity: .125;
-	stroke: #fff;
+	fill-opacity: .075;
+	stroke: #aaa;
 }

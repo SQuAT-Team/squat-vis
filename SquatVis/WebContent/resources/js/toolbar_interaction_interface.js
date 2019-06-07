@@ -20,7 +20,20 @@ function resetSelectorComparison_toolbar(id) {
 }
 
 function setSelectorMarked_toolbar(id) {
-	addElement(id, "marked");
+	var candidateItems = $(queryCssCandidateItem + ".c" + id);
+	var element = "marked";
+	for (let i = 0; i < candidateItems.length; i++) {
+		var candidateItem = candidateItems[i];
+		var starItem = $(candidateItem).find(candidateStarCssTag).find("i")[0];
+		var classes = candidateItem.classList;
+		if (!classes.contains(element)) {
+			if (starItem) {
+				starItem.classList.remove("fas");
+				starItem.classList.add("far");
+			}
+			classes.add(element);
+		}
+	}
 }
 
 function resetSelectorMarked_toolbar(id) {
@@ -28,12 +41,37 @@ function resetSelectorMarked_toolbar(id) {
 }
 
 function setSelectorSelected_toolbar(id) {
-	addElement(id, "selected");
-}
+	var candidateItems = $(queryCssCandidateItem + ".c" + id);
+	var element = "selected";
+	for (let i = 0; i < candidateItems.length; i++) {
+		var candidateItem = candidateItems[i];
+		var starItem = $(candidateItem).find(candidateStarCssTag).find("i")[0];
+		var classes = candidateItem.classList;
+		if (!classes.contains(element)) {
+			if (starItem) {
+				starItem.classList.remove("far");
+				starItem.classList.add("fas");
+			}
+			classes.add(element);
+		}
+	}}
 
 function resetSelectorSelected_toolbar(id) {
-	removeElement(id, "selected");
-}
+	// find candidate item with id
+	var candidateItems = $(queryCssCandidateItem + ".c" + id);
+	var element = "selected";
+	for (let i = 0; i < candidateItems.length; i++) {
+		var candidateItem = candidateItems[i];
+		var starItem = $(candidateItem).find(candidateStarCssTag).find("i")[0];
+		var classes = candidateItem.classList;
+		if (classes.contains(element)) {
+			if (starItem) {
+				starItem.classList.remove("fas");
+				starItem.classList.add("far");
+			}
+			classes.remove(element);
+		}
+	}}
 
 function setAllSelectorCurrent_toolbar(ids) {
 	for (let i = 0; i < ids.length; i++) {

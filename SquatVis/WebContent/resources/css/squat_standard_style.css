@@ -2,6 +2,15 @@
 	height: 100vh;
 }
 
+.card-header{
+    padding-top : 0.4rem; 
+    padding-bottom : 0.4rem; 
+}
+
+.card-body{
+	padding: 0.5rem;
+}
+
 .h-5 {
 	height: 5% !important;
 }
