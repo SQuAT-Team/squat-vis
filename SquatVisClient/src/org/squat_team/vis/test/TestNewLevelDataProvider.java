@@ -19,7 +19,7 @@ public class TestNewLevelDataProvider {
 	
 	private static final List<Double> LEVEL1_CANDIDATE3_REAL_VALUES = Arrays.asList(1.8, 2.4, 500.0, 700.0);
 	private static final List<Double> LEVEL1_CANDIDATE3_UTILITY_VALUES = Arrays.asList(0.5, 0.2, 0.5, 0.6);
-
+	
 	public List<CLevel> getAllLevels() {
 		List<CLevel> levels = new ArrayList<CLevel>();
 		levels.add(getLevel0());
@@ -53,6 +53,7 @@ public class TestNewLevelDataProvider {
 	public CCandidate getLevel1Candidate1() {
 		CCandidate candidate = new CCandidate();
 		candidate.setCandidateId(2L);
+		candidate.setParentId(1L);
 		candidate.setRealValues(LEVEL1_CANDIDATE1_REAL_VALUES);
 		candidate.setUtilityValues(LEVEL1_CANDIDATE1_UTILITY_VALUES);
 		candidate.setSuggested(false);
@@ -62,6 +63,7 @@ public class TestNewLevelDataProvider {
 	public CCandidate getLevel1Candidate2() {
 		CCandidate candidate = new CCandidate();
 		candidate.setCandidateId(3L);
+		candidate.setParentId(1L);
 		candidate.setRealValues(LEVEL1_CANDIDATE2_REAL_VALUES);
 		candidate.setUtilityValues(LEVEL1_CANDIDATE2_UTILITY_VALUES);
 		candidate.setSuggested(true);
@@ -71,6 +73,7 @@ public class TestNewLevelDataProvider {
 	public CCandidate getLevel1Candidate3() {
 		CCandidate candidate = new CCandidate();
 		candidate.setCandidateId(4L);
+		candidate.setParentId(1L);
 		candidate.setRealValues(LEVEL1_CANDIDATE3_REAL_VALUES);
 		candidate.setUtilityValues(LEVEL1_CANDIDATE3_UTILITY_VALUES);
 		candidate.setSuggested(false);

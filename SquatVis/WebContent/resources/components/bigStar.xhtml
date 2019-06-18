@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="usePopulation" required="true" />
+	<composite:attribute name="renderCandidates" required="true" />
+	<composite:attribute name="population" />
+	<composite:attribute name="width" />
+	<composite:attribute name="outerElementId" />
+</composite:interface>
+
+<composite:implementation>
+	<script>
+	var mycfg = {
+		showAxisNames: true,
+		margin: {top: 50, right: 50, bottom: 50, left: 50},
+		dotRadius: 4,
+		wrapWidth: 50,
+		responsiveWidth: true,
+		responsiveId: #{cc.attrs.outerElementId},
+		resize: true,
+		showName: true
+	}
+	mycfg.w = #{cc.attrs.width};
+	mycfg.h = #{cc.attrs.width};
+
+	</script>
+
+	<div class="big-radar-container mt-1 mb-1}">
+		<!-- STAR VISUALIZATION -->
+		<c:if test="${cc.attrs.usePopulation}">
+			<script>
+				RadarChart(".big-radar-container",#{cc.attrs.renderCandidates},mycfg,#{cc.attrs.population});
+				</script>
+		</c:if>
+		<c:if test="${!cc.attrs.usePopulation}">
+			<script>
+				RadarChart(".big-radar-container",#{cc.attrs.renderCandidates},mycfg);
+				</script>
+		</c:if>
+	</div>
+</composite:implementation>
+
+</html>

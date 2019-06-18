@@ -2,12 +2,12 @@
 	height: 100vh;
 }
 
-.card-header{
-    padding-top : 0.4rem; 
-    padding-bottom : 0.4rem; 
+.card-header {
+	padding-top: 0.4rem;
+	padding-bottom: 0.4rem;
 }
 
-.card-body{
+.card-body {
 	padding: 0.5rem;
 }
 
@@ -16,16 +16,56 @@
 }
 
 .h-20 {
-	height: 20%! important;
+	height: 20% !important;
+}
+
+.h-30 {
+	height: 30% !important;
+}
+
+.mh-15 {
+	max-height: 15% !important;
+}
+
+.mh-20 {
+	max-height: 20% !important;
+}
+
+.mh-30 {
+	max-height: 30% !important;
+}
+
+.mh-70 {
+	max-height: 70% !important;
+}
+
+.mh-80 {
+	max-height: 80% !important;
+}
+
+.mh-85 {
+	max-height: 85% !important;
+}
+
+.h-70 {
+	height: 70% !important;
 }
 
 .h-75 {
-	height: 75%! important;
+	height: 75% !important;
+}
+
+.mh-100 {
+	max-height: 100% !important;
+}
+
+.mw-100 {
+	max-width: 100% !important;
 }
 
 .scrollable {
-		overflow-x: auto;
-		overflow-y: auto;
+	overflow-x: auto;
+	overflow-y: auto;
 }
 
 .button {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<composite:interface>
+	<composite:attribute name="usePopulation" required="true" />
+	<composite:attribute name="candidate" required="true" />
+	<composite:attribute name="renderCandidates" required="true" />
+	<composite:attribute name="population" />
+	<composite:attribute name="width" />
+	<composite:attribute name="glow" />
+	<composite:attribute name="selectable" required="true"/>
+</composite:interface>
+
+<composite:implementation>
+	<script>
+	var mycfg = {
+	}
+	mycfg.w = #{cc.attrs.width};
+	mycfg.h = #{cc.attrs.width};
+	mycfg.glow = #{cc.attrs.glow};
+	mycfg.showName = false;
+	</script>
+	<!-- CANDIDATE -->
+		<div
+		class="candidate-radar-container position-relative d-inline-block mt-1 mb-1 c#{cc.attrs.candidate.candidateId} #{sessionInfo.getCurrentProjectInfo().selectorInfo.getSelectorsType(cc.attrs.candidate.candidateId)}" onClick="javascript:if(#{cc.attrs.selectable}){toggleCurrent(this)}">
+		
+		<!-- CANDIDATE ID -->
+		<div class="candidate-id" style="display:none">#{cc.attrs.candidate.candidateId}</div>
+
+		<!-- TOP BAR -->
+		<div class="position-absolute mx-2" style="width: calc(#{cc.attrs.width}px + 20px); pointer-events: none;">
+			<!-- STAR -->
+			<div class="candidate-radar-star d-inline" style="pointer-events: all;"
+				onclick="selectorLevelUp(#{cc.attrs.candidate.candidateId})">
+				<i
+					class="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getCandidateStarType(cc.attrs.candidate.candidateId)} fa-star"></i>
+			</div>
+			<!-- TAGS -->
+			<div class="candidate-radar-tags d-inline float-right">
+				<div class="text-center font-weight-bold d-flex">
+					<div
+						class="candidate-suggestion text-primary px-1 #{sessionInfo.getCurrentProjectInfo().tagInfo.getSuggestionTag(cc.attrs.candidate)}">S</div>
+					<div
+						class="candidate-pareto text-danger px-1 #{sessionInfo.getCurrentProjectInfo().tagInfo.getParetoTag(cc.attrs.candidate)}">P</div>
+				</div>
+			</div>
+		</div>
+		<!-- STAR VISUALIZATION -->
+		<div class="candidate-radar c#{cc.attrs.candidate.getCandidateId()} px-2">
+			<c:if test="${cc.attrs.usePopulation}">
+				<script>
+				RadarChart(".candidate-radar.c#{cc.attrs.candidate.getCandidateId()}",#{cc.attrs.renderCandidates},mycfg,#{cc.attrs.population});
+				</script>
+			</c:if>
+			<c:if test="${!cc.attrs.usePopulation}">
+				<script>
+				RadarChart(".candidate-radar.c#{cc.attrs.candidate.getCandidateId()}",#{cc.attrs.renderCandidates},mycfg);
+				</script>
+			</c:if>
+
+		</div>
+		<!-- CANDIDATE NAME -->
+		<div
+			class="candidate-radar-name w-100 pt-1 pb-1 text-center bg-secondary text-light font-weight-bold">Candidate
+			#{cc.attrs.candidate.getCandidateId()}</div>
+	</div>
+</composite:implementation>
+
+</html>

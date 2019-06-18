@@ -19,7 +19,7 @@
 
 <composite:implementation>
 	<h:panelGroup layout="block" rendered="#{cc.attrs.render}"
-		styleClass="list-group-item candidate-item c#{cc.attrs.candidate.candidateId} #{sessionInfo.getCurrentProjectInfo().selectorInfo.getSelectorsType(cc.attrs.candidate.candidateId)} p-2">
+		styleClass="list-group-item candidate-item c#{cc.attrs.candidate.candidateId} #{sessionInfo.getCurrentProjectInfo().selectorInfo.getSelectorsType(cc.attrs.candidate.candidateId)} p-1">
 		<div class="d-flex">
 			<div class="candidate-id">#{cc.attrs.candidate.candidateId}</div>
 			<c:if test="${cc.attrs.comparison}">

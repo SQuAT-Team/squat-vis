@@ -14,6 +14,7 @@
 <composite:interface>
 	<composite:attribute name="render" />
 	<composite:attribute name="heading" />
+	<composite:attribute name="headingDescription" />
 	<composite:attribute name="badgeNumber" />
 	<composite:attribute name="badgeColor" />
 	<composite:attribute name="updateBadgeCommand" />
@@ -38,17 +39,20 @@
 		<div class="panel-heading">
 			<h:form>
 				<span class="panel-title">
-					<h3 style="display: inline"
+					<h4 title="#{cc.attrs.headingDescription}" style="display: inline"
 						class="accordion-toggle collapsed font-weight-bold align-text-bottom"
 						data-toggle="collapse" data-parent="#accordion"
 						href="#collapseToolbar#{cc.attrs.heading}">&ensp;#{cc.attrs.heading}
-					</h3> <h:panelGroup id="#{cc.attrs.updateBadgeId}"
+					</h4> <h:panelGroup id="#{cc.attrs.updateBadgeId}"
 						styleClass="badge badge-pill badge-primary align-top small"
 						pt:style="background-color:#{cc.attrs.badgeColor};">
 												#{cc.attrs.badgeNumber}
-					</h:panelGroup> <h:panelGroup styleClass="float-right #{cc.attrs.iconColorClass}">
-						<i class="#{cc.attrs.iconClass} fa-lg align-bottom" />
 					</h:panelGroup>
+					<c:if test="${!(cc.attrs.iconClass eq '')}">
+					<h:panelGroup styleClass="float-right #{cc.attrs.iconColorClass}">
+						<i class="#{cc.attrs.iconClass} fa-lg align-middle" />
+					</h:panelGroup>
+					</c:if>
 				</span>
 				<pf:remoteCommand name="#{cc.attrs.updateBadgeCommand}"
 					update="#{cc.attrs.updateBadgeId}" />
@@ -80,7 +84,7 @@
 						update="#{cc.attrs.updateListId}" />
 				</h:form>
 
-				<!-- BUTONS -->
+				<!-- BUTTONS -->
 				<c:if test="${cc.attrs.button}">
 					<div class="row no-gutters mt-1 ml-3">
 						<div class="col mx-1">

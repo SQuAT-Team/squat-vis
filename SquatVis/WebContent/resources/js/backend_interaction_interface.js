@@ -23,6 +23,8 @@ function setSelectorComparison_backend(id) {
 	} ]);
 	updateToolbarComparison();
 	updateToolbarComparisonCounter();
+	updateColorMappings();
+	updateColorMappingCss();
 }
 
 function resetSelectorComparison_backend(id) {
@@ -32,6 +34,8 @@ function resetSelectorComparison_backend(id) {
 	} ]);
 	updateToolbarComparison();
 	updateToolbarComparisonCounter();
+	updateColorMappings();
+	updateColorMappingCss();
 }
 
 function setSelectorMarked_backend(id) {
@@ -95,6 +99,8 @@ function setAllSelectorComparison_backend(ids) {
 	} ]);
 	updateToolbarComparison();
 	updateToolbarComparisonCounter();
+	updateColorMappings();
+	updateColorMappingCss();
 }
 
 function resetAllSelectorComparison_backend(ids) {
@@ -172,6 +178,8 @@ function setCandidateColor_backend(id, color) {
 		name : 'color',
 		value : color
 	} ]);
+	updateColorMappings();
+	updateColorMappingCss();
 }
 
 function selectorClearCurrent_backend(){
@@ -184,6 +192,8 @@ function selectorClearComparison_backend(){
 	selectorClearComparison_application();
 	updateToolbarComparison();
 	updateToolbarComparisonCounter();
+	updateColorMappings();
+	updateColorMappingCss();
 }
 
 function selectorClearMarked_backend(){
@@ -210,6 +220,8 @@ function selectorSelectAllComparison_backend(){
 	updateToolbarMarkedCounter();
 	updateToolbarSelected();
 	updateToolbarSelectedCounter();
+	updateColorMappings();
+	updateColorMappingCss();
 }
 
 function selectorSelectAllMarked_backend(){

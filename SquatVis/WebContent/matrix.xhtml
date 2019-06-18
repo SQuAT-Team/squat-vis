@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pf="http://primefaces.org/ui"
@@ -15,9 +16,8 @@ MODIFIED: Sebastian Frank
  -->
 
 <!-- LIBS -->
-<h:outputScript library="lib" name="jquery.min.js" target="body"></h:outputScript>
+<h:outputScript library="lib" name="jquery.min.js" target="head"></h:outputScript>
 <h:outputScript library="lib" name="popper.min.js" target="body"></h:outputScript>
-<h:outputScript name="tether-1.3.3/dist/js/popper.min.js" target="body"></h:outputScript>
 <h:outputStylesheet name="fontawesome/css/all.css" target="head"></h:outputStylesheet>
 <h:outputScript library="lib" name="jquery.contextMenu.min.js"
 	target="body"></h:outputScript>
@@ -27,14 +27,20 @@ MODIFIED: Sebastian Frank
 <h:outputStylesheet library="lib" name="jquery.contextMenu.min.css"
 	target="head"></h:outputStylesheet>
 <h:outputScript library="lib" name="d3.min.js" target="head"></h:outputScript>
+<h:outputScript library="lib" name="d3-tip.js" target="head"></h:outputScript>
 <h:outputScript name="bootstrap-4.3.1-dist/js/bootstrap.min.js"
 	target="body"></h:outputScript>
 <h:outputStylesheet name="bootstrap-4.3.1-dist/css/bootstrap.min.css"
 	target="head"></h:outputStylesheet>
 
+<!-- D3 Visualizations -->
+<h:outputScript library="d3" name="d3_matrix.js" target="body"></h:outputScript>
+<h:outputScript library="d3" name="d3_star.js" target="head"></h:outputScript>
+
 <!-- JAVASCRIPT -->
 <h:outputScript library="js" name="popover_activator.js" target="body"></h:outputScript>
 <h:outputScript library="js" name="toolbar.js" target="body"></h:outputScript>
+<h:outputScript library="js" name="matrix.js" target="body"></h:outputScript>
 <h:outputScript library="js" name="interaction_interface.js"
 	target="body"></h:outputScript>
 <h:outputScript library="js" name="toolbar_interaction_interface.js"
@@ -43,6 +49,7 @@ MODIFIED: Sebastian Frank
 	target="body"></h:outputScript>
 <h:outputScript library="js" name="matrix_interaction_interface.js"
 	target="body"></h:outputScript>
+<h:outputScript library="js" name="star_standard_methods.js" target="body"></h:outputScript>
 
 <!-- CSS -->
 <h:outputStylesheet library="css" name="squat_standard_style.css"
@@ -51,44 +58,100 @@ MODIFIED: Sebastian Frank
 <h:outputStylesheet library="css" name="toolbar.css" target="head"></h:outputStylesheet>
 <h:outputStylesheet library="css" name="matrix.css" target="head"></h:outputStylesheet>
 
-<!-- D3 Visualizations -->
-<h:outputScript library="d3" name="d3_matrix.js" target="body"></h:outputScript>
-
-<h:head>
+<h:head id="head">
 	<title>Matrix</title>
-	<!-- Matrix style -->
 </h:head>
 <h:body styleClass="fullscreen-view">
+
+	<script>					
+		var candidateValues = '#{sessionInfo.getProjectDataAsCSV()}';
+		var parsedValues = d3.csvParse(candidateValues);
+	</script>
+	<h:form>
+		<h:panelGroup id="colorMappingsDiv">
+				<style id="colorMappings">
+				<ui:repeat value="#{sessionInfo.getCurrentProjectInfo().colorInfo.getColorEntries()}" var="colorEntry">
+					.comparison-active .candidate-circle.comparison.c#{colorEntry.getKey()} {	fill: #{colorEntry.getValue()}!important;}
+				</ui:repeat>
+				</style>
+			</h:panelGroup>
+			<pf:remoteCommand name="updateColorMappings" update="colorMappingsDiv"/>
+	</h:form>
+
 	<!-- NAVBAR -->
 	<tp:header>
 	</tp:header>
 
-	<div class="container-fluid h-100">
-		<div class="row h-100">
+	<div class="container-fluid h-100 mh-100">
+		<div id="matrixOptions"
+			class="row h-100 mh-100 #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowTagsStyle()} #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowParentsStyle()}">
 
 			<!-- SIDEBAR START -->
 			<tp:toolbar>
 			</tp:toolbar>
 			<!-- SIDEBAR END -->
-
-			<div id="content" class="ml-auto col-10 px-4 mb-2">
-				<div class="row h-100">
+			<div id="content" class="h-100 mh-100 ml-auto col-10 px-4 mb-2">
+				<div class="row h-100 mh-100">
 					<div id="matrixDetails" class="col-5 h-100">
-						<div class="row h-75">
+						<div class="row h-70 mh-70">
 							<div class="card w-100 mb-2">
 								<div class="card-header font-weight-bold">Detail</div>
 								<div class="card-body">
-									<div id="matrixDetailedToolbar" class="">
-										<div class="dropdown">
-											<button class="btn btn-light dropdown-toggle"
-												type="button" id="dropdownMenuButton" data-toggle="dropdown"
-												aria-haspopup="true" aria-expanded="false">
-												Dropdown button</button>
-											<div class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="#">Action</a> <a
-													class="dropdown-item" href="#">Another action</a> <a
-													class="dropdown-item" href="#">Something else here</a>
+									<div id="matrixDetailedToolbar" class="row">
+										<div class="col">
+											<div class="dropdown">
+												<button style="width: 100%;"
+													class="btn btn-light dropdown-toggle" type="button"
+													id="dropdownMenuButton" data-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">
+													#{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getMode()}</button>
+												<div class="dropdown-menu"
+													aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="javascript:showCurrent()">Current</a>
+													<a class="dropdown-item" href="javascript:showComparison()">Comparison</a>
+													<a class="dropdown-item" href="javascript:showMarked()">Marked</a>
+													<a class="dropdown-item" href="javascript:showSelected()">Selected</a>
+												</div>
+											</div>
+										</div>
+										<div class="col mt-1">
+											<div class="custom-control custom-checkbox">
+												<c:choose>
+													<c:when
+														test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowParents()}">
+														<input type="checkbox" id="showParentsCheckbox"
+															class="custom-control-input" checked="true"
+															onchange="changeParents()"> <label
+															class="custom-control-label" for="showParentsCheckbox">Show
+																Parents</label> </input>
+													</c:when>
+													<c:otherwise>
+														<input type="checkbox" id="showParentsCheckbox"
+															class="custom-control-input" onchange="changeParents()">
+															<label class="custom-control-label"
+															for="showParentsCheckbox">Show Parents</label> </input>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</div>
+										<div class="col mt-1">
+											<div class="custom-control custom-checkbox">
+												<c:choose>
+													<c:when
+														test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowTags()}">
+														<input type="checkbox" id="showTagsCheckbox"
+															class="custom-control-input" checked="true"
+															onchange="changeTags()"> <label
+															class="custom-control-label" for="showTagsCheckbox">Show
+																Tags</label> </input>
+													</c:when>
+													<c:otherwise>
+														<input type="checkbox" id="showTagsCheckbox"
+															class="custom-control-input" onchange="changeTags()">
+															<label class="custom-control-label"
+															for="showTagsCheckbox">Show Tags</label> </input>
+													</c:otherwise>
+												</c:choose>
 											</div>
 										</div>
 									</div>
@@ -96,11 +159,24 @@ MODIFIED: Sebastian Frank
 								</div>
 							</div>
 						</div>
-						<div class="row h-25">
-							<div class="card w-100">
+						<div class="row h-30 mh-30">
+							<div class="card h-100 mh-100 w-100">
 								<div class="card-header font-weight-bold">Current</div>
-								<div class="card-body">
-									<div id="matrixCurrentContent" class="h-100 w-100 scrollable"></div>
+								<div class="card-body scrollable">
+									<div id="matrixCurrentContent" class="h-100 mh-100 w-100 scrollable">
+										<div class="d-inline-block">
+											<ui:repeat value="#{sessionInfo.getAllCandidates()}"
+												var="candidate" varStatus="candidateStatus">
+												<!--  CANDIDATE -->
+												<tp:candidateStar usePopulation="false"
+													candidate="#{candidate}"
+													renderCandidates="[parsedValues[#{candidateStatus.index}]]"
+													width="110"
+													glow="false"
+													selectable="false" />
+											</ui:repeat>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -114,13 +190,10 @@ MODIFIED: Sebastian Frank
 						</div>
 					</div>
 				</div>
-
-				<script>
-					var candidateValues = '#{sessionInfo.getProjectDataAsCSV()}';
-				</script>
-
 				<tp:application_interaction_interface>
 				</tp:application_interaction_interface>
+				<tp:matrix_callbacks>
+				</tp:matrix_callbacks>
 			</div>
 		</div>
 	</div>

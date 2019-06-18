@@ -26,7 +26,8 @@ public class CsvExporter {
 		this.projectInfo = projectInfo;
 		StringBuilder contentBuilder = new StringBuilder();
 		exportNameHeader(contentBuilder);
-		exportInitialTagsHeader(contentBuilder);
+		exportParentHeader(contentBuilder);
+		exportTagsHeader(contentBuilder);
 		exportGoals(project.getGoal(), contentBuilder);
 		exportLevels(project.getLevels(), contentBuilder);
 		return contentBuilder.toString();
@@ -37,8 +38,17 @@ public class CsvExporter {
 		endValue(contentBuilder);
 	}
 
-	private void exportInitialTagsHeader(StringBuilder contentBuilder) {
-		contentBuilder.append("InitialTags");
+	private void exportParentHeader(StringBuilder contentBuilder){
+		contentBuilder.append("Parent");
+		endValue(contentBuilder);
+	}
+	
+	private void exportTagsHeader(StringBuilder contentBuilder) {
+		contentBuilder.append("SelectorTags");
+		endValue(contentBuilder);
+		contentBuilder.append("ParetoTags");
+		endValue(contentBuilder);
+		contentBuilder.append("SuggestionTags");
 		endValue(contentBuilder);
 	}
 
@@ -72,6 +82,7 @@ public class CsvExporter {
 
 	private void exportCandidate(Candidate candidate, StringBuilder contentBuilder) {
 		exportCandidateId(candidate, contentBuilder);
+		exportCandidateParent(candidate, contentBuilder);
 		exportCandidateTags(candidate, contentBuilder);
 		int numberOfValues = Math.max(candidate.getRealValues().size(), candidate.getUtilityValues().size());
 		for (int i = 0; i < numberOfValues; i++) {
@@ -85,10 +96,22 @@ public class CsvExporter {
 		endValue(contentBuilder);
 	}
 
+	private void exportCandidateParent(Candidate candidate, StringBuilder contentBuilder) {
+		String parentId = "";
+		if(candidate.getParent() != null) {
+			parentId = candidate.getParent().getCandidateId().toString();
+		}
+		contentBuilder.append(parentId);
+		endValue(contentBuilder);
+	}
+	
 	private void exportCandidateTags(Candidate candidate, StringBuilder contentBuilder) {
 		String selectors = getSelectorTags(String.valueOf(candidate.getCandidateId()));
-		String tags = getCandidateTag(candidate);
-		contentBuilder.append(selectors).append(" ").append(tags);
+		contentBuilder.append(selectors);
+		endValue(contentBuilder);
+		contentBuilder.append(getCandidateParetoTag(candidate));
+		endValue(contentBuilder);
+		contentBuilder.append(getCandidateSuggestionTag(candidate));
 		endValue(contentBuilder);
 	}
 
@@ -110,11 +133,12 @@ public class CsvExporter {
 		return selectors;
 	}
 
-	private String getCandidateTag(Candidate candidate) {
-		String tags = "";
-		tags = tags + " " + projectInfo.getTagInfo().getParetoTag(candidate);
-		tags = tags + " " + projectInfo.getTagInfo().getSuggestionTag(candidate);
-		return tags;
+	private String getCandidateParetoTag(Candidate candidate) {
+		return projectInfo.getTagInfo().getParetoTag(candidate);
+	}
+
+	private String getCandidateSuggestionTag(Candidate candidate) {
+		return projectInfo.getTagInfo().getSuggestionTag(candidate);
 	}
 
 	private void exportCandidateValue(Candidate candidate, int i, StringBuilder contentBuilder) {
@@ -123,11 +147,11 @@ public class CsvExporter {
 	}
 
 	private void endLine(StringBuilder contentBuilder) {
-		removeLastCharacterfComma(contentBuilder);
+		removeLastCharacterComma(contentBuilder);
 		contentBuilder.append("\\n");
 	}
 
-	private void removeLastCharacterfComma(StringBuilder contentBuilder) {
+	private void removeLastCharacterComma(StringBuilder contentBuilder) {
 		int numberOfCharacters = contentBuilder.length();
 		String lastCharacter = contentBuilder.substring(numberOfCharacters - 1);
 		if (lastCharacter.equals(",")) {

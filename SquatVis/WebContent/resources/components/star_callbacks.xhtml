@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+
+<composite:interface>
+</composite:interface>
+
+<composite:implementation>
+	<h:form>
+		<pf:remoteCommand name="setShowPopulation_application"
+			action="#{sessionInfo.getCurrentProjectInfo().starViewInfo.setShowPopulation}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setMode_application"
+			action="#{sessionInfo.getCurrentProjectInfo().starViewInfo.setMode}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setModeBig_application"
+			action="#{sessionInfo.getCurrentProjectInfo().starViewInfo.setModeBig}" />
+	</h:form>
+</composite:implementation>
+
+</html>

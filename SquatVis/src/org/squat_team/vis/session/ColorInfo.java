@@ -3,6 +3,8 @@ package org.squat_team.vis.session;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.faces.context.FacesContext;
 
@@ -20,6 +22,10 @@ public class ColorInfo implements Serializable {
 	private Map<String, String> colorMapping = new HashMap<>();
 	private String[] defaultColors = { "#800000", "#177E89", "#DB3A34", "#FFC857", "#084C61", "#EF476F", "#3F220F" };
 	private int defaultColorsIndex = 0;
+
+	public Set<Entry<String, String>> getColorEntries() {
+		return colorMapping.entrySet();
+	}
 
 	public String getColor(String id) {
 		String color = colorMapping.get(id);

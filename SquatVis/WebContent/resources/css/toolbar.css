@@ -62,12 +62,23 @@
 	color: #0080ff;
 }
 
-.candidate-pareto:not(.pareto-on) {
-	display: none;
+.candidate-pareto{
+	visibility: hidden;
 }
 
-.candidate-suggestion:not(.suggestion-on) {
-	display: none;
+.candidate-pareto.pareto-real-level
+,.candidate-pareto.pareto-utility-level
+,.candidate-pareto.pareto-real-population,
+.candidate-pareto.pareto-utility-population {
+	visibility: visible;
+}
+
+.candidate-suggestion {
+	visibility: hidden;
+}
+
+.candidate-suggestion.suggestion-on {
+	visibility: visible;
 }
 
 #context-menu {
@@ -85,7 +96,7 @@
     content: "\f068";
     float: left;
     color: black;
-    line-height: 40px;
+    line-height: 32px;
 }
 
 .panel-heading .accordion-toggle.collapsed:after {

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<!-- LIBS -->
+<h:outputScript library="lib" name="jquery.min.js" target="body"></h:outputScript>
+<h:outputScript library="lib" name="popper.min.js" target="body"></h:outputScript>
+<h:outputStylesheet name="fontawesome/css/all.css" target="head"></h:outputStylesheet>
+<h:outputScript library="lib" name="jquery.contextMenu.min.js"
+	target="body"></h:outputScript>
+<h:outputScript library="lib" name="jquery.ui.position.min.js"
+	target="body"></h:outputScript>
+<h:outputScript library="lib" name="popper.min.js" target="body"></h:outputScript>
+<h:outputStylesheet library="lib" name="jquery.contextMenu.min.css"
+	target="head"></h:outputStylesheet>
+<h:outputScript library="lib" name="d3.min.js" target="head"></h:outputScript>
+<h:outputScript library="lib" name="d3-tip.js" target="head"></h:outputScript>
+<h:outputScript name="bootstrap-4.3.1-dist/js/bootstrap.min.js"
+	target="body"></h:outputScript>
+<h:outputStylesheet name="bootstrap-4.3.1-dist/css/bootstrap.min.css"
+	target="head"></h:outputStylesheet>
+
+<!-- D3 Visualizations -->
+<h:outputScript library="d3" name="d3_star.js" target="head"></h:outputScript>
+
+<!-- JAVASCRIPT -->
+<h:outputScript library="js" name="popover_activator.js" target="body"></h:outputScript>
+<h:outputScript library="js" name="toolbar.js" target="body"></h:outputScript>
+<!-- <h:outputScript library="js" name="matrix.js" target="body"></h:outputScript> -->
+<h:outputScript library="js" name="interaction_interface.js"
+	target="body"></h:outputScript>
+<h:outputScript library="js" name="toolbar_interaction_interface.js"
+	target="body"></h:outputScript>
+<h:outputScript library="js" name="backend_interaction_interface.js"
+	target="body"></h:outputScript>
+<h:outputScript library="js" name="star_interaction_interface.js"
+	target="body"></h:outputScript>
+<h:outputScript library="js" name="star_standard_methods.js"
+	target="body"></h:outputScript>
+<h:outputScript library="js" name="star.js" target="body"></h:outputScript>
+
+<!-- CSS -->
+<h:outputStylesheet library="css" name="squat_standard_style.css"
+	target="head"></h:outputStylesheet>
+<h:outputStylesheet library="css" name="header.css" target="head"></h:outputStylesheet>
+<h:outputStylesheet library="css" name="toolbar.css" target="head"></h:outputStylesheet>
+<h:outputStylesheet library="css" name="star.css" target="head"></h:outputStylesheet>
+
+<h:head id="head">
+	<title>Star</title>
+
+</h:head>
+<h:body id="body" styleClass="fullscreen-view">
+	<h:form>
+		<h:panelGroup id="colorMappingsDiv">
+				<style id="colorMappings">
+				<ui:repeat value="#{sessionInfo.getCurrentProjectInfo().colorInfo.getColorEntries()}" var="colorEntry">
+					.comparison-active .radarWrapper.comparison.c#{colorEntry.getKey()} .radarArea {	fill: #{colorEntry.getValue()}!important; visibility: visible!important;}
+					.comparison-active .radarWrapper.comparison.c#{colorEntry.getKey()} .radarStroke {	stroke: #{colorEntry.getValue()}!important; visibility: visible!important;}
+					.comparison-active .radarWrapper.comparison.c#{colorEntry.getKey()} .radarCircle {	fill: #{colorEntry.getValue()}!important; visibility: visible!important;}
+				</ui:repeat>
+				</style>
+			</h:panelGroup>
+			<pf:remoteCommand name="updateColorMappings" update="colorMappingsDiv"/>
+	</h:form>
+
+	<script>
+		var candidateValues = '#{sessionInfo.getProjectDataAsCSV()}';
+		var parsedValues = d3.csvParse(candidateValues);
+	</script>
+
+	<!-- NAVBAR -->
+	<tp:header>
+	</tp:header>
+
+	<div class="container-fluid h-100 mh-100 ">
+		<div id="starOptions"
+			class="row h-100 mh-100 #{sessionInfo.getCurrentProjectInfo().starViewInfo.getShowPopulationStyle()}">
+
+			<!-- SIDEBAR START -->
+			<tp:toolbar>
+			</tp:toolbar>
+			<!-- SIDEBAR END -->
+
+			<div id="content" class="h-100 mh-100 ml-auto col-10 px-4 mb-2">
+				<div class="row h-100 mh-100 ">
+					<div id="starOverview" class="col-6 h-100 mh-100 ">
+						<div class="card h-100 mh-100">
+							<div class="card-header font-weight-bold">Detailed</div>
+							<div class="card-body m-1 p-1">
+								<div class="row">
+									<div class="col mt-2">
+										<div class="dropdown">
+											<button style="width: 100%;"
+												class="btn btn-light dropdown-toggle" type="button"
+												id="dropdownMenuButtonBig" data-toggle="dropdown"
+												aria-haspopup="true" aria-expanded="false">
+												#{sessionInfo.getCurrentProjectInfo().starViewInfo.getModeBig()}</button>
+											<div class="dropdown-menu"
+												aria-labelledby="dropdownMenuButtonBig">
+												<a class="dropdown-item" href="javascript:showCurrentBig()">Current</a>
+												<a class="dropdown-item"
+													href="javascript:showComparisonBig()">Comparison</a> <a
+													class="dropdown-item" href="javascript:showMarkedBig()">Marked</a>
+												<a class="dropdown-item" href="javascript:showSelectedBig()">Selected</a>
+											</div>
+										</div>
+									</div>
+									<div class="col mt-3">
+										<div class="custom-control custom-checkbox">
+											<c:choose>
+												<c:when
+													test="${sessionInfo.getCurrentProjectInfo().starViewInfo.getShowPopulation()}">
+													<input type="checkbox" id="showPopulationCheckbox"
+														class="custom-control-input" checked="true"
+														onchange="changePopulation()"> <label
+														class="custom-control-label" for="showPopulationCheckbox">Show
+															Population</label> </input>
+												</c:when>
+												<c:otherwise>
+													<input type="checkbox" id="showPopulationCheckbox"
+														class="custom-control-input" onchange="changePopulation()">
+														<label class="custom-control-label"
+														for="showPopulationCheckbox">Show Population</label> </input>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</div>
+								</div>
+
+								<div class="row m-0 p-0 h-100 w-100 mw-100 mh-100">
+									<div class="col-12 m-0 p-0">
+										<div id="starOverviewContent" class="h-100 mh-100 scrollable">
+											<tp:bigStar usePopulation="true"
+												renderCandidates="parsedValues" population="parsedValues"
+												width="300" outerElementId="'starOverviewContent'" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="starDetailed" class="col-6 h-100 mh-100 ">
+						<div class="card  h-100 mh-100 ">
+							<div class="card-header font-weight-bold">Candidates</div>
+							<div class="card-body h-100 mh-100 w-100 mw-100"
+								style="display: flex; flex-direction: column;">
+								<!-- CANDIDATES TOOLBAR -->
+								<div id="starDetailedToolbar" class="mh-15">
+									<div class="row">
+										<div class="col">
+
+											<!-- SEARCH BAR -->
+											<div class="has-search mt-2 mb-2">
+												<span class="fa fa-search form-control-feedback"></span> <input
+													type="text" class="form-control" placeholder="Search"
+													onkeyup="starSearch(this)" />
+											</div>
+										</div>
+										<div class="col">
+
+											<!-- DROPDOWN MENU-->
+											<div class="dropdown mt-2 mb-2">
+												<button style="width: 100%;"
+													class="btn btn-light dropdown-toggle" type="button"
+													id="dropdownMenuButton" data-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">
+													#{sessionInfo.getCurrentProjectInfo().starViewInfo.getMode()}</button>
+												<div class="dropdown-menu"
+													aria-labelledby="dropdownMenuButton">
+													<a class="dropdown-item" href="javascript:showAll()">All</a>
+													<a class="dropdown-item" href="javascript:showComparison()">Comparison</a>
+													<a class="dropdown-item" href="javascript:showMarked()">Marked</a>
+													<a class="dropdown-item" href="javascript:showSelected()">Selected</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- CANDIDATES AREA -->
+								<div id="starDetailedContent" class="m-0 p-0 scrollable mh-85">
+									<div class="d-inline-block">
+										<ui:repeat value="#{sessionInfo.getAllCandidates()}"
+											var="candidate" varStatus="candidateStatus">
+											<!--  CANDIDATE -->
+											<tp:candidateStar usePopulation="true"
+												candidate="#{candidate}"
+												renderCandidates="[parsedValues[#{candidateStatus.index}]]"
+												population="parsedValues" width="130" glow="true" selectable="true" />
+										</ui:repeat>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<tp:application_interaction_interface>
+				</tp:application_interaction_interface>
+				<tp:star_callbacks>
+				</tp:star_callbacks>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>

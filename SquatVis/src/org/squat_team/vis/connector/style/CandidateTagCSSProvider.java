@@ -10,11 +10,26 @@ public class CandidateTagCSSProvider implements Serializable {
 	 * Generated
 	 */
 	private static final long serialVersionUID = 4585922370479891147L;
-	private static final String PARETO_TAG_CSS = "pareto-on";
+	private static final String PARETO_REAL_LEVEL_TAG_CSS = "pareto-real-level";
+	private static final String PARETO_REAL_POPULATION_TAG_CSS = "pareto-real-population";
+	private static final String PARETO_UTILITY_LEVEL_TAG_CSS = "pareto-utility-level";
+	private static final String PARETO_UTILITY_POPULATION_TAG_CSS = "pareto-utility-population";
 	private static final String SUGGESTION_TAG_CSS = "suggestion-on";
 
-	public String getParetoTag() {
-		return PARETO_TAG_CSS;
+	public String getParetoRealLevelTag() {
+		return PARETO_REAL_LEVEL_TAG_CSS;
+	}
+
+	public String getParetoRealPopulationTag() {
+		return PARETO_REAL_POPULATION_TAG_CSS;
+	}
+
+	public String getParetoUtilityLevelTag() {
+		return PARETO_UTILITY_LEVEL_TAG_CSS;
+	}
+
+	public String getParetoUtilityPopulationTag() {
+		return PARETO_UTILITY_POPULATION_TAG_CSS;
 	}
 
 	public String getSuggestionTag() {

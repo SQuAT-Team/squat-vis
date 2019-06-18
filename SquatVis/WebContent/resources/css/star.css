@@ -1,0 +1,171 @@
+.legend {
+	font-family: 'Raleway', sans-serif;
+	fill: #333333;
+}
+
+.tooltip {
+	fill: #333333;
+}
+
+.axis-line {
+	stroke: black;
+	stroke-width: 1px;
+	opacity: 0.75;
+}
+
+.hidden-axis-line {
+	stroke: black;
+	stroke-width: 10px;
+	opacity: 0.0;
+}
+
+.radarStrokePopulation {
+	stroke: none;
+	stroke-width: 1px;
+	fill: #aaaaaa;
+	opacity: 0.15;
+}
+
+.candidate-radar-container {
+	border: solid;
+	border-width: thin;
+	border-color: black;
+	margin: 1px;
+}
+
+.candidate-radar-star .fa-star {
+	color: #eeeeee;
+}
+
+.selected .fa-star {
+	color: #8000ff;
+}
+
+.marked .fa-star {
+	color: #0080ff;
+}
+
+.radarWrapperPopulation {
+	visibility : hidden;
+}
+
+.population-active .radarWrapperPopulation {
+	visibility : visible;
+}
+
+#starDetailedContent .candidate-radar-container {
+	display: none !important;
+}
+
+#starOverviewContent .radarWrapper {
+	display: none !important;
+}
+
+#starOverview.current-active #starOverviewContent .radarWrapper.current {
+	display: inline-block !important;
+}
+
+#starOverview.marked-active #starOverviewContent .radarWrapper.marked {
+	display: inline-block !important;
+}
+
+#starOverview.selected-active #starOverviewContent .radarWrapper.selected {
+	display: inline-block !important;
+}
+
+#starOverview.comparison-active #starOverviewContent .radarWrapper.comparison {
+	display: inline-block !important;
+}
+
+#starDetailed.all-active #starDetailedContent .candidate-radar-container:not(.search-hide ) {
+	display: inline-block !important;
+}
+
+#starDetailed.marked-active #starDetailedContent .candidate-radar-container.marked:not
+	(.search-hide ) {
+	display: inline-block !important;
+}
+
+#starDetailed.selected-active #starDetailedContent .candidate-radar-container.selected:not
+	(.search-hide ) {
+	display: inline-block !important;
+}
+
+#starDetailed.comparison-active #starDetailedContent .candidate-radar-container.comparison:not
+	(.search-hide ) {
+	display: inline-block !important;
+}
+
+#starDetailedContent .radarArea {
+	fill: #1F77B4;
+}
+
+#starDetailedContent .radarStroke {
+	stroke: #1F77B4;
+}
+
+#starDetailedContent .radarCircle {
+	fill: #1F77B4;
+}
+
+#starDetailedContent .candidate-radar-container.current {
+	border-color: #00ffff;
+	background-color: rgba(0, 255, 255, 0.1);
+}
+
+#starOverviewContent .radarWrapper .radarArea {
+	visibility: hidden;
+}
+
+#starOverviewContent .radarWrapper .radarStroke {
+	visibility: hidden;
+}
+
+#starOverviewContent .radarWrapper .radarCircle {
+	visibility: hidden;
+}
+
+.current-active #starOverviewContent .radarWrapper.current .radarArea {
+	fill: #00ffff;
+	visibility: visible;
+}
+
+.current-active #starOverviewContent .radarWrapper.current .radarStroke {
+	stroke: #00ffff;
+	visibility: visible;
+}
+
+.current-active #starOverviewContent .radarWrapper.current .radarCircle {
+	fill: #00ffff;
+	visibility: visible;
+}
+
+.marked-active #starOverviewContent .radarWrapper.marked .radarArea {
+	fill: #0080ff;
+	visibility: visible;
+}
+
+.marked-active #starOverviewContent .radarWrapper.marked .radarStroke {
+	stroke: #0080ff;
+	visibility: visible;
+}
+
+.marked-active #starOverviewContent .radarWrapper.marked .radarCircle {
+	fill: #0080ff;
+	visibility: visible;
+}
+
+.selected-active #starOverviewContent .radarWrapper.selected .radarArea {
+	fill: #8000ff;
+	visibility: visible;
+}
+
+.selected-active #starOverviewContent .radarWrapper.selected .radarStroke {
+	stroke: #8000ff;
+	visibility: visible;
+}
+
+.selected-active #starOverviewContent .radarWrapper.selected .radarCircle {
+	fill: #8000ff;
+	visibility: visible;
+}

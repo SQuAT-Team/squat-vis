@@ -1,7 +1,6 @@
 // INTERACE
-
-var candidateStarCssTag = ".candidate-star";
-var queryCssCandidateItem = "div.candidate-item";
+var candidateStarCssTag_toolbar = ".candidate-star";
+var queryCssCandidateItem_toolbar = "div.candidate-item";
 
 function setSelectorCurrent_toolbar(id) {
 	addElement(id, "current");
@@ -20,12 +19,14 @@ function resetSelectorComparison_toolbar(id) {
 }
 
 function setSelectorMarked_toolbar(id) {
-	var candidateItems = $(queryCssCandidateItem + ".c" + id);
+	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
 	var element = "marked";
 	for (let i = 0; i < candidateItems.length; i++) {
 		var candidateItem = candidateItems[i];
-		var starItem = $(candidateItem).find(candidateStarCssTag).find("i")[0];
+		var starItem = $(candidateItem).find(candidateStarCssTag_toolbar).find(
+				"i")[0];
 		var classes = candidateItem.classList;
+		classes.remove("selected");
 		if (!classes.contains(element)) {
 			if (starItem) {
 				starItem.classList.remove("fas");
@@ -41,12 +42,14 @@ function resetSelectorMarked_toolbar(id) {
 }
 
 function setSelectorSelected_toolbar(id) {
-	var candidateItems = $(queryCssCandidateItem + ".c" + id);
+	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
 	var element = "selected";
 	for (let i = 0; i < candidateItems.length; i++) {
 		var candidateItem = candidateItems[i];
-		var starItem = $(candidateItem).find(candidateStarCssTag).find("i")[0];
+		var starItem = $(candidateItem).find(candidateStarCssTag_toolbar).find(
+				"i")[0];
 		var classes = candidateItem.classList;
+		classes.remove("marked");
 		if (!classes.contains(element)) {
 			if (starItem) {
 				starItem.classList.remove("far");
@@ -54,15 +57,17 @@ function setSelectorSelected_toolbar(id) {
 			}
 			classes.add(element);
 		}
-	}}
+	}
+}
 
 function resetSelectorSelected_toolbar(id) {
 	// find candidate item with id
-	var candidateItems = $(queryCssCandidateItem + ".c" + id);
+	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
 	var element = "selected";
 	for (let i = 0; i < candidateItems.length; i++) {
 		var candidateItem = candidateItems[i];
-		var starItem = $(candidateItem).find(candidateStarCssTag).find("i")[0];
+		var starItem = $(candidateItem).find(candidateStarCssTag_toolbar).find(
+				"i")[0];
 		var classes = candidateItem.classList;
 		if (classes.contains(element)) {
 			if (starItem) {
@@ -71,7 +76,8 @@ function resetSelectorSelected_toolbar(id) {
 			}
 			classes.remove(element);
 		}
-	}}
+	}
+}
 
 function setAllSelectorCurrent_toolbar(ids) {
 	for (let i = 0; i < ids.length; i++) {
@@ -151,7 +157,7 @@ function selectorClearSelected_toolbar() {
 }
 
 function selectorMarkAllCurrent_toolbar() {
-	var candidateItems = $(queryCssCandidateItem + ".current");
+	var candidateItems = $(queryCssCandidateItem_toolbar + ".current");
 	for (let i = 0; i < candidateItems.length; i++) {
 		var classes = candidateItems[i].classList;
 		if (!classes.contains("marked") && !classes.contains("selected")) {
@@ -161,9 +167,10 @@ function selectorMarkAllCurrent_toolbar() {
 }
 
 function selectorSelectAllComparison_toolbar() {
-	var candidateItems = $(queryCssCandidateItem + ".comparison");
+	var candidateItems = $(queryCssCandidateItem_toolbar + ".comparison");
 	for (let i = 0; i < candidateItems.length; i++) {
-		var starItem = $(candidateItems[i]).find(candidateStarCssTag).find("i")[0];
+		var starItem = $(candidateItems[i]).find(candidateStarCssTag_toolbar)
+				.find("i")[0];
 		var classes = candidateItems[i].classList;
 		if (!classes.contains("selected")) {
 			if (starItem) {
@@ -177,9 +184,10 @@ function selectorSelectAllComparison_toolbar() {
 }
 
 function selectorSelectAllMarked_toolbar() {
-	var candidateItems = $(queryCssCandidateItem + ".marked");
+	var candidateItems = $(queryCssCandidateItem_toolbar + ".marked");
 	for (let i = 0; i < candidateItems.length; i++) {
-		var starItem = $(candidateItems[i]).find(candidateStarCssTag).find("i")[0];
+		var starItem = $(candidateItems[i]).find(candidateStarCssTag_toolbar)
+				.find("i")[0];
 		var classes = candidateItems[i].classList;
 		if (starItem) {
 			starItem.classList.remove("far");
@@ -198,45 +206,65 @@ function selectorExportAllSelected_toolbar() {
 
 function addElement(id, element) {
 	// find candidate item with id
-	var candidateItems = $(queryCssCandidateItem + ".c" + id);
+	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
 	for (let i = 0; i < candidateItems.length; i++) {
 		var candidateItem = candidateItems[i];
+		var starItem = $(candidateItem).find(candidateStarCssTag_toolbar).find(
+		"i")[0];
 		var classes = candidateItem.classList;
 		if (!classes.contains(element)) {
 			classes.add(element);
+			if(element === "selected" && starItem){
+				starItem.classList.remove("far");
+				starItem.classList.add("fas");
+			}
 		}
 	}
 }
 
 function removeElement(id, element) {
 	// find candidate item with id
-	var candidateItems = $(queryCssCandidateItem + ".c" + id);
+	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
 	for (let i = 0; i < candidateItems.length; i++) {
 		var candidateItem = candidateItems[i];
+		var starItem = $(candidateItem).find(candidateStarCssTag_toolbar).find(
+				"i")[0];
 		var classes = candidateItem.classList;
 		if (classes.contains(element)) {
 			classes.remove(element);
+			if (element === "selected" && starItem) {
+				starItem.classList.remove("fas");
+				starItem.classList.add("far");
+			}
 		}
 	}
 }
 
 function removeElementFromAll(element) {
-	var candidateItems = $(queryCssCandidateItem);
+	var candidateItems = $(queryCssCandidateItem_toolbar);
 	for (let i = 0; i < candidateItems.length; i++) {
+		var starItem = $(candidateItems[i]).find(candidateStarCssTag_toolbar).find(
+		"i")[0];
 		var classes = candidateItems[i].classList;
 		classes.remove(element);
+		if (element === "selected" && starItem) {
+			starItem.classList.remove("fas");
+			starItem.classList.add("far");
+		}
 	}
 }
 
 function levelUp(id) {
 	// find candidate item with id
-	var candidateItems = $(queryCssCandidateItem + ".c" + id);
+	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
+	console.log(candidateItems);
 
 	// change all items
 	for (let i = 0; i < candidateItems.length; i++) {
 		var candidateItem = candidateItems[i];
 		var classes = candidateItem.classList;
-		var starItem = $(candidateItem).find(candidateStarCssTag).find("i")[0];
+		var starItem = $(candidateItem).find(candidateStarCssTag_toolbar).find(
+				"i")[0];
 
 		if (classes.contains("marked")) {
 			classes.remove("marked");

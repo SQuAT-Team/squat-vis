@@ -16,10 +16,10 @@
 
 <composite:implementation>
 	<nav id="sidebar" class="col-2 bg-light sidebar">
-	<div class="sidebar-sticky px-2">
+	<div class="sidebar-sticky">
 
-		<div class="row">
-			<div class="col-12">
+		<div class="row mx-0">
+			<div class="col-12 px-1">
 
 				<!-- TAB CONTROL -->
 				<nav>
@@ -45,6 +45,7 @@
 							<tp:toolbarList
 								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isComparison(candidate.candidateId)}"
 								heading="COMPARISON"
+								headingDescription="#{descriptionProvider.getComparisonDescription()}"
 								badgeNumber="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getNumberOfComparison()}"
 								badgeColor="#ffa500"
 								updateBadgeCommand="updateToolbarComparisonCounter"
@@ -63,6 +64,7 @@
 							<tp:toolbarList
 								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isCurrent(candidate.candidateId)}"
 								heading="CURRENT"
+								headingDescription="#{descriptionProvider.getCurrentDescription()}"
 								badgeNumber="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getNumberOfCurrent()}"
 								badgeColor="#00ffff"
 								updateBadgeCommand="updateToolbarCurrentCounter"
@@ -81,6 +83,7 @@
 							<tp:toolbarList
 								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isMarked(candidate.candidateId)}"
 								heading="MARKED"
+								headingDescription="#{descriptionProvider.getMarkedDescription()}"
 								badgeNumber="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getNumberOfMarked()}"
 								badgeColor="#0080ff"
 								updateBadgeCommand="updateToolbarMarkedCounter"
@@ -99,6 +102,7 @@
 							<tp:toolbarList
 								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isSelected(candidate.candidateId)}"
 								heading="SELECTED"
+								headingDescription="#{descriptionProvider.getSelectedDescription()}"
 								badgeNumber="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getNumberOfSelected()}"
 								badgeColor="#8000ff"
 								updateBadgeCommand="updateToolbarSelectedCounter"
@@ -117,6 +121,7 @@
 							<tp:toolbarList
 								render="true"
 								heading="ALL"
+								headingDescription="#{descriptionProvider.getAllDescription()}"
 								badgeNumber="#{sessionInfo.project.getNumberOfCandidates()}"
 								badgeColor="#000000"
 								updateBadgeCommand="updateToolbarAllCounter"

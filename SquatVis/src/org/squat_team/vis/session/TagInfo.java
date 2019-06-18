@@ -31,27 +31,20 @@ public class TagInfo implements Serializable {
 	}
 
 	public String getParetoTag(@NonNull Candidate candidate) {
-		if (!optionsInfo.isShowPareto()) {
-			return "";
+		String paretoTag = "";
+		if (candidate.isRealValueParetoPopulationBased()) {
+			paretoTag += " " + candidateTagMapper.getParetoRealPopulationTag();
 		}
-		if (optionsInfo.isUsePopulationPareto() && optionsInfo.isUseRealValuesPareto()) {
-			if (candidate.isRealValueParetoPopulationBased()) {
-				return candidateTagMapper.getParetoTag();
-			}
-		} else if (optionsInfo.isUsePopulationPareto() && !optionsInfo.isUseRealValuesPareto()) {
-			if (candidate.isUtilityValueParetoPopulationBased()) {
-				return candidateTagMapper.getParetoTag();
-			}
-		} else if (!optionsInfo.isUsePopulationPareto() && optionsInfo.isUseRealValuesPareto()) {
-			if (candidate.isRealValueParetoLevelBased()) {
-				return candidateTagMapper.getParetoTag();
-			}
-		} else if (!optionsInfo.isUsePopulationPareto() && !optionsInfo.isUseRealValuesPareto()) {
-			if (candidate.isUtilityValueParetoLevelBased()) {
-				return candidateTagMapper.getParetoTag();
-			}
+		if (candidate.isUtilityValueParetoPopulationBased()) {
+			paretoTag += " " + candidateTagMapper.getParetoUtilityPopulationTag();
 		}
-		return "";
+		if (candidate.isRealValueParetoLevelBased()) {
+			paretoTag += " " + candidateTagMapper.getParetoRealLevelTag();
+		}
+		if (candidate.isUtilityValueParetoLevelBased()) {
+			paretoTag += " " + candidateTagMapper.getParetoUtilityLevelTag();
+		}
+		return paretoTag;
 	}
 
 	public String getSuggestionTag(@NonNull Candidate candidate) {
