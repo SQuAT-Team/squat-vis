@@ -89,4 +89,20 @@ function selectorLevelUp_star(id) {
 			classes.add("marked");
 		}
 	}
+	
+	var candidateItems = $(".radarWrapper" + ".c" + id);
+	// change all items
+	for (let i = 0; i < candidateItems.length; i++) {
+		var candidateItem = candidateItems[i];
+		var classes = candidateItem.classList;
+
+		if (classes.contains("marked")) {
+			classes.remove("marked");
+			classes.add("selected");
+		} else if (classes.contains("selected")) {
+			classes.remove("selected");
+		} else {
+			classes.add("marked");
+		}
+	}
 }
