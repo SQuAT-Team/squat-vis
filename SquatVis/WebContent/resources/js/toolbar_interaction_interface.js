@@ -257,7 +257,6 @@ function removeElementFromAll(element) {
 function levelUp(id) {
 	// find candidate item with id
 	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
-	console.log(candidateItems);
 
 	// change all items
 	for (let i = 0; i < candidateItems.length; i++) {

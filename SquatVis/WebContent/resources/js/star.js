@@ -264,8 +264,8 @@ function changePopulation() {
 }
 
 function toggleCurrent(element){
-	var classes = element.classList;
-	var id = $(element).children(".candidate-id").text();
+	var classes = element.parentElement.classList;
+	var id = $(element.parentElement).children(".candidate-id").text();
 	if(classes.contains("current")){
 		resetSelectorCurrent(id);
 	}else{

@@ -29,10 +29,11 @@
 	mycfg.h = #{cc.attrs.width};
 	mycfg.glow = #{cc.attrs.glow};
 	mycfg.showName = false;
+	mycfg.showAxisTooltips = true;
 	</script>
 	<!-- CANDIDATE -->
 		<div
-		class="candidate-radar-container position-relative d-inline-block mt-1 mb-1 c#{cc.attrs.candidate.candidateId} #{sessionInfo.getCurrentProjectInfo().selectorInfo.getSelectorsType(cc.attrs.candidate.candidateId)}" onClick="javascript:if(#{cc.attrs.selectable}){toggleCurrent(this)}">
+		class="candidate-radar-container position-relative d-inline-block mt-1 mb-1 c#{cc.attrs.candidate.candidateId} #{sessionInfo.getCurrentProjectInfo().selectorInfo.getSelectorsType(cc.attrs.candidate.candidateId)}">
 		
 		<!-- CANDIDATE ID -->
 		<div class="candidate-id" style="display:none">#{cc.attrs.candidate.candidateId}</div>
@@ -56,7 +57,7 @@
 			</div>
 		</div>
 		<!-- STAR VISUALIZATION -->
-		<div class="candidate-radar c#{cc.attrs.candidate.getCandidateId()} px-2">
+		<div  onclick="javascript:if(#{cc.attrs.selectable}){toggleCurrent(this)}" class="candidate-radar c#{cc.attrs.candidate.getCandidateId()} px-2">
 			<c:if test="${cc.attrs.usePopulation}">
 				<script>
 				RadarChart(".candidate-radar.c#{cc.attrs.candidate.getCandidateId()}",#{cc.attrs.renderCandidates},mycfg,#{cc.attrs.population});
