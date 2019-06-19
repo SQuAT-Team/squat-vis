@@ -77,22 +77,19 @@
 	display: inline-block !important;
 }
 
-#starDetailed.all-active #starDetailedContent .candidate-radar-container:not(.search-hide ) {
+#starDetailed.all-active #starDetailedContent .candidate-radar-container:not(.search-hide) {
 	display: inline-block !important;
 }
 
-#starDetailed.marked-active #starDetailedContent .candidate-radar-container.marked:not
-	(.search-hide ) {
+#starDetailed.marked-active #starDetailedContent .candidate-radar-container.marked:not(.search-hide) {
 	display: inline-block !important;
 }
 
-#starDetailed.selected-active #starDetailedContent .candidate-radar-container.selected:not
-	(.search-hide ) {
+#starDetailed.selected-active #starDetailedContent .candidate-radar-container.selected:not(.search-hide) {
 	display: inline-block !important;
 }
 
-#starDetailed.comparison-active #starDetailedContent .candidate-radar-container.comparison:not
-	(.search-hide ) {
+#starDetailed.comparison-active #starDetailedContent .candidate-radar-container.comparison:not(.search-hide) {
 	display: inline-block !important;
 }
 
