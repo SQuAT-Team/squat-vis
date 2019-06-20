@@ -45,6 +45,8 @@ function setSelectorMarked_backend(id) {
 	} ]);
 	updateToolbarMarked();
 	updateToolbarMarkedCounter();
+	updateToolbarSelected();
+	updateToolbarSelectedCounter();
 }
 
 function resetSelectorMarked_backend(id) {
@@ -63,6 +65,8 @@ function setSelectorSelected_backend(id) {
 	} ]);
 	updateToolbarSelected();
 	updateToolbarSelectedCounter();
+	updateToolbarMarked();
+	updateToolbarMarkedCounter();
 }
 
 function resetSelectorSelected_backend(id) {
