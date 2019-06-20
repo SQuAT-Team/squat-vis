@@ -1,3 +1,5 @@
+const candidateCircleCss_matrix = "circle.candidate-circle";
+
 function setSelectorCurrent_d3(id) {
 	addElementToCandidate_d3(id, "current");
 	drawParentWithId(id);
@@ -97,7 +99,7 @@ function resetAllSelectorSelected_d3(ids) {
 }
 
 function selectorLevelUp_d3(id) {
-	var candidateCircles = $("g.cell").children("circle.candidate-circle.c" + id);
+	var candidateCircles = $("g.cell").children(candidateCircleCss_matrix + ".c" + id);
 	for (let i = 0; i < candidateCircles.length; i++) {
 		var classList = candidateCircles[i].classList;
 		if (classList.contains("marked")) {
@@ -144,7 +146,7 @@ function selectorClearSelected_d3() {
 }
 
 function selectorMarkAllCurrent_d3() {
-	var circles = $("g.cell").children("circle.candidate-circle.current:not(.selected)");
+	var circles = $("g.cell").children(candidateCircleCss_matrix + ".current:not(.selected)");
 	for (let i = 0; i < circles.length; i++) {
 		var classes = circles[i].classList;
 		classes.add("marked");
@@ -157,7 +159,7 @@ function selectorMarkAllCurrent_d3() {
 }
 
 function selectorSelectAllComparison_d3() {
-	var circles = $("g.cell").children("circle.candidate-circle.comparison");
+	var circles = $("g.cell").children(candidateCircleCss_matrix + ".comparison");
 	for (let i = 0; i < circles.length; i++) {
 		var classes = circles[i].classList;
 		classes.remove("marked");
@@ -171,7 +173,7 @@ function selectorSelectAllComparison_d3() {
 }
 
 function selectorSelectAllMarked_d3() {
-	var circles = $("g.cell").children("circle.candidate-circle.marked");
+	var circles = $("g.cell").children(candidateCircleCss_matrix + ".marked");
 	for (let i = 0; i < circles.length; i++) {
 		var classes = circles[i].classList;
 		classes.remove("marked");
@@ -197,7 +199,7 @@ d3.selection.prototype.moveToFront = function() {
 	};
 
 function addElementToCandidate_d3(id, element, remove) {
-	var candidateCircles = $("g.cell").children("circle.candidate-circle.c" + id);
+	var candidateCircles = $("g.cell").children(candidateCircleCss_matrix + ".c" + id);
 	for (let i = 0; i < candidateCircles.length; i++) {
 		candidateCircles[i].classList.add(element);
 		if (remove) {
@@ -208,14 +210,14 @@ function addElementToCandidate_d3(id, element, remove) {
 }
 
 function removeElementFromCandidate_d3(id, element) {
-	var candidateCircles = $("g.cell").children("circle.candidate-circle.c" + id);
+	var candidateCircles = $("g.cell").children(candidateCircleCss_matrix + ".c" + id);
 	for (let i = 0; i < candidateCircles.length; i++) {
 		candidateCircles[i].classList.remove(element);
 	}
 }
 
 function removeElementFromAllCandidates_d3(element) {
-	var candidateCircles = $("g.cell").children("circle.candidate-circle" + "." + element);
+	var candidateCircles = $("g.cell").children(candidateCircleCss_matrix + "." + element);
 	for (let i = 0; i < candidateCircles.length; i++) {
 		candidateCircles[i].classList.remove(element);
 	}

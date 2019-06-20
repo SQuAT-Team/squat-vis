@@ -56,10 +56,6 @@ circle.current {
 	fill: #0080ff !important;
 }
 
-circle.comparison {
-	
-}
-
 .selected-active circle.selected {
 	fill: #8000ff !important;
 }

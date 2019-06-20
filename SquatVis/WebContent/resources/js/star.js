@@ -1,3 +1,9 @@
+const allActiveCss_star = "all-active";
+const currentActiveCss_star = "current-active";
+const comparisonActiveCss_star = "comparison-active";
+const markedActiveCss_star = "marked-active";
+const selectedActiveCss_star = "selected-active";
+
 initDropdown();
 initDropdownBig();
 updateColorMappingCss();
@@ -99,11 +105,11 @@ $(function() {
 function showAll() {
 	setDropdownName("All");
 	var classes = document.getElementById("starDetailed").classList;
-	classes.remove("comparison-active");
-	classes.remove("marked-active");
-	classes.remove("selected-active");
-	if (!classes.contains("all-active")) {
-		classes.add("all-active");
+	classes.remove(comparisonActiveCss_star);
+	classes.remove(markedActiveCss_star);
+	classes.remove(selectedActiveCss_star);
+	if (!classes.contains(allActiveCss_star)) {
+		classes.add(allActiveCss_star);
 	}
 	setMode_application([ {
 		name : 'param',
@@ -114,11 +120,11 @@ function showAll() {
 function showMarked() {
 	setDropdownName("Marked");
 	var classes = document.getElementById("starDetailed").classList;
-	classes.remove("comparison-active");
-	classes.remove("selected-active");
-	classes.remove("all-active");
-	if (!classes.contains("marked-active")) {
-		classes.add("marked-active");
+	classes.remove(comparisonActiveCss_star);
+	classes.remove(selectedActiveCss_star);
+	classes.remove(allActiveCss_star);
+	if (!classes.contains(markedActiveCss_star)) {
+		classes.add(markedActiveCss_star);
 	}
 	setMode_application([ {
 		name : 'param',
@@ -129,11 +135,11 @@ function showMarked() {
 function showSelected() {
 	setDropdownName("Selected");
 	var classes = document.getElementById("starDetailed").classList;
-	classes.remove("comparison-active");
-	classes.remove("marked-active");
-	classes.remove("all-active");
-	if (!classes.contains("selected-active")) {
-		classes.add("selected-active");
+	classes.remove(comparisonActiveCss_star);
+	classes.remove(markedActiveCss_star);
+	classes.remove(allActiveCss_star);
+	if (!classes.contains(selectedActiveCss_star)) {
+		classes.add(selectedActiveCss_star);
 	}
 	setMode_application([ {
 		name : 'param',
@@ -144,11 +150,11 @@ function showSelected() {
 function showComparison() {
 	setDropdownName("Comparison");
 	var classes = document.getElementById("starDetailed").classList;
-	classes.remove("marked-active");
-	classes.remove("selected-active");
-	classes.remove("all-active");
-	if (!classes.contains("comparison-active")) {
-		classes.add("comparison-active");
+	classes.remove(markedActiveCss_star);
+	classes.remove(selectedActiveCss_star);
+	classes.remove(allActiveCss_star);
+	if (!classes.contains(comparisonActiveCss_star)) {
+		classes.add(comparisonActiveCss_star);
 	}
 	setMode_application([ {
 		name : 'param',
@@ -159,11 +165,11 @@ function showComparison() {
 function showCurrentBig() {
 	setDropdownNameBig("Current");
 	var classes = document.getElementById("starOverview").classList;
-	classes.remove("comparison-active");
-	classes.remove("marked-active");
-	classes.remove("selected-active");
-	if (!classes.contains("current-active")) {
-		classes.add("current-active");
+	classes.remove(comparisonActiveCss_star);
+	classes.remove(markedActiveCss_star);
+	classes.remove(selectedActiveCss_star);
+	if (!classes.contains(currentActiveCss_star)) {
+		classes.add(currentActiveCss_star);
 	}
 	setModeBig_application([ {
 		name : 'param',
@@ -174,11 +180,11 @@ function showCurrentBig() {
 function showMarkedBig() {
 	setDropdownNameBig("Marked");
 	var classes = document.getElementById("starOverview").classList;
-	classes.remove("comparison-active");
-	classes.remove("selected-active");
-	classes.remove("current-active");
-	if (!classes.contains("marked-active")) {
-		classes.add("marked-active");
+	classes.remove(comparisonActiveCss_star);
+	classes.remove(selectedActiveCss_star);
+	classes.remove(currentActiveCss_star);
+	if (!classes.contains(markedActiveCss_star)) {
+		classes.add(markedActiveCss_star);
 	}
 	setModeBig_application([ {
 		name : 'param',
@@ -189,11 +195,11 @@ function showMarkedBig() {
 function showSelectedBig() {
 	setDropdownNameBig("Selected");
 	var classes = document.getElementById("starOverview").classList;
-	classes.remove("comparison-active");
-	classes.remove("marked-active");
-	classes.remove("current-active");
-	if (!classes.contains("selected-active")) {
-		classes.add("selected-active");
+	classes.remove(comparisonActiveCss_star);
+	classes.remove(markedActiveCss_star);
+	classes.remove(currentActiveCss_star);
+	if (!classes.contains(selectedActiveCss_star)) {
+		classes.add(selectedActiveCss_star);
 	}
 	setModeBig_application([ {
 		name : 'param',
@@ -204,11 +210,11 @@ function showSelectedBig() {
 function showComparisonBig() {
 	setDropdownNameBig("Comparison");
 	var classes = document.getElementById("starOverview").classList;
-	classes.remove("marked-active");
-	classes.remove("selected-active");
-	classes.remove("current-active");
-	if (!classes.contains("comparison-active")) {
-		classes.add("comparison-active");
+	classes.remove(markedActiveCss_star);
+	classes.remove(selectedActiveCss_star);
+	classes.remove(currentActiveCss_star);
+	if (!classes.contains(comparisonActiveCss_star)) {
+		classes.add(comparisonActiveCss_star);
 	}
 	setModeBig_application([ {
 		name : 'param',
@@ -246,14 +252,15 @@ function starSearch(element) {
 }
 
 function changePopulation() {
+	const populationActiveCss = "population-active";
 	var checkboxValue = $("#showPopulationCheckbox").prop("checked");
 	var classes = document.getElementById("starOptions").classList;
 	if (checkboxValue) {
-		if (!classes.contains("population-active")) {
-			classes.add("population-active");
+		if (!classes.contains(populationActiveCss)) {
+			classes.add(populationActiveCss);
 		}
 	} else {
-		classes.remove("population-active");
+		classes.remove(populationActiveCss);
 	}
 
 	// notify backend

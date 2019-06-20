@@ -1,6 +1,6 @@
 // INTERACE
-var candidateStarCssTag_toolbar = ".candidate-star";
-var queryCssCandidateItem_toolbar = "div.candidate-item";
+const candidateStarCssTag_toolbar = ".candidate-star";
+const queryCssCandidateItem_toolbar = "div.candidate-item";
 
 function setSelectorCurrent_toolbar(id) {
 	addElement(id, "current");
@@ -19,22 +19,7 @@ function resetSelectorComparison_toolbar(id) {
 }
 
 function setSelectorMarked_toolbar(id) {
-	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
-	var element = "marked";
-	for (let i = 0; i < candidateItems.length; i++) {
-		var candidateItem = candidateItems[i];
-		var starItem = $(candidateItem).find(candidateStarCssTag_toolbar).find(
-				"i")[0];
-		var classes = candidateItem.classList;
-		classes.remove("selected");
-		if (!classes.contains(element)) {
-			if (starItem) {
-				starItem.classList.remove("fas");
-				starItem.classList.add("far");
-			}
-			classes.add(element);
-		}
-	}
+	addElement(id, "marked", "selected");
 }
 
 function resetSelectorMarked_toolbar(id) {
@@ -42,22 +27,7 @@ function resetSelectorMarked_toolbar(id) {
 }
 
 function setSelectorSelected_toolbar(id) {
-	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
-	var element = "selected";
-	for (let i = 0; i < candidateItems.length; i++) {
-		var candidateItem = candidateItems[i];
-		var starItem = $(candidateItem).find(candidateStarCssTag_toolbar).find(
-				"i")[0];
-		var classes = candidateItem.classList;
-		classes.remove("marked");
-		if (!classes.contains(element)) {
-			if (starItem) {
-				starItem.classList.remove("far");
-				starItem.classList.add("fas");
-			}
-			classes.add(element);
-		}
-	}
+	addElement(id, "selected", "marked");
 }
 
 function resetSelectorSelected_toolbar(id) {
@@ -204,7 +174,7 @@ function selectorExportAllSelected_toolbar() {
 
 // HELPERS
 
-function addElement(id, element) {
+function addElement(id, element, remove) {
 	// find candidate item with id
 	var candidateItems = $(queryCssCandidateItem_toolbar + ".c" + id);
 	for (let i = 0; i < candidateItems.length; i++) {
@@ -212,6 +182,13 @@ function addElement(id, element) {
 		var starItem = $(candidateItem).find(candidateStarCssTag_toolbar).find(
 		"i")[0];
 		var classes = candidateItem.classList;
+		if(remove){
+			classes.remove(remove);
+			if(remove === "selected" && starItem){
+				starItem.classList.remove("fas");
+				starItem.classList.add("far");
+			}
+		}
 		if (!classes.contains(element)) {
 			classes.add(element);
 			if(element === "selected" && starItem){

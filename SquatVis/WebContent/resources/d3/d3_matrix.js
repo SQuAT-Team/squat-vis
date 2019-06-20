@@ -6,18 +6,18 @@ var width = 960,
     size = 130,
     padding = 20,
     paddingPlus = 10,
-    minSizeBig = 200;
+    minSizeBig = 200,
     radius = 2,
     radiusBig = 3,
     textSize = 20;
     n = 0;
 
     var axisTextSize = "16px";
-    
+
     var svgBig;
-    var domainByTrait = {},
-    traits;
-	
+    var domainByTrait = {};
+    var traits;
+
     var x;
     var y;
     var xBig;
@@ -30,7 +30,7 @@ var width = 960,
 
     // tooltip
     var cellTip = d3.tip().attr('class', 'd3-tip').html(function(d) { return "x: " + traits[d.i] + " y: " + traits[d.j]; });
-    
+
 render(parsedValues);
 window.onresize = resize;
 
@@ -41,7 +41,7 @@ function resize(){
 function resizeBig(){
 	var widthBig = document.getElementById('matrixDetailedContent').clientWidth;
 	var heightBig = document.getElementById('matrixDetailedContent').clientHeight;
-	  var sizeBig = Math.max(Math.min(widthBig,heightBig), minSizeBig)-padding-textSize-paddingPlus;
+	var sizeBig = Math.max(Math.min(widthBig,heightBig), minSizeBig)-padding-textSize-paddingPlus;
 
 	  xBig = d3.scaleLinear()
 	  	.range([padding / 2, sizeBig - padding / 2]);
@@ -58,41 +58,41 @@ function resizeBig(){
     var svgBig = d3.select('#matrixDetailedContent svg')
     .attr('width', sizeBig + padding+textSize)
     .attr('height', sizeBig + padding+textSize);
-    
+
     xAxisBig.tickSize(sizeBig);
     yAxisBig.tickSize(-sizeBig);
-        
-	svgBig.selectAll("g").filter(".x").filter(".axis")
+
+    svgBig.selectAll("g").filter(".x").filter(".axis")
 	  .each(function(d) {
 	    xBig.domain(d3.extent([0.0,1.0]));
 	    d3.select(this).call(xAxisBig);
 	});
-	
+
 	svgBig.selectAll("g").filter(".y").filter(".axis")
 	  .each(function(d) {
 	    yBig.domain(d3.extent([0.0,1.0]));
 	    d3.select(this).call(yAxisBig);
 	});
-	
+
     svgBig.selectAll("rect").filter(".frame")
     .attr("width", sizeBig - padding)
     .attr("height", sizeBig - padding);
 
     svgBig.selectAll("text").filter(".x").filter(".axis")
-    .attr("transform","translate(" + (sizeBig/2) + " ," + 
+    .attr("transform","translate(" + (sizeBig/2) + " ," +
     (sizeBig+30) + ")");
-                         
+
     svgBig.selectAll("text").filter(".y").filter(".axis")
     .attr("x",0 - (sizeBig / 2));
-    
+
     var cellBig = svgBig.selectAll("g").filter(".cell");
-    
+
     var xTrait = cellBig.attr("x-trait");
     var yTrait = cellBig.attr("y-trait");
-        
+
 	xBig.domain(domainByTrait[xTrait]);
 	yBig.domain(domainByTrait[yTrait]);
-    
+
     cellBig.selectAll("circle")
     .attr("cx", function(d) {
       return xBig(d[xTrait]);
@@ -100,10 +100,10 @@ function resizeBig(){
 	.attr("cy", function(d) {
 	  return yBig(d[yTrait]);
 	});
-    
+
     brushBig.extent([[xBig.range()[0], yBig.range()[1]], [xBig.range()[1], yBig.range()[0]]]);
     cellBig.call(brushBig);
-    
+
     redrawParent();
 }
 
@@ -112,9 +112,9 @@ function render(data) {
   var heightBig = document.getElementById('matrixDetailedContent').clientHeight;
   traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "Parent") && (d !== "ParetoTags") && (d !== "SuggestionTags")); });
   n = traits.length;
-  
+
   var sizeBig = Math.max(Math.min(widthBig,heightBig), minSizeBig)-2*padding-textSize-paddingPlus;
-	
+
   x = d3.scaleLinear()
       .range([padding / 2, size - padding / 2]);
 
@@ -139,7 +139,6 @@ function render(data) {
   yAxisBig = d3.axisLeft(yBig)
   .ticks(6);
 
-  
   traits.forEach(function(trait) {
 	  domainByTrait[trait] = d3.extent([0.0,1.0]);
 	  // automatic
@@ -149,7 +148,7 @@ function render(data) {
 
   xAxis.tickSize(size * n);
   yAxis.tickSize(-size * n);
-  
+
   xAxisBig.tickSize(sizeBig);
   yAxisBig.tickSize(-sizeBig);
 
@@ -157,19 +156,19 @@ function render(data) {
       .on("start", brushstart)
       .on("brush", brushmove)
       .on("end", brushend);
-  
+
   brushBig = d3.brush().extent([[xBig.range()[0], yBig.range()[1]], [xBig.range()[1], yBig.range()[0]]])
   .on("start", brushstartBig)
   .on("brush", brushmoveBig)
   .on("end", brushendBig);
-  
+
   // Big Area
   svgBig = d3.select("#matrixDetailedContent").append("svg")
   	  .attr("width", sizeBig+padding+textSize)
   	  .attr("height", sizeBig+padding+textSize)
   	  .append("g")
   	  .attr("transform", "translate(" + (padding+textSize )+ "," + (padding/ 2)+ ")");
-  	  
+
 	svgBig.append("g")
 	  .attr("class", "x axis")
 	  .each(function(d) {
@@ -183,18 +182,18 @@ function render(data) {
     	yBig.domain(d3.extent([0.0,1.0]));
     	d3.select(this).call(yAxisBig);
     });
-    
+
     // Text Label X Axis
     svgBig.append("text")
     .attr("class", "x axis")
     .attr("transform",
-          "translate(" + (sizeBig/2) + " ," + 
+          "translate(" + (sizeBig/2) + " ," +
                          (sizeBig+30) + ")")
     .style("text-anchor", "middle")
     .style("font-size",axisTextSize)
     .style("font-weight","bold")
     .text(traits[traits.length-1]);
-	
+
     // Text Label Y Axis
     svgBig.append("text")
         .attr("class", "y axis")
@@ -206,13 +205,13 @@ function render(data) {
         .style("font-size",axisTextSize)
         .style("font-weight","bold")
         .text(traits[0]);
-    
+
   var svg = d3.select("#matrixContent").append("svg")
       .attr("width", size * n + padding)
       .attr("height", size * n + padding)
       .append("g")
       .attr("transform", "translate(" + padding + "," + padding / 2 + ")");
-  
+
   svg.selectAll(".x.axis")
       .data(traits)
     .enter().append("g")
@@ -241,17 +240,17 @@ function render(data) {
   c.push({x: traits[traits.length-1], y: traits[0]});
 
   svg.call(cellTip);
-  
-  cellBig = svgBig.selectAll(".cell")
+
+  var cellBig = svgBig.selectAll(".cell")
   .data(c)
   .enter().append("g")
   .attr("class", "cell")
   .attr("x-trait", function(d){return traits[traits.length-1]})
   .attr("y-trait", function(d){return traits[0]})
   .each(plotBig);
-  
+
   cellBig.call(brushBig);
-  
+
   var cell = svg.selectAll(".cell")
       .data(cross(traits, traits))
       .enter().append("g")
@@ -292,7 +291,6 @@ function render(data) {
 	        .attr("width", size - padding)
 	        .attr("height", size - padding);
 
-
 	    // Pareto Tag circle
 	    cell.selectAll(".pareto-circle")
         .data(data)
@@ -307,7 +305,7 @@ function render(data) {
        	})
         .attr("r", radius+1)
         .style("pointer-events", "none");
-	    
+
 	    // Suggestion Tag circle
 	    cell.selectAll(".suggestion-circle")
         .data(data)
@@ -322,8 +320,7 @@ function render(data) {
        	})
         .attr("r", radius+2)
         .style("pointer-events", "none");
-	    
-	    
+
 	    cell.selectAll(".candidate-circle")
 	        .data(data)
 	      .enter().append("circle").attr("class", function(d) {
@@ -338,7 +335,7 @@ function render(data) {
 	        .attr("r", radius)
 	        .style("pointer-events", "none")
 	  }
-  
+
   var cellBig;
   function plotBig(p) {
 	    cellBig = d3.select(this);
@@ -346,7 +343,7 @@ function render(data) {
 	    xBig.domain(domainByTrait[p.x]);
 	    yBig.domain(domainByTrait[p.y]);
 
-	    cellRect = cellBig.append("rect")
+	    cellBig.append("rect")
 	        .attr("class", "frame")
 	        .attr("x", padding / 2)
 	        .attr("y", padding / 2)
@@ -367,7 +364,7 @@ function render(data) {
        	})
         .attr("r", radiusBig+1)
         .style("pointer-events", "none");
-	    
+
 	    // Suggestion Tag circle
 	    cellBig.selectAll(".suggestion-circle")
         .data(data)
@@ -382,7 +379,7 @@ function render(data) {
        	})
         .attr("r", radiusBig+2)
         .style("pointer-events", "none");
-	    
+
 	    // Candidate itself
 	    cellBig.selectAll(".candidate-circle")
         .data(data)
@@ -404,7 +401,7 @@ function render(data) {
         .attr("r", radiusBig)
         .style("pointer-events", "none");
      }
-  
+
   var brushCellBig;
   var brushCell;
 
@@ -431,7 +428,7 @@ function render(data) {
 	var e = d3.event.selection;
     var xTrait = this.getAttribute("x-trait");
     var yTrait = this.getAttribute("y-trait");
-    if (!e || e === null){
+    if (!e || e == null){
     	svgBig.selectAll(".current").classed("current", false);
     	selectorClearCurrent();
     }else{
@@ -445,7 +442,7 @@ function render(data) {
         });
     }
   }
-  
+
   // Clear the previously-active brush, if any.
   function brushstart(p) {
     if (brushCell !== this) {
@@ -465,10 +462,10 @@ function render(data) {
   // If the brush is empty, select all circles.
   function brushend(p) {
 	var e = d3.event.selection;
-    if (e === null){
+    if (e == null){
     	svg.selectAll(".current").classed("current", false);
     	selectorClearCurrent();
-    }else{
+    } else {
         svg.selectAll("circle").filter(".candidate-circle").classed("current", function(d) {
         	var isSelected = x(d[p.x]) >= e[0][0] && e[1][0] >= x(d[p.x])
             && y(d[p.y]) >= e[0][1] && e[1][1] >= y(d[p.y]);
@@ -479,20 +476,20 @@ function render(data) {
         });
     }
   }
-  
+
   function selectCell(){
 	  // Prevent right click menu
 	  d3.event.preventDefault();
 	  // Get trait names
 	  var xTrait = this.getAttribute("x-trait");
 	  var yTrait = this.getAttribute("y-trait");
-	  
+
 	  xBig.domain(domainByTrait[xTrait]);
 	  yBig.domain(domainByTrait[yTrait]);
-	  
+
 	  cellBig.attr("x-trait", xTrait)
 	  .attr("y-trait", yTrait);
-	  
+
 	    cellBig.selectAll("circle")
         .attr("cx", function(d) {
         	return xBig(d[xTrait]);
@@ -500,10 +497,10 @@ function render(data) {
         .attr("cy", function(d) {
         	return yBig(d[yTrait]);
        	})
-       	
+
        	svgBig.selectAll("text").filter(".x").filter(".axis").text(xTrait);
        	svgBig.selectAll("text").filter(".y").filter(".axis").text(yTrait);
-       	
+
        	redrawParent();
   }
 }

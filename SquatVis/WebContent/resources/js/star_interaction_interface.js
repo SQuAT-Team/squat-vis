@@ -105,9 +105,9 @@ function selectorMarkAllCurrent_d3() {
 		}
 	}
 
-	var candidateItems = $(queryCssCandidateContainer_d3 + ".current");
+	candidateItems = $(queryCssCandidateContainer_d3 + ".current");
 	for (let i = 0; i < candidateItems.length; i++) {
-		var classes = candidateItems[i].classList;
+		classes = candidateItems[i].classList;
 		if (!classes.contains("marked") && !classes.contains("selected")) {
 			classes.add("marked");
 		}
@@ -121,19 +121,15 @@ function selectorSelectAllComparison_d3() {
 				"i")[0];
 		var classes = candidateItems[i].classList;
 		if (!classes.contains("selected")) {
-			if (starItem) {
-				starItem.classList.remove("far");
-				starItem.classList.add("fas");
-			}
+			switchToSolid(starItem);
 			classes.add("selected");
 			classes.remove("marked");
 		}
 	}
 
-	var candidateItems = $(queryCssCandidateItem_d3 + ".comparison");
-	console.log(candidateItems);
+	candidateItems = $(queryCssCandidateItem_d3 + ".comparison");
 	for (let i = 0; i < candidateItems.length; i++) {
-		var classes = candidateItems[i].classList;
+		classes = candidateItems[i].classList;
 		if (!classes.contains("selected")) {
 			classes.add("selected");
 			classes.remove("marked");
@@ -146,19 +142,15 @@ function selectorSelectAllMarked_d3() {
 	for (let i = 0; i < candidateItems.length; i++) {
 		var starItem = $(candidateItems[i]).find(candidateStarCssTag_d3).find(
 				"i")[0];
-		console.log(starItem);
 		var classes = candidateItems[i].classList;
-		if (starItem) {
-			starItem.classList.remove("far");
-			starItem.classList.add("fas");
-		}
+		switchToSolid(starItem);
 		classes.remove("marked");
 		classes.add("selected");
 	}
 
-	var candidateItems = $(queryCssCandidateItem_d3 + ".marked");
+	candidateItems = $(queryCssCandidateItem_d3 + ".marked");
 	for (let i = 0; i < candidateItems.length; i++) {
-		var classes = candidateItems[i].classList;
+		classes = candidateItems[i].classList;
 		classes.remove("marked");
 		classes.add("selected");
 	}
@@ -195,16 +187,14 @@ function addSelectorWithQuery_d3(query, add, remove) {
 		var starItem = $(result[i]).find(candidateStarCssTag_d3).find("i")[0];
 		if (remove) {
 			classes.remove(remove);
-			if (remove === "selected" && starItem) {
-				starItem.classList.remove("fas");
-				starItem.classList.add("far");
+			if (remove === "selected") {
+				switchToNonSolid(starItem);
 			}
 		}
 		if (!classes.contains(add)) {
 			classes.add(add);
-			if (add === "selected" && starItem) {
-				starItem.classList.remove("far");
-				starItem.classList.add("fas");
+			if (add === "selected") {
+				switchToSolid(starItem);
 			}
 		}
 	}
@@ -228,9 +218,8 @@ function removeSelectorWithQuery_d3(query, remove) {
 	for (let i = 0; i < result.length; i++) {
 		var classes = result[i].classList;
 		var starItem = $(result[i]).find(candidateStarCssTag_d3).find("i")[0];
-		if (remove === "selected" && starItem) {
-			starItem.classList.remove("fas");
-			starItem.classList.add("far");
+		if (remove === "selected") {
+			switchToNonSolid(starItem);
 		}
 		classes.remove(remove);
 	}

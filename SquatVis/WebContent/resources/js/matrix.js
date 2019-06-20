@@ -25,7 +25,7 @@ function drawParent() {
 		if(parentId.length > 0){
 		    var otherCircle = $("circle.candidate-circle.c"+parentId);
 		    var candidateId = currentCircle.getAttribute("candidateId");
-		    
+
 			svgBig.append("line")
 			.attr("class", "parent-line c" + candidateId)
 			.attr("sourceId", parentId)
@@ -47,8 +47,8 @@ function drawParentWithId(id) {
 		if(parentId.length > 0){
 		    var otherCircle = $("circle.candidate-circle.c"+parentId);
 		    var candidateId = currentCircle.getAttribute("candidateId");
-		    
-			svgBig.append("line")
+
+		    svgBig.append("line")
 			.attr("class", "parent-line c" + candidateId)
 			.attr("sourceId", parentId)
 			.attr("targetId", candidateId)
@@ -98,18 +98,19 @@ function initDropdown() {
 }
 
 function changeParents(){
+	const parentsActiveCss = "parents-active";
 	var checkboxValue = $("#showParentsCheckbox").prop("checked");
 	var classes = document.getElementById("matrixOptions").classList;
 	if (checkboxValue) {
-		if (!classes.contains("parents-active")) {
-			classes.add("parents-active");
+		if (!classes.contains(parentsActiveCss)) {
+			classes.add(parentsActiveCss);
 		}
 	} else {
-		if (classes.contains("parents-active")) {
-			classes.remove("parents-active");
+		if (classes.contains(parentsActiveCss)) {
+			classes.remove(parentsActiveCss);
 		}
 	}
-	
+
 	// notify backend
 	setShowParents_application([ {
 		name : 'param',
@@ -118,15 +119,16 @@ function changeParents(){
 }
 
 function changeTags() {
+	const tagsActiveCss = "tags-active";
 	var checkboxValue = $("#showTagsCheckbox").prop("checked");
 	var classes = document.getElementById("matrixOptions").classList;
 	if (checkboxValue) {
-		if (!classes.contains("tags-active")) {
-			classes.add("tags-active");
+		if (!classes.contains(tagsActiveCss)) {
+			classes.add(tagsActiveCss);
 		}
 	} else {
-		if (classes.contains("tags-active")) {
-			classes.remove("tags-active");
+		if (classes.contains(tagsActiveCss)) {
+			classes.remove(tagsActiveCss);
 		}
 	}
 
