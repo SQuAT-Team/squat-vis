@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.squat_team.vis.analysis.ArchitectureAnalyzer;
 import org.squat_team.vis.analysis.ParetoAnalyzer;
 import org.squat_team.vis.connector.ProjectConnector;
+import org.squat_team.vis.connector.data.CLevel;
 import org.squat_team.vis.connector.server.ConnectorService;
 import org.squat_team.vis.data.daos.CandidateDao;
 import org.squat_team.vis.data.data.Candidate;
@@ -16,6 +18,7 @@ import org.squat_team.vis.data.data.Project;
  * This handler should be called after the import of a new level of search.
  */
 public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProtocolHandler {
+	private CLevel level;
 	private boolean noResponse;
 
 	/**
@@ -23,11 +26,13 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 	 * 
 	 * @param connectorService Provides daos for the import
 	 * @param projectConnector Specifies the project the import belongs to
+	 * @param level            the received level
 	 * @param noResponse       True if the client does not expect a response.
 	 */
-	public NewLevelPostProtocolHandler(ConnectorService connectorService, ProjectConnector projectConnector,
+	public NewLevelPostProtocolHandler(ConnectorService connectorService, ProjectConnector projectConnector, CLevel level,
 			boolean noResponse) {
 		super(connectorService, projectConnector);
+		this.level = level;
 		this.noResponse = noResponse;
 	}
 
@@ -35,6 +40,7 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 	public void handle() {
 		updateStatusFinishLevel();
 		startParetoAnalysis();
+		startArchitectureAnalysis();
 		updateStatusFinishLevelImport();
 		if (noResponse) {
 			updateStatusStartLevel();
@@ -51,6 +57,11 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 		if (project.getConfiguration().getHasRealValues()) {
 			analyzeForParetoCandidates(false);
 		}
+	}
+	
+	private void startArchitectureAnalysis() {
+		ArchitectureAnalyzer analyzer = new ArchitectureAnalyzer(level, projectConnector);
+		analyzer.analyze();
 	}
 
 	private void analyzeForParetoCandidates(boolean useUtility) {

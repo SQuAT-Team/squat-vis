@@ -18,7 +18,7 @@ public abstract class AbstractSimpleClientProtocol extends AbstractClientProtoco
 	 * 
 	 * @throws IOException
 	 */
-	protected abstract void sendRequests() throws IOException;
+	protected abstract void sendRequests() throws IOException, ProtocolFailure;
 
 	@Override
 	protected Boolean executeProtocol() throws ProtocolFailure, InvalidRequestException, ConnectionFailure {

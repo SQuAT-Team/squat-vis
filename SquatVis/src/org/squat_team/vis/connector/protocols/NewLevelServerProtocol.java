@@ -1,6 +1,7 @@
 package org.squat_team.vis.connector.protocols;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -19,6 +20,7 @@ import org.squat_team.vis.connector.server.ConnectorService;
 public class NewLevelServerProtocol extends AbstractSimpleServerProtocol {
 	private CLevel cLevel;
 	private boolean noResponse;
+	protected InputStream inRaw;
 
 	/**
 	 * Creates a new protocol.
@@ -28,9 +30,10 @@ public class NewLevelServerProtocol extends AbstractSimpleServerProtocol {
 	 * @param connectorService Provides daos for the import
 	 * @param projectConnector Specifies the project the import belongs to
 	 */
-	public NewLevelServerProtocol(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService,
-			ProjectConnector projectConnector) {
+	public NewLevelServerProtocol(ObjectInputStream in, InputStream inRaw, ObjectOutputStream out,
+			ConnectorService connectorService, ProjectConnector projectConnector) {
 		super(in, out, connectorService, projectConnector);
+		this.inRaw = inRaw;
 	}
 
 	@Override
@@ -46,7 +49,7 @@ public class NewLevelServerProtocol extends AbstractSimpleServerProtocol {
 
 	@Override
 	public IPostProtocolHandler getPostProtocolHandler() {
-		return new NewLevelPostProtocolHandler(connectorService, projectConnector, noResponse);
+		return new NewLevelPostProtocolHandler(connectorService, projectConnector, cLevel, noResponse);
 	}
 
 }

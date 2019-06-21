@@ -21,7 +21,7 @@ public class DefaultToolConfigurations {
 		String name = "Default Test Configuration";
 		CToolConfiguration configuration = new CToolConfiguration(name);
 		configuration.setToolName("Test Client");
-		configuration.setHasArchitectures(false);
+		configuration.setHasArchitectures(true);
 		configuration.setHasRealValues(true);
 		configuration.setHasUtilities(true);
 		configuration.setHasParents(true);

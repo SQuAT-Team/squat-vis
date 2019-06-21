@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
@@ -35,6 +36,7 @@ public abstract class AbstractClientProtocol<R> extends AbstractProtocolHelper i
 	private Socket clientSocket;
 	protected ObjectOutputStream out;
 	protected ObjectInputStream in;
+	protected OutputStream outRaw;
 
 	@Override
 	public ServerConfiguration getServerConfiguration() {
@@ -128,7 +130,8 @@ public abstract class AbstractClientProtocol<R> extends AbstractProtocolHelper i
 	 */
 	private void initializeStreams() throws ConnectionFailure {
 		try {
-			this.out = new ObjectOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
+			this.outRaw = clientSocket.getOutputStream();
+			this.out = new ObjectOutputStream(new BufferedOutputStream(outRaw));
 			this.in = new ObjectInputStream(new BufferedInputStream(clientSocket.getInputStream()));
 			this.initializeProtocolHelper(in, out);
 		} catch (IOException e) {

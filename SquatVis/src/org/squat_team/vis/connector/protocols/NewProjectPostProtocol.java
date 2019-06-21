@@ -7,6 +7,7 @@ import org.squat_team.vis.connector.server.ConnectorService;
  * This handler should be called after the creation of a new project.
  */
 public class NewProjectPostProtocol extends AbstractStatusUpdatingPostProtocolHandler {
+
 	/**
 	 * Creates a new handler.
 	 * 

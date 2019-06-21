@@ -17,5 +17,6 @@ public class CLevel implements Serializable {
 	 */
 	private static final long serialVersionUID = -9190778335192222262L;
 
+	private int levelNumber;
 	private List<CCandidate> candidates = new ArrayList<>();
 }

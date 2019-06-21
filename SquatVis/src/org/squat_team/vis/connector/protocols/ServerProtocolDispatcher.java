@@ -1,5 +1,6 @@
 package org.squat_team.vis.connector.protocols;
 
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -14,6 +15,7 @@ import org.squat_team.vis.connector.server.ConnectorService;
  */
 public class ServerProtocolDispatcher implements IServerProtocolDispatcher {
 	protected ObjectInputStream in;
+	protected InputStream inRaw;
 	protected ObjectOutputStream out;
 	protected ConnectorService connectorService;
 
@@ -21,13 +23,15 @@ public class ServerProtocolDispatcher implements IServerProtocolDispatcher {
 	 * Creates a new dispatcher.
 	 * 
 	 * @param in               the connection from client to server.
+	 * @param inRaw               the connection from client to server.
 	 * @param out              the connection from server to client.
 	 * @param connectorService Provides daos for the import
 	 */
-	public ServerProtocolDispatcher(ObjectInputStream in, ObjectOutputStream out, ConnectorService connectorService) {
+	public ServerProtocolDispatcher(ObjectInputStream in, InputStream inRaw, ObjectOutputStream out, ConnectorService connectorService) {
 		this.connectorService = connectorService;
 		this.in = in;
 		this.out = out;
+		this.inRaw = inRaw;
 	}
 
 	@Override
@@ -43,7 +47,7 @@ public class ServerProtocolDispatcher implements IServerProtocolDispatcher {
 			protocol = new UpdateStatusServerProtocol(in, out, connectorService, projectConnector);
 			break;
 		case SEND_NEW_LEVEL:
-			protocol = new NewLevelServerProtocol(in, out, connectorService, projectConnector);
+			protocol = new NewLevelServerProtocol(in, inRaw, out, connectorService, projectConnector);
 			break;
 		case SEND_PROJECT_TERMINATED:
 			protocol = new ProjectTerminatedServerProtocol(in, out, connectorService, projectConnector);

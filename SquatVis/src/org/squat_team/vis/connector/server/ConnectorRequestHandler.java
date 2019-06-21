@@ -2,6 +2,7 @@ package org.squat_team.vis.connector.server;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -28,7 +29,7 @@ public class ConnectorRequestHandler extends Thread {
 	/**
 	 * Creates a new request handler
 	 * 
-	 * @param socket the socket that connects to the client.
+	 * @param socket           the socket that connects to the client.
 	 * @param connectorService contains daos to access the database
 	 */
 	public ConnectorRequestHandler(Socket socket, ConnectorService connectorService) {
@@ -44,8 +45,9 @@ public class ConnectorRequestHandler extends Thread {
 	@Override
 	public void run() {
 		try (ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-				ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(socket.getInputStream()));) {
-			IServerProtocol protocol = determineCorrectProtocol(in, out);
+				InputStream inRaw = socket.getInputStream();
+				ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(inRaw));) {
+			IServerProtocol protocol = determineCorrectProtocol(in, inRaw, out);
 			protocol.execute();
 			protocol.getPostProtocolHandler().handle();
 		} catch (IOException | ProtocolFailure | InvalidRequestException e) {
@@ -59,16 +61,17 @@ public class ConnectorRequestHandler extends Thread {
 	 * Determines which protocol to use.
 	 * 
 	 * @param in  the input connection to the client
+	 * @param inRaw  the input connection to the client
 	 * @param out the output connection to the client
 	 * @return the determined protocol
 	 * @throws ProtocolFailure if the actual communication deviates from the
 	 *                         protocol
 	 * @throws IOException     if an exception related to the connection occurred.
 	 */
-	private IServerProtocol determineCorrectProtocol(ObjectInputStream in, ObjectOutputStream out)
+	private IServerProtocol determineCorrectProtocol(ObjectInputStream in, InputStream inRaw, ObjectOutputStream out)
 			throws ProtocolFailure, IOException {
 		Message message = receiveMessage(in);
-		IServerProtocolDispatcher protocolDispatcher = new ServerProtocolDispatcher(in, out, connectorService);
+		IServerProtocolDispatcher protocolDispatcher = new ServerProtocolDispatcher(in, inRaw, out, connectorService);
 		return protocolDispatcher.dispatch(message);
 	}
 

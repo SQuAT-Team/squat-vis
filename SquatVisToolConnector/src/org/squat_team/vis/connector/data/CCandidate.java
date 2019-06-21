@@ -29,5 +29,5 @@ public class CCandidate implements Serializable {
 	private List<Double> realValues = new ArrayList<>();
 	private List<Double> utilityValues = new ArrayList<>();
 	private boolean isSuggested = false;
-
+	private CArchitecture architecture;
 }
