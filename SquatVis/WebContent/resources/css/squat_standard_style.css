@@ -23,6 +23,14 @@
 	height: 30% !important;
 }
 
+.h-65 {
+	height: 65% !important;
+}
+
+.mh-5 {
+	max-height: 5% !important;
+}
+
 .mh-15 {
 	max-height: 15% !important;
 }
@@ -33,6 +41,10 @@
 
 .mh-30 {
 	max-height: 30% !important;
+}
+
+.mh-65 {
+	max-height: 65% !important;
 }
 
 .mh-70 {
