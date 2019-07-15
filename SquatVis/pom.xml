@@ -130,11 +130,11 @@
 								<goal>install-file</goal>
 							</goals>
 							<configuration>
-								<groupId>palladio</groupId>
-								<artifactId>environment</artifactId>
-								<version>0.6.3-SNAPSHOT-jar-with-dependencies</version>
+								<groupId>de.fakeller.palladio-headless</groupId>
+								<artifactId>palladio-environment</artifactId>
+								<version>0.6.3-SNAPSHOT</version>
 								<packaging>jar</packaging>
-								<file>${project.basedir}/libs/palladio-environment-0.6.3-SNAPSHOT-jar-with-dependencies.jar</file>
+								<file>${project.basedir}/libs/palladio-environment-0.6.3-SNAPSHOT.jar</file>
 							</configuration>
 						</execution>
 					</executions>
@@ -302,9 +302,9 @@
 			<version>3.5.0</version>
 		</dependency>
 		<dependency>
-			<groupId>palladio</groupId>
-			<artifactId>environment</artifactId>
-			<version>0.6.3-SNAPSHOT-jar-with-dependencies</version>
+			<groupId>de.fakeller.palladio-headless</groupId>
+			<artifactId>palladio-environment</artifactId>
+			<version>0.6.3-SNAPSHOT</version>
 		</dependency>
 
 		<!-- JEE DEPENDENCIES -->
