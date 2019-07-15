@@ -11,6 +11,8 @@ addons:
     token:
       secure: "IZow8aaKfotJq6Y0HXz/fqlX392GAWgfwabzirAFBQGvo+Lq/Hr+Efwko8eh9N2s3cCm4uQ68Tulitu0PSJZ+cefRBald27Ib869vtUR9MSZA2PTN81Jj0dvqN5tv+jolyNIqNGSZzg9XbEsi4BgxZ+255SsQvzaDkkKSlfckouh+SiZ7sbtZIcHLMMhAVytNLCS3tiYVB81LkBza70PjS2DcdSbdHgMatQ+ARIkFApA4qA+2sDzemQXY+RpDHvxrCO65ONvjBnURNN/oxQuJTFva6Uq8ONE3375JogIYnqjBsB+Zx28bLNIfU+T1/21Tlbzpxhy27nW+VoD+lsxSn9FcPH+xvXS39XlqHZMJqUWAIlp/Yn9GXHAHYhBr9CZdT26Ush2gJVAGb0RIYdwhdiBICm7lSLdPu/DvZUhL8cmUUNnE3CX5l8lM0S5hInrzo4mVSzCBwZP8N7hg0MOR+d5dJwlp5cEEQD9E8rn/B0mT3eA7ZLAFSSZKPcFMiukfxHn5eym8DWhwKlLQQxZgRQbUYF1NnO2LpKezXU01odJLYDwhw6CNlVOWtlils/GKA25AEga7HEAFccYERbTMhP1MEkP8/EkJDUTRM0O6E5x8yNnsibLmZMmPQNE0R9NA73yH5YnIQDNZ24TWFP59pXT7UdXSP1hD/rTsb4r10c="
 script:
+- find ~/.m2/repository -name _maven.repositories -exec rm -v {} \
+- find ~/.m2/repository -name _remote.repositories -exec rm -v {} \
 - mvn -q -B -f SquatVisToolConnector/pom.xml clean install sonar:sonar
 - mvn -q -B -f SquatVis/pom.xml clean install sonar:sonar
 deploy:
