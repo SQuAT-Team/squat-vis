@@ -234,7 +234,7 @@ function starSearch(element) {
 	var doNotShowCssClass = "search-hide";
 	var toSearch = element.value.trim().replace(/\s+/g, ' ').toLowerCase();
 	// search for items in all list
-	var candidateItems = $("#starOverviewContent .candidate-radar-container");
+	var candidateItems = $("#starDetailedContent .candidate-radar-container");
 	for (let i = 0; i < candidateItems.length; i++) {
 		var itemName = $(candidateItems[i]).find(".candidate-radar-name")
 				.text();
