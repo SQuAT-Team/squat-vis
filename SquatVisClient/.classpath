@@ -3,5 +3,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SquatVisToolConnector"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="libs/callgraph-1.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/palladio-bridge-0.3.1.jar"/>
+	<classpathentry kind="lib" path="libs/palladio-analysis-0.6.3-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/palladio-builder-0.6.3-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="libs/palladio-environment-0.6.3-SNAPSHOT-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -39,6 +39,14 @@
 			<f:facet name="header">Level Numbers</f:facet>#{project.getNumberOfLevels()}
 		</h:column>
 	</h:dataTable>
+	<h:dataTable value="#{architectureAnalysisDataController.data}" var="data">
+		<h:column>
+			<f:facet name="header">AnalysisData</f:facet>#{data.id}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Components</f:facet>#{data.components}
+		</h:column>
+	</h:dataTable>
 	<h:dataTable value="#{toolConfigurationController.data}" var="c">
 		<h:column>
 			<f:facet name="header">Config Name</f:facet>#{c.name}

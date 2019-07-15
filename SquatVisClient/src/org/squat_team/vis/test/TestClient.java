@@ -86,54 +86,69 @@ public class TestClient {
 		System.out.println("RECEIVED CONNECTION WITH ID: " + projectConnector.getProjectId());
 	}
 
-	private static void makeStatusUpdate1()
-			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
-		System.out.println("UPDATING STATUS");
-		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-		CStatus status = testDataProvider.getStatus1of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-		boolean success = protocol.call();
-		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+	private static void makeStatusUpdate1() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
+		try {
+			System.out.println("UPDATING STATUS");
+			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+			CStatus status = testDataProvider.getStatus1of5();
+			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+			boolean success = protocol.call();
+			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+		} catch (InvalidRequestException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private static void makeStatusUpdate2()
-			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
-		System.out.println("UPDATING STATUS");
-		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-		CStatus status = testDataProvider.getStatus2of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-		boolean success = protocol.call();
-		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+	private static void makeStatusUpdate2() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
+		try {
+			System.out.println("UPDATING STATUS");
+			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+			CStatus status = testDataProvider.getStatus2of5();
+			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+			boolean success = protocol.call();
+			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+		} catch (InvalidRequestException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private static void makeStatusUpdate3()
-			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
-		System.out.println("UPDATING STATUS");
-		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-		CStatus status = testDataProvider.getStatus3of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-		boolean success = protocol.call();
-		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+	private static void makeStatusUpdate3() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
+		try {
+			System.out.println("UPDATING STATUS");
+			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+			CStatus status = testDataProvider.getStatus3of5();
+			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+			boolean success = protocol.call();
+			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+		} catch (InvalidRequestException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private static void makeStatusUpdate4()
-			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
-		System.out.println("UPDATING STATUS");
-		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-		CStatus status = testDataProvider.getStatus4of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-		boolean success = protocol.call();
-		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+	private static void makeStatusUpdate4() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
+		try {
+			System.out.println("UPDATING STATUS");
+			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+			CStatus status = testDataProvider.getStatus4of5();
+			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+			boolean success = protocol.call();
+			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+		} catch (InvalidRequestException e) {
+			e.printStackTrace();
+		}
 	}
 
-	private static void makeStatusUpdate5()
-			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
-		System.out.println("UPDATING STATUS");
-		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-		CStatus status = testDataProvider.getStatus5of5();
-		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-		boolean success = protocol.call();
-		System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+	private static void makeStatusUpdate5() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
+		try {
+			System.out.println("UPDATING STATUS");
+			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+			CStatus status = testDataProvider.getStatus5of5();
+			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+			boolean success = protocol.call();
+			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
+		} catch (InvalidRequestException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void sleep(long timeInMillis) throws InterruptedException {

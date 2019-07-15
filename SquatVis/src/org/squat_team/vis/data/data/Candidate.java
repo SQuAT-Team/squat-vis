@@ -30,4 +30,5 @@ public class Candidate {
 	private boolean isRealValueParetoPopulationBased = false;
 	private boolean isUtilityValueParetoPopulationBased = false;
 	private boolean isSuggested = false;
+	private ArchitectureAnalysisData staticArchitectureAnalysisData;
 }

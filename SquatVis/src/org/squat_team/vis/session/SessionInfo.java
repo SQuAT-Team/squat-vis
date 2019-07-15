@@ -14,6 +14,7 @@ import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
+import org.squat_team.vis.transformers.ArchitecturesToCSVExporter;
 import org.squat_team.vis.transformers.CsvExporter;
 
 import lombok.Data;
@@ -75,6 +76,11 @@ public class SessionInfo implements Serializable {
 
 	public String getProjectDataAsCSV() {
 		CsvExporter exporter = new CsvExporter();
+		return exporter.export(project, getCurrentProjectInfo());
+	}
+	
+	public String getProjectArchitectureComponentsAsCSV() {
+		ArchitecturesToCSVExporter exporter = new ArchitecturesToCSVExporter();
 		return exporter.export(project, getCurrentProjectInfo());
 	}
 

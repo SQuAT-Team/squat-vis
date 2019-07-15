@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.squat_team.vis.analysis.ArchitectureAnalyzer;
+import org.squat_team.vis.analysis.PCMArchitectureAnalyzer;
 import org.squat_team.vis.analysis.ParetoAnalyzer;
 import org.squat_team.vis.connector.ProjectConnector;
 import org.squat_team.vis.connector.data.CLevel;
@@ -60,7 +60,7 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 	}
 	
 	private void startArchitectureAnalysis() {
-		ArchitectureAnalyzer analyzer = new ArchitectureAnalyzer(level, projectConnector);
+		PCMArchitectureAnalyzer analyzer = new PCMArchitectureAnalyzer(level, projectConnector, connectorService);
 		analyzer.analyze();
 	}
 

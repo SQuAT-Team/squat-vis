@@ -4,6 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.omnifaces.cdi.Startup;
+import org.squat_team.vis.data.daos.ArchitectureAnalysisDataDao;
+import org.squat_team.vis.data.daos.ArchitectureContainerResourceDao;
 import org.squat_team.vis.data.daos.CandidateDao;
 import org.squat_team.vis.data.daos.GoalDao;
 import org.squat_team.vis.data.daos.LevelDao;
@@ -36,6 +38,10 @@ public class ConnectorService {
 	private StatusLogDao statusLogDao;
 	@Inject
 	private ResponseManager responseManager;
+	@Inject
+	private ArchitectureAnalysisDataDao architectureAnalysisDataDao;
+	@Inject
+	private ArchitectureContainerResourceDao architectureContainerResourceDao;
 
 	@PostConstruct
 	public void startConnectorServer() {

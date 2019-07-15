@@ -20,6 +20,126 @@
 		<testSourceDirectory>test</testSourceDirectory>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>3.0.0-M1</version>
+					<executions>
+						<execution>
+							<id>1</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>install-file</goal>
+							</goals>
+							<configuration>
+								<groupId>io.github.squat_team.callgraph</groupId>
+								<artifactId>callgraph</artifactId>
+								<version>1.0.0</version>
+								<packaging>jar</packaging>
+								<file>${project.basedir}/libs/callgraph-1.0.0.jar</file>
+							</configuration>
+						</execution>
+						<execution>
+							<id>2</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>install-file</goal>
+							</goals>
+							<configuration>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>cdo</artifactId>
+								<version>4.4.1</version>
+								<packaging>jar</packaging>
+								<file>${project.basedir}/libs/org.eclipse.emf.cdo_4.4.1.v20151007-1653.jar</file>
+							</configuration>
+						</execution>
+						<execution>
+							<id>3</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>install-file</goal>
+							</goals>
+							<configuration>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>common</artifactId>
+								<version>2.10.1</version>
+								<packaging>jar</packaging>
+								<file>${project.basedir}/libs/org.eclipse.emf.common_2.10.1.v20150123-0348.jar</file>
+							</configuration>
+						</execution>
+						<execution>
+							<id>4</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>install-file</goal>
+							</goals>
+							<configuration>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>ecore</artifactId>
+								<version>2.10.2</version>
+								<packaging>jar</packaging>
+								<file>${project.basedir}/libs/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar</file>
+							</configuration>
+						</execution>
+						<execution>
+							<id>5</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>install-file</goal>
+							</goals>
+							<configuration>
+								<groupId>org.eclipse.ocl</groupId>
+								<artifactId>ocl</artifactId>
+								<version>3.5.0</version>
+								<packaging>jar</packaging>
+								<file>${project.basedir}/libs/org.eclipse.ocl_3.5.0.v20150521-1211.jar</file>
+							</configuration>
+						</execution>
+						<execution>
+							<id>6</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>install-file</goal>
+							</goals>
+							<configuration>
+								<groupId>org.eclipse.ocl</groupId>
+								<artifactId>common</artifactId>
+								<version>1.3.0</version>
+								<packaging>jar</packaging>
+								<file>${project.basedir}/libs/org.eclipse.ocl.common_1.3.0.v20150519-0914.jar</file>
+							</configuration>
+						</execution>
+						<execution>
+							<id>7</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>install-file</goal>
+							</goals>
+							<configuration>
+								<groupId>org.eclipse.ocl</groupId>
+								<artifactId>ecore</artifactId>
+								<version>3.5.0</version>
+								<packaging>jar</packaging>
+								<file>${project.basedir}/libs/org.eclipse.ocl.ecore_3.5.0.v20150525-1635.jar</file>
+							</configuration>
+						</execution>
+						<execution>
+							<id>11</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>install-file</goal>
+							</goals>
+							<configuration>
+								<groupId>palladio</groupId>
+								<artifactId>environment</artifactId>
+								<version>0.6.3-SNAPSHOT-jar-with-dependencies</version>
+								<packaging>jar</packaging>
+								<file>${project.basedir}/libs/palladio-environment-0.6.3-SNAPSHOT-jar-with-dependencies.jar</file>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
@@ -147,67 +267,44 @@
 	</repositories>
 	<dependencies>
 		<dependency>
+			<groupId>io.github.squat_team.callgraph</groupId>
+			<artifactId>callgraph</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.cdo</artifactId>
+			<artifactId>cdo</artifactId>
 			<version>4.4.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/org.eclipse.emf.cdo_4.4.1.v20151007-1653.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.common</artifactId>
+			<artifactId>common</artifactId>
 			<version>2.10.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/org.eclipse.emf.common_2.10.1.v20150123-0348.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<artifactId>ecore</artifactId>
 			<version>2.10.2</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.ocl</groupId>
-			<artifactId>org.eclipse.ocl</artifactId>
+			<artifactId>ocl</artifactId>
 			<version>3.5.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/org.eclipse.ocl_3.5.0.v20150521-1211.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.ocl</groupId>
-			<artifactId>org.eclipse.ocl.common</artifactId>
+			<artifactId>common</artifactId>
 			<version>1.3.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/org.eclipse.ocl.common_1.3.0.v20150519-0914.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.ocl</groupId>
-			<artifactId>org.eclipse.ocl.ecore</artifactId>
+			<artifactId>ecore</artifactId>
 			<version>3.5.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/org.eclipse.ocl.ecore_3.5.0.v20150525-1635.jar</systemPath>
 		</dependency>
 		<dependency>
-			<groupId>palladio-bridge</groupId>
-			<artifactId>palladio-bridge</artifactId>
-			<version>0.3.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/palladio-bridge-0.3.1.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>palladio-builder</groupId>
-			<artifactId>palladio-builder</artifactId>
-			<version>0.6.3-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/palladio-builder-0.6.3-SNAPSHOT.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>palladio-environment</groupId>
-			<artifactId>palladio-environment</artifactId>
-			<version>0.6.3-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/libs/palladio-environment-0.6.3-SNAPSHOT-jar-with-dependencies.jar</systemPath>
+			<groupId>palladio</groupId>
+			<artifactId>environment</artifactId>
+			<version>0.6.3-SNAPSHOT-jar-with-dependencies</version>
 		</dependency>
 
 		<!-- JEE DEPENDENCIES -->
