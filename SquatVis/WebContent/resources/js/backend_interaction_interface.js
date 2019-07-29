@@ -81,7 +81,7 @@ function resetSelectorSelected_backend(id) {
 function setAllSelectorCurrent_backend(ids) {
 	setAllSelectorCurrent_application([ {
 		name : 'param',
-		value : id
+		value : ids
 	} ]);
 	updateToolbarCurrent();
 	updateToolbarCurrentCounter();

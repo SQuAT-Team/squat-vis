@@ -1,7 +1,9 @@
 package org.squat_team.vis.session;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.faces.context.FacesContext;
@@ -160,36 +162,52 @@ public class SelectorInfo implements Serializable {
 		selected.remove(id);
 	}
 
+	private List<String> extractIdsFromString(String ids) {
+		return Arrays.asList(ids.split(","));
+	}
+	
 	public void setAllSelectorCurrent() {
 		String ids = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		current.addAll(extractIdsFromString(ids));
 	}
 
 	public void resetAllSelectorCurrent() {
 		String ids = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		current.removeAll(extractIdsFromString(ids));
 	}
 
 	public void setAllSelectorComparison() {
 		String ids = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		comparison.addAll(extractIdsFromString(ids));
 	}
 
 	public void resetAllSelectorComparison() {
 		String ids = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		comparison.removeAll(extractIdsFromString(ids));
 	}
 
 	public void setAllSelectorMarked() {
 		String ids = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		List<String> idsAsList = extractIdsFromString(ids);
+		selected.removeAll(idsAsList);
+		marked.addAll(idsAsList);
 	}
 
 	public void resetAllSelectorMarked() {
 		String ids = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		marked.removeAll(extractIdsFromString(ids));
 	}
 
 	public void setAllSelectorSelected() {
 		String ids = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
-	}
+		List<String> idsAsList = extractIdsFromString(ids);
+		marked.removeAll(idsAsList);
+		selected.addAll(idsAsList);
+		}
 
 	public void resetAllSelectorSelected() {
 		String ids = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		selected.removeAll(extractIdsFromString(ids));
 	}
 
 	public void selectorLevelUp() {
@@ -213,6 +231,9 @@ public class SelectorInfo implements Serializable {
 
 	public void selectorLevelUpAll() {
 		String ids = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		for(String id : extractIdsFromString(ids)) {
+			selectorLevelUp(id);
+		}
 	}
 
 	public void selectorClearCurrent() {

@@ -57,23 +57,28 @@
 	display: none !important;
 }
 
-#starOverviewContent .radarWrapper {
+#starOverviewContent .radarWrapper,
+#starOverviewContent .radarCircleWrapper {
 	display: none !important;
 }
 
-#starOverview.current-active #starOverviewContent .radarWrapper.current {
+#starOverview.current-active #starOverviewContent .radarWrapper.current,
+#starOverview.current-active #starOverviewContent .radarCircleWrapper.current {
 	display: inline-block !important;
 }
 
-#starOverview.marked-active #starOverviewContent .radarWrapper.marked {
+#starOverview.marked-active #starOverviewContent .radarWrapper.marked,
+#starOverview.marked-active #starOverviewContent .radarCircleWrapper.marked {
 	display: inline-block !important;
 }
 
-#starOverview.selected-active #starOverviewContent .radarWrapper.selected {
+#starOverview.selected-active #starOverviewContent .radarWrapper.selected,
+#starOverview.selected-active #starOverviewContent .radarCircleWrapper.selected {
 	display: inline-block !important;
 }
 
-#starOverview.comparison-active #starOverviewContent .radarWrapper.comparison {
+#starOverview.comparison-active #starOverviewContent .radarWrapper.comparison,
+#starOverview.comparison-active #starOverviewContent .radarCircleWrapper.comparison {
 	display: inline-block !important;
 }
 

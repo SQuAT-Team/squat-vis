@@ -23,4 +23,5 @@ public class ProjectInfo implements Serializable {
 	private TagInfo tagInfo = new TagInfo(optionsInfo);
 	private MatrixViewInfo matrixViewInfo = new MatrixViewInfo();
 	private StarViewInfo starViewInfo = new StarViewInfo();
+	private GraphViewInfo graphViewInfo = new GraphViewInfo();
 }

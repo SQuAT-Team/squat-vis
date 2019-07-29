@@ -17,27 +17,34 @@
 	<composite:attribute name="population" />
 	<composite:attribute name="width" />
 	<composite:attribute name="outerElementId" />
+	<composite:attribute name="showAxisTooltips" />
+	<composite:attribute name="showAxisNames" />
+	<composite:attribute name="dotRadius" />
+	<composite:attribute name="wrapWidth" />
+	<composite:attribute name="margin" />
+	<composite:attribute name="minSize" />
 </composite:interface>
 
 <composite:implementation>
 	<script>
 	var mycfg = {
-		showAxisNames: true,
-		margin: {top: 50, right: 50, bottom: 50, left: 50},
-		dotRadius: 4,
-		wrapWidth: 50,
+		showAxisNames: #{cc.attrs.showAxisNames},
+		margin: {top: #{cc.attrs.margin}, right: #{cc.attrs.margin}, bottom: #{cc.attrs.margin}, left: #{cc.attrs.margin}},
+		dotRadius: #{cc.attrs.dotRadius},
+		wrapWidth: #{cc.attrs.wrapWidth},
 		responsiveWidth: true,
 		responsiveId: #{cc.attrs.outerElementId},
 		resize: true,
 		showName: true,
-		showAxisTooltips: false
+		showAxisTooltips: #{cc.attrs.showAxisTooltips},
+		minSize: #{cc.attrs.minSize}		
 	}
 	mycfg.w = #{cc.attrs.width};
 	mycfg.h = #{cc.attrs.width};
 
 	</script>
 
-	<div class="big-radar-container mt-1 mb-1}">
+	<div class="big-radar-container mt-0 mb-0">
 		<!-- STAR VISUALIZATION -->
 		<c:if test="${cc.attrs.usePopulation}">
 			<script>

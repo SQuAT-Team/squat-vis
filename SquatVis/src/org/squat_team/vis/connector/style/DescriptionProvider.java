@@ -15,7 +15,8 @@ public class DescriptionProvider {
 	private static final String MARKED_DESCRIPTION = "These candidates are 'interesting' from the user's perspecitve, but not completely evaluated yet. These candidates are usually potential selected candidates.";
 	private static final String SELECTED_DESCRIPTION = "Candidates that should be taken to the next level of optimization or exported as final results.";
 	private static final String ALL_DESCRIPTION = "All (visible) candidates are listed here.";
-
+	private static final String REDUCE_GRAPH_DESCRIPTION = "Most nodes and links used by all candidates are hidden.";
+	
 	public String getLevelsCandidateDescription(int numberOfLevels, int numberOfCandidates) {
 		return "Project contains " + numberOfLevels + " Levels and " + numberOfCandidates + " Candidates";
 	}
@@ -38,5 +39,9 @@ public class DescriptionProvider {
 
 	public String getAllDescription() {
 		return ALL_DESCRIPTION;
+	}
+	
+	public String getReduceGraphDescription() {
+		return REDUCE_GRAPH_DESCRIPTION;
 	}
 }

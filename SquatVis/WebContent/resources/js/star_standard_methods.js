@@ -96,6 +96,22 @@ function selectorLevelUp_star(id) {
 			classes.add("marked");
 		}
 	}
+	
+	candidateItems = $(".radarCircleWrapper" + ".c" + id);
+	// change all items
+	for (let i = 0; i < candidateItems.length; i++) {
+		candidateItem = candidateItems[i];
+		classes = candidateItem.classList;
+
+		if (classes.contains("marked")) {
+			classes.remove("marked");
+			classes.add("selected");
+		} else if (classes.contains("selected")) {
+			classes.remove("selected");
+		} else {
+			classes.add("marked");
+		}
+	}
 }
 
 function switchToSolid(starItem){

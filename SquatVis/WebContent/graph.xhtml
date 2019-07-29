@@ -29,11 +29,17 @@
 	target="head"></h:outputStylesheet>
 
 <!-- D3 Visualizations -->
+<h:outputScript library="js" name="helpers.js" target="head"></h:outputScript>
+<h:outputScript library="js" name="graph_standard_methods.js" target="head"></h:outputScript>
+<h:outputScript library="d3" name="d3_parallel_coordinates.js" target="head"></h:outputScript>
 <h:outputScript library="d3" name="d3_graph.js" target="head"></h:outputScript>
+<h:outputScript library="d3" name="d3_bi_graph.js" target="head"></h:outputScript>
+<h:outputScript library="d3" name="d3_star.js" target="head"></h:outputScript>
 
 <!-- JAVASCRIPT -->
 <h:outputScript library="js" name="popover_activator.js" target="body"></h:outputScript>
 <h:outputScript library="js" name="toolbar.js" target="body"></h:outputScript>
+<h:outputScript library="js" name="graph.js" target="body"></h:outputScript>
 <h:outputScript library="js" name="interaction_interface.js"
 	target="body"></h:outputScript>
 <h:outputScript library="js" name="toolbar_interaction_interface.js"
@@ -42,6 +48,7 @@
 	target="body"></h:outputScript>
 <h:outputScript library="js" name="graph_interaction_interface.js"
 	target="body"></h:outputScript>
+<h:outputScript library="js" name="star_standard_methods.js" target="body"></h:outputScript>
 
 <!-- CSS -->
 <h:outputStylesheet library="css" name="squat_standard_style.css"
@@ -58,9 +65,12 @@
 		<h:panelGroup id="colorMappingsDiv">
 				<style id="colorMappings">
 				<ui:repeat value="#{sessionInfo.getCurrentProjectInfo().colorInfo.getColorEntries()}" var="colorEntry">
-					.comparison-active .radarWrapper.comparison.c#{colorEntry.getKey()} .radarArea {	fill: #{colorEntry.getValue()}!important; visibility: visible!important;}
-					.comparison-active .radarWrapper.comparison.c#{colorEntry.getKey()} .radarStroke {	stroke: #{colorEntry.getValue()}!important; visibility: visible!important;}
-					.comparison-active .radarWrapper.comparison.c#{colorEntry.getKey()} .radarCircle {	fill: #{colorEntry.getValue()}!important; visibility: visible!important;}
+					#graphOptions.Comparison-active .radarWrapper.c#{colorEntry.getKey()} .radarArea {	fill: #{colorEntry.getValue()}!important;}
+					#graphOptions.Comparison-active .radarWrapper.c#{colorEntry.getKey()} .radarStroke {	stroke: #{colorEntry.getValue()}!important;}
+					#graphOptions.Comparison-active .radarWrapper.c#{colorEntry.getKey()} .radarCircle {	fill: #{colorEntry.getValue()}!important;}
+					#graphOptions.comparison-mode path.comparison-arc.c#{colorEntry.getKey()} {	fill: #{colorEntry.getValue()}!important;}
+					#graphOptions.comparison-mode line.comparison-link.c#{colorEntry.getKey()} {	stroke: #{colorEntry.getValue()}!important;}
+					#graphOptions.comparison-mode path.resource-line.c#{colorEntry.getKey()} {	stroke: #{colorEntry.getValue()}!important;}
 				</ui:repeat>
 				</style>
 			</h:panelGroup>
@@ -70,8 +80,19 @@
 	<script>
 		var candidateValues = '#{sessionInfo.getProjectDataAsCSV()}';
 		var architectureComponents = '#{sessionInfo.getProjectArchitectureComponentsAsCSV()}';
+		var architectureLinks = '#{sessionInfo.getProjectArchitectureComponentLinksAsCSV()}';
+		var architectureServers = '#{sessionInfo.getProjectArchitectureServersAsCSV()}';
+		var architectureAllocations = '#{sessionInfo.getProjectArchitectureAllocationsAsCSV()}';
+		var architectureResources = '#{sessionInfo.getProjectArchitectureResourcesAsCSV()}';
+		var architectureResourcesMetadata= '#{sessionInfo.getProjectArchitectureResourcesMetadataAsCSV()}';
+		var parsedResources = d3.csvParse(architectureResources);
+		var parsedResourcesMetadata = d3.csvParse(architectureResourcesMetadata);
 		var parsedComponents = d3.csvParse(architectureComponents);
+		var parsedComponents2 = d3.csvParse(architectureComponents);
+		var parsedLinks = d3.csvParse(architectureLinks);
 		var parsedValues = d3.csvParse(candidateValues);
+		var parsedServers = d3.csvParse(architectureServers);
+		var parsedAllocations = d3.csvParse(architectureAllocations);
 	</script>
 
 	<!-- NAVBAR -->
@@ -79,7 +100,7 @@
 	</tp:header>
 
 	<div class="container-fluid h-100 mh-100 ">
-		<div id="graphOptions" class="row h-100 mh-100">
+		<div id="graphOptions" class="row h-100 mh-100 #{sessionInfo.getCurrentProjectInfo().graphViewInfo.getShowPopulationStyle()} #{sessionInfo.getCurrentProjectInfo().graphViewInfo.getReduceGraphStyle()} #{sessionInfo.getCurrentProjectInfo().graphViewInfo.getMode()}-active">
 
 			<!-- SIDEBAR START -->
 			<tp:toolbar>
@@ -88,21 +109,21 @@
 
 			<div id="content" class="h-100 mh-100 ml-auto col-10 px-4 mb-2">
 				<div class="row h-10 mh-10 ">
-					<div id="graphOptionsRow" class="col-4 h-100 mh-100 p-1">
+					<div id="graphOptionsRow" class="col-6 h-100 mh-100 pb-1">
 						<div class="row">
 							<div class="col mt-2">
 								<div class="dropdown">
 									<button style="width: 100%;"
 										class="btn btn-light dropdown-toggle" type="button"
-										id="dropdownMenuButtonBig" data-toggle="dropdown"
+										id="graphModeDropdownMenuButton" data-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="false">
-										#{sessionInfo.getCurrentProjectInfo().starViewInfo.getModeBig()}</button>
+										#{sessionInfo.getCurrentProjectInfo().graphViewInfo.getMode()}</button>
 									<div class="dropdown-menu"
 										aria-labelledby="dropdownMenuButtonBig">
-										<a class="dropdown-item" href="javascript:showAllBig()">All</a>
-										<a class="dropdown-item" href="javascript:showComparisonBig()">Comparison</a>
-										<a class="dropdown-item" href="javascript:showMarkedBig()">Marked</a>
-										<a class="dropdown-item" href="javascript:showSelectedBig()">Selected</a>
+										<a class="dropdown-item" href="javascript:showAll()">All</a>
+										<a class="dropdown-item" href="javascript:showComparison()">Comparison</a>
+										<a class="dropdown-item" href="javascript:showMarked()">Marked</a>
+										<a class="dropdown-item" href="javascript:showSelected()">Selected</a>
 									</div>
 								</div>
 							</div>
@@ -110,7 +131,7 @@
 								<div class="custom-control custom-checkbox">
 									<c:choose>
 										<c:when
-											test="${sessionInfo.getCurrentProjectInfo().starViewInfo.getShowPopulation()}">
+											test="${sessionInfo.getCurrentProjectInfo().graphViewInfo.getShowPopulation()}">
 											<input type="checkbox" id="showPopulationCheckbox"
 												class="custom-control-input" checked="true"
 												onchange="changePopulation()"> <label
@@ -126,25 +147,60 @@
 									</c:choose>
 								</div>
 							</div>
+							<div class="col mt-3">
+								<div class="custom-control custom-checkbox">
+									<c:choose>
+										<c:when
+											test="${sessionInfo.getCurrentProjectInfo().graphViewInfo.getReduceGraph()}">
+											<input type="checkbox" id="reduceGraphCheckbox"
+												class="custom-control-input" checked="true"
+												onchange="changeReduceGraph()">
+												<label
+												class="custom-control-label" title="#{descriptionProvider.getReduceGraphDescription()}" for="reduceGraphCheckbox">Reduce Graph
+												</label>
+											</input>
+										</c:when>
+										<c:otherwise>
+											<input type="checkbox" id="reduceGraphCheckbox"
+												class="custom-control-input" onchange="changeReduceGraph()">
+												<label class="custom-control-label"  title="#{descriptionProvider.getReduceGraphDescription()}"
+												for="reduceGraphCheckbox">Reduce Graph
+												</label>
+											</input>
+										</c:otherwise>
+									</c:choose>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="row h-25 mh-25 ">
-					<div id="starOverview" class="col-3 h-100 mh-100 p-1">
+					<div id="starOverview" class="col-2 h-100 mh-100 p-1">
 						<div class="card h-100 mh-100">
 							<div class="card-header font-weight-bold">Goals</div>
-							<div class="card-body m-1 p-1">
-								<div class="row">
+							<div class="card-body m-1 p-1 scrollable">
+								<div class="row m-0 p-0 h-100 w-100 mw-100 mh-100">
+									<div class="col-12 m-0 p-0">
+										<div id="starOverviewContent" class="h-100 mh-100 scrollable" style="text-align: center;">
+											<tp:bigStar usePopulation="true"
+												renderCandidates="parsedValues" population="parsedValues"
+												width="100" outerElementId="'starOverviewContent'" showAxisTooltips="true"
+												showAxisNames="false" dotRadius="3" wrapWidth="5" margin="10" minSize="50"/>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div id="resourcesOverview" class="col-9 h-100 mh-100 p-1">
+					<div id="resourcesOverview" class="col-10 h-100 mh-100 p-1">
 						<div class="card h-100 mh-100">
 							<div class="card-header font-weight-bold">Resources</div>
-							<div class="card-body m-1 p-1">
-								<div class="row">
+							<div class="card-body m-1 p-1 scrollable">
+								<div id="resources-container" class="resources-container h-100 mh-100 mt-0 mb-0 scrollable">
+										<script>
+											renderParallelCoordinates(parsedResources, parsedResourcesMetadata);
+										</script>
 								</div>
 							</div>
 						</div>
@@ -155,8 +211,9 @@
 					<div id="componentsGraph" class="col-6 h-100 mh-100 p-1">
 						<div class="card h-100 mh-100">
 							<div class="card-header font-weight-bold">Components</div>
-							<div class="card-body m-1 p-1">
-								<div class="row">
+							<div class="card-body m-1 p-1 scrollable">
+								<div id="architecture-container" class="architecture-container h-100 mh-100 mt-0 mb-0">
+										<script>render(parsedComponents, parsedLinks);</script>
 								</div>
 							</div>
 						</div>
@@ -164,8 +221,9 @@
 					<div id="allocationsGraph" class="col-6 h-100 mh-100 p-1">
 						<div class="card h-100 mh-100">
 							<div class="card-header font-weight-bold">Allocation</div>
-							<div class="card-body m-1 p-1">
-								<div class="row">
+							<div class="card-body m-1 p-1 scrollable">
+								<div id="allocation-container" class="allocation-container h-100 mh-100 mt-0 mb-0">
+										<script>renderBiGraph(parsedComponents2, parsedServers, parsedAllocations);</script>
 								</div>
 							</div>
 						</div>

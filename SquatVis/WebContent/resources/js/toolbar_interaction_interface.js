@@ -75,7 +75,7 @@ function resetAllSelectorComparison_toolbar(ids) {
 
 function setAllSelectorMarked_toolbar(ids) {
 	for (let i = 0; i < ids.length; i++) {
-		addElement(ids[i], "marked");
+		addElement(ids[i], "marked", "selected");
 	}
 }
 
@@ -87,7 +87,7 @@ function resetAllSelectorMarked_toolbar(ids) {
 
 function setAllSelectorSelected_toolbar(ids) {
 	for (let i = 0; i < ids.length; i++) {
-		addElement(ids[i], "selected");
+		addElement(ids[i], "selected", "marked");
 	}
 }
 

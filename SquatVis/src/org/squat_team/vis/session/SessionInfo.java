@@ -9,12 +9,17 @@ import java.util.Map;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.Transient;
 
 import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
-import org.squat_team.vis.transformers.ArchitecturesToCSVExporter;
+import org.squat_team.vis.transformers.ArchitectureAllocationsToCSVExporter;
+import org.squat_team.vis.transformers.ArchitectureComponentsToCSVExporter;
+import org.squat_team.vis.transformers.ArchitectureLinksToCSVExporter;
+import org.squat_team.vis.transformers.ArchitectureResourceContainersToCSVExporter;
+import org.squat_team.vis.transformers.ArchitectureResourcesToCSVExporter;
 import org.squat_team.vis.transformers.CsvExporter;
 
 import lombok.Data;
@@ -38,6 +43,8 @@ public class SessionInfo implements Serializable {
 	private long selectedProject;
 	private transient Project project;
 	private Map<Long, ProjectInfo> projectInfos = new HashMap<>();
+	@Transient
+	private ArchitectureResourcesToCSVExporter resourcesExporter;
 
 	public ProjectInfo getCurrentProjectInfo() {
 		if (project == null) {
@@ -78,10 +85,34 @@ public class SessionInfo implements Serializable {
 		CsvExporter exporter = new CsvExporter();
 		return exporter.export(project, getCurrentProjectInfo());
 	}
-	
+
 	public String getProjectArchitectureComponentsAsCSV() {
-		ArchitecturesToCSVExporter exporter = new ArchitecturesToCSVExporter();
+		ArchitectureComponentsToCSVExporter exporter = new ArchitectureComponentsToCSVExporter();
 		return exporter.export(project, getCurrentProjectInfo());
+	}
+
+	public String getProjectArchitectureComponentLinksAsCSV() {
+		ArchitectureLinksToCSVExporter exporter = new ArchitectureLinksToCSVExporter();
+		return exporter.export(project, getCurrentProjectInfo());
+	}
+
+	public String getProjectArchitectureServersAsCSV() {
+		ArchitectureResourceContainersToCSVExporter exporter = new ArchitectureResourceContainersToCSVExporter();
+		return exporter.export(project, getCurrentProjectInfo());
+	}
+
+	public String getProjectArchitectureAllocationsAsCSV() {
+		ArchitectureAllocationsToCSVExporter exporter = new ArchitectureAllocationsToCSVExporter();
+		return exporter.export(project, getCurrentProjectInfo());
+	}
+
+	public String getProjectArchitectureResourcesAsCSV() {
+		resourcesExporter = new ArchitectureResourcesToCSVExporter();
+		return resourcesExporter.export(project, getCurrentProjectInfo());
+	}
+	
+	public String getProjectArchitectureResourcesMetadataAsCSV() {
+		return resourcesExporter.exportResourcesMetadata();
 	}
 
 }

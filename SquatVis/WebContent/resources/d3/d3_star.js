@@ -44,7 +44,8 @@ function RadarChart(id, data, options, populationData) {
 	 responsiveWidth: false, // if star should be initialized responsive
 	 responsiveId: 'content', // the id of the outer container
 	 resize: false, // whether star should resize in responisve way
-	 showName: false // whether name candidates is shown when hovering
+	 showName: false, // whether name candidates is shown when hovering
+	 minSize: 150 // the minimal size of the plot
 	};
 
 	// MANUAL OPTIONS TO CFG
@@ -149,8 +150,8 @@ function RadarChart(id, data, options, populationData) {
 		var element = document.getElementById(cfg.responsiveId);
 		var width = element.clientWidth - cfg.margin.left - cfg.margin.right;
 		var height = element.clientHeight - cfg.margin.top - cfg.margin.bottom;
-		cfg.w = Math.max(Math.min(width, height), 200);
-		cfg.h = Math.max(Math.min(width, height), 200);
+		cfg.w = Math.max(Math.min(width, height), cfg.minSize);
+		cfg.h = Math.max(Math.min(width, height), cfg.minSize);
 
 		radius = Math.min(cfg.w/2, cfg.h/2); 	// Radius of the outermost
 		rScale = d3.scaleLinear()
@@ -312,7 +313,7 @@ function RadarChart(id, data, options, populationData) {
 			return g.selectAll(".radarWrapperPopulation")
 				.data(populationData)
 				.enter().append("g")
-				.attr("class", "radarWrapperPopulation");
+				.attr("class", function(d){return "radarWrapperPopulation" + " c" +d ["ID"];});
 		}
 		return null;
 	}
@@ -459,7 +460,7 @@ function RadarChart(id, data, options, populationData) {
 	return g.selectAll(".radarCircleWrapper")
 		.data(data)
 		.enter().append("g")
-		.attr("class", "radarCircleWrapper");
+		.attr("class", function(d){return "radarCircleWrapper" + " c" +d ["ID"] + " " + d["SelectorTags"];});
 	}
 
 	function createBlobCircleTooltips(blobCircleWrapper, cfg){

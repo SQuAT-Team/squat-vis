@@ -192,12 +192,6 @@ function selectorExportAllSelected_d3() {
 
 // HELPERS
 
-d3.selection.prototype.moveToFront = function() {
-	  return this.each(function(){
-	  this.parentNode.appendChild(this);
-	  });
-	};
-
 function addElementToCandidate_d3(id, element, remove) {
 	var candidateCircles = $("g.cell").children(candidateCircleCss_matrix + ".c" + id);
 	for (let i = 0; i < candidateCircles.length; i++) {

@@ -13,6 +13,18 @@
 </composite:interface>
 
 <composite:implementation>
+	<h:form>
+		<pf:remoteCommand name="setShowPopulation_application"
+			action="#{sessionInfo.getCurrentProjectInfo().graphViewInfo.setShowPopulation}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setReduceGraph_application"
+			action="#{sessionInfo.getCurrentProjectInfo().graphViewInfo.setReduceGraph}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setMode_application"
+			action="#{sessionInfo.getCurrentProjectInfo().graphViewInfo.setMode}" />
+	</h:form>
 </composite:implementation>
 
 </html>

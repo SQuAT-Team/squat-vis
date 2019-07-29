@@ -164,12 +164,14 @@ function selectorExportAllSelected_d3() {
 
 function selectorClearElement_d3(remove) {
 	removeSelectorWithQuery_d3("g.radarWrapper", remove);
+	removeSelectorWithQuery_d3("g.radarCircleWrapper", remove);
 	removeSelectorWithQuery_d3(".candidate-radar-container", remove);
 }
 
 function addSelectorAll_d3(ids, add, remove) {
 	for (let i = 0; i < ids.length; i++) {
 		addSelectorWithQuery_d3(".radarWrapper.c" + ids[i], add, remove);
+		addSelectorWithQuery_d3(".radarCircleWrapper.c" + ids[i], add, remove);
 		addSelectorWithQuery_d3(".candidate-radar-container.c" + ids[i], add,
 				remove);
 	}
@@ -177,6 +179,7 @@ function addSelectorAll_d3(ids, add, remove) {
 
 function addSelector_d3(id, add, remove) {
 	addSelectorWithQuery_d3(".radarWrapper.c" + id, add, remove);
+	addSelectorWithQuery_d3(".radarCircleWrapper.c" + id, add, remove);
 	addSelectorWithQuery_d3(".candidate-radar-container.c" + id, add, remove);
 }
 
@@ -203,6 +206,7 @@ function addSelectorWithQuery_d3(query, add, remove) {
 function removeSelectorAll_d3(ids, remove) {
 	for (let i = 0; i < ids.length; i++) {
 		removeSelectorWithQuery_d3("g.radarWrapper.c" + ids[i], remove);
+		removeSelectorWithQuery_d3("g.radarCircleWrapper.c" + ids[i], remove);
 		removeSelectorWithQuery_d3(".candidate-radar-container.c" + ids[i],
 				remove);
 	}
@@ -210,6 +214,7 @@ function removeSelectorAll_d3(ids, remove) {
 
 function removeSelector_d3(id, remove) {
 	removeSelectorWithQuery_d3("g.radarWrapper.c" + id, remove);
+	removeSelectorWithQuery_d3("g.radarCircleWrapper.c" + id, remove);
 	removeSelectorWithQuery_d3(".candidate-radar-container.c" + id, remove);
 }
 

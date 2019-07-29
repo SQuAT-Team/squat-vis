@@ -1,0 +1,209 @@
+#graphOptions .radarStrokePopulation {
+	visibility: hidden;
+}
+
+#graphOptions.population-active .radarStrokePopulation {
+	visibility: visible;
+}
+
+.radarStrokePopulation {
+	stroke: none;
+	stroke-width: 1px;
+	fill: #aaaaaa;
+	opacity: 0.15;
+}
+
+#graphOptions g.radarWrapper.current .radarArea {
+	fill: #00ffff;
+}
+
+#graphOptions g.radarWrapper.current .radarStroke {
+	stroke: #00ffff;
+}
+
+#graphOptions g.radarWrapper.current .radarCircle {
+	fill: #00ffff;
+}
+
+#graphOptions g.radarWrapper.marked:not(.current) .radarArea {
+	fill: #0080ff;
+}
+
+#graphOptions g.radarWrapper.marked:not(.current) .radarStroke {
+	stroke: #0080ff;
+}
+
+#graphOptions g.radarWrapper.marked:not(.current) .radarCircle {
+	fill: #0080ff;
+}
+
+#graphOptions g.radarWrapper.selected:not(.current) .radarArea {
+	fill: #8000ff;
+}
+
+#graphOptions g.radarWrapper.selected:not(.current) .radarStroke {
+	stroke: #8000ff;
+}
+
+#graphOptions g.radarWrapper.selected.not(.current) .radarCircle {
+	fill: #8000ff;
+}
+
+#graphOptions.All-active .radarCircleWrapper.current,
+#graphOptions.All-active .radarWrapper.current {
+	visibility: visible;
+	display: inline;
+}
+
+#graphOptions.Marked-active .radarCircleWrapper.marked,
+#graphOptions.Marked-active .radarWrapper.marked {
+	visibility: visible;
+	display: inline;
+}
+
+#graphOptions.Selected-active .radarCircleWrapper.selected,
+#graphOptions.Selected-active .radarWrapper.selected {
+	visibility: visible;
+	display: inline;
+}
+
+#graphOptions.Comparison-active .radarCircleWrapper.comparison,
+#graphOptions.Comparison-active .radarWrapper.comparison {
+	visibility: visible;
+	display: inline;
+}
+
+.radarCircleWrapper,
+.radarWrapper {
+	visibility: hidden;
+	display: none;
+}
+
+.d3-tip {
+	background-color: rgba(180, 180, 180, 0.4);
+	padding: 5px;
+}
+
+#graphOptions.normal-mode path.comparison-arc {
+	visibility:hidden;
+}
+
+#graphOptions.comparison-mode path.current-arc {
+	visibility:hidden;
+}
+
+#graphOptions.normal-mode line.comparison-link {
+	visibility:hidden;
+}
+
+#graphOptions.comparison-mode line.current-link {
+	visibility:hidden;
+}
+
+#resources-container path.line {
+	stroke: #aaa;
+	stroke-width: 1px;
+}
+
+text.resource-text {
+	fill: black;
+}
+
+text.resource-text.selected-server {
+	fill: #ff8000;
+}
+
+rect.selected-server {
+	fill: #ff8000;
+}
+
+.axis {
+  opacity: 0.7;
+}
+
+.links line {
+  stroke: #999;
+  stroke-opacity: 1.0;
+}
+
+path.resource-line {
+  stroke: #777;
+  stroke-opacity: 0.5;
+}
+
+path.resource-line.current {
+  stroke: #0ff;
+}
+
+.links line.current-link{
+  stroke: #0ff;
+  stroke-opacity: 1.0;
+}
+
+.nodes circle {
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+.servers rect {
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+text {
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+text.component-node-text {
+  text-anchor: middle;
+}
+
+text.server-node-text {
+  text-anchor: middle;
+  vertical-align: middle;
+}
+
+#graphOptions.reduce-graph-active line.link {
+	visibility: hidden;
+}
+
+#graphOptions.reduce-graph-active line.link.visibleLink {
+	visibility: visible;
+}
+
+#graphOptions.reduce-graph-active line.current-link {
+	visibility: hidden;
+}
+
+#graphOptions.reduce-graph-active line.current-link.visibleLink {
+	visibility: visible;
+}
+
+#graphOptions.reduce-graph-active line.comparison-link {
+	visibility: hidden;
+}
+
+#graphOptions.reduce-graph-active line.comparison-link.visibleLink {
+	visibility: visible;
+}
+
+#graphOptions.reduce-graph-active g.node {
+	visibility: hidden;
+}
+
+#graphOptions.reduce-graph-active g.node.visibleNode {
+	visibility: visible;
+}
+
+#graphOptions.reduce-graph-active g.server {
+	visibility: hidden;
+}
+
+#graphOptions.reduce-graph-active g.server.visibleNode {
+	visibility: visible;
+}
+
+.zero-element {
+	visibility: hidden !important;
+}
