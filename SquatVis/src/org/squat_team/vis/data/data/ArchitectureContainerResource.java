@@ -18,5 +18,6 @@ public class ArchitectureContainerResource {
 
 	private String name;
 	private String resourceId;
+	private boolean isLink;
 	private List<ArchitectureResource> resources = new ArrayList<>();;
 }

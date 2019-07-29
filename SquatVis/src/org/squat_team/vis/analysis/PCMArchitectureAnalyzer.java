@@ -43,8 +43,6 @@ import de.fakeller.palladio.environment.PalladioEclipseEnvironment;
 import de.uka.ipd.sdq.pcmsolver.models.PCMInstance;
 import io.github.squat_team.callgraph.CallGraphGenerator;
 import io.github.squat_team.callgraph.config.CallGraphConfiguration;
-import io.github.squat_team.callgraph.data.CallEntity;
-import io.github.squat_team.callgraph.data.CallGraph;
 import io.github.squat_team.callgraph.data.CallGraphManager;
 import lombok.extern.java.Log;
 
@@ -171,15 +169,6 @@ public class PCMArchitectureAnalyzer {
 			configuration.setDebugMode(false);
 			CallGraphGenerator callGenerator = new CallGraphGenerator(configuration);
 			CallGraphManager callGraphManager = callGenerator.generateWithoutExport();
-
-			for (CallGraph graph : callGraphManager.getCallGraphs()) {
-				for (CallEntity entity : graph.getEntities().values()) {
-					System.out.println("Found Entity with name " + entity.getComponentName() + " ("
-							+ entity.getComponentId() + ")");
-
-				}
-			}
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -324,6 +313,7 @@ public class PCMArchitectureAnalyzer {
 		ArchitectureContainerResource containerResource = new ArchitectureContainerResource();
 		containerResource.setResourceId(link.getId());
 		containerResource.setName("Link " + containerResource.getName());
+		containerResource.setLink(true);
 		return containerResource;
 	}
 
@@ -331,6 +321,7 @@ public class PCMArchitectureAnalyzer {
 		ArchitectureResource latencyResource = new ArchitectureResource();
 		String latency = link.getCommunicationLinkResourceSpecifications_LinkingResource()
 				.getLatency_CommunicationLinkResourceSpecification().getSpecification();
+		latencyResource.setResourceId(link.getCommunicationLinkResourceSpecifications_LinkingResource().getId());
 		latencyResource.setName("Latency");
 		latencyResource.setValue(new Double(latency));
 		return latencyResource;
@@ -340,6 +331,7 @@ public class PCMArchitectureAnalyzer {
 		ArchitectureResource throughputResource = new ArchitectureResource();
 		String throughput = link.getCommunicationLinkResourceSpecifications_LinkingResource()
 				.getThroughput_CommunicationLinkResourceSpecification().getSpecification();
+		throughputResource.setResourceId(link.getCommunicationLinkResourceSpecifications_LinkingResource().getId());
 		throughputResource.setName("Throughput");
 		throughputResource.setValue(new Double(throughput));
 		return throughputResource;
@@ -360,12 +352,14 @@ public class PCMArchitectureAnalyzer {
 		ArchitectureContainerResource containerResource = new ArchitectureContainerResource();
 		containerResource.setName(palladioResourceContainer.getEntityName());
 		containerResource.setResourceId(palladioResourceContainer.getId());
+		containerResource.setLink(false);
 		return containerResource;
 	}
 
 	private ArchitectureResource handleProcessingResourceSpecification(
 			ProcessingResourceSpecification resourceSpecification, int i) {
 		ArchitectureResource resource = new ArchitectureResource();
+		resource.setResourceId(resourceSpecification.getId());
 		resource.setName("" + i);
 		String value = resourceSpecification.getProcessingRate_ProcessingResourceSpecification().getSpecification();
 		resource.setValue(new Double(value));
@@ -384,6 +378,7 @@ public class PCMArchitectureAnalyzer {
 			ArchitectureComponent allocatedComponent = components.get(allocatedComponentId);
 			componentAllocation.setComponent(allocatedComponent);
 			componentAllocation.setContainer(allocationLocation);
+			componentAllocations.add(componentAllocation);
 		}
 		return componentAllocations;
 	}
