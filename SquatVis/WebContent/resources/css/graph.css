@@ -18,11 +18,11 @@
 }
 
 #graphOptions g.radarWrapper.current .radarStroke {
-	stroke: #00ffff;
+	stroke: #00cfcf;
 }
 
 #graphOptions g.radarWrapper.current .radarCircle {
-	fill: #00ffff;
+	fill: #00cfcf;
 }
 
 #graphOptions g.radarWrapper.marked:not(.current) .radarArea {
@@ -30,11 +30,11 @@
 }
 
 #graphOptions g.radarWrapper.marked:not(.current) .radarStroke {
-	stroke: #0080ff;
+	stroke: #0070cf;
 }
 
 #graphOptions g.radarWrapper.marked:not(.current) .radarCircle {
-	fill: #0080ff;
+	fill: #0070cf;
 }
 
 #graphOptions g.radarWrapper.selected:not(.current) .radarArea {
@@ -42,11 +42,11 @@
 }
 
 #graphOptions g.radarWrapper.selected:not(.current) .radarStroke {
-	stroke: #8000ff;
+	stroke: #7000cf;
 }
 
 #graphOptions g.radarWrapper.selected.not(.current) .radarCircle {
-	fill: #8000ff;
+	fill: #7000cf;
 }
 
 #graphOptions.All-active .radarCircleWrapper.current,

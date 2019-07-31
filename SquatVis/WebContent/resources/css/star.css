@@ -133,7 +133,7 @@
 }
 
 .current-active #starOverviewContent .radarWrapper.current .radarStroke {
-	stroke: #00ffff;
+	stroke: #00cfcf;
 	visibility: visible;
 }
 
@@ -148,12 +148,12 @@
 }
 
 .marked-active #starOverviewContent .radarWrapper.marked .radarStroke {
-	stroke: #0080ff;
+	stroke: #0070cf;
 	visibility: visible;
 }
 
 .marked-active #starOverviewContent .radarWrapper.marked .radarCircle {
-	fill: #0080ff;
+	fill: #0070cf;
 	visibility: visible;
 }
 
@@ -163,11 +163,11 @@
 }
 
 .selected-active #starOverviewContent .radarWrapper.selected .radarStroke {
-	stroke: #8000ff;
+	stroke: #7000cf;
 	visibility: visible;
 }
 
 .selected-active #starOverviewContent .radarWrapper.selected .radarCircle {
-	fill: #8000ff;
+	fill: #7000cf;
 	visibility: visible;
 }
