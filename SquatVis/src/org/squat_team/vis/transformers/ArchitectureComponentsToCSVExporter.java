@@ -17,8 +17,10 @@ import lombok.extern.java.Log;
 public class ArchitectureComponentsToCSVExporter {
 	private static final String CANDIDATE_SEPARATOR = " + ";
 	private Map<String, Entry> components = new HashMap<>();
-
+	private boolean useNameInsteadOfId;
+	
 	public String export(Project project, ProjectInfo projectInfo) {
+		useNameInsteadOfId = projectInfo.getOptionsInfo().isUseNameInsteadOfId();
 		StringBuilder contentBuilder = new StringBuilder();
 		exportHeader(contentBuilder);
 		findComponentsInLevels(project.getLevels());
@@ -28,7 +30,7 @@ public class ArchitectureComponentsToCSVExporter {
 
 	private void exportComponents(StringBuilder contentBuilder) {
 		for (Entry component : components.values()) {
-			contentBuilder.append(component.getComponent().getComponentId());
+			contentBuilder.append(getIdFrom(component.getComponent()));
 			endValue(contentBuilder);
 			contentBuilder.append(component.getComponent().getName());
 			endValue(contentBuilder);
@@ -67,7 +69,7 @@ public class ArchitectureComponentsToCSVExporter {
 		List<ArchitectureComponent> candidatesComponents = analysisData.getComponents();
 
 		for (ArchitectureComponent currentCandidatesComponent : candidatesComponents) {
-			String componentId = currentCandidatesComponent.getComponentId();
+			String componentId = getIdFrom(currentCandidatesComponent);
 			Entry componentInMap = components.get(componentId);
 			if (componentInMap == null) {
 				componentInMap = new Entry(currentCandidatesComponent);
@@ -94,6 +96,17 @@ public class ArchitectureComponentsToCSVExporter {
 		contentBuilder.append(",");
 	}
 
+	private String getIdFrom(ArchitectureComponent component) {
+		if (useNameInsteadOfId) {
+			return replaceAllWhitespaces(component.getName());
+		} else {
+			return component.getComponentId();
+		}
+	}
+
+	private String replaceAllWhitespaces(String name) {
+		return name.replaceAll("\\s+", "-");
+	}
 	private class Entry {
 		private ArchitectureComponent component;
 		private String candidates = "";

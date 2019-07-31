@@ -60,8 +60,10 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 	}
 	
 	private void startArchitectureAnalysis() {
-		PCMArchitectureAnalyzer analyzer = new PCMArchitectureAnalyzer(level, projectConnector, connectorService);
-		analyzer.analyze();
+		if(project.getConfiguration().getHasArchitectures()) {
+			PCMArchitectureAnalyzer analyzer = new PCMArchitectureAnalyzer(level, projectConnector, connectorService);
+			analyzer.analyze();
+		}
 	}
 
 	private void analyzeForParetoCandidates(boolean useUtility) {

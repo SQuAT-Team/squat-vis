@@ -21,4 +21,5 @@ public class OptionsInfo implements Serializable {
 	private boolean usePopulationPareto = false;
 	private boolean showPareto = true;
 	private boolean showSuggestions = true;
+	private boolean useNameInsteadOfId = true;
 }

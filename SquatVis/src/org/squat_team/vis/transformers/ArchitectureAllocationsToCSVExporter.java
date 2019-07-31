@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.squat_team.vis.data.data.ArchitectureAnalysisData;
+import org.squat_team.vis.data.data.ArchitectureComponent;
 import org.squat_team.vis.data.data.ArchitectureComponentAllocation;
 import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
@@ -14,8 +15,10 @@ import org.squat_team.vis.session.ProjectInfo;
 public class ArchitectureAllocationsToCSVExporter {
 	private static final String CANDIDATE_SEPARATOR = " + ";
 	private Map<String, Entry> allocations = new HashMap<>();
-
+	private boolean useNameInsteadOfId;
+	
 	public String export(Project project, ProjectInfo projectInfo) {
+		useNameInsteadOfId = projectInfo.getOptionsInfo().isUseNameInsteadOfId();
 		StringBuilder contentBuilder = new StringBuilder();
 		exportHeader(contentBuilder);
 		findAllocationsInLevels(project.getLevels());
@@ -25,7 +28,7 @@ public class ArchitectureAllocationsToCSVExporter {
 
 	private void exportAllocations(StringBuilder contentBuilder) {
 		for (Entry allocation : allocations.values()) {
-			contentBuilder.append(allocation.getAllocation().getComponent().getComponentId());
+			contentBuilder.append(getIdFrom(allocation.getAllocation().getComponent()));
 			endValue(contentBuilder);
 			contentBuilder.append(allocation.getAllocation().getContainer().getResourceId());
 			endValue(contentBuilder);
@@ -63,8 +66,6 @@ public class ArchitectureAllocationsToCSVExporter {
 		List<ArchitectureComponentAllocation> candidatesAllocations = analysisData.getAllocations();
 
 		for (ArchitectureComponentAllocation currentCandidatesAllocation : candidatesAllocations) {
-			System.out.println("allocation: " +currentCandidatesAllocation);
-
 			String allocationId = getAllocationIdentifier(currentCandidatesAllocation);
 			Entry linkInMap = allocations.get(allocationId);
 			if (linkInMap == null) {
@@ -94,6 +95,18 @@ public class ArchitectureAllocationsToCSVExporter {
 
 	private void endValue(StringBuilder contentBuilder) {
 		contentBuilder.append(",");
+	}
+
+	private String getIdFrom(ArchitectureComponent component) {
+		if (useNameInsteadOfId) {
+			return replaceAllWhitespaces(component.getName());
+		} else {
+			return component.getComponentId();
+		}
+	}
+
+	private String replaceAllWhitespaces(String name) {
+		return name.replaceAll("\\s+", "-");
 	}
 
 	private class Entry {

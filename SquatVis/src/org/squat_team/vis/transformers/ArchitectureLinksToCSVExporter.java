@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.squat_team.vis.data.data.ArchitectureAnalysisData;
+import org.squat_team.vis.data.data.ArchitectureComponent;
 import org.squat_team.vis.data.data.ArchitectureComponentLink;
 import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
@@ -14,8 +15,10 @@ import org.squat_team.vis.session.ProjectInfo;
 public class ArchitectureLinksToCSVExporter {
 	private static final String CANDIDATE_SEPARATOR = " + ";
 	private Map<String, Entry> links = new HashMap<>();
+	private boolean useNameInsteadOfId;
 
 	public String export(Project project, ProjectInfo projectInfo) {
+		useNameInsteadOfId = projectInfo.getOptionsInfo().isUseNameInsteadOfId();
 		StringBuilder contentBuilder = new StringBuilder();
 		exportHeader(contentBuilder);
 		findLinksInLevels(project.getLevels());
@@ -25,9 +28,9 @@ public class ArchitectureLinksToCSVExporter {
 
 	private void exportLinks(StringBuilder contentBuilder) {
 		for (Entry link : links.values()) {
-			contentBuilder.append(link.getLink().getSource().getComponentId());
+			contentBuilder.append(getIdFrom(link.getLink().getSource()));
 			endValue(contentBuilder);
-			contentBuilder.append(link.getLink().getTarget().getComponentId());
+			contentBuilder.append(getIdFrom(link.getLink().getTarget()));
 			endValue(contentBuilder);
 			contentBuilder.append(link.getCandidates());
 			endLine(contentBuilder);
@@ -57,7 +60,7 @@ public class ArchitectureLinksToCSVExporter {
 
 	private void findLinksInCandidate(Candidate candidate) {
 		ArchitectureAnalysisData analysisData = candidate.getStaticArchitectureAnalysisData();
-		if(analysisData == null) {
+		if (analysisData == null) {
 			return;
 		}
 		List<ArchitectureComponentLink> candidatesLinks = analysisData.getComponentLinks();
@@ -72,9 +75,9 @@ public class ArchitectureLinksToCSVExporter {
 			linkInMap.addCandidate(candidate.getCandidateId().toString());
 		}
 	}
-	
+
 	private String getLinkIdentifier(ArchitectureComponentLink link) {
-		return link.getSource().getComponentId()+CANDIDATE_SEPARATOR+link.getTarget().getComponentId();
+		return link.getSource().getComponentId() + CANDIDATE_SEPARATOR + link.getTarget().getComponentId();
 	}
 
 	private void endLine(StringBuilder contentBuilder) {
@@ -92,6 +95,18 @@ public class ArchitectureLinksToCSVExporter {
 
 	private void endValue(StringBuilder contentBuilder) {
 		contentBuilder.append(",");
+	}
+
+	private String getIdFrom(ArchitectureComponent component) {
+		if (useNameInsteadOfId) {
+			return replaceAllWhitespaces(component.getName());
+		} else {
+			return component.getComponentId();
+		}
+	}
+
+	private String replaceAllWhitespaces(String name) {
+		return name.replaceAll("\\s+", "-");
 	}
 
 	private class Entry {
