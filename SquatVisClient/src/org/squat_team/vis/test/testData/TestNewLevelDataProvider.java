@@ -1,4 +1,4 @@
-package org.squat_team.vis.test;
+package org.squat_team.vis.test.testData;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,8 +8,11 @@ import java.util.List;
 import org.squat_team.vis.connector.data.CArchitecture;
 import org.squat_team.vis.connector.data.CCandidate;
 import org.squat_team.vis.connector.data.CLevel;
+import org.squat_team.vis.util.ArchitectureHelper;
 
 public class TestNewLevelDataProvider {
+	private static final String MODEL_PATH = "models"+File.separator+"test-project"+File.separator;
+	
 	private static final List<Double> INITIAL_REAL_VALUES = Arrays.asList(0.9, 1.8, 350.0, 630.0);
 	private static final List<Double> INITIAL_UTILITY_VALUES = Arrays.asList(1.0, 0.6, 1.0, 0.85);
 
@@ -90,39 +93,30 @@ public class TestNewLevelDataProvider {
 
 	private CCandidate loadArchitecture1(CCandidate candidate) {
 		CArchitecture architecture = new CArchitecture();
-		loadModel(architecture, "models/stplus-0-IExporter");
+		ArchitectureHelper.loadModel(architecture, MODEL_PATH + "stplus-0-IExporter");
 		candidate.setArchitecture(architecture);
 		return candidate;
 	}
 
 	private CCandidate loadArchitecture2(CCandidate candidate) {
 		CArchitecture architecture = new CArchitecture();
-		loadModel(architecture, "models/stplus-0-Payment System");
+		ArchitectureHelper.loadModel(architecture, MODEL_PATH + "stplus-0-Payment System");
 		candidate.setArchitecture(architecture);
 		return candidate;
 	}
 
 	private CCandidate loadArchitecture3(CCandidate candidate) {
 		CArchitecture architecture = new CArchitecture();
-		loadModel(architecture, "models/stplus-1-ITripDB");
+		ArchitectureHelper.loadModel(architecture, MODEL_PATH + "stplus-1-ITripDB");
 		candidate.setArchitecture(architecture);
 		return candidate;
 	}
 
 	private CCandidate loadArchitecture4(CCandidate candidate) {
 		CArchitecture architecture = new CArchitecture();
-		loadModel(architecture, "models/stplus-2-IExternalPayment");
+		ArchitectureHelper.loadModel(architecture, MODEL_PATH + "stplus-2-IExternalPayment");
 		candidate.setArchitecture(architecture);
 		return candidate;
-	}
-
-	private CArchitecture loadModel(CArchitecture architecture, String pathAndName) {
-		architecture.setAllocation(new File(pathAndName + ".allocation"));
-		architecture.setRepository(new File(pathAndName + ".repository"));
-		architecture.setResourceenvironment(new File(pathAndName + ".resourceenvironment"));
-		architecture.setSystem(new File(pathAndName + ".system"));
-		architecture.setUsage(new File(pathAndName + ".usagemodel"));
-		return architecture;
 	}
 
 }

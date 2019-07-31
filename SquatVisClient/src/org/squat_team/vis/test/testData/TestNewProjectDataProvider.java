@@ -1,4 +1,4 @@
-package org.squat_team.vis.test;
+package org.squat_team.vis.test.testData;
 
 import org.squat_team.vis.connector.data.CGoal;
 import org.squat_team.vis.connector.data.CProject;

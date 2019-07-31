@@ -20,8 +20,11 @@ import org.squat_team.vis.connector.protocols.NewProjectClientProtocol;
 import org.squat_team.vis.connector.protocols.ProjectTerminatedClientProtocol;
 import org.squat_team.vis.connector.protocols.UpdateStatusClientProtocol;
 import org.squat_team.vis.test.exporter.CsvExporter;
+import org.squat_team.vis.test.testData.TestNewLevelDataProvider;
+import org.squat_team.vis.test.testData.TestNewProjectDataProvider;
+import org.squat_team.vis.test.testData.TestStatusUpdateDataProvider;
 
-public class TestClient {
+public class TestDataTestClient {
 	private static final String EXPORT_DIRECTORY_PATH = "." + File.separator + "SquatVisExports";
 	private static ProjectConnector projectConnector;
 
