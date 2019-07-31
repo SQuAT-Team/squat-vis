@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.1" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.1" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.1 http://palladiosimulator.org/PalladioComponentModel/5.1#//core/composition http://palladiosimulator.org/PalladioComponentModel/System/5.1 http://palladiosimulator.org/PalladioComponentModel/5.1#//system" xmi:id="_bMLP0C2wEeemf65Cy3VPbg" type="CompositeModel" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_bYJPQC2wEeemf65Cy3VPbg" type="2002" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_bYKdYC2wEeemf65Cy3VPbg" type="5012"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_bYKdYS2wEeemf65Cy3VPbg" type="7002">
+      <children xmi:type="notation:Shape" xmi:id="_bYt3AC2wEeemf65Cy3VPbg" type="3006" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_bYt3Ai2wEeemf65Cy3VPbg" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="default.system#_X594sC6MEd-Jla2o7wkBzQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bYt3AS2wEeemf65Cy3VPbg" x="-15" y="126"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_bYt3Ay2wEeemf65Cy3VPbg" type="3006" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_bYt3BS2wEeemf65Cy3VPbg" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="default.system#_YXdtAC6MEd-Jla2o7wkBzQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bYt3BC2wEeemf65Cy3VPbg" x="238" y="270"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_bYt3Bi2wEeemf65Cy3VPbg" type="3006" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_bYt3CC2wEeemf65Cy3VPbg" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="default.system#_Y4vOEC6MEd-Jla2o7wkBzQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bYt3By2wEeemf65Cy3VPbg" x="428" y="175"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_bYueEC2wEeemf65Cy3VPbg" type="3006" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_bYueEi2wEeemf65Cy3VPbg" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="default.system#_-tTDEF7oEeavvL8WcdoZSg"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bYueES2wEeemf65Cy3VPbg" x="718"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_bYueEy2wEeemf65Cy3VPbg" type="3006" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_bYueFS2wEeemf65Cy3VPbg" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="default.system#_Ha2JcGCTEeaQ-qRnqvu5Tg"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bYueFC2wEeemf65Cy3VPbg" x="518" y="80"/>
+      </children>
+    </children>
+    <element xmi:type="system:System" href="default.system#_VreA0C6MEd-Jla2o7wkBzQ"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bYJPQS2wEeemf65Cy3VPbg" width="941"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_bMLP0S2wEeemf65Cy3VPbg"/>
+  <element xmi:type="system:System" href="default.system#_VreA0C6MEd-Jla2o7wkBzQ"/>
+</notation:Diagram>
