@@ -41,7 +41,11 @@ public class CandidateDao extends AbstractDao<Candidate> implements Serializable
 		TypedQuery<Candidate> query = getEntityManager().createQuery(
 				"SELECT c FROM Candidate  c WHERE c.projectId = :projectId AND c.candidateId = :candidateId ",
 				Candidate.class);
-		return query.setParameter("projectId", projectId).setParameter("candidateId", candidateId).getSingleResult();
+		try {
+			return query.setParameter("projectId", projectId).setParameter("candidateId", candidateId).getSingleResult();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 
 	@Override
