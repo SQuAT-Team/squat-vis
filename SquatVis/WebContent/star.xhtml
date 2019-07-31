@@ -192,7 +192,7 @@
 										<ui:repeat value="#{sessionInfo.getAllCandidates()}"
 											var="candidate" varStatus="candidateStatus">
 											<!--  CANDIDATE -->
-											<tp:candidateStar usePopulation="true"
+											<tp:candidateStar usePopulation="false"
 												candidate="#{candidate}"
 												renderCandidates="[parsedValues[#{candidateStatus.index}]]"
 												population="parsedValues" width="130" glow="true" selectable="true" />
