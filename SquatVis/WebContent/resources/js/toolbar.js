@@ -1,3 +1,39 @@
+function selectorAllParetoToCurrent(){
+	var paretoGroup1 = getCandidateIdsWithElement(".pareto-real-population");
+	var paretoGroup2 = getCandidateIdsWithElement(".pareto-utility-population");
+	var paretoGroup3 = getCandidateIdsWithElement(".pareto-real-level");
+	var paretoGroup4 = getCandidateIdsWithElement(".pareto-utility-level");
+	
+	let idSet = new Set();
+	paretoGroup1.forEach(item => idSet.add(item));
+	paretoGroup2.forEach(item => idSet.add(item));
+	paretoGroup3.forEach(item => idSet.add(item));
+	paretoGroup4.forEach(item => idSet.add(item));
+	
+	selectorClearCurrent();
+	setAllSelectorCurrent(Array.from(idSet));
+}
+
+function selectorAllSuggestedToCurrent(){
+	selectorClearCurrent();
+	setAllSelectorCurrent(getCandidateIdsWithElement(".suggestion-on"));
+}
+
+function getCandidateIdsWithElement(element){
+	var candidateItems = $("div.list-group.candidate-list.toolbarAll")
+	.children(".candidate-item");
+	var ids = [];
+	for (let i = 0; i < candidateItems.length; i++) {
+		var suggestion = $(candidateItems[i]).find(element);
+		// set correct search css class in each element
+		if (suggestion.length > 0) {
+			var id = $(candidateItems[i]).find(".candidate-id").text();
+			ids.push(parseInt(id));
+		}
+	}
+	return ids;
+}
+
 function toolbarSearch(element) {
 	var doNotShowCssClass = "search-hide";
 	var toSearch = element.value.trim().replace(/\s+/g, ' ').toLowerCase();
