@@ -408,6 +408,9 @@ function markReducedBiGraph(links, currentLinks, selectLinks, comparisonLinks, n
 	links.classed("visibleLink", false);
 	nodes.classed("visibleNode", false);
 	servers.classed("visibleNode", false);
+	currentLinks.classed("visibleLink", false);
+	selectLinks.classed("visibleLink", false);
+	comparisonLinks.classed("visibleLink", false);
 	
 	links.filter(":not(.zero-element)")
 	.classed("visibleLink", function(d){
