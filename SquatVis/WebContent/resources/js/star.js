@@ -235,18 +235,49 @@ function starSearch(element) {
 	var toSearch = element.value.trim().replace(/\s+/g, ' ').toLowerCase();
 	// search for items in all list
 	var candidateItems = $("#starDetailedContent .candidate-radar-container");
-	for (let i = 0; i < candidateItems.length; i++) {
-		var itemName = $(candidateItems[i]).find(".candidate-radar-name")
-				.text();
-		var classes = candidateItems[i].classList;
-		// set correct search css class in each element
-		if (!itemName.trim().replace(/\s+/g, ' ').toLowerCase().includes(
-				toSearch)) {
-			if (!classes.contains(doNotShowCssClass)) {
-				classes.add(doNotShowCssClass);
+	if(toSearch == "p"){
+		for (let i = 0; i < candidateItems.length; i++) {
+			var pareto1 = $(candidateItems[i]).find(".candidate-pareto.pareto-real-level");
+			var pareto2 = $(candidateItems[i]).find(".candidate-pareto.pareto-utility-level");
+			var pareto3 = $(candidateItems[i]).find(".candidate-pareto.pareto-real-population");
+			var pareto4 = $(candidateItems[i]).find(".candidate-pareto.pareto-utility-population");
+			var classes = candidateItems[i].classList;
+			// set correct search css class in each element
+			if (pareto1.length == 0 && pareto2.length == 0 && pareto3.length == 0 && pareto4.length == 0) {
+				if (!classes.contains(doNotShowCssClass)) {
+					classes.add(doNotShowCssClass);
+				}
+			} else {
+				classes.remove(doNotShowCssClass);
 			}
-		} else {
-			classes.remove(doNotShowCssClass);
+		}	
+	}else if(toSearch == "s"){
+		for (let i = 0; i < candidateItems.length; i++) {
+			var suggestion = $(candidateItems[i]).find(".suggestion-on");
+			var classes = candidateItems[i].classList;
+			// set correct search css class in each element
+			if (suggestion.length == 0) {
+				if (!classes.contains(doNotShowCssClass)) {
+					classes.add(doNotShowCssClass);
+				}
+			} else {
+				classes.remove(doNotShowCssClass);
+			}
+		}	
+	}else{	
+		for (let i = 0; i < candidateItems.length; i++) {
+			var itemName = $(candidateItems[i]).find(".candidate-radar-name")
+			.text();
+			var classes = candidateItems[i].classList;
+			// set correct search css class in each element
+			if (!itemName.trim().replace(/\s+/g, ' ').toLowerCase().includes(
+					toSearch)) {
+				if (!classes.contains(doNotShowCssClass)) {
+					classes.add(doNotShowCssClass);
+				}
+			} else {
+				classes.remove(doNotShowCssClass);
+			}
 		}
 	}
 }
