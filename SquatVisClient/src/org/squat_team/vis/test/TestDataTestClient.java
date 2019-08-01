@@ -27,8 +27,13 @@ import org.squat_team.vis.test.testData.TestStatusUpdateDataProvider;
 public class TestDataTestClient {
 	private static final String EXPORT_DIRECTORY_PATH = "." + File.separator + "SquatVisExports";
 	private static ProjectConnector projectConnector;
-
+	
 	public static void main(String[] args) throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
+			InvalidRequestException, InterruptedException, IOException {
+		run();
+	}
+	
+	public static void run() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 			InvalidRequestException, InterruptedException, IOException {
 		exportData();
 		System.out.println("STARTING TEST CLIENT");

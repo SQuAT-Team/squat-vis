@@ -25,7 +25,7 @@ public abstract class AbstractTestClient {
 
 	protected abstract int getLevelEndIndex();
 	
-	public void mainMethod() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
+	public void run() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 			InvalidRequestException, IOException, InterruptedException {
 		System.out.println("STARTING SQUAT TEST CLIENT");
 		sendData();

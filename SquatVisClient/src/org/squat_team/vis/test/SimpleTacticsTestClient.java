@@ -10,27 +10,39 @@ import org.squat_team.vis.test.importer.IImporter;
 import org.squat_team.vis.test.importer.SimpleTacticsImporter;
 
 public class SimpleTacticsTestClient extends AbstractTestClient {
-	private static final SimpleTacticsImporter IMPORTER = new SimpleTacticsImporter(true);
-	private static final int LEVELS_START_INDEX = 0;
-	private static final int LEVELS_END_INDEX = 2;
+	private IImporter importer;
+	private int levelStartIndex = 0;
+	private int levelEndIndex = 3;
 
+	public SimpleTacticsTestClient() {
+		// Default constructor
+		importer = new SimpleTacticsImporter(true, "");
+	}
+	
+	public SimpleTacticsTestClient(int levelStartIndex, int levelEndIndex) {
+		this.levelStartIndex = levelStartIndex;
+		this.levelEndIndex = levelEndIndex;
+		String projectNameSuffix = getLevelStartIndex() + "-" + (getLevelEndIndex() - 1);
+		importer = new SimpleTacticsImporter(true, projectNameSuffix);
+	}
+	
 	public static void main(String[] args) throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 	InvalidRequestException, IOException, InterruptedException {
-		(new SimpleTacticsTestClient()).mainMethod();
+		(new SimpleTacticsTestClient()).run();
 	}
 	
 	@Override
 	protected IImporter getImporter() {
-		return IMPORTER;
+		return importer;
 	}
 
 	@Override
 	protected int getLevelStartIndex() {
-		return LEVELS_START_INDEX;
+		return levelStartIndex;
 	}
 
 	@Override
 	protected int getLevelEndIndex() {
-		return LEVELS_END_INDEX;
+		return levelEndIndex;
 	}
 }

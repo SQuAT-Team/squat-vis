@@ -36,13 +36,19 @@ public class SimpleTacticsImporter implements IImporter {
 	private Map<String, CGoal> goals = new HashMap<>();
 	private Map<String, CGoal> qualityAttributes = new LinkedHashMap<>();
 	private Map<String, String> parents = new HashMap<String, String>();
+	private String projectNameSuffix;
 
-	public SimpleTacticsImporter(boolean overoptimizationPenalty) {
+	public SimpleTacticsImporter(boolean overoptimizationPenalty, String projectNameSuffix) {
 		this.overoptimizationPenalty = overoptimizationPenalty;
+		this.projectNameSuffix = projectNameSuffix;
 	}
 
 	public CProject importProject() {
-		return new CProject(PROJECT_NAME);
+		String projectName = PROJECT_NAME;
+		if(!(projectNameSuffix == null) && projectNameSuffix.length() != 0 ) {
+			projectName += " " + projectNameSuffix;
+		}
+		return new CProject(projectName);
 	}
 
 	public CToolConfiguration importConfiguration() {

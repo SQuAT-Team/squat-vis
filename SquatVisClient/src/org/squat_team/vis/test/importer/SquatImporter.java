@@ -30,14 +30,20 @@ public class SquatImporter implements IImporter {
 	private Map<String, CGoal> goals = new HashMap<>();
 	private Map<String, CGoal> qualityAttributes = new LinkedHashMap<>();
 	private Map<String, String> parents = new HashMap<String, String>();
+	private String projectNameSuffix;
 
-	public SquatImporter(String filePath) {
+	public SquatImporter(String filePath, String projectNameSuffix) {
 		this.filePath = filePath;
+		this.projectNameSuffix = projectNameSuffix;
 	}
 	
 	public CProject importProject() {
-		return new CProject(PROJECT_NAME);
-	}
+		String projectName = PROJECT_NAME;
+		if(!(projectNameSuffix == null) && projectNameSuffix.length() != 0 ) {
+			projectName += " " + projectNameSuffix;
+		}
+		return new CProject(projectName);
+		}
 	
 	public CToolConfiguration importConfiguration() {
 		CToolConfiguration configuration = DefaultToolConfigurations.getInstance().getSquatDefaultConfiguration();

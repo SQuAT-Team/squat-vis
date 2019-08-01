@@ -13,28 +13,40 @@ import org.squat_team.vis.test.importer.SquatImporter;
 public class SquatTestClient extends AbstractTestClient {
 	private static final String TXT_PATH = "models" + File.separator + "squat-project" + File.separator
 			+ "alternativesRegistry.txt";
-	private static final SquatImporter IMPORTER = new SquatImporter(TXT_PATH);
-	private static final int LEVELS_START_INDEX = 1;
-	private static final int LEVELS_END_INDEX = 2;
+	private IImporter importer;
+	private int levelStartIndex = 0;
+	private int levelEndIndex = 6;
 
+	public SquatTestClient() {
+		// Default constructor
+		importer = new SquatImporter(TXT_PATH, "");
+	}
+	
+	public SquatTestClient(int levelStartIndex, int levelEndIndex) {
+		this.levelStartIndex = levelStartIndex;
+		this.levelEndIndex = levelEndIndex;
+		String projectNameSuffix = getLevelStartIndex() + "-" + (getLevelEndIndex() - 1);
+		importer = new SquatImporter(TXT_PATH, projectNameSuffix);
+	}
+	
 	public static void main(String[] args) throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 	InvalidRequestException, IOException, InterruptedException {
-		(new SquatTestClient()).mainMethod();
+		(new SquatTestClient()).run();
 	}
 	
 	@Override
 	protected IImporter getImporter() {
-		return IMPORTER;
+		return importer;
 	}
 
 	@Override
 	protected int getLevelStartIndex() {
-		return LEVELS_START_INDEX;
+		return levelStartIndex;
 	}
 
 	@Override
 	protected int getLevelEndIndex() {
-		return LEVELS_END_INDEX;
+		return levelEndIndex;
 	}
 
 }
