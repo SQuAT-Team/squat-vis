@@ -21,26 +21,32 @@
 
 <!-- JAVASCRIPT -->
 <h:outputScript library="js" name="popover_activator.js" target="body"></h:outputScript>
+<h:outputScript library="js" name="toolbar.js" target="body"></h:outputScript>
 
 <!-- CSS -->
 <h:outputStylesheet library="css" name="squat_standard_style.css"
 	target="head"></h:outputStylesheet>
 <h:outputStylesheet library="css" name="header.css" target="head"></h:outputStylesheet>
+<h:outputStylesheet library="css" name="toolbar.css" target="head"></h:outputStylesheet>
 
 
 <h:head>
 	<!-- TAB TITLE -->
 	<title>#{sessionInfo.project.name}</title>
 </h:head>
-<h:body class="bg-light">
+<h:body styleClass="fullscreen-view">
 
 	<!-- NAVBAR -->
 	<tp:header>
 	</tp:header>
 
-	<div class="container-fluid">
-		<div class="container">
-
+	<div class="full-width h-100 mh-100 p-0 pb-1">
+		<div class="row h-100 mh-100 p-0 m-0">
+			<!-- SIDEBAR START -->
+			<tp:toolbar>
+			</tp:toolbar>
+			
+		<div id="content" class="h-100 mh-100 ml-auto col-10">
 			<h:form>
 				<h:button value="Visualization" outcome="matrix"></h:button>
 			</h:form>
@@ -54,10 +60,10 @@
 			</div>
 
 			<!-- CONTENTS & STATUS -->
-			<div class="row">
+			<div class="row m-0 p-0">
 
 				<!-- CONTENTS -->
-				<div class="col-3 d-flex flex-column">
+				<div class="col-3 d-flex flex-column pl-0 pr-4">
 					<div class="card text-center bg-white flex-grow-1 mb-4">
 						<div class="card-body">
 							<a href="#" class="stretched-link" style="font-size: 50px;">#{sessionInfo.project.getNumberOfGoals()}</a>
@@ -79,7 +85,7 @@
 				</div>
 
 				<!-- STATUS -->
-				<div class="col-9 d-flex flex-column">
+				<div class="col-9 d-flex flex-column m-0 p-0">
 					<div class="card bg-white flex-grow-1 ">
 						<h2 class="card-header">Status Information</h2>
 						<div class="card-body">
@@ -150,15 +156,14 @@
 				</div>
 
 				<!--  CONFIGURATION INFO -->
-				<div class="card bg-white mt-3 mb-2">
+				<div class="card mt-3 mb-2">
 					<h2 class="card-header">Configuration</h2>
 					<div class="card-body">
 						<p>
 							<strong>Profile: </strong>#{c.name}
 						</p>
-					</div>
-
-					<!-- CONFIGURATION CARDS ROW 1 -->
+						
+											<!-- CONFIGURATION CARDS ROW 1 -->
 					<div class="row text-center mx-2 mb-2">
 						<div class="col-3">
 							<div class="card">
@@ -206,10 +211,12 @@
 							</div>
 						</div>
 					</div>
+					</div>
 				</div>
 			</ui:repeat>
 
 		</div>
+	</div>
 	</div>
 </h:body>
 </html>

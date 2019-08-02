@@ -99,22 +99,22 @@
 	<tp:header>
 	</tp:header>
 
-	<div class="container-fluid h-100 mh-100 ">
-		<div id="graphOptions" class="row h-100 mh-100 #{sessionInfo.getCurrentProjectInfo().graphViewInfo.getShowPopulationStyle()} #{sessionInfo.getCurrentProjectInfo().graphViewInfo.getReduceGraphStyle()} #{sessionInfo.getCurrentProjectInfo().graphViewInfo.getMode()}-active">
+	<div class="full-width h-100 mh-100  p-0 pb-1">
+		<div id="graphOptions" class="row h-100 mh-100 p-0 m-0 #{sessionInfo.getCurrentProjectInfo().graphViewInfo.getShowPopulationStyle()} #{sessionInfo.getCurrentProjectInfo().graphViewInfo.getReduceGraphStyle()} #{sessionInfo.getCurrentProjectInfo().graphViewInfo.getMode()}-active">
 
 			<!-- SIDEBAR START -->
 			<tp:toolbar>
 			</tp:toolbar>
 			<!-- SIDEBAR END -->
 
-			<div id="content" class="h-100 mh-100 ml-auto col-10 px-4 mb-2">
-				<div class="row h-10 mh-10 ">
-					<div id="graphOptionsRow" class="col-6 h-100 mh-100 pb-1">
+			<div id="content" class="h-100 mh-100 ml-auto col-10">
+				<div class="row row-box mh-10 p-1 m-0">
+					<div id="graphOptionsRow" class="col-6 h-100 mh-100 p-0 m-0">
 						<div class="row">
-							<div class="col mt-2">
+							<div class="col">
 								<div class="dropdown">
 									<button style="width: 100%;"
-										class="btn btn-light dropdown-toggle" type="button"
+										class="btn btn-outline-dark dropdown-toggle" type="button"
 										id="graphModeDropdownMenuButton" data-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="false">
 										#{sessionInfo.getCurrentProjectInfo().graphViewInfo.getMode()}</button>
@@ -127,7 +127,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col mt-3">
+							<div class="col">
 								<div class="custom-control custom-checkbox">
 									<c:choose>
 										<c:when
@@ -147,7 +147,7 @@
 									</c:choose>
 								</div>
 							</div>
-							<div class="col mt-3">
+							<div class="col">
 								<div class="custom-control custom-checkbox">
 									<c:choose>
 										<c:when
@@ -175,11 +175,11 @@
 					</div>
 				</div>
 
-				<div class="row h-25 mh-25 ">
-					<div id="starOverview" class="col-2 h-100 mh-100 p-1">
+				<div class="row h-25 mh-25 p-0 pt-1 m-0">
+					<div id="starOverview" class="col-2 h-100 mh-100 p-0 m-0">
 						<div class="card h-100 mh-100">
-							<div class="card-header font-weight-bold">Goals</div>
-							<div class="card-body m-1 p-1 scrollable">
+							<div class="card-header font-weight-bold">GOALS</div>
+							<div class="card-body m-0 p-1 scrollable">
 								<div class="row m-0 p-0 h-100 w-100 mw-100 mh-100">
 									<div class="col-12 m-0 p-0">
 										<div id="starOverviewContent" class="h-100 mh-100 scrollable" style="text-align: center;">
@@ -193,10 +193,10 @@
 							</div>
 						</div>
 					</div>
-					<div id="resourcesOverview" class="col-10 h-100 mh-100 p-1">
+					<div id="resourcesOverview" class="col-10 h-100 mh-100 p-0 pl-1 m-0">
 						<div class="card h-100 mh-100">
-							<div class="card-header font-weight-bold">Resources</div>
-							<div class="card-body m-1 p-1 scrollable">
+							<div class="card-header font-weight-bold">RESOURCES</div>
+							<div class="card-body m-0 p-1 scrollable">
 								<div id="resources-container" class="resources-container h-100 mh-100 mt-0 mb-0 scrollable">
 										<script>
 											renderParallelCoordinates(parsedResources, parsedResourcesMetadata);
@@ -207,21 +207,21 @@
 					</div>
 				</div>
 					
-				<div class="row h-65 mh-65 ">
-					<div id="componentsGraph" class="col-6 h-100 mh-100 p-1">
+				<div class="row h-65 mh-65 p-0 pt-1 m-0">
+					<div id="componentsGraph" class="col-6 h-100 mh-100 p-0 m-0">
 						<div class="card h-100 mh-100">
-							<div class="card-header font-weight-bold">Components</div>
-							<div class="card-body m-1 p-1 scrollable">
+							<div class="card-header font-weight-bold">COMPONENTS</div>
+							<div class="card-body m-0 p-1 scrollable">
 								<div id="architecture-container" class="architecture-container h-100 mh-100 mt-0 mb-0">
 										<script>render(parsedComponents, parsedLinks);</script>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div id="allocationsGraph" class="col-6 h-100 mh-100 p-1">
+					<div id="allocationsGraph" class="col-6 h-100 mh-100 p-0 pl-1 m-0">
 						<div class="card h-100 mh-100">
-							<div class="card-header font-weight-bold">Allocation</div>
-							<div class="card-body m-1 p-1 scrollable">
+							<div class="card-header font-weight-bold">ALLOCATION</div>
+							<div class="card-body m-0 p-1 scrollable">
 								<div id="allocation-container" class="allocation-container h-100 mh-100 mt-0 mb-0">
 										<script>renderBiGraph(parsedComponents2, parsedServers, parsedAllocations);</script>
 								</div>

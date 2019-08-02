@@ -29,6 +29,10 @@ rect {
 	stroke: #000;
 }
 
+.cell.active-cell .frame {
+	stroke: red;
+}
+
 circle {
 	fill: #000000;
 	fill-opacity: 0.8;
@@ -106,6 +110,7 @@ circle.current {
 }
 
 .candidate-radar-container {
+	background-color: white;
 	border: solid;
 	border-width: thin;
 	border-color: black;
@@ -115,6 +120,10 @@ circle.current {
 
 .candidate-radar-container.current {
 	display: inline-block !important;
+}
+
+.candidate-radar-container:hover {
+	background-color: #f8f8f8;
 }
 
 .candidate-radar-star .fa-star {
@@ -143,4 +152,8 @@ circle.current {
 
 #glow {
 	display: none!important;
+}
+
+#matrixDetailedContent {
+	text-align: center;
 }

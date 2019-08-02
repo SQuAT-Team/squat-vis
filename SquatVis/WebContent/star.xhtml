@@ -80,26 +80,26 @@
 	<tp:header>
 	</tp:header>
 
-	<div class="container-fluid h-100 mh-100 ">
+	<div class="full-width h-100 mh-100 p-0 pb-1">
 		<div id="starOptions"
-			class="row h-100 mh-100 #{sessionInfo.getCurrentProjectInfo().starViewInfo.getShowPopulationStyle()}">
+			class="row h-100 mh-100 m-0 p-0 #{sessionInfo.getCurrentProjectInfo().starViewInfo.getShowPopulationStyle()}">
 
 			<!-- SIDEBAR START -->
 			<tp:toolbar>
 			</tp:toolbar>
 			<!-- SIDEBAR END -->
 
-			<div id="content" class="h-100 mh-100 ml-auto col-10 px-4 mb-2">
-				<div class="row h-100 mh-100 ">
-					<div id="starOverview" class="col-6 h-100 mh-100  p-1 ">
+			<div id="content" class="h-100 mh-100 ml-auto col-10">
+				<div class="row h-100 mh-100 p-0 m-0">
+					<div id="starOverview" class="col-6 h-100 mh-100 p-0 m-0 ">
 						<div class="card h-100 mh-100">
-							<div class="card-header font-weight-bold">Detailed</div>
-							<div class="card-body m-1 p-1">
-								<div class="row">
-									<div class="col mt-2">
+							<div class="card-header font-weight-bold">DETAILED</div>
+							<div class="card-body m-0 p-1">
+								<div class="row mh-10 m-0 p-1 pb-2 row-bottom-line">
+									<div class="col m-0 p-0">
 										<div class="dropdown">
 											<button style="width: 100%;"
-												class="btn btn-light dropdown-toggle" type="button"
+												class="btn btn-outline-dark dropdown-toggle" type="button"
 												id="dropdownMenuButtonBig" data-toggle="dropdown"
 												aria-haspopup="true" aria-expanded="false">
 												#{sessionInfo.getCurrentProjectInfo().starViewInfo.getModeBig()}</button>
@@ -113,7 +113,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col mt-3">
+									<div class="col m-0 ml-3 p-0">
 										<div class="custom-control custom-checkbox">
 											<c:choose>
 												<c:when
@@ -135,9 +135,9 @@
 									</div>
 								</div>
 
-								<div class="row m-0 p-0 h-100 w-100 mw-100 mh-100">
+								<div class="row m-0 mt-1 p-0 h-90 w-100 mw-100 mh-90">
 									<div class="col-12 m-0 p-0">
-										<div id="starOverviewContent" class="h-100 mh-100 scrollable">
+										<div class="h-100 mh-100 scrollable">
 											<tp:bigStar usePopulation="true"
 												renderCandidates="parsedValues" population="parsedValues"
 												width="300" outerElementId="'starOverviewContent'" showAxisTooltips="false"
@@ -148,29 +148,20 @@
 							</div>
 						</div>
 					</div>
-					<div id="starDetailed" class="col-6 h-100 mh-100 p-1 ">
+					<div id="starDetailed" class="col-6 h-100 mh-100 p-0 pl-1 m-0 ">
 						<div class="card  h-100 mh-100 ">
-							<div class="card-header font-weight-bold">Candidates</div>
-							<div class="card-body h-100 mh-100 w-100 mw-100"
+							<div class="card-header font-weight-bold">CANDIDATES</div>
+							<div class="card-body m-0 p-1 h-100 mh-100 w-100 mw-100"
 								style="display: flex; flex-direction: column;">
 								<!-- CANDIDATES TOOLBAR -->
-								<div id="starDetailedToolbar" class="mh-15">
-									<div class="row">
-										<div class="col">
-
-											<!-- SEARCH BAR -->
-											<div class="has-search mt-2 mb-2">
-												<span class="fa fa-search form-control-feedback"></span> <input
-													type="text" class="form-control" placeholder="Search"
-													onkeyup="starSearch(this)" />
-											</div>
-										</div>
-										<div class="col">
+								<div id="starDetailedToolbar" class="row-bottom-line mh-10 p-1 pb-2">
+									<div class="row m-0 p-0">
+										<div class="col m-0 mr-2 p-0">
 
 											<!-- DROPDOWN MENU-->
-											<div class="dropdown mt-2 mb-2">
+											<div class="dropdown">
 												<button style="width: 100%;"
-													class="btn btn-light dropdown-toggle" type="button"
+													class="btn btn-outline-dark dropdown-toggle" type="button"
 													id="dropdownMenuButton" data-toggle="dropdown"
 													aria-haspopup="true" aria-expanded="false">
 													#{sessionInfo.getCurrentProjectInfo().starViewInfo.getMode()}</button>
@@ -183,11 +174,20 @@
 												</div>
 											</div>
 										</div>
+										<div class="col">
+
+											<!-- SEARCH BAR -->
+											<div class="has-search">
+												<span class="fa fa-search form-control-feedback"></span> <input
+													type="text" class="form-control" placeholder="Search"
+													onkeyup="starSearch(this)" />
+											</div>
+										</div>
 									</div>
 								</div>
 								
 								<!-- CANDIDATES AREA -->
-								<div id="starDetailedContent" class="m-0 p-0 scrollable mh-85">
+								<div id="starDetailedContent" class="m-0 mt-1 p-0 scrollable mh-90">
 									<div class="d-inline-block">
 										<ui:repeat value="#{sessionInfo.getAllCandidates()}"
 											var="candidate" varStatus="candidateStatus">

@@ -140,7 +140,7 @@ function updateStarElements(id, addSelector, removeSelector, moveToFront){
 function updateStarPopulationElements(id, addSelector, removeSelector){
 	var starContainer = d3.select("#starOverviewContent");
 	var starRadarWrapper = starContainer.selectAll("g.radarWrapper.c"+id);
-	var starRadarCircleWrapper = starContainer.selectAll("g.radarWrapper.c"+id);
+	var starRadarCircleWrapper = starContainer.selectAll("g.radarCircleWrapper.c"+id);
 	if(addSelector){
 		starRadarWrapper.classed(addSelector, true);
 		starRadarCircleWrapper.classed(addSelector, true);
@@ -154,7 +154,7 @@ function updateStarPopulationElements(id, addSelector, removeSelector){
 function updateStarPopulationElementsWithSelector(selector, addSelector, removeSelector){
 	var starContainer = d3.select("#starOverviewContent");
 	var starRadarWrapper = starContainer.selectAll("g.radarWrapper."+selector);
-	var starRadarCircleWrapper = starContainer.selectAll("g.radarWrapper."+selector);
+	var starRadarCircleWrapper = starContainer.selectAll("g.radarCircleWrapper."+selector);
 	if(addSelector){
 		starRadarWrapper.classed(addSelector, true);
 		starRadarCircleWrapper.classed(addSelector, true);
@@ -168,7 +168,7 @@ function updateStarPopulationElementsWithSelector(selector, addSelector, removeS
 function updateAllStarElements(addSelector, removeSelector){
 	var starContainer = d3.select("#starOverviewContent");
 	var starRadarWrapper = starContainer.selectAll("g.radarWrapper");
-	var starRadarCircleWrapper = starContainer.selectAll("g.radarWrapper");
+	var starRadarCircleWrapper = starContainer.selectAll("g.radarCircleWrapper");
 	if(addSelector){
 		starRadarWrapper.classed(addSelector, true);
 		starRadarCircleWrapper.classed(addSelector, true);

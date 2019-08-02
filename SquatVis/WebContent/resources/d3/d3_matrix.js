@@ -255,6 +255,7 @@ function render(data) {
       .data(cross(traits, traits))
       .enter().append("g")
       .attr("class", "cell")
+      .classed("active-cell", function(d){return d.i == traits.length-1 && d.j == 0})
       .attr("x-trait", function(d){return traits[d.i]})
       .attr("y-trait", function(d){return traits[d.j]})
       .attr("transform", function(d) {
@@ -483,6 +484,9 @@ function render(data) {
 	  // Get trait names
 	  var xTrait = this.getAttribute("x-trait");
 	  var yTrait = this.getAttribute("y-trait");
+	  
+	  d3.selectAll("g.cell").classed("active-cell", false);
+	  d3.select(this).classed("active-cell", true);
 
 	  xBig.domain(domainByTrait[xTrait]);
 	  yBig.domain(domainByTrait[yTrait]);

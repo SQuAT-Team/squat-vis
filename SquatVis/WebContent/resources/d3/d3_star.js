@@ -58,10 +58,10 @@ function RadarChart(id, data, options, populationData) {
 	// SET INITIAL RESPONSIVE WIDTH
 	if(cfg.responsiveWidth){
 		var element = document.getElementById(cfg.responsiveId);
-		var width = element.clientWidth - cfg.margin.left - cfg.margin.right;
+		var width = element.clientWidth - cfg.margin.left - cfg.margin.right -10;
 		var height = element.clientHeight - cfg.margin.top - cfg.margin.bottom;
-		cfg.w = Math.min(width, height);
-		cfg.h = Math.min(width, height);
+		cfg.w = Math.max(Math.min(width, height), cfg.minSize);
+		cfg.h = Math.max(Math.min(width, height), cfg.minSize);
 	}
 
 	var traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "Parent") && (d !== "ParetoTags") && (d !== "SuggestionTags")); });
@@ -143,12 +143,12 @@ function RadarChart(id, data, options, populationData) {
 
 	// Responsive Resize
 	if(cfg.resize){
-		window.onresize = resize;			
+		//window.onresize = resize;			
 	}
 
 	function resize(){
 		var element = document.getElementById(cfg.responsiveId);
-		var width = element.clientWidth - cfg.margin.left - cfg.margin.right;
+		var width = element.clientWidth - cfg.margin.left - cfg.margin.right -10;
 		var height = element.clientHeight - cfg.margin.top - cfg.margin.bottom;
 		cfg.w = Math.max(Math.min(width, height), cfg.minSize);
 		cfg.h = Math.max(Math.min(width, height), cfg.minSize);

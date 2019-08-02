@@ -27,10 +27,15 @@
 }
 
 .candidate-radar-container {
+	background-color: white;
 	border: solid;
 	border-width: thin;
 	border-color: black;
 	margin: 1px;
+}
+
+.candidate-radar-container:hover {
+	background-color: #f8f8f8;
 }
 
 .candidate-radar-star .fa-star {
@@ -112,7 +117,12 @@
 
 #starDetailedContent .candidate-radar-container.current {
 	border-color: #00ffff;
-	background-color: rgba(0, 255, 255, 0.1);
+	background-color: rgba(230, 255, 255, 1.0);
+}
+
+#starDetailedContent .candidate-radar-container.current:hover {
+	border-color: #00ffff;
+	background-color: rgba(210, 255, 255, 1.0);
 }
 
 #starOverviewContent .radarWrapper .radarArea {

@@ -45,7 +45,7 @@
 	stroke: #7000cf;
 }
 
-#graphOptions g.radarWrapper.selected.not(.current) .radarCircle {
+#graphOptions g.radarWrapper.selected:not(.current) .radarCircle {
 	fill: #7000cf;
 }
 
@@ -140,18 +140,12 @@ path.resource-line.current {
   stroke-opacity: 1.0;
 }
 
-.nodes circle {
-  stroke: #ccc;
-  stroke-width: 1.5px;
-}
-
 .servers rect {
   stroke: #ccc;
   stroke-width: 1.5px;
 }
 
 text {
-  font-family: sans-serif;
   font-size: 10px;
 }
 
