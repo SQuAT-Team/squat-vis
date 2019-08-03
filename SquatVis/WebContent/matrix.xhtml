@@ -67,6 +67,8 @@ MODIFIED: Sebastian Frank
 	<script>					
 		var candidateValues = '#{sessionInfo.getProjectDataAsCSV()}';
 		var parsedValues = d3.csvParse(candidateValues);
+		
+		var useMinimizedMatrixOption = ${sessionInfo.getCurrentProjectInfo().optionsInfo.getUseMinimizedMatrix()};
 	</script>
 	<h:form>
 		<h:panelGroup id="colorMappingsDiv">

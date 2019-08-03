@@ -31,7 +31,7 @@ var width = 960,
     // tooltip
     var cellTip = d3.tip().attr('class', 'd3-tip').html(function(d) { return "x: " + traits[d.i] + " y: " + traits[d.j]; });
 
-render(parsedValues);
+render(parsedValues, useMinimizedMatrixOption);
 window.onresize = resize;
 
 function resize(){
@@ -107,7 +107,7 @@ function resizeBig(){
     redrawParent();
 }
 
-function render(data) {
+function render(data, useMinimizedMatrixOption) {
   var widthBig = document.getElementById('matrixDetailedContent').clientWidth;
   var heightBig = document.getElementById('matrixDetailedContent').clientHeight;
   traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "Parent") && (d !== "ParetoTags") && (d !== "SuggestionTags")); });
@@ -252,7 +252,7 @@ function render(data) {
   cellBig.call(brushBig);
 
   var cell = svg.selectAll(".cell")
-      .data(cross(traits, traits))
+      .data(cross(traits, traits, useMinimizedMatrixOption))
       .enter().append("g")
       .attr("class", "cell")
       .classed("active-cell", function(d){return d.i == traits.length-1 && d.j == 0})
@@ -509,12 +509,16 @@ function render(data) {
   }
 }
 
-function cross(a, b) {
+function cross(a, b, minimize) {
   var c = [], n = a.length, m = b.length, i, j;
   for (i = -1;n > ++i;){
+	  if(minimize){
+		  m = i + 1;
+	  }
 	  for (j = -1;m > ++j; ){
 		  c.push({x: a[i], i: i, y: b[j], j: j});
 	  }
 	}
   return c;
 }
+

@@ -19,6 +19,15 @@ function selectorAllSuggestedToCurrent(){
 	setAllSelectorCurrent(getCandidateIdsWithElement(".suggestion-on"));
 }
 
+function changeUseMinimizedMatrix(){
+	var checkboxValue = $("#useMinimizedMatrixCheckbox").prop("checked");
+	// notify backend
+	setUseMinimizedMatrix_application([ {
+		name : 'param',
+		value : checkboxValue
+	} ]);
+}
+
 function getCandidateIdsWithElement(element){
 	var candidateItems = $("div.list-group.candidate-list.toolbarAll")
 	.children(".candidate-item");

@@ -122,6 +122,13 @@
 		<pf:remoteCommand name="selectorExportAllSelected_application"
 			action="#{sessionInfo.getCurrentProjectInfo().selectorInfo.selectorExportAllSelected}" />
 	</h:form>
+	
+	<!-- Options Interface -->
+	<h:form>
+		<pf:remoteCommand name="setUseMinimizedMatrix_application"
+			action="#{sessionInfo.getCurrentProjectInfo().optionsInfo.setUseMinimizedMatrix}" />
+	</h:form>
+	
 </composite:implementation>
 
 </html>

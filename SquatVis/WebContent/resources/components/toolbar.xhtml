@@ -145,6 +145,23 @@
 					aria-labelledby="tab-options-tab">
 					<!-- OPTIONS START -->
 
+						<div class="custom-control custom-checkbox">
+							<c:choose>
+								<c:when
+									test="${sessionInfo.getCurrentProjectInfo().optionsInfo.getUseMinimizedMatrix()}">
+									<input type="checkbox" id="useMinimizedMatrixCheckbox"
+										class="custom-control-input" checked="true"
+										onchange="changeUseMinimizedMatrix()"> <label
+										class="custom-control-label" for="useMinimizedMatrixCheckbox">Minimize Matrix</label> </input>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" id="useMinimizedMatrixCheckbox"
+										class="custom-control-input" onchange="changeUseMinimizedMatrix()">
+										<label class="custom-control-label"
+										for="useMinimizedMatrixCheckbox">Minimize Matrix</label> </input>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					<!-- OPTIONS END -->
 				</div>
 			</div>
