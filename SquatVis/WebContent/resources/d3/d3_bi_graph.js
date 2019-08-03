@@ -155,9 +155,10 @@ function renderBiGraph(nodes, serverNodes, links){
   
   circlesBiGraph = nodeBiGraph.append("circle")
       .attr("r", function(d) { return d.currentRadius; })
-      .attr("fill", function(d) { return biGraphColor(0); })
       .attr("candidates", function(d){ return d.Candidates })
-	  .style("opacity", 0.0)
+      .classed("contains-current", function(d){
+		  return d.currentCandidatesCount > 0;
+	  })
       .call(d3.drag()
           .on("start", dragstartedBiGraph)
           .on("drag", draggedBiGraph)
@@ -174,7 +175,9 @@ function renderBiGraph(nodes, serverNodes, links){
         return d.Name;
       })
       .attr('x', 0)
-      .attr('y', function(d){return d.currentRadius + textMarginBiGraph;});
+      .attr('y', function(d){return d.currentRadius + textMarginBiGraph;})
+      .style("pointer-events", "none");
+
   
   var rectLabels = servers.append("text")
 	  .attr("class", "server-node-text")
@@ -357,6 +360,7 @@ function updateBiGraphCurrentNodes(){
 		  var pie = d3.pie().sort(null)
 		  .value(function(d) {return d.value; });
 		  d.data_ready = pie(d3.entries(data));
+		  d.currentCandidatesCount = currentCandidatesCount;
 		  arcBiGraph = d3.arc()
 		    .innerRadius(0)
 		    .outerRadius(d.currentRadius);
@@ -401,7 +405,11 @@ function updateBiGraphCurrentNodes(){
 	  })
 	  
 	  // circle should be in front, otherwise no dragging
-	  arcsBiGraph.selectAll("circle").moveToFront();
+	  arcsBiGraph.selectAll("circle")
+	  .classed("contains-current", function(d){
+		  return d.currentCandidatesCount > 0;
+	  })
+	  .moveToFront();
 }
 
 function markReducedBiGraph(links, currentLinks, selectLinks, comparisonLinks, nodes, servers, maxValue){	

@@ -130,9 +130,10 @@ function render(nodes, links){
 
   circles = node.append("circle")
       .attr("r", function(d) { return d.currentRadius; })
-      .attr("fill", function(d) { return graphColor(0); })
       .attr("candidates", function(d){ return d.Candidates })
-	  .style("opacity", 0.0)
+	  .classed("contains-current", function(d){
+		  return d.currentCandidatesCount > 0;
+	  })
       .call(d3.drag()
           .on("start", dragstarted)
           .on("drag", dragged)
@@ -338,6 +339,8 @@ function updateGraphCurrentNodes(){
 		  var pie = d3.pie().sort(null)
 		  .value(function(d) {return d.value; });
 		  d.data_ready = pie(d3.entries(data));
+		  d.currentCandidatesCount = currentCandidatesCount;
+		  
 		  arc = d3.arc()
 		    .innerRadius(0)
 		    .outerRadius(d.currentRadius);
@@ -382,7 +385,11 @@ function updateGraphCurrentNodes(){
 	  })
 	  
 	  // circle should be in front, otherwise no dragging
-	  arcs.selectAll("circle").moveToFront();
+	  arcs.selectAll("circle")
+	  .classed("contains-current", function(d){
+		  return d.currentCandidatesCount > 0;
+	  })
+	  .moveToFront();
 }
 
 function markReduced(links, currentLinks, selectLinks, comparisonLinks, nodes, maxValue){
