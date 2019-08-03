@@ -2,6 +2,7 @@ package org.squat_team.vis.transformers;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class CsvExporterTest {
 	public void test() {
 		Project project = initializeTestProject();
 		CsvExporter csvExporter = new CsvExporter();
-		assertEquals(expectedResult, csvExporter.export(project, new ProjectInfo()));
+		assertEquals(expectedResult, csvExporter.export(project, new ProjectInfo(new ArrayList<Candidate>())));
 	}
 
 	private Project initializeTestProject() {

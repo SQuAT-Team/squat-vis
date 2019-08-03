@@ -1,7 +1,9 @@
 package org.squat_team.vis.session;
 
 import java.io.Serializable;
+import java.util.List;
 
+import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Project;
 
 import lombok.Data;
@@ -17,7 +19,11 @@ public class ProjectInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = 8781120400605216186L;
 	
-	private SelectorInfo selectorInfo = new SelectorInfo();
+	public ProjectInfo(List<Candidate> candidates) {
+		selectorInfo = new SelectorInfo(candidates);
+	}
+	
+	private SelectorInfo selectorInfo;
 	private ColorInfo colorInfo = new ColorInfo();
 	private OptionsInfo optionsInfo = new OptionsInfo();
 	private TagInfo tagInfo = new TagInfo(optionsInfo);

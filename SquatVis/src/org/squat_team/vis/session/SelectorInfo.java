@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.faces.context.FacesContext;
 
 import org.squat_team.vis.connector.style.CandidateSelectorCSSProvider;
+import org.squat_team.vis.data.data.Candidate;
 
 import lombok.Data;
 
@@ -29,6 +30,18 @@ public class SelectorInfo implements Serializable {
 	private Set<String> current = new HashSet<>();
 	private Set<String> comparison = new HashSet<>();
 
+	public SelectorInfo(List<Candidate> candidates) {
+		addSuggestedCandidatesAsSelected(candidates);
+	}
+	
+	private void addSuggestedCandidatesAsSelected(List<Candidate> candidates) {
+		for(Candidate candidate : candidates) {
+			if(candidate.isSuggested()) {
+				selected.add(candidate.getCandidateId().toString());
+			}
+		}
+	}
+	
 	public void addSelected() {
 		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
 		selected.add(id);

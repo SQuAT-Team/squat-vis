@@ -51,7 +51,7 @@ public class SessionInfo implements Serializable {
 			return null;
 		}
 		long projectId = project.getId();
-		return projectInfos.computeIfAbsent(projectId, k -> new ProjectInfo());
+		return projectInfos.computeIfAbsent(projectId, k -> new ProjectInfo(getAllCandidates()));
 	}
 
 	public List<Candidate> getAllCandidates() {
