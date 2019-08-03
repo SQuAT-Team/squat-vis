@@ -20,7 +20,7 @@ public class ArchitectureComponentsToCSVExporter {
 	private boolean useNameInsteadOfId;
 	
 	public String export(Project project, ProjectInfo projectInfo) {
-		useNameInsteadOfId = projectInfo.getOptionsInfo().isUseNameInsteadOfId();
+		useNameInsteadOfId = projectInfo.getOptionsInfo().getUseNameInsteadOfId();
 		StringBuilder contentBuilder = new StringBuilder();
 		exportHeader(contentBuilder);
 		findComponentsInLevels(project.getLevels());

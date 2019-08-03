@@ -162,6 +162,24 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
+						
+						<div class="custom-control custom-checkbox">
+							<c:choose>
+								<c:when
+									test="${sessionInfo.getCurrentProjectInfo().optionsInfo.getUseNameInsteadOfId()}">
+									<input type="checkbox" id="useUseNameInsteadOfIdCheckbox"
+										class="custom-control-input" checked="true"
+										onchange="changeUseNameInsteadOfId()"> <label
+										class="custom-control-label" for="useUseNameInsteadOfIdCheckbox">Name as ID</label> </input>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" id="useUseNameInsteadOfIdCheckbox"
+										class="custom-control-input" onchange="changeUseNameInsteadOfId()">
+										<label class="custom-control-label"
+										for="useUseNameInsteadOfIdCheckbox">Name as ID</label> </input>
+								</c:otherwise>
+							</c:choose>
+						</div>
 					<!-- OPTIONS END -->
 				</div>
 			</div>

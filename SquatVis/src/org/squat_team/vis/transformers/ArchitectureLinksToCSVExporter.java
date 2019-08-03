@@ -18,7 +18,7 @@ public class ArchitectureLinksToCSVExporter {
 	private boolean useNameInsteadOfId;
 
 	public String export(Project project, ProjectInfo projectInfo) {
-		useNameInsteadOfId = projectInfo.getOptionsInfo().isUseNameInsteadOfId();
+		useNameInsteadOfId = projectInfo.getOptionsInfo().getUseNameInsteadOfId();
 		StringBuilder contentBuilder = new StringBuilder();
 		exportHeader(contentBuilder);
 		findLinksInLevels(project.getLevels());

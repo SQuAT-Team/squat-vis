@@ -28,6 +28,15 @@ function changeUseMinimizedMatrix(){
 	} ]);
 }
 
+function changeUseNameInsteadOfId(){
+	var checkboxValue = $("#useUseNameInsteadOfIdCheckbox").prop("checked");
+	// notify backend
+	setUseNameInsteadOfId_application([ {
+		name : 'param',
+		value : checkboxValue
+	} ]);
+}
+
 function getCandidateIdsWithElement(element){
 	var candidateItems = $("div.list-group.candidate-list.toolbarAll")
 	.children(".candidate-item");
