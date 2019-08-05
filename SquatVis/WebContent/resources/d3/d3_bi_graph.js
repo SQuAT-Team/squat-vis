@@ -5,7 +5,6 @@ const rectWidthBigGraph = 40;
 const rectHeightBigGraph = 20;
 const minLineWithBiGraph = 1;
 const maxLineWithBiGraph = 11;
-const linkDistanceBiGraph = 75;
 const textMarginBiGraph = 10;
 
 const nodeComponentPrefixBiGraph = "node-bi-graph-component-";

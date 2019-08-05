@@ -3,7 +3,6 @@ const minRadius = 5;
 const maxRadius = 25;
 const minLineWith = 1;
 const maxLineWith = 11;
-const linkDistance = 75;
 const textMargin = 10;
 
 const nodeComponentPrefix = "node-component-";

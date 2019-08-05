@@ -11,7 +11,7 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <!-- LIBS -->
-<h:outputScript library="lib" name="jquery.min.js" target="body"></h:outputScript>
+<h:outputScript library="lib" name="jquery.min.js" target="head"></h:outputScript>
 <h:outputScript library="lib" name="popper.min.js" target="body"></h:outputScript>
 <h:outputStylesheet name="fontawesome/css/all.css" target="head"></h:outputStylesheet>
 <h:outputScript library="lib" name="jquery.contextMenu.min.js"
@@ -93,6 +93,9 @@
 		var parsedValues = d3.csvParse(candidateValues);
 		var parsedServers = d3.csvParse(architectureServers);
 		var parsedAllocations = d3.csvParse(architectureAllocations);
+		
+		var linkDistance = #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength};
+		var linkDistanceBiGraph = #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength};
 	</script>
 
 	<!-- NAVBAR -->

@@ -145,6 +145,7 @@
 					aria-labelledby="tab-options-tab">
 					<!-- OPTIONS START -->
 
+						<!-- MINIMIZED MATRIX OPTION -->
 						<div class="custom-control custom-checkbox">
 							<c:choose>
 								<c:when
@@ -163,6 +164,7 @@
 							</c:choose>
 						</div>
 						
+						<!-- NAME AS ID OPTION -->
 						<div class="custom-control custom-checkbox">
 							<c:choose>
 								<c:when
@@ -180,6 +182,17 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
+						
+						<!-- LINK LENGTH OPTION -->
+						<h:form>
+							<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
+								<h:outputText id="output1" value="Link Length: #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength}"></h:outputText>
+								<h:inputHidden id="txt1" value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength}"></h:inputHidden>
+								<pf:slider for="txt1"  minValue="10" maxValue="200" display="output1" style="width: auto;" displayTemplate="Link length: {value}">
+									<pf:ajax event="slideEnd" process="txt1" />
+								</pf:slider>
+							</h:panelGrid>
+						</h:form>
 					<!-- OPTIONS END -->
 				</div>
 			</div>
