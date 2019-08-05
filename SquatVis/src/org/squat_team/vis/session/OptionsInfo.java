@@ -26,7 +26,7 @@ public class OptionsInfo implements Serializable {
 	private boolean useNameInsteadOfId = true;
 	private boolean useMinimizedMatrix = true;
 	private int linkLength = 75;
-	private double populationTransparency = 0.15;
+	private float populationTransparency = 0.15f;
 	
 	public void setUseNameInsteadOfId() {
 		String newState = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
