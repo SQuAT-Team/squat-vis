@@ -10,11 +10,17 @@
 	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
 
 <composite:interface>
+	<composite:attribute name="activeElement" />
 </composite:interface>
 
 <composite:implementation>
 	<!-- As a heading -->
-	<nav class="navbar navbar-light fixed-top bg-dark">
+	<nav class="navbar fixed-top bg-dark navbar-expand-lg navbar-white navbar-dark bg-inverse">
+	<button class="navbar-toggler navbar-toggle-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    	<span class="navbar-toggler-icon"></span>
+  	</button>
+	
+	<!-- Status and Project Name -->
 	<div class="navbar-brand mb-0 h1">
 		<h:form>
 			<h:panelGroup id="status">
@@ -29,11 +35,41 @@
 				styleClass="invisible" />
 		</h:form>
 	</div>
+	
+	<!-- Navigation -->
+  	<div class="collapse navbar-collapse #{cc.attrs.activeElement}" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item project-element">
+        <h:link styleClass="nav-link" outcome="project">
+          <span class="custom-icon icon-project"/>
+        Project</h:link>
+      </li>
+      <li class="nav-item matrix-element">
+        <h:link styleClass="nav-link" outcome="matrix">
+          <span class="custom-icon icon-matrix"/>
+        Population</h:link>
+      </li>
+      <li class="nav-item star-element">
+        <h:link styleClass="nav-link" outcome="star">
+          <span class="custom-icon icon-star"/>
+        Candidates</h:link>
+      </li>
+      <li class="nav-item graph-element">
+        <h:link styleClass="nav-link" outcome="graph">
+          <span class="custom-icon icon-graph"/>
+        Architecture</h:link>
+      </li>
+    </ul>
+  </div>
+	
+	<!-- Leave Project Button -->
 	<h:form>
 		<h:link outcome="projects">
-			<h:panelGroup styleClass="fas fa-level-down-alt text-white"></h:panelGroup>
+			<h:panelGroup pt:title="Leave Project" styleClass="fas fa-level-down-alt text-white"></h:panelGroup>
 		</h:link>
-	</h:form> </nav>
+	</h:form> 
+	
+	</nav>
 </composite:implementation>
 
 </html>

@@ -13,6 +13,68 @@
 	position: absolute;
 }
 
+.navbar-white a {
+	color: #fff!important;
+}
+
+.navbar-toggler-icon {
+	color: rgba(255,255,255,1.0);
+}
+
+.navbar-dark .navbar-toggler {
+	color: rgba(255,255,255,0);
+	border-color: rgba(255,255,255,0);
+}
+
+.custom-icon {
+	margin-right: 3px;
+	background-size: cover;
+	background-position: center center;
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	vertical-align: middle;
+}
+
+.icon-matrix {
+	background-image: url("#{resource['icons:Matrix.svg']}");
+}
+
+.icon-star {
+	background-image: url("#{resource['icons:Star.svg']}");
+}
+
+.icon-graph {
+	background-image: url("#{resource['icons:Graph.svg']}");
+}
+
+.icon-project {
+	background-image: url("#{resource['icons:Project.svg']}");
+}
+
+.nav-item {
+	margin-right: 10px;
+	font-size: 18px;
+	font-weight: 400;
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgba(255,255,255,0.0);
+}
+
+.nav-item:hover {
+	background-color: rgba(255,255,255,0.1);
+	border-color: rgba(255,255,255,0.4);
+}
+
+.project .nav-item.project-element,
+.matrix .nav-item.matrix-element,
+.star .nav-item.star-element,
+.graph .nav-item.graph-element
+ {
+	background-color: rgba(255,255,255,0.1);
+	border-color: rgba(255,255,255,0.4);
+}
+
 body { 
     padding-top: 65px; 
 }

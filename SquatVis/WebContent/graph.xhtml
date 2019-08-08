@@ -59,6 +59,7 @@
 
 <h:head id="head">
 	<title>Graph</title>
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['icons/Graph_fav32.ico']}"/>
 	<style>
 	.radarStrokePopulation {opacity: #{sessionInfo.getCurrentProjectInfo().optionsInfo.populationTransparency};}
 	</style>
@@ -102,7 +103,7 @@
 	</script>
 
 	<!-- NAVBAR -->
-	<tp:header>
+	<tp:header activeElement="graph">
 	</tp:header>
 
 	<div class="full-width h-100 mh-100  p-0 pb-1">

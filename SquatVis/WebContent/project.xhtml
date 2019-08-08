@@ -43,11 +43,12 @@
 <h:head>
 	<!-- TAB TITLE -->
 	<title>#{sessionInfo.project.name}</title>
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['icons/Project_fav32.ico']}"/>
 </h:head>
 <h:body styleClass="fullscreen-view">
 
 	<!-- NAVBAR -->
-	<tp:header>
+	<tp:header activeElement="project">
 	</tp:header>
 
 	<div class="full-width h-100 mh-100 p-0 pb-1">
@@ -57,9 +58,6 @@
 			</tp:toolbar>
 			
 		<div id="content" class="h-100 mh-100 ml-auto col-10">
-			<h:form>
-				<h:button value="Visualization" outcome="matrix"></h:button>
-			</h:form>
 			<!-- TOP PROJECT NAME -->
 			<div class="jumbotron mt-2 pb-4 pt-4 mb-3">
 				<h1 class="display-4">#{sessionInfo.project.name} (ID:
