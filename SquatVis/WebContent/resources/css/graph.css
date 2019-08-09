@@ -211,3 +211,13 @@ g.nodes circle.contains-current {
 	stroke: #00cfcf;
 	stroke-width: 2px;
 }
+
+g.nodes g.node.node-highlight text {
+	font-weight: 600;
+	fill: #ff8000;
+}
+
+g.nodes g.node.node-highlight circle {
+	stroke: #ff8000;
+	stroke-width: 2px;
+}

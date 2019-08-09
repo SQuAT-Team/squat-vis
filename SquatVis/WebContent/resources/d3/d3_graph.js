@@ -52,7 +52,7 @@ function render(nodes, links){
 	
 	simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.ID; }))
-    .force("charge", d3.forceManyBody())
+    .force("charge", d3.forceManyBody().strength(-80).distanceMax(250))
     .force("center", d3.forceCenter(cfgGraph.width / 2, cfgGraph.height / 2));
 
     linkContainer = svg.append("g")
@@ -132,8 +132,9 @@ function render(nodes, links){
       .attr("candidates", function(d){ return d.Candidates })
 	  .classed("contains-current", function(d){
 		  return d.currentCandidatesCount > 0;
-	  })
-      .call(d3.drag()
+	  });
+  
+  node.call(d3.drag()
           .on("start", dragstarted)
           .on("drag", dragged)
           .on("end", dragended));
@@ -170,11 +171,9 @@ function render(nodes, links){
 	    tickLinks(selectLink);
 	    tickLinks(link);
 	    tickLinks(comparisonLink);
-	    	    
-    node
-    .attr("transform", function(d) {
-    return "translate(" + limit(d.x, cfgGraph.width) + "," + limit(d.y, cfgGraph.height) + ")";
-    });
+	    
+    node.attr("transform", function(d) {
+    	    	return "translate(" + limit(d.x, cfgGraph.width) + "," + limit(d.y, cfgGraph.height) + ")";});
   }
   
   function createArrowHeads(min, max, element){
@@ -210,7 +209,12 @@ function render(nodes, links){
 };
 
 function dragstarted(d) {
+  var node =  d3.select(this);
+  node.moveToFront();
+  node.classed("node-highlight", true);
+      
   if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+  simulation.alpha(0);
   d.fx = d.x;
   d.fy = d.y;
 }
@@ -221,7 +225,11 @@ function dragged(d) {
 }
 
 function dragended(d) {
+  var node =  d3.select(this);
+  node.classed("node-highlight", false);
+  
   if (!d3.event.active) simulation.alphaTarget(0);
+  simulation.alpha(1);
   d.fx = null;
   d.fy = null;
 }

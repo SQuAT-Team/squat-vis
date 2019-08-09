@@ -56,9 +56,9 @@ function renderBiGraph(nodes, serverNodes, links){
 	
 	simulationBiGraph = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.ID; }))
-    .force("charge", d3.forceManyBody())
+    .force("charge", d3.forceManyBody().strength(-80).distanceMax(250))
     .force("center", d3.forceCenter(cfgGraph.width / 2, cfgGraph.height / 2));
-    
+	    
     linkContainerBiGraph = svgBiGraph.append("g")
     .attr("class", "links");
     
@@ -119,8 +119,8 @@ function renderBiGraph(nodes, serverNodes, links){
     .attr("width",  rectWidthBigGraph)
     .attr("fill", function(d) { return biGraphColor(1); })
     .attr("class",function(d){ return "server server-id-" + d.ID; })
-    .attr("server-id", function(d){ return d.ID; })
-    .call(d3.drag()
+    .attr("server-id", function(d){ return d.ID; });
+    servers.call(d3.drag()
         .on("start", dragstartedBiGraph)
         .on("drag", draggedBiGraph)
         .on("end", dragendedBiGraph));
@@ -157,8 +157,8 @@ function renderBiGraph(nodes, serverNodes, links){
       .attr("candidates", function(d){ return d.Candidates })
       .classed("contains-current", function(d){
 		  return d.currentCandidatesCount > 0;
-	  })
-      .call(d3.drag()
+	  });
+  nodeBiGraph.call(d3.drag()
           .on("start", dragstartedBiGraph)
           .on("drag", draggedBiGraph)
           .on("end", dragendedBiGraph));
@@ -233,7 +233,12 @@ function renderBiGraph(nodes, serverNodes, links){
 };
 
 function dragstartedBiGraph(d) {
+  var node =  d3.select(this);
+  node.moveToFront();
+  node.classed("node-highlight", true);
+	  
   if (!d3.event.active) simulationBiGraph.alphaTarget(0.3).restart();
+  simulation.alpha(0);
   d.fx = d.x;
   d.fy = d.y;
 }
@@ -244,7 +249,11 @@ function draggedBiGraph(d) {
 }
 
 function dragendedBiGraph(d) {
+  var node =  d3.select(this);
+  node.classed("node-highlight", false);
+  
   if (!d3.event.active) simulationBiGraph.alphaTarget(0);
+  simulation.alpha(1);
   d.fx = null;
   d.fy = null;
 }
