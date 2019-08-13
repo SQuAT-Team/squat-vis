@@ -440,19 +440,18 @@ function render(data, useMinimizedMatrixOption) {
         .style("pointer-events", "none");
      }
 
-  var brushCellBig;
   var brushCell;
 
   // Clear the previously-active brush, if any.
   function brushstartBig(p) {
-    if (brushCellBig !== this) {
+    if (brushCell !== this) {
       var xTrait = this.getAttribute("x-trait");
       var yTrait = this.getAttribute("y-trait");
       xBig.domain(domainByTrait[xTrait]);
       yBig.domain(domainByTrait[yTrait]);
-      brushCellBig = this;
+      d3.select(brushCell).call(brushBig.move, null);
+      brushCell = this;
     }
-    d3.select(brushCellBig).call(brushBig.move, null);
 	selectorClearCurrent();
   }
 
@@ -486,9 +485,9 @@ function render(data, useMinimizedMatrixOption) {
     if (brushCell !== this) {
       x.domain(domainByTrait[p.x]);
       y.domain(domainByTrait[p.y]);
+      d3.select(brushCell).call(brush.move, null);
       brushCell = this;
     }
-    d3.select(brushCell).call(brush.move, null);
 	selectorClearCurrent();
   }
 
