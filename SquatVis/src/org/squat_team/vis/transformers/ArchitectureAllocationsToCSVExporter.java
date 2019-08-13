@@ -12,7 +12,7 @@ import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.session.ProjectInfo;
 
-public class ArchitectureAllocationsToCSVExporter {
+public class ArchitectureAllocationsToCSVExporter extends AbstractExporter {
 	private static final String CANDIDATE_SEPARATOR = " + ";
 	private Map<String, Entry> allocations = new HashMap<>();
 	private boolean useNameInsteadOfId;
@@ -21,7 +21,7 @@ public class ArchitectureAllocationsToCSVExporter {
 		useNameInsteadOfId = projectInfo.getOptionsInfo().getUseNameInsteadOfId();
 		StringBuilder contentBuilder = new StringBuilder();
 		exportHeader(contentBuilder);
-		findAllocationsInLevels(project.getLevels());
+		findAllocationsInLevels(findActiveLevels(project, projectInfo));
 		exportAllocations(contentBuilder);
 		return contentBuilder.toString();
 	}

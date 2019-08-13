@@ -12,7 +12,7 @@ import org.squat_team.vis.session.ProjectInfo;
 /**
  * Exports the current data as CSV. The csv data can then be parsed by d3.
  */
-public class CsvExporter {
+public class CsvExporter extends AbstractExporter {
 	private ProjectInfo projectInfo;
 
 	/**
@@ -29,7 +29,7 @@ public class CsvExporter {
 		exportParentHeader(contentBuilder);
 		exportTagsHeader(contentBuilder);
 		exportGoals(project.getGoal(), contentBuilder);
-		exportLevels(project.getLevels(), contentBuilder);
+		exportLevels(findActiveLevels(project, projectInfo), contentBuilder);
 		return contentBuilder.toString();
 	}
 
@@ -69,8 +69,8 @@ public class CsvExporter {
 	}
 
 	private void exportLevels(List<Level> levels, StringBuilder contentBuilder) {
-		for (Level level : levels) {
-			exportLevel(level, contentBuilder);
+		for (Level currentLevel: levels) {
+			exportLevel(currentLevel, contentBuilder);
 		}
 	}
 

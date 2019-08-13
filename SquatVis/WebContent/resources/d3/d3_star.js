@@ -334,7 +334,7 @@ function RadarChart(id, data, options, populationData) {
 		return g.selectAll(".radarWrapper")
 			.data(data)
 			.enter().append("g")
-			.attr("class", function(d){return "radarWrapper" + " c" +d ["ID"] + " " + d["SelectorTags"];})
+			.attr("class", function(d){return "radarWrapper" + " c" + d["ID"] + " " + d["SelectorTags"];})
 	}
 
 	function drawBlobRadarAreaWithTooltip(cfg){

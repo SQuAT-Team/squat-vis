@@ -1,3 +1,56 @@
+function handleLevelClick(element){
+	var levelId = element.getAttribute("levelid");
+	if(element.checked){
+		addActiveLevel_application([ {
+			name : 'param',
+			value : levelId
+		} ]);
+	}else{
+		removeActiveLevel_application([ {
+			name : 'param',
+			value : levelId
+		} ]);
+	}
+	updateAllSelectorElements();
+}
+
+function handleParentLevelClick(element){
+	var levelId = element.getAttribute("levelid");
+	if(element.checked){
+		addActiveParentLevel_application([ {
+			name : 'param',
+			value : levelId
+		} ]);
+	}else{
+		removeActiveParentLevel_application([ {
+			name : 'param',
+			value : levelId
+		} ]);
+	}
+}
+
+
+function setLevelMode(name){
+	setLevelMode_application([ {
+		name : 'param',
+		value : name
+	} ]);
+	updateAllSelectorElements();
+}
+
+function updateAllSelectorElements(){
+	updateToolbarComparisonCounter();
+	updateToolbarComparison();
+	updateToolbarCurrentCounter();
+	updateToolbarCurrent();
+	updateToolbarMarkedCounter();
+	updateToolbarMarked();
+	updateToolbarSelectedCounter();
+	updateToolbarSelected();
+	updateToolbarAllCounter();
+	updateToolbarAll();
+}
+
 function selectorAllParetoToCurrent(){
 	var paretoGroup1 = getCandidateIdsWithElement(".pareto-real-population");
 	var paretoGroup2 = getCandidateIdsWithElement(".pareto-utility-population");

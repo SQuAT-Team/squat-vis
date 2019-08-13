@@ -122,7 +122,7 @@
 								render="true"
 								heading="ALL"
 								headingDescription="#{descriptionProvider.getAllDescription()}"
-								badgeNumber="#{sessionInfo.project.getNumberOfCandidates()}"
+								badgeNumber="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getNumberOfAll()}"
 								badgeColor="#000000"
 								updateBadgeCommand="updateToolbarAllCounter"
 								updateBadgeId="toolbarAllCounter"
@@ -202,6 +202,130 @@
 								</pf:slider>
 							</h:panelGrid>
 						</h:form>
+						
+						<!-- Level Selection -->
+						<c:choose>
+							<c:when
+								test="#{sessionInfo.getCurrentProjectInfo().levelInfo.getMode() == 'LAST'}">
+							<div class="custom-control custom-radio" onclick = "setLevelMode('LAST')">
+						  		<input type="radio" class="custom-control-input" id="defaultGroupExample1" name="levelSelectionGroup" checked="true"/>
+						  		<label class="custom-control-label" for="defaultGroupExample1">Last</label>
+							</div>
+							</c:when>
+							<c:otherwise>
+							<div class="custom-control custom-radio" onclick = "setLevelMode('LAST')">
+						  		<input type="radio" class="custom-control-input" id="defaultGroupExample1" name="levelSelectionGroup"/>
+						  		<label class="custom-control-label" for="defaultGroupExample1">Last</label>
+							</div>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when
+								test="#{sessionInfo.getCurrentProjectInfo().levelInfo.getMode() == 'LAST_AND_PARENT'}">
+							<div class="custom-control custom-radio" onclick = "setLevelMode('LAST_AND_PARENT')">
+							  <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="levelSelectionGroup" checked="true"/>
+							  <label class="custom-control-label" for="defaultGroupExample2">Last+Parent</label>
+							</div>
+							</c:when>
+							<c:otherwise>
+							<div class="custom-control custom-radio" onclick = "setLevelMode('LAST_AND_PARENT')">
+							  <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="levelSelectionGroup"/>
+							  <label class="custom-control-label" for="defaultGroupExample2">Last+Parent</label>
+							</div>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when
+								test="#{sessionInfo.getCurrentProjectInfo().levelInfo.getMode() == 'ALL'}">
+							<div class="custom-control custom-radio" onclick = "setLevelMode('ALL')">
+							  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="levelSelectionGroup" checked="true"/>
+							  <label class="custom-control-label" for="defaultGroupExample3">All</label>
+							</div>
+							</c:when>
+							<c:otherwise>
+							<div class="custom-control custom-radio" onclick = "setLevelMode('ALL')">
+							  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="levelSelectionGroup"/>
+							  <label class="custom-control-label" for="defaultGroupExample3">All</label>
+							</div>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when
+								test="#{sessionInfo.getCurrentProjectInfo().levelInfo.getMode() == 'CUSTOM'}">
+							<div class="custom-control custom-radio" onclick = "setLevelMode('CUSTOM')">
+							  <input type="radio" class="custom-control-input" id="defaultGroupExample4" name="levelSelectionGroup" checked="true"/>
+							  <label class="custom-control-label" for="defaultGroupExample4">Custom</label>
+							</div>
+							</c:when>
+							<c:otherwise>
+							<div class="custom-control custom-radio" onclick = "setLevelMode('CUSTOM')">
+							  <input type="radio" class="custom-control-input" id="defaultGroupExample4" name="levelSelectionGroup"/>
+							  <label class="custom-control-label" for="defaultGroupExample4">Custom</label>
+							</div>
+							</c:otherwise>
+						</c:choose>
+						
+						<span>Custom Levels:</span>
+						<h:form>
+						<h:panelGroup layout="block"
+						styleClass="list-group level-list"
+						id="levelList">
+						<c:forEach items="${sessionInfo.getAllLevels()}" var="level" varStatus="levelStatus">
+						<h:panelGroup layout="block" styleClass="list-group-item level-entry p-1 pb-2 pl-2">
+							<c:choose>
+								<c:when
+									test="${sessionInfo.getCurrentProjectInfo().levelInfo.isActiveLevel(levelStatus.index)}">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="checkboxLevel${levelStatus.index}" class="custom-control-input" levelId="${levelStatus.index}" checked="true" onchange="handleLevelClick(this)">
+									<label class="custom-control-label" for="checkboxLevel#{levelStatus.index}">Level ${levelStatus.index} (Size: ${level.getNumberOfCandidates()})</label>
+									</input>
+								</div>
+								</c:when>
+								<c:otherwise>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="checkboxLevel${levelStatus.index}" class="custom-control-input" levelId="${levelStatus.index}" onchange="handleLevelClick(this)">
+									<label class="custom-control-label" for="checkboxLevel#{levelStatus.index}">Level ${levelStatus.index} (Size: ${level.getNumberOfCandidates()})</label>
+									</input>
+								</div>
+								</c:otherwise>
+							</c:choose>
+						</h:panelGroup>
+						</c:forEach>
+						</h:panelGroup>
+						</h:form>
+						
+						<span>Custom Parent Levels:</span>
+						<h:form>
+						<h:panelGroup layout="block"
+						styleClass="list-group parent-level-list"
+						id="parentLevelList">
+						<c:forEach items="${sessionInfo.getAllLevels()}" var="level" varStatus="levelStatus">
+						<h:panelGroup layout="block" styleClass="list-group-item level-entry p-1 pb-2 pl-2">
+							<c:choose>
+								<c:when
+									test="${sessionInfo.getCurrentProjectInfo().levelInfo.isActiveParentLevel(levelStatus.index)}">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="checkboxParentLevel${levelStatus.index}" class="custom-control-input" levelId="${levelStatus.index}" checked="true" onchange="handleParentLevelClick(this)">
+									<label class="custom-control-label" for="checkboxParentLevel${levelStatus.index}">Level ${levelStatus.index} (Size: ${level.getNumberOfCandidates()})</label>
+									</input>
+								</div>
+								</c:when>
+								<c:otherwise>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="checkboxParentLevel${levelStatus.index}" class="custom-control-input" levelId="${levelStatus.index}" onchange="handleParentLevelClick(this)">
+									<label class="custom-control-label" for="checkboxParentLevel${levelStatus.index}">Level ${levelStatus.index} (Size: ${level.getNumberOfCandidates()})</label>
+									</input>
+								</div>
+								</c:otherwise>
+							</c:choose>
+						</h:panelGroup>
+						</c:forEach>
+						</h:panelGroup>
+						</h:form>
+						
 					<!-- OPTIONS END -->
 				</div>
 			</div>

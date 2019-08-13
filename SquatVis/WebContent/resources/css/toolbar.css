@@ -16,7 +16,7 @@
 	border-width: thin;
 }
 
-.candidate-list {
+.candidate-list, .level-list, .parent-level-list {
     padding-top: 3px;
     padding-bottom: 3px;
     padding-right: 3px;
@@ -26,7 +26,7 @@
 	height: auto;
 }
 
-.candidate-item {
+.candidate-item, .level-entry, .parent-level-entry {
 	margin-bottom: 2px;
 	font-size: 0.9rem;
 }
@@ -107,4 +107,3 @@
     pointer-events: none;
     color: #aaa;
 }
-

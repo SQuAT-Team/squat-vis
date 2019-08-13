@@ -14,7 +14,7 @@ import org.squat_team.vis.session.ProjectInfo;
 import lombok.extern.java.Log;
 
 @Log
-public class ArchitectureComponentsToCSVExporter {
+public class ArchitectureComponentsToCSVExporter extends AbstractExporter {
 	private static final String CANDIDATE_SEPARATOR = " + ";
 	private Map<String, Entry> components = new HashMap<>();
 	private boolean useNameInsteadOfId;
@@ -23,7 +23,7 @@ public class ArchitectureComponentsToCSVExporter {
 		useNameInsteadOfId = projectInfo.getOptionsInfo().getUseNameInsteadOfId();
 		StringBuilder contentBuilder = new StringBuilder();
 		exportHeader(contentBuilder);
-		findComponentsInLevels(project.getLevels());
+		findComponentsInLevels(findActiveLevels(project, projectInfo));
 		exportComponents(contentBuilder);
 		return contentBuilder.toString();
 	}

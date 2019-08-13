@@ -11,13 +11,13 @@ import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.session.ProjectInfo;
 
-public class ArchitectureResourceContainersToCSVExporter {
+public class ArchitectureResourceContainersToCSVExporter extends AbstractExporter {
 	private Map<String, ArchitectureContainerResource> resourceContainers = new HashMap<>();
 
 	public String export(Project project, ProjectInfo projectInfo) {
 		StringBuilder contentBuilder = new StringBuilder();
 		exportHeader(contentBuilder);
-		findResourceContainersInLevels(project.getLevels());
+		findResourceContainersInLevels(findActiveLevels(project, projectInfo));
 		exportResourceContainers(contentBuilder);
 		return contentBuilder.toString();
 	}

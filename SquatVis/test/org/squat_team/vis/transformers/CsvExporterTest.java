@@ -10,6 +10,7 @@ import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Goal;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
+import org.squat_team.vis.session.LevelInfo.LevelMode;
 import org.squat_team.vis.session.ProjectInfo;
 
 /**
@@ -26,9 +27,15 @@ public class CsvExporterTest {
 	public void test() {
 		Project project = initializeTestProject();
 		CsvExporter csvExporter = new CsvExporter();
-		assertEquals(expectedResult, csvExporter.export(project, new ProjectInfo(new ArrayList<Candidate>())));
+		assertEquals(expectedResult, csvExporter.export(project, initializeProjectInfo(project)));
 	}
 
+	private ProjectInfo initializeProjectInfo(Project project) {
+		ProjectInfo projectInfo =  new ProjectInfo(project, new ArrayList<Candidate>());
+		projectInfo.getLevelInfo().setMode(LevelMode.ALL);
+		return projectInfo;
+	}
+	
 	private Project initializeTestProject() {
 		Project project = new Project();
 		project.setGoal(initializeTestGoal());

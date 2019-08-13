@@ -51,9 +51,13 @@ public class SessionInfo implements Serializable {
 			return null;
 		}
 		long projectId = project.getId();
-		return projectInfos.computeIfAbsent(projectId, k -> new ProjectInfo(getAllCandidates()));
+		return projectInfos.computeIfAbsent(projectId, k -> new ProjectInfo(project, getAllCandidates()));
 	}
 
+	public List<Level> getAllLevels() {
+		return project.getLevels();
+	}
+	
 	public List<Candidate> getAllCandidates() {
 		List<Candidate> candidates = new ArrayList<>();
 		for (Level level : project.getLevels()) {
@@ -61,7 +65,20 @@ public class SessionInfo implements Serializable {
 		}
 		return candidates;
 	}
+	
+	public List<Candidate> getAllActiveCandidates(){
+		return getCurrentProjectInfo().getAllActiveCandidates();
+	}
+	
+	public List<Candidate> getAllActiveParentCandidates(){
+		return getCurrentProjectInfo().getAllActiveParentCandidates();
+	}
 
+	public List<Candidate> getAllActiveAndParentCandidates(){
+		return getCurrentProjectInfo().getAllActiveAndParentCandidates();
+	}
+	
+	
 	/**
 	 * Sets the project and navigates to the project page.
 	 * 
@@ -71,6 +88,10 @@ public class SessionInfo implements Serializable {
 	public String setSelectedProject(long selectedProject) {
 		this.selectedProject = selectedProject;
 		this.project = projectDao.find(selectedProject);
+		ProjectInfo projectInfo = getCurrentProjectInfo();
+		if(projectInfo != null) {
+			projectInfo.updateProject(project);
+		}
 		return "project?faces-redirect=true";
 	}
 

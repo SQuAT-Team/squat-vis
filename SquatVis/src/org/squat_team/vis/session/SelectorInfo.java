@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.faces.context.FacesContext;
@@ -24,13 +25,15 @@ public class SelectorInfo implements Serializable {
 	 * Generated
 	 */
 	private static final long serialVersionUID = -6415382161054942298L;
+	private ProjectInfo projectInfo;
 	private CandidateSelectorCSSProvider candidateSelectorMapper = new CandidateSelectorCSSProvider();
 	private Set<String> selected = new HashSet<>();
 	private Set<String> marked = new HashSet<>();
 	private Set<String> current = new HashSet<>();
 	private Set<String> comparison = new HashSet<>();
 
-	public SelectorInfo(List<Candidate> candidates) {
+	public SelectorInfo(ProjectInfo projectInfo, List<Candidate> candidates) {
+		this.projectInfo = projectInfo;
 		addSuggestedCandidatesAsSelected(candidates);
 	}
 	
@@ -73,20 +76,40 @@ public class SelectorInfo implements Serializable {
 	}
 
 	public int getNumberOfSelected() {
-		return selected.size();
+		return findOnlyIdsOfActiveLevels(selected).size();
 	}
 
 	public int getNumberOfMarked() {
-		return marked.size();
+		return findOnlyIdsOfActiveLevels(marked).size();
 	}
 
 	public int getNumberOfComparison() {
-		return comparison.size();
+		return findOnlyIdsOfActiveLevels(comparison).size();
 	}
 
 	public int getNumberOfCurrent() {
-		return current.size();
+		return findOnlyIdsOfActiveLevels(current).size();
 	}
+	
+	public int getNumberOfAll() {
+		return findOnlyIdsOfActiveLevels(null).size();
+	}
+	
+	private Set<String> findOnlyIdsOfActiveLevels(Set<String> candidateIdstoCompareWith) {
+		boolean setToCompareWithSpecified = (candidateIdstoCompareWith != null);
+		Map<Integer, Set<String>> candidateIdCache = projectInfo.getCandidateIdCache();
+		Set<Integer> activeLevelIndezes = projectInfo.getLevelInfo().getActiveLevels(candidateIdCache.keySet().size());
+		Set<String> allActiveLevelSelectedCandidates = new HashSet<>();
+		for(int activeLevelIndex : activeLevelIndezes) {
+			Set<String> candidateIdsInCurrentLevel = candidateIdCache.get(activeLevelIndex);
+			Set<String> candidateIdsInCurrentLevelCopy = new HashSet<>(candidateIdsInCurrentLevel);
+			if(setToCompareWithSpecified) {
+				candidateIdsInCurrentLevelCopy.retainAll(candidateIdstoCompareWith);
+			}
+			allActiveLevelSelectedCandidates.addAll(candidateIdsInCurrentLevelCopy);
+		}
+		return allActiveLevelSelectedCandidates;
+	}	
 
 	public String getCandidateStarType(String id) {
 		return candidateSelectorMapper.getStarType(selected.contains(id));

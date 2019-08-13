@@ -23,18 +23,20 @@ function drawParent() {
 		var currentCircle = circles[i];
 		var parentId = circles[i].getAttribute("parent");
 		if(parentId.length > 0){
-		    var otherCircle = $("circle.candidate-circle.c"+parentId);
-		    var candidateId = currentCircle.getAttribute("candidateId");
+		    var parentCircle = $("circle.candidate-circle.c"+parentId);
+		    if(parentCircle != 0){
+		    	var candidateId = currentCircle.getAttribute("candidateId");
 
-			svgBig.append("line")
-			.attr("class", "parent-line c" + candidateId)
-			.attr("sourceId", parentId)
-			.attr("targetId", candidateId)
-			.attr("x2", currentCircle.getAttribute("cx"))
-			.attr("y2", currentCircle.getAttribute("cy"))
-			.attr("x1", otherCircle.attr("cx"))
-			.attr("y1", otherCircle.attr("cy"))
-			.attr("marker-end", "url(#triangle)");
+		    	svgBig.append("line")
+		    	.attr("class", "parent-line c" + candidateId)
+		    	.attr("sourceId", parentId)
+				.attr("targetId", candidateId)
+				.attr("x2", currentCircle.getAttribute("cx"))
+				.attr("y2", currentCircle.getAttribute("cy"))
+				.attr("x1", parentCircle.attr("cx"))
+				.attr("y1", parentCircle.attr("cy"))
+				.attr("marker-end", "url(#triangle)");
+		    }
 		}
 	}
 }
@@ -45,18 +47,20 @@ function drawParentWithId(id) {
 		var currentCircle = circles[i];
 		var parentId = circles[i].getAttribute("parent");
 		if(parentId.length > 0){
-		    var otherCircle = $("circle.candidate-circle.c"+parentId);
-		    var candidateId = currentCircle.getAttribute("candidateId");
+		    var parentCircle = $("circle.candidate-circle.c"+parentId);
+		    if(parentCircle.length != 0){
+		    	var candidateId = currentCircle.getAttribute("candidateId");
 
-		    svgBig.append("line")
-			.attr("class", "parent-line c" + candidateId)
-			.attr("sourceId", parentId)
-			.attr("targetId", candidateId)
-			.attr("x2", currentCircle.getAttribute("cx"))
-			.attr("y2", currentCircle.getAttribute("cy"))
-			.attr("x1", otherCircle.attr("cx"))
-			.attr("y1", otherCircle.attr("cy"))
-			.attr("marker-end", "url(#triangle)");
+		    	svgBig.append("line")
+		    	.attr("class", "parent-line c" + candidateId)
+		    	.attr("sourceId", parentId)
+		    	.attr("targetId", candidateId)
+		    	.attr("x2", currentCircle.getAttribute("cx"))
+		    	.attr("y2", currentCircle.getAttribute("cy"))
+				.attr("x1", parentCircle.attr("cx"))
+				.attr("y1", parentCircle.attr("cy"))
+				.attr("marker-end", "url(#triangle)");
+		    }
 		}
 	}
 }

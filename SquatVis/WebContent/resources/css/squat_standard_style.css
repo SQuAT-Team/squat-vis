@@ -133,7 +133,7 @@
 
 .list-group {
 	max-height: 300px;
-	height: 300px;
+	height: auto;
 	margin-bottom: 10px;
 	overflow-y: auto;
 	border-style: solid;
@@ -199,7 +199,7 @@ h4 {
 	color: #777777;
 }
 
-.candidate-item:hover {
+.list-group-item:hover {
 	background-color: #f8f8f8;
 }
 
@@ -324,6 +324,20 @@ label.custom-control-label {
 
 .ui-slider {
 	background-color: rgba(52, 58, 64, 0.08);
+}
+
+/* Radio Button */
+.custom-radio .custom-control-input:checked~.custom-control-label::before,
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+    background-color: #343a40;
+    /* this bg image SVG is just a white circle, you can replace it with any valid SVG code */
+    background-image: url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23fff'/%3E%3C/svg%3E); 
+    border-radius: 50%;
+}
+    
+/* Radio Button Shadow */
+.custom-radio .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(52, 58, 64, 0.25);
 }
 
 /* FONT */

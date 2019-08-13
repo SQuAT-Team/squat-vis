@@ -16,7 +16,7 @@
 </composite:interface>
 
 <composite:implementation>
-	<ui:repeat value="#{sessionInfo.getAllCandidates()}" var="candidate">
+	<ui:repeat value="#{sessionInfo.getAllActiveCandidates()}" var="candidate">
 		<tp:candidateItem render="#{cc.attrs.render}" candidate="#{candidate}" comparison="#{cc.attrs.comparison}" />
 	</ui:repeat>
 </composite:implementation>

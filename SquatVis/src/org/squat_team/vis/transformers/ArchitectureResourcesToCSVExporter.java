@@ -18,7 +18,7 @@ import org.squat_team.vis.session.ProjectInfo;
 import lombok.extern.java.Log;
 
 @Log
-public class ArchitectureResourcesToCSVExporter {
+public class ArchitectureResourcesToCSVExporter extends AbstractExporter {
 	private Map<String, Entry> resources = new HashMap<>();
 	private Collection<Entry> sortedResources;
 
@@ -27,7 +27,7 @@ public class ArchitectureResourcesToCSVExporter {
 		findResourcesInLevels(project.getLevels());
 		sortedResources = sortEntries(resources.values());
 		exportHeader(contentBuilder);
-		exportResourcesInLevels(project.getLevels(), contentBuilder);
+		exportResourcesInLevels(findActiveLevels(project, projectInfo), contentBuilder);
 		return contentBuilder.toString();
 	}
 	
