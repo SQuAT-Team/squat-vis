@@ -39,7 +39,7 @@ function RadarChart(id, data, options, populationData) {
 	 showAxisTooltips: true, // show tooltips when hover over axis
 	 showAxisValues: false, // show values of the level circles
 	 axisColor: d3.scaleOrdinal().range(["#000000","#000000"]), // axis color
-	 startIndex: 5, // the starting index for data to show
+	 startIndex: 6, // the starting index for data to show
 	 glow: true, // if a glow for the circle stroke should be added
 	 responsiveWidth: false, // if star should be initialized responsive
 	 responsiveId: 'content', // the id of the outer container
@@ -63,14 +63,20 @@ function RadarChart(id, data, options, populationData) {
 		cfg.w = Math.max(Math.min(width, height), cfg.minSize);
 		cfg.h = Math.max(Math.min(width, height), cfg.minSize);
 	}
+	
+	var normalData = data.filter(function(d){return d["LevelType"] == "normal";});
+	var normalPopulationData = populationData;
+	if(populationData){
+		normalPopulationData = data.filter(function(d){return d["LevelType"] == "normal";});
+	}
 
-	var traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "Parent") && (d !== "ParetoTags") && (d !== "SuggestionTags")); });
+	var traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "LevelType") && (d !== "Parent") && (d !== "ParetoTags") && (d !== "SuggestionTags")); });
 	var n = traits.length;
 	var total_n = d3.values(data[0]).length;
 
 	// If the supplied maxValue is smaller than the actual one, replace by the
 	// max in the data
-	var maxValue = Math.max(cfg.maxValue, d3.max(data, function(i){
+	var maxValue = Math.max(cfg.maxValue, d3.max(normalData, function(i){
 		var values = d3.values(i);
 		return d3.max(values.slice(cfg.startIndex,total_n))}
 	));
@@ -98,9 +104,9 @@ function RadarChart(id, data, options, populationData) {
 	var axisNames = drawAxisNames(axis, cfg);
 	// Draw the radar chart blobs
 	var radarLine = setupRadialLineFunction(cfg);
-	var blobWrapperPopulation = createBlobWrapperForPopulation(populationData, g);
-	var blobWrapperPopulationPath = createRadarStrokePopulation(populationData, blobWrapperPopulation, cfg);
-	var blobWrapper = createBlobWrapperForCandidate(data, g);
+	var blobWrapperPopulation = createBlobWrapperForPopulation(normalPopulationData, g);
+	var blobWrapperPopulationPath = createRadarStrokePopulation(normalPopulationData, blobWrapperPopulation, cfg);
+	var blobWrapper = createBlobWrapperForCandidate(normalData, g);
 	var blobArea = drawBlobRadarAreaWithTooltip(cfg);
 	var blobOutline = drawBlobOutline(blobWrapper, cfg);
 	var blobCircles = drawBlobCircles(blobWrapper, cfg);
@@ -110,7 +116,7 @@ function RadarChart(id, data, options, populationData) {
 		var tooltipAxisWrapper = createTooltipAxisWrappers(tooltipAxisGrid);
 		var tooltipAxis = createTooltipAxis(tooltipAxisWrapper, g);
 	}
-	var blobCircleWrapper = createBlobCircleWrapper(g);
+	var blobCircleWrapper = createBlobCircleWrapper(normalData, g);
 	var blobCircleTooltips = createBlobCircleTooltips(blobCircleWrapper, cfg);
 	// Helper Function
 	// Taken from http://bl.ocks.org/mbostock/7555321
@@ -455,7 +461,7 @@ function RadarChart(id, data, options, populationData) {
 		});
 	}
 
-	function createBlobCircleWrapper(g){
+	function createBlobCircleWrapper(data, g){
 	// Wrapper for the invisible circles on top
 	return g.selectAll(".radarCircleWrapper")
 		.data(data)

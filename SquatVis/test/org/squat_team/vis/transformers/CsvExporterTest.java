@@ -18,7 +18,7 @@ import org.squat_team.vis.session.ProjectInfo;
  */
 public class CsvExporterTest {
 
-	private final static String expectedResult = "ID,Parent,SelectorTags,ParetoTags,SuggestionTags,P1,P2,M1,M2\\n0,,,,,0.01,0.02,0.03,0.04\\n1,,,,,0.11,0.12,0.13,0.14\\n2,,,,,0.21,0.22,0.23,0.24\\n3,,,,,0.31,0.32,0.33,0.34\\n4,,,,,0.41,0.42,0.43,0.44\\n5,,,,,0.51,0.52,0.53,0.54\\n6,,,,,0.61,0.62,0.63,0.64\\n7,,,,,0.71,0.72,0.73,0.74\\n8,,,,,0.81,0.82,0.83,0.84\\n";
+	private final static String expectedResult = "ID,Parent,SelectorTags,ParetoTags,SuggestionTags,LevelType,P1,P2,M1,M2\\n0,,,,,normal,0.01,0.02,0.03,0.04\\n1,,,,,normal,0.11,0.12,0.13,0.14\\n2,,,,,normal,0.21,0.22,0.23,0.24\\n3,,,,,normal,0.31,0.32,0.33,0.34\\n4,,,,,normal,0.41,0.42,0.43,0.44\\n5,,,,,normal,0.51,0.52,0.53,0.54\\n6,,,,,normal,0.61,0.62,0.63,0.64\\n7,,,,,normal,0.71,0.72,0.73,0.74\\n8,,,,,normal,0.81,0.82,0.83,0.84\\n";
 
 	/**
 	 * A complex test that consists of 9 candidates in 3 levels.

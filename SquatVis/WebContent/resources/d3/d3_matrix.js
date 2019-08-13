@@ -110,8 +110,11 @@ function resizeBig(){
 function render(data, useMinimizedMatrixOption) {
   var widthBig = document.getElementById('matrixDetailedContent').clientWidth;
   var heightBig = document.getElementById('matrixDetailedContent').clientHeight;
-  traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "Parent") && (d !== "ParetoTags") && (d !== "SuggestionTags")); });
+  traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "Parent") && (d !== "LevelType") && (d !== "ParetoTags") && (d !== "SuggestionTags")); });
   n = traits.length;
+  
+  var normalData = data.filter(function(d){return d["LevelType"] == "normal";});
+  var parentData = data.filter(function(d){return d["LevelType"] == "parent";});
 
   var sizeBig = Math.max(Math.min(widthBig,heightBig), minSizeBig)-2*padding-textSize-paddingPlus;
 
@@ -294,7 +297,7 @@ function render(data, useMinimizedMatrixOption) {
 
 	    // Pareto Tag circle
 	    cell.selectAll(".pareto-circle")
-        .data(data)
+        .data(normalData)
       .enter().append("circle").attr("class", function(d) {
     	  return "pareto-circle c"+d["ID"] + " " + d["ParetoTags"];
       	})
@@ -309,7 +312,7 @@ function render(data, useMinimizedMatrixOption) {
 
 	    // Suggestion Tag circle
 	    cell.selectAll(".suggestion-circle")
-        .data(data)
+        .data(normalData)
       .enter().append("circle").attr("class", function(d) {
     	  return "suggestion-circle c"+d["ID"] + " " + d["SuggestionTags"];
       	})
@@ -323,18 +326,32 @@ function render(data, useMinimizedMatrixOption) {
         .style("pointer-events", "none");
 
 	    cell.selectAll(".candidate-circle")
-	        .data(data)
-	      .enter().append("circle").attr("class", function(d) {
-	    	  return "candidate-circle c"+d["ID"] + " " + d["SelectorTags"];
-	      	})
-	        .attr("cx", function(d) {
-	        	return x(d[p.x]);
-	       	})
-	        .attr("cy", function(d) {
-	        	return y(d[p.y]);
-	       	})
-	        .attr("r", radius)
-	        .style("pointer-events", "none")
+        .data(normalData)
+      .enter().append("circle").attr("class", function(d) {
+    	  return "candidate-circle c"+d["ID"] + " " + d["SelectorTags"];
+      	})
+        .attr("cx", function(d) {
+        	return x(d[p.x]);
+       	})
+        .attr("cy", function(d) {
+        	return y(d[p.y]);
+       	})
+        .attr("r", radius)
+        .style("pointer-events", "none");
+	    
+        cell.selectAll(".parent-circle")
+        .data(parentData)
+        .enter().append("circle").attr("class", function(d) {
+    	  return "parent-circle c"+d["ID"];
+      	})
+        .attr("cx", function(d) {
+        	return x(d[p.x]);
+       	})
+        .attr("cy", function(d) {
+        	return y(d[p.y]);
+       	})
+        .attr("r", radius)
+        .style("pointer-events", "none");
 	  }
 
   var cellBig;
@@ -353,7 +370,7 @@ function render(data, useMinimizedMatrixOption) {
 
 	    // Pareto Tag circle
 	    cellBig.selectAll(".pareto-circle")
-        .data(data)
+        .data(normalData)
       .enter().append("circle").attr("class", function(d) {
     	  return "pareto-circle c"+d["ID"] + " " + d["ParetoTags"];
       	})
@@ -368,7 +385,7 @@ function render(data, useMinimizedMatrixOption) {
 
 	    // Suggestion Tag circle
 	    cellBig.selectAll(".suggestion-circle")
-        .data(data)
+        .data(normalData)
       .enter().append("circle").attr("class", function(d) {
     	  return "suggestion-circle c"+d["ID"] + " " + d["SuggestionTags"];
       	})
@@ -381,11 +398,31 @@ function render(data, useMinimizedMatrixOption) {
         .attr("r", radiusBig+2)
         .style("pointer-events", "none");
 
-	    // Candidate itself
+	    // Candidate itself	    
 	    cellBig.selectAll(".candidate-circle")
-        .data(data)
+        .data(normalData)
       .enter().append("circle").attr("class", function(d) {
     	  return "candidate-circle c"+d["ID"] + " " + d["SelectorTags"];
+      	})
+      	.attr("candidateId", function(d) {
+      		return d["ID"];
+      	})
+       	.attr("parent", function(d) {
+      		return d["Parent"];
+      	})
+        .attr("cx", function(d) {
+        	return xBig(d[p.x]);
+       	})
+        .attr("cy", function(d) {
+        	return yBig(d[p.y]);
+       	})
+        .attr("r", radiusBig)
+        .style("pointer-events", "none");
+	    
+	    cellBig.selectAll(".parent-circle")
+        .data(parentData)
+      .enter().append("circle").attr("class", function(d) {
+    	  return "parent-circle c"+d["ID"];
       	})
       	.attr("candidateId", function(d) {
       		return d["ID"];

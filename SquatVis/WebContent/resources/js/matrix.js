@@ -23,8 +23,8 @@ function drawParent() {
 		var currentCircle = circles[i];
 		var parentId = circles[i].getAttribute("parent");
 		if(parentId.length > 0){
-		    var parentCircle = $("circle.candidate-circle.c"+parentId);
-		    if(parentCircle != 0){
+		    var parentCircle = $("circle.c"+parentId);
+		    if(parentCircle.length != 0){
 		    	var candidateId = currentCircle.getAttribute("candidateId");
 
 		    	svgBig.append("line")
@@ -47,7 +47,7 @@ function drawParentWithId(id) {
 		var currentCircle = circles[i];
 		var parentId = circles[i].getAttribute("parent");
 		if(parentId.length > 0){
-		    var parentCircle = $("circle.candidate-circle.c"+parentId);
+		    var parentCircle = $("circle.c"+parentId);
 		    if(parentCircle.length != 0){
 		    	var candidateId = currentCircle.getAttribute("candidateId");
 

@@ -56,6 +56,11 @@ circle.current {
 	stroke-width: 2px !important;
 }
 
+circle.parent-circle{
+	fill: #888888;
+	fill-opacity:0.7;
+}
+
 .marked-active circle.marked {
 	fill: #0080ff !important;
 }

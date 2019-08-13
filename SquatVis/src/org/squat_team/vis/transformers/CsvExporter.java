@@ -28,8 +28,10 @@ public class CsvExporter extends AbstractExporter {
 		exportNameHeader(contentBuilder);
 		exportParentHeader(contentBuilder);
 		exportTagsHeader(contentBuilder);
+		exportLevelTypeHeader(contentBuilder);
 		exportGoals(project.getGoal(), contentBuilder);
-		exportLevels(findActiveLevels(project, projectInfo), contentBuilder);
+		exportLevels(findActiveLevels(project, projectInfo), contentBuilder, false);
+		exportLevels(findActiveParentLevels(project, projectInfo), contentBuilder, true);
 		return contentBuilder.toString();
 	}
 
@@ -51,6 +53,11 @@ public class CsvExporter extends AbstractExporter {
 		contentBuilder.append("SuggestionTags");
 		endValue(contentBuilder);
 	}
+	
+	private void exportLevelTypeHeader(StringBuilder contentBuilder){
+		contentBuilder.append("LevelType");
+		endValue(contentBuilder);
+	}
 
 	private void exportGoals(Goal rootGoal, StringBuilder contentBuilder) {
 		exportGoal(rootGoal, contentBuilder);
@@ -68,22 +75,23 @@ public class CsvExporter extends AbstractExporter {
 		}
 	}
 
-	private void exportLevels(List<Level> levels, StringBuilder contentBuilder) {
+	private void exportLevels(List<Level> levels, StringBuilder contentBuilder, boolean isParent) {
 		for (Level currentLevel: levels) {
-			exportLevel(currentLevel, contentBuilder);
+			exportLevel(currentLevel, contentBuilder, isParent);
 		}
 	}
-
-	private void exportLevel(Level level, StringBuilder contentBuilder) {
+	
+	private void exportLevel(Level level, StringBuilder contentBuilder, boolean isParent) {
 		for (Candidate candidate : level.getCandidates()) {
-			exportCandidate(candidate, contentBuilder);
+			exportCandidate(candidate, contentBuilder, isParent);
 		}
 	}
 
-	private void exportCandidate(Candidate candidate, StringBuilder contentBuilder) {
+	private void exportCandidate(Candidate candidate, StringBuilder contentBuilder, boolean isParent) {
 		exportCandidateId(candidate, contentBuilder);
 		exportCandidateParent(candidate, contentBuilder);
 		exportCandidateTags(candidate, contentBuilder);
+		exportLevelType(isParent, contentBuilder);
 		int numberOfValues = Math.max(candidate.getRealValues().size(), candidate.getUtilityValues().size());
 		for (int i = 0; i < numberOfValues; i++) {
 			exportCandidateValue(candidate, i, contentBuilder);
@@ -112,6 +120,17 @@ public class CsvExporter extends AbstractExporter {
 		contentBuilder.append(getCandidateParetoTag(candidate));
 		endValue(contentBuilder);
 		contentBuilder.append(getCandidateSuggestionTag(candidate));
+		endValue(contentBuilder);
+	}
+	
+	private void exportLevelType(boolean isParent, StringBuilder contentBuilder) {
+		String levelType;
+		if(isParent) {
+			levelType = "parent";
+		}else {
+			levelType = "normal";
+		}
+		contentBuilder.append(levelType);
 		endValue(contentBuilder);
 	}
 

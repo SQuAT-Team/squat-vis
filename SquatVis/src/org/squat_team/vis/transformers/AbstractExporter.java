@@ -20,4 +20,16 @@ public class AbstractExporter {
 		return activeLevels;
 	}
 	
+	protected List<Level> findActiveParentLevels(Project project, ProjectInfo projectInfo){
+		int numberOfLevels =  projectInfo.getCandidateIdCache().keySet().size();
+		Set<Integer> activeParentLevelIndizes = projectInfo.getLevelInfo().getActiveParentLevels(numberOfLevels);
+		Set<Integer> activeLevelIndizes = projectInfo.getLevelInfo().getActiveLevels(numberOfLevels);
+		activeParentLevelIndizes.removeAll(activeLevelIndizes);
+		List<Level> activeParentLevels = new ArrayList<>();
+		for (int currentActiveLevelIndex : activeParentLevelIndizes) {
+			activeParentLevels.add(project.getLevels().get(currentActiveLevelIndex));
+		}
+		return activeParentLevels;
+	}
+	
 }
