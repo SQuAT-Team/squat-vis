@@ -358,8 +358,13 @@ function render(data, useMinimizedMatrixOption) {
   function plotBig(p) {
 	    cellBig = d3.select(this);
 
-	    xBig.domain(domainByTrait[p.x]);
-	    yBig.domain(domainByTrait[p.y]);
+	    // given that x- and y-axis is defined
+	    if(p.x){
+	    	xBig.domain(domainByTrait[p.x]);
+	    }
+	    if(p.y){
+		    yBig.domain(domainByTrait[p.y]);
+	    }
 
 	    cellBig.append("rect")
 	        .attr("class", "frame")
