@@ -62,7 +62,9 @@ public class LevelInfo implements Serializable {
 		case LAST:
 		case LAST_AND_PARENT:
 			Set<Integer> lastLevel = new HashSet<>();
-			lastLevel.add(numberOfLevels - 1);
+			if(numberOfLevels >= 1) {
+				lastLevel.add(numberOfLevels - 1);
+			}
 			return lastLevel;
 		case CUSTOM:
 			return level;
@@ -89,7 +91,9 @@ public class LevelInfo implements Serializable {
 		switch (mode) {
 		case LAST_AND_PARENT:
 			Set<Integer> previousOfLastLevel = new HashSet<>();
-			previousOfLastLevel.add(numberOfLevels - 2);
+			if(numberOfLevels >= 2) {
+				previousOfLastLevel.add(numberOfLevels - 2);
+			}
 			return previousOfLastLevel;
 		case CUSTOM:
 			return parent;
