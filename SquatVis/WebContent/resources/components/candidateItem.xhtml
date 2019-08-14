@@ -44,6 +44,13 @@
 					class="candidate-pareto text-danger px-1 #{sessionInfo.getCurrentProjectInfo().tagInfo.getParetoTag(cc.attrs.candidate)}">P</div>
 			</div>
 		</div>
+		
+		<!-- Hidden Export Button -->
+		<h:panelGroup styleClass="d-none">
+    		<pf:commandButton value="Download" ajax="false">
+       			<pf:fileDownload value="#{selectedCandidatesDownloadService.exportCandidate(cc.attrs.candidate.candidateId)}" />
+    		</pf:commandButton>
+		</h:panelGroup>
 	</h:panelGroup>
 </composite:implementation>
 

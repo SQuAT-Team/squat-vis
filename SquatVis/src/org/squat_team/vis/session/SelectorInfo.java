@@ -95,7 +95,7 @@ public class SelectorInfo implements Serializable {
 		return findOnlyIdsOfActiveLevels(null).size();
 	}
 	
-	private Set<String> findOnlyIdsOfActiveLevels(Set<String> candidateIdstoCompareWith) {
+	public Set<String> findOnlyIdsOfActiveLevels(Set<String> candidateIdstoCompareWith) {
 		boolean setToCompareWithSpecified = (candidateIdstoCompareWith != null);
 		Map<Integer, Set<String>> candidateIdCache = projectInfo.getCandidateIdCache();
 		Set<Integer> activeLevelIndezes = projectInfo.getLevelInfo().getActiveLevels(candidateIdCache.keySet().size());

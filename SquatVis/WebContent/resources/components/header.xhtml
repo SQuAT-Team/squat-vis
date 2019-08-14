@@ -62,12 +62,31 @@
     </ul>
   </div>
 	
+	<!-- Download Loading Bar -->
+	<pf:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+	  <pf:graphicImage name="/images/ajaxloadingbar.gif" />
+	</pf:dialog>
+	
+	<!-- Export Selected Button -->
+	<h:panelGroup layout="block" styleClass="selectable-element ml-3">
+	<h:panelGroup styleClass="d-none">
+	<h:form>   
+    	<pf:commandButton value="Download" ajax="false">
+       		<pf:fileDownload value="#{selectedCandidatesDownloadService.exportAllSelectedCandidates()}" />
+    	</pf:commandButton>
+	</h:form>
+	</h:panelGroup>
+	<h:panelGroup pt:title="Download Selected Candidates" styleClass="fas fa-download text-white" onclick="exportSelectedCandidates(this);"></h:panelGroup>
+	</h:panelGroup>
+	
 	<!-- Leave Project Button -->
+	<h:panelGroup layout="block" styleClass="ml-3">
 	<h:form>
 		<h:link outcome="projects">
 			<h:panelGroup pt:title="Leave Project" styleClass="fas fa-level-down-alt text-white"></h:panelGroup>
 		</h:link>
 	</h:form> 
+	</h:panelGroup>
 	
 	</nav>
 </composite:implementation>

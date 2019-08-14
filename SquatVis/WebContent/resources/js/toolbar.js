@@ -1,3 +1,14 @@
+// EXPORT BUTTON
+//<![CDATA[
+function start() {
+    PF('statusDialog').show();
+}
+ 
+function stop() {
+    PF('statusDialog').hide();
+}
+//]]>
+
 function handleLevelClick(element){
 	var levelId = element.getAttribute("levelid");
 	if(element.checked){
@@ -160,8 +171,7 @@ function toolbarSearch(element) {
 // Activates Right Click Menu For Candidates
 $(function() {
 	var candidateIdCssClass = ".candidate-id";
-	$
-			.contextMenu({
+	$.contextMenu({
 				selector : '.candidate-item',
 				callback : function(key, options) {
 					// do nothing
@@ -238,7 +248,11 @@ $(function() {
 					},
 					"Export" : {
 						name : "Export",
-						disabled : true
+						disabled : false,
+						callback : function(key, opt) {
+							PrimeFaces.monitorDownload(start, stop);
+							opt.$trigger.find("button").click();
+						}
 					}
 				}
 			})

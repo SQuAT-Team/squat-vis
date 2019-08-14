@@ -15,5 +15,12 @@ public class Architecture {
 	@Id
 	@GeneratedValue
 	private Long id;
+	private Long projectId;
+	private Long candidateId;
 
+	private byte[] repositoryFile;
+	private byte[] allocationFile;
+	private byte[] systemFile;
+	private byte[] resourceenvironmentFile;
+	private byte[] usagemodelFile;
 }

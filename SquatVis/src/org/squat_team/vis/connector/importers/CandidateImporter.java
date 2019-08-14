@@ -13,6 +13,7 @@ import org.squat_team.vis.data.data.Candidate;
  */
 public class CandidateImporter extends AbstractImporter<CCandidate, Candidate> {
 	private CandidateDao candidateDao;
+	private ArchitectureImporter architectureImporter;
 
 	/**
 	 * Creates a new importer.
@@ -22,12 +23,14 @@ public class CandidateImporter extends AbstractImporter<CCandidate, Candidate> {
 	 */
 	public CandidateImporter(ConnectorService connectorService, ProjectConnector projectConnector) {
 		super(connectorService, projectConnector);
+		architectureImporter = new ArchitectureImporter(connectorService, projectConnector);
 	}
 
 	@Override
 	public Candidate transform(CCandidate ccandidate) throws InvalidRequestException {
 		findDao();
 		Candidate candidate = transformCandidate(ccandidate);
+		architectureImporter.transform(ccandidate);
 		store(candidate);
 		return candidate;
 	}
