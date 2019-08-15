@@ -55,10 +55,16 @@ public class SessionInfo implements Serializable {
 	}
 
 	public List<Level> getAllLevels() {
+		if(project == null) {
+			return new ArrayList<>();
+		}
 		return project.getLevels();
 	}
 	
 	public List<Candidate> getAllCandidates() {
+		if(project == null) {
+			return new ArrayList<>();
+		}
 		List<Candidate> candidates = new ArrayList<>();
 		for (Level level : project.getLevels()) {
 			candidates.addAll(level.getCandidates());
