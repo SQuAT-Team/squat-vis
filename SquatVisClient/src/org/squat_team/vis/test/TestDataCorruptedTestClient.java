@@ -8,9 +8,9 @@ import org.squat_team.vis.connector.exceptions.HostUnreachableException;
 import org.squat_team.vis.connector.exceptions.InvalidRequestException;
 import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 
-public class TestDataTestClient extends AbstractTestData {
+public class TestDataCorruptedTestClient extends AbstractTestData {
 
-	public TestDataTestClient(ProjectConnector projectConnector) {
+	public TestDataCorruptedTestClient(ProjectConnector projectConnector) {
 		super(projectConnector);
 	}
 
@@ -22,23 +22,23 @@ public class TestDataTestClient extends AbstractTestData {
 	public static void run() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 			InvalidRequestException, InterruptedException, IOException {
 		System.out.println("STARTING TEST CLIENT");
-		runStandardProcedure();
+		runUpdateStuckProcedure();
 		System.out.println("SHUTTING DOWN TEST CLIENT");
 	}
 
-	private static void runStandardProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
+	private static void runUpdateStuckProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 			InvalidRequestException, InterruptedException {
 		makeNewProjectRequest();
-		sleep(1000);
+		sleep(2000);
 		makeStatusUpdate1();
-		sleep(1000);
-		sendLevel0(true);
-		sleep(1000);
-		makeStatusUpdate1();
-		sleep(1000);
-		sendLevel1(true);
-		sleep(5000);
-		terminateProject();
+		sleep(2000);
+		makeStatusUpdate2();
+		sleep(2000);
+		makeStatusUpdate3();
+		sleep(2000);
+		makeStatusUpdate4();
+		sleep(2000);
+		makeStatusUpdate5();
 	}
 
 }
