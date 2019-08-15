@@ -14,8 +14,12 @@
 
 <composite:implementation>
 	<h:form>
-		<pf:remoteCommand name="setShowTags_application"
-			action="#{sessionInfo.getCurrentProjectInfo().matrixViewInfo.setShowTags}" />
+		<pf:remoteCommand name="setShowPareto_application"
+			action="#{sessionInfo.getCurrentProjectInfo().matrixViewInfo.setShowPareto}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setShowSuggestions_application"
+			action="#{sessionInfo.getCurrentProjectInfo().matrixViewInfo.setShowSuggestions}" />
 	</h:form>
 	<h:form>
 		<pf:remoteCommand name="setShowParents_application"

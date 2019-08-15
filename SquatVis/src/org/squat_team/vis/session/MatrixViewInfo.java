@@ -18,18 +18,19 @@ public class MatrixViewInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = -6298299571486000929L;
 	
-	private boolean showTags = true;
+	private boolean showPareto = true;
+	private boolean showSuggestions = true;
 	private boolean showParents = true;
 	private boolean highlightInitial = true;
 	private String mode = "All";
 	private MatrixOptionsCSSProvider matrixOptionsCssProvider = new MatrixOptionsCSSProvider();
 
-	
-	public MatrixViewInfo() {
-		this.showTags = true;
+	public boolean getShowPareto() {
+		return showPareto;
 	}
-	public boolean getShowTags() {
-		return showTags;
+	
+	public boolean getShowSuggestions() {
+		return showSuggestions;
 	}
 	
 	public boolean getShowParents() {
@@ -47,9 +48,16 @@ public class MatrixViewInfo implements Serializable {
 		return "";
 	}
 	
-	public String getShowTagsStyle() {
-		if (getShowTags()) {
-			return matrixOptionsCssProvider.getTagsOnTag();
+	public String getShowParetoStyle() {
+		if (getShowPareto()) {
+			return matrixOptionsCssProvider.getParetoOnTag();
+		}
+		return "";
+	}
+	
+	public String getShowSuggestionsStyle() {
+		if (getShowSuggestions()) {
+			return matrixOptionsCssProvider.getSuggestionsOnTag();
 		}
 		return "";
 	}
@@ -61,9 +69,14 @@ public class MatrixViewInfo implements Serializable {
 		return "";
 	}
 
-	public void setShowTags() {
+	public void setShowPareto() {
 		String newState = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
-		this.showTags = Boolean.parseBoolean(newState);
+		this.showPareto = Boolean.parseBoolean(newState);
+	}
+	
+	public void setShowSuggestions() {
+		String newState = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		this.showSuggestions = Boolean.parseBoolean(newState);
 	}
 	
 	public void setMode() {

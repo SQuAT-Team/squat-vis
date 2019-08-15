@@ -83,8 +83,8 @@ circle.parent-circle{
 	visibility: hidden;
 }
 
-.tags-active .pareto-circle.pareto-real-level, .tags-active .pareto-circle.pareto-utility-level,
-	.tags-active .pareto-circle.pareto-real-population, .tags-active .pareto-circle.pareto-utility-population
+.pareto-active .pareto-circle.pareto-real-level, .pareto-active .pareto-circle.pareto-utility-level,
+	.pareto-active .pareto-circle.pareto-real-population, .pareto-active .pareto-circle.pareto-utility-population
 	{
 	visibility: visible;
 }
@@ -93,7 +93,7 @@ circle.parent-circle{
 	visibility: hidden;
 }
 
-.tags-active .suggestion-circle.suggestion-on {
+.suggestions-active .suggestion-circle.suggestion-on {
 	visibility: visible;
 }
 

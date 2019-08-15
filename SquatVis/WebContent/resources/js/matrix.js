@@ -101,19 +101,24 @@ function initDropdown() {
 	}
 }
 
-function changeParents(){
-	const parentsActiveCss = "parents-active";
-	var checkboxValue = $("#showParentsCheckbox").prop("checked");
+function setMatrixOptionsFromCheckbox(checkboxId, optionsCss){
+	var checkboxValue = $("#"+checkboxId).prop("checked");
 	var classes = document.getElementById("matrixOptions").classList;
 	if (checkboxValue) {
-		if (!classes.contains(parentsActiveCss)) {
-			classes.add(parentsActiveCss);
+		if (!classes.contains(optionsCss)) {
+			classes.add(optionsCss);
 		}
 	} else {
-		if (classes.contains(parentsActiveCss)) {
-			classes.remove(parentsActiveCss);
+		if (classes.contains(optionsCss)) {
+			classes.remove(optionsCss);
 		}
 	}
+	return checkboxValue;
+}
+
+function changeParents(){
+	const parentsActiveCss = "parents-active";
+	var checkboxValue = setMatrixOptionsFromCheckbox("showParentsCheckbox",parentsActiveCss);
 
 	// notify backend
 	setShowParents_application([ {
@@ -124,17 +129,7 @@ function changeParents(){
 
 function changeHighlightInitial() {
 	const initialActiveCss = "initial-active";
-	var checkboxValue = $("#highlightInitialCheckbox").prop("checked");
-	var classes = document.getElementById("matrixOptions").classList;
-	if (checkboxValue) {
-		if (!classes.contains(initialActiveCss)) {
-			classes.add(initialActiveCss);
-		}
-	} else {
-		if (classes.contains(initialActiveCss)) {
-			classes.remove(initialActiveCss);
-		}
-	}
+	var checkboxValue = setMatrixOptionsFromCheckbox("highlightInitialCheckbox",initialActiveCss);
 
 	// notify backend
 	setHighlightInitial_application([ {
@@ -143,22 +138,23 @@ function changeHighlightInitial() {
 	} ]);
 }
 
-function changeTags() {
-	const tagsActiveCss = "tags-active";
-	var checkboxValue = $("#showTagsCheckbox").prop("checked");
-	var classes = document.getElementById("matrixOptions").classList;
-	if (checkboxValue) {
-		if (!classes.contains(tagsActiveCss)) {
-			classes.add(tagsActiveCss);
-		}
-	} else {
-		if (classes.contains(tagsActiveCss)) {
-			classes.remove(tagsActiveCss);
-		}
-	}
+function changePareto() {
+	const paretoActiveCss = "pareto-active";
+	var checkboxValue = setMatrixOptionsFromCheckbox("showParetoCheckbox",paretoActiveCss);
 
 	// notify backend
-	setShowTags_application([ {
+	setShowPareto_application([ {
+		name : 'param',
+		value : checkboxValue
+	} ]);
+}
+
+function changeSuggestions() {
+	const suggestionsActiveCss = "suggestions-active";
+	var checkboxValue = setMatrixOptionsFromCheckbox("showSuggestionsCheckbox",suggestionsActiveCss);
+
+	// notify backend
+	setShowSuggestions_application([ {
 		name : 'param',
 		value : checkboxValue
 	} ]);

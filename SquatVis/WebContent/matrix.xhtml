@@ -89,97 +89,117 @@ MODIFIED: Sebastian Frank
 
 	<div class="full-width h-100 mh-100 p-0 pb-1">
 		<div id="matrixOptions"
-			class="row h-100 mh-100 p-0 m-0 #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowTagsStyle()} #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowParentsStyle()} #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getHighlightInitialStyle()}">
+			class="row h-100 mh-100 p-0 m-0 #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowParetoStyle()} #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowSuggestionsStyle()} #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowParentsStyle()} #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getHighlightInitialStyle()}">
 
 			<!-- SIDEBAR START -->
 			<tp:toolbar>
 			</tp:toolbar>
 			<!-- SIDEBAR END -->
 			<div id="content" class="h-100 mh-100 ml-auto col-10">
-				<div class="row h-100 mh-100 p-0 m-0">
+				<div class="row row-box mh-10 p-1 m-0">
+					<div class="col m-0 p-0">
+						<div class="dropdown">
+							<button style="width: 100%;"
+								class="btn btn-outline-dark dropdown-toggle" type="button"
+								id="dropdownMenuButton" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">
+								#{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getMode()}</button>
+							<div class="dropdown-menu"
+								aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="javascript:showAll()">All</a>
+								<a class="dropdown-item" href="javascript:showComparison()">Comparison</a>
+								<a class="dropdown-item" href="javascript:showMarked()">Marked</a>
+								<a class="dropdown-item" href="javascript:showSelected()">Selected</a>
+							</div>
+						</div>
+					</div>
+					<div class="col m-0 p-0 ml-3">
+						<div class="custom-control custom-checkbox">
+							<c:choose>
+								<c:when
+									test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowParents()}">
+									<input type="checkbox" id="showParentsCheckbox"
+										class="custom-control-input" checked="true"
+										onchange="changeParents()"> <label
+										class="custom-control-label" for="showParentsCheckbox">Show
+										Parents</label> </input>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" id="showParentsCheckbox"
+									class="custom-control-input" onchange="changeParents()">
+										<label class="custom-control-label"
+									for="showParentsCheckbox">Show Parents</label> </input>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+					<div class="col m-0 p-0">
+						<div class="custom-control custom-checkbox">
+							<c:choose>
+								<c:when
+									test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowPareto()}">
+									<input type="checkbox" id="showParetoCheckbox"
+										class="custom-control-input" checked="true"
+										onchange="changePareto()"> <label
+										class="custom-control-label" for="showParetoCheckbox">Show
+										Pareto</label> </input>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" id="showParetoCheckbox"
+										class="custom-control-input" onchange="changePareto()">
+										<label class="custom-control-label"
+										for="showParetoCheckbox">Show Pareto</label> </input>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+					<div class="col m-0 p-0">
+						<div class="custom-control custom-checkbox">
+							<c:choose>
+								<c:when
+									test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowSuggestions()}">
+									<input type="checkbox" id="showSuggestionsCheckbox"
+										class="custom-control-input" checked="true"
+										onchange="changeSuggestions()"> <label
+										class="custom-control-label" for="showSuggestionsCheckbox">Show
+										Suggestions</label> </input>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" id="showSuggestionsCheckbox"
+										class="custom-control-input" onchange="changeSuggestions()">
+										<label class="custom-control-label"
+										for="showSuggestionsCheckbox">Show Suggestions</label> </input>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+					<div class="col m-0 p-0">
+						<div class="custom-control custom-checkbox">
+							<c:choose>
+								<c:when
+									test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getHighlightInitial()}">
+									<input type="checkbox" id="highlightInitialCheckbox"
+									class="custom-control-input" checked="true"
+									onchange="changeHighlightInitial()"> <label
+									class="custom-control-label" for="highlightInitialCheckbox">Highlight Initial</label> </input>
+								</c:when>
+								<c:otherwise>
+									<input type="checkbox" id="highlightInitialCheckbox"
+									class="custom-control-input" onchange="changeHighlightInitial()">
+										<label class="custom-control-label"
+										for="highlightInitialCheckbox">Highlight Initial</label> </input>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+				</div>
+				<div class="row h-90 mh-90 p-0 pt-1 m-0">
 					<div id="matrixDetails" class="col-5 h-100 p-0">
 						<div class="row h-70 mh-70 m-0 p-0">
 							<div class="card w-100 mw-100 h-100 mh-100">
 								<div class="card-header font-weight-bold">DETAIL</div>
 								<div class="card-body p-1 m-0">
-									<div id="matrixDetailedToolbar" class="row row-bottom-line m-0 p-1 pb-2 h-10 mh-10 ">
-										<div class="col m-0 p-0">
-											<div class="dropdown">
-												<button style="width: 100%;"
-													class="btn btn-outline-dark dropdown-toggle" type="button"
-													id="dropdownMenuButton" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">
-													#{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getMode()}</button>
-												<div class="dropdown-menu"
-													aria-labelledby="dropdownMenuButton">
-													<a class="dropdown-item" href="javascript:showAll()">All</a>
-													<a class="dropdown-item" href="javascript:showComparison()">Comparison</a>
-													<a class="dropdown-item" href="javascript:showMarked()">Marked</a>
-													<a class="dropdown-item" href="javascript:showSelected()">Selected</a>
-												</div>
-											</div>
-										</div>
-										<div class="col m-0 p-0 ml-3">
-											<div class="custom-control custom-checkbox">
-												<c:choose>
-													<c:when
-														test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowParents()}">
-														<input type="checkbox" id="showParentsCheckbox"
-															class="custom-control-input" checked="true"
-															onchange="changeParents()"> <label
-															class="custom-control-label" for="showParentsCheckbox">Show
-																Parents</label> </input>
-													</c:when>
-													<c:otherwise>
-														<input type="checkbox" id="showParentsCheckbox"
-															class="custom-control-input" onchange="changeParents()">
-															<label class="custom-control-label"
-															for="showParentsCheckbox">Show Parents</label> </input>
-													</c:otherwise>
-												</c:choose>
-											</div>
-										</div>
-										<div class="col m-0 p-0">
-											<div class="custom-control custom-checkbox">
-												<c:choose>
-													<c:when
-														test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowTags()}">
-														<input type="checkbox" id="showTagsCheckbox"
-															class="custom-control-input" checked="true"
-															onchange="changeTags()"> <label
-															class="custom-control-label" for="showTagsCheckbox">Show
-																Tags</label> </input>
-													</c:when>
-													<c:otherwise>
-														<input type="checkbox" id="showTagsCheckbox"
-															class="custom-control-input" onchange="changeTags()">
-															<label class="custom-control-label"
-															for="showTagsCheckbox">Show Tags</label> </input>
-													</c:otherwise>
-												</c:choose>
-											</div>
-										</div>
-										<div class="col m-0 p-0">
-											<div class="custom-control custom-checkbox">
-												<c:choose>
-													<c:when
-														test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getHighlightInitial()}">
-														<input type="checkbox" id="highlightInitialCheckbox"
-															class="custom-control-input" checked="true"
-															onchange="changeHighlightInitial()"> <label
-															class="custom-control-label" for="highlightInitialCheckbox">Highlight Initial</label> </input>
-													</c:when>
-													<c:otherwise>
-														<input type="checkbox" id="highlightInitialCheckbox"
-															class="custom-control-input" onchange="changeHighlightInitial()">
-															<label class="custom-control-label"
-															for="highlightInitialCheckbox">Highlight Initial</label> </input>
-													</c:otherwise>
-												</c:choose>
-											</div>
-										</div>
-									</div>
-									<div id="matrixDetailedContent" class="h-90 mh-90 w-100 scrollable"></div>
+									<div id="matrixDetailedContent" class="h-100 mh-100 w-100 scrollable"></div>
 								</div>
 							</div>
 						</div>

@@ -14,12 +14,17 @@ public class MatrixOptionsCSSProvider implements Serializable {
 	 */
 	private static final long serialVersionUID = -5856344665780774742L;
 
-	private static final String TAGS_ON_CSS = "tags-active";
+	private static final String PARETO_ON_CSS = "pareto-active";
+	private static final String SUGGESTIONS_ON_CSS = "suggestions-active";
 	private static final String PARENTS_ON_CSS = "parents-active";
 	private static final String INITIAL_ON_CSS = "initial-active";
 
-	public String getTagsOnTag() {
-		return TAGS_ON_CSS;
+	public String getParetoOnTag() {
+		return PARETO_ON_CSS;
+	}
+	
+	public String getSuggestionsOnTag() {
+		return SUGGESTIONS_ON_CSS;
 	}
 
 	public String getParentsOnTag() {
