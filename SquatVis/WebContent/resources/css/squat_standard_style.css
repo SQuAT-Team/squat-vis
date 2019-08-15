@@ -1,10 +1,13 @@
-
 .fullscreen-view {
 	height: 100vh;
 }
 
 .h-5 {
 	height: 5% !important;
+}
+
+.h-6 {
+	height: 6% !important;
 }
 
 .h-10 {
@@ -27,8 +30,36 @@
 	height: 65% !important;
 }
 
+.h-70 {
+	height: 70% !important;
+}
+
+.h-69 {
+	height: 69% !important;
+}
+
+.h-75 {
+	height: 75% !important;
+}
+
+.h-85 {
+	height: 85% !important;
+}
+
+.h-90 {
+	height: 90% !important;
+}
+
+.h-94 {
+	height: 94% !important;
+}
+
 .mh-5 {
 	max-height: 5% !important;
+}
+
+.mh-6 {
+	max-height: 6% !important;
 }
 
 .mh-15 {
@@ -51,6 +82,10 @@
 	max-height: 65% !important;
 }
 
+.mh-69 {
+	max-height: 69% !important;
+}
+
 .mh-70 {
 	max-height: 70% !important;
 }
@@ -63,24 +98,12 @@
 	max-height: 85% !important;
 }
 
-.h-70 {
-	height: 70% !important;
-}
-
-.h-75 {
-	height: 75% !important;
-}
-
-.h-85 {
-	height: 85% !important;
-}
-
-.h-90 {
-	height: 90% !important;
-}
-
 .mh-90 {
 	max-height: 90% !important;
+}
+
+.mh-94 {
+	max-height: 94% !important;
 }
 
 .mh-100 {
@@ -306,7 +329,7 @@ label.custom-control-label {
 }
 
 .btn.btn-outline-dark:hover {
-	background-color: rgba(52, 58, 64, 0.9);
+	background-color: rgba(52, 58, 64, 0.25);
 	color: white;
 }
 
