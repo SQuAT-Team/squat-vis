@@ -117,7 +117,6 @@ function getCandidateIdsWithElement(element){
 }
 
 function toolbarSearch(element) {
-	var doNotShowCssClass = "search-hide";
 	var toSearch = element.value.trim().replace(/\s+/g, ' ').toLowerCase();
 	// search for items in all list
 	var candidateItems = $("div.list-group.candidate-list.toolbarAll")
@@ -139,20 +138,11 @@ function toolbarSearch(element) {
 				classes.remove(doNotShowCssClass);
 			}
 		}	
-	}else if(toSearch == "s"){
-		for (let i = 0; i < candidateItems.length; i++) {
-			var suggestion = $(candidateItems[i]).find(".suggestion-on");
-			var classes = candidateItems[i].classList;
-			// set correct search css class in each element
-			if (suggestion.length == 0) {
-				if (!classes.contains(doNotShowCssClass)) {
-					classes.add(doNotShowCssClass);
-				}
-			} else {
-				classes.remove(doNotShowCssClass);
-			}
-		}	
-	}else{
+	}else if (toSearch == "s") {
+		hideCandidatesWithoutClass(candidateItems, "suggestion-on");
+	} else if (toSearch == "i") {
+		hideCandidatesWithoutClass(candidateItems, "initial-on");
+	} else {
 	for (let i = 0; i < candidateItems.length; i++) {
 		var itemName = $(candidateItems[i]).find(".candidate-name").text();
 		var classes = candidateItems[i].classList;

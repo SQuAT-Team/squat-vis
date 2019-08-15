@@ -252,18 +252,9 @@ function starSearch(element) {
 			}
 		}	
 	}else if(toSearch == "s"){
-		for (let i = 0; i < candidateItems.length; i++) {
-			var suggestion = $(candidateItems[i]).find(".suggestion-on");
-			var classes = candidateItems[i].classList;
-			// set correct search css class in each element
-			if (suggestion.length == 0) {
-				if (!classes.contains(doNotShowCssClass)) {
-					classes.add(doNotShowCssClass);
-				}
-			} else {
-				classes.remove(doNotShowCssClass);
-			}
-		}	
+		hideCandidatesWithoutClass(candidateItems, "suggestion-on");
+	}else if(toSearch == "i"){
+		hideCandidatesWithoutClass(candidateItems, "initial-on");
 	}else{	
 		for (let i = 0; i < candidateItems.length; i++) {
 			var itemName = $(candidateItems[i]).find(".candidate-radar-name")
