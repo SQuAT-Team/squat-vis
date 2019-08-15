@@ -30,7 +30,7 @@ import org.squat_team.vis.data.daos.ProjectDao;
 import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
-import org.squat_team.vis.session.LevelResponseService;
+import org.squat_team.vis.export.LevelResponseService;
 import org.squat_team.vis.session.SessionInfo;
 import org.squat_team.vis.util.ResponseManager;
 

@@ -62,6 +62,15 @@
     </ul>
   </div>
 	
+	<!-- Send Response Button -->
+	<h:panelGroup layout="block" styleClass="selectable-element ml-3">
+	<h:form>
+		<h:commandLink action="#{levelResponseService.respondAllActiveSelected()}">
+			<h:panelGroup pt:title="Send Selected Candidates to Optimization Tool" styleClass="fas fa-paper-plane text-white"></h:panelGroup>
+		</h:commandLink>
+	</h:form> 
+	</h:panelGroup>
+	
 	<!-- Download Loading Bar -->
 	<pf:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
 	  <pf:graphicImage name="/images/ajaxloadingbar.gif" />

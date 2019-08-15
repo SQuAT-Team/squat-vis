@@ -1,8 +1,9 @@
-package org.squat_team.vis.session;
+package org.squat_team.vis.export;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
@@ -14,6 +15,8 @@ import org.squat_team.vis.data.controllers.ProjectController;
 import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
+import org.squat_team.vis.session.SelectorInfo;
+import org.squat_team.vis.session.SessionInfo;
 import org.squat_team.vis.util.ResponseIdentifier;
 import org.squat_team.vis.util.ResponseManager;
 
@@ -42,6 +45,23 @@ public class LevelResponseService implements Serializable {
 	private Event<ResponseIdentifier> eventService;
 
 	/**
+	 * Sends all active (means that they are in a shown level) and selected
+	 * candidates as response.
+	 */
+	public void respondAllActiveSelected() {
+		long projectId = this.sessionInfo.getSelectedProject();
+		List<Level> levels = getAllLevels(projectId);
+		if (!levels.isEmpty()) {
+			int levelNumber = getLastLevelIndex(levels);
+			Level lastLevel = levels.get(levelNumber);
+			Set<String> activeSelectedCandidateIds = getActiveSelectedCandidateIds();
+			List<Long> responseCandidates = castToLongList(activeSelectedCandidateIds);
+			setSelectedCandidatesInLevel(responseCandidates, lastLevel);
+			notifyResponseProtocol(projectId, levelNumber);
+		}
+	}
+
+	/**
 	 * Sends the complete last level as a response
 	 */
 	public void respondCompleteLastLevel() {
@@ -54,6 +74,32 @@ public class LevelResponseService implements Serializable {
 			setSelectedCandidatesInLevel(allCandidates, lastLevel);
 			notifyResponseProtocol(projectId, levelNumber);
 		}
+	}
+
+	/**
+	 * Finds candidate IDs of all selected candidates which are part of an active
+	 * level.
+	 * 
+	 * @return the ids of the candidates
+	 */
+	private Set<String> getActiveSelectedCandidateIds() {
+		SelectorInfo selectorInfo = sessionInfo.getCurrentProjectInfo().getSelectorInfo();
+		Set<String> allSelectedCandidateIds = selectorInfo.getSelected();
+		return selectorInfo.findOnlyIdsOfActiveLevels(allSelectedCandidateIds);
+	}
+
+	/**
+	 * Turns a set of strings into a list of longs.
+	 * 
+	 * @param stringList the string set
+	 * @return the long list
+	 */
+	private List<Long> castToLongList(Set<String> stringList) {
+		List<Long> longList = new ArrayList<>();
+		for (String candidateId : stringList) {
+			longList.add(Long.parseLong(candidateId));
+		}
+		return longList;
 	}
 
 	/**
