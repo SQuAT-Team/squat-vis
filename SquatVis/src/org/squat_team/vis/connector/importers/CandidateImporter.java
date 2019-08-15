@@ -30,9 +30,21 @@ public class CandidateImporter extends AbstractImporter<CCandidate, Candidate> {
 	public Candidate transform(CCandidate ccandidate) throws InvalidRequestException {
 		findDao();
 		Candidate candidate = transformCandidate(ccandidate);
-		architectureImporter.transform(ccandidate);
+		if(architectureExists(ccandidate)) {
+			architectureImporter.transform(ccandidate);
+		}
 		store(candidate);
 		return candidate;
+	}
+	
+	/**
+	 * Checks whether an architecture for the candidate has been send.
+	 * 
+	 * @param ccandidate the candidate to check for an architecture.
+	 * @return true if architecture is available, false if not.
+	 */
+	private boolean architectureExists(CCandidate ccandidate) {
+		return ccandidate.getArchitecture() != null && ccandidate.getArchitecture().getRepository() != null;
 	}
 
 	/**
