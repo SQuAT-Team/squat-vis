@@ -20,6 +20,7 @@ public class MatrixViewInfo implements Serializable {
 	
 	private boolean showTags = true;
 	private boolean showParents = true;
+	private boolean highlightInitial = true;
 	private String mode = "All";
 	private MatrixOptionsCSSProvider matrixOptionsCssProvider = new MatrixOptionsCSSProvider();
 
@@ -34,6 +35,10 @@ public class MatrixViewInfo implements Serializable {
 	public boolean getShowParents() {
 		return showParents;
 	}
+	
+	public boolean getHighlightInitial() {
+		return highlightInitial;
+	}
 
 	public String getShowParentsStyle() {
 		if (getShowParents()) {
@@ -45,6 +50,13 @@ public class MatrixViewInfo implements Serializable {
 	public String getShowTagsStyle() {
 		if (getShowTags()) {
 			return matrixOptionsCssProvider.getTagsOnTag();
+		}
+		return "";
+	}
+	
+	public String getHighlightInitialStyle() {
+		if (getHighlightInitial()) {
+			return matrixOptionsCssProvider.getInitialsOnTag();
 		}
 		return "";
 	}
@@ -62,6 +74,11 @@ public class MatrixViewInfo implements Serializable {
 	public void setShowParents() {
 		String newState = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
 		this.showParents = Boolean.parseBoolean(newState);
+	}
+	
+	public void setHighlightInitial() {
+		String newState = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		this.highlightInitial = Boolean.parseBoolean(newState);
 	}
 
 }

@@ -52,6 +52,8 @@ public class CsvExporter extends AbstractExporter {
 		endValue(contentBuilder);
 		contentBuilder.append("SuggestionTags");
 		endValue(contentBuilder);
+		contentBuilder.append("InitialTags");
+		endValue(contentBuilder);
 	}
 	
 	private void exportLevelTypeHeader(StringBuilder contentBuilder){
@@ -121,6 +123,8 @@ public class CsvExporter extends AbstractExporter {
 		endValue(contentBuilder);
 		contentBuilder.append(getCandidateSuggestionTag(candidate));
 		endValue(contentBuilder);
+		contentBuilder.append(getCandidateInitialTag(candidate));
+		endValue(contentBuilder);
 	}
 	
 	private void exportLevelType(boolean isParent, StringBuilder contentBuilder) {
@@ -158,6 +162,10 @@ public class CsvExporter extends AbstractExporter {
 
 	private String getCandidateSuggestionTag(Candidate candidate) {
 		return projectInfo.getTagInfo().getSuggestionTag(candidate);
+	}
+	
+	private String getCandidateInitialTag(Candidate candidate) {
+		return projectInfo.getTagInfo().getInitialTag(candidate);
 	}
 
 	private void exportCandidateValue(Candidate candidate, int i, StringBuilder contentBuilder) {

@@ -110,7 +110,7 @@ function resizeBig(){
 function render(data, useMinimizedMatrixOption) {
   var widthBig = document.getElementById('matrixDetailedContent').clientWidth;
   var heightBig = document.getElementById('matrixDetailedContent').clientHeight;
-  traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "Parent") && (d !== "LevelType") && (d !== "ParetoTags") && (d !== "SuggestionTags")); });
+  traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "Parent") && (d !== "LevelType") && (d !== "ParetoTags") && (d !== "SuggestionTags") && (d !== "InitialTags")); });
   n = traits.length;
   
   var normalData = data.filter(function(d){return d["LevelType"] == "normal";});
@@ -299,7 +299,7 @@ function render(data, useMinimizedMatrixOption) {
 	    cell.selectAll(".pareto-circle")
         .data(normalData)
       .enter().append("circle").attr("class", function(d) {
-    	  return "pareto-circle c"+d["ID"] + " " + d["ParetoTags"];
+    	  return "pareto-circle c" + d["ID"] + " " + d["ParetoTags"];
       	})
         .attr("cx", function(d) {
         	return x(d[p.x]);
@@ -314,7 +314,7 @@ function render(data, useMinimizedMatrixOption) {
 	    cell.selectAll(".suggestion-circle")
         .data(normalData)
       .enter().append("circle").attr("class", function(d) {
-    	  return "suggestion-circle c"+d["ID"] + " " + d["SuggestionTags"];
+    	  return "suggestion-circle c" + d["ID"] + " " + d["SuggestionTags"];
       	})
         .attr("cx", function(d) {
         	return x(d[p.x]);
@@ -328,7 +328,7 @@ function render(data, useMinimizedMatrixOption) {
 	    cell.selectAll(".candidate-circle")
         .data(normalData)
       .enter().append("circle").attr("class", function(d) {
-    	  return "candidate-circle c"+d["ID"] + " " + d["SelectorTags"];
+    	  return "candidate-circle c" + d["ID"] + " " + d["SelectorTags"] + " " + d["InitialTags"];
       	})
         .attr("cx", function(d) {
         	return x(d[p.x]);
@@ -407,7 +407,7 @@ function render(data, useMinimizedMatrixOption) {
 	    cellBig.selectAll(".candidate-circle")
         .data(normalData)
       .enter().append("circle").attr("class", function(d) {
-    	  return "candidate-circle c"+d["ID"] + " " + d["SelectorTags"];
+    	  return "candidate-circle c"+d["ID"] + " " + d["SelectorTags"] + " " + d["InitialTags"];
       	})
       	.attr("candidateId", function(d) {
       		return d["ID"];

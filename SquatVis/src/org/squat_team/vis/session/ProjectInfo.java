@@ -29,7 +29,7 @@ public class ProjectInfo implements Serializable {
 	private SelectorInfo selectorInfo;
 	private ColorInfo colorInfo = new ColorInfo();
 	private OptionsInfo optionsInfo = new OptionsInfo();
-	private TagInfo tagInfo = new TagInfo(optionsInfo);
+	private TagInfo tagInfo;
 	private MatrixViewInfo matrixViewInfo = new MatrixViewInfo();
 	private StarViewInfo starViewInfo = new StarViewInfo();
 	private GraphViewInfo graphViewInfo = new GraphViewInfo();
@@ -40,6 +40,7 @@ public class ProjectInfo implements Serializable {
 		addProjectToCandidateIdCache(this.project);
 		this.levelInfo = new LevelInfo();
 		this.selectorInfo = new SelectorInfo(this, candidates);
+		this.tagInfo = new TagInfo(this);
 	}
 
 	private void addProjectToCandidateIdCache(Project project) {

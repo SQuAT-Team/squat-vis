@@ -39,7 +39,7 @@ function RadarChart(id, data, options, populationData) {
 	 showAxisTooltips: true, // show tooltips when hover over axis
 	 showAxisValues: false, // show values of the level circles
 	 axisColor: d3.scaleOrdinal().range(["#000000","#000000"]), // axis color
-	 startIndex: 6, // the starting index for data to show
+	 startIndex: 7, // the starting index for data to show
 	 glow: true, // if a glow for the circle stroke should be added
 	 responsiveWidth: false, // if star should be initialized responsive
 	 responsiveId: 'content', // the id of the outer container
@@ -70,7 +70,7 @@ function RadarChart(id, data, options, populationData) {
 		normalPopulationData = data.filter(function(d){return d["LevelType"] == "normal";});
 	}
 
-	var traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "LevelType") && (d !== "Parent") && (d !== "ParetoTags") && (d !== "SuggestionTags")); });
+	var traits = d3.keys(data[0]).filter(function(d) { return ((d !== "ID") && (d !== "SelectorTags") && (d !== "LevelType") && (d !== "Parent") && (d !== "ParetoTags") && (d !== "SuggestionTags") && (d !== "InitialTags")); });
 	var n = traits.length;
 	var total_n = d3.values(data[0]).length;
 

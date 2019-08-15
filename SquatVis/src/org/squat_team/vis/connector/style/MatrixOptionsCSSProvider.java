@@ -16,6 +16,7 @@ public class MatrixOptionsCSSProvider implements Serializable {
 
 	private static final String TAGS_ON_CSS = "tags-active";
 	private static final String PARENTS_ON_CSS = "parents-active";
+	private static final String INITIAL_ON_CSS = "initial-active";
 
 	public String getTagsOnTag() {
 		return TAGS_ON_CSS;
@@ -23,5 +24,9 @@ public class MatrixOptionsCSSProvider implements Serializable {
 
 	public String getParentsOnTag() {
 		return PARENTS_ON_CSS;
+	}
+
+	public String getInitialsOnTag() {
+		return INITIAL_ON_CSS;
 	}
 }

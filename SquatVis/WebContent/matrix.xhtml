@@ -89,7 +89,7 @@ MODIFIED: Sebastian Frank
 
 	<div class="full-width h-100 mh-100 p-0 pb-1">
 		<div id="matrixOptions"
-			class="row h-100 mh-100 p-0 m-0 #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowTagsStyle()} #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowParentsStyle()}">
+			class="row h-100 mh-100 p-0 m-0 #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowTagsStyle()} #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getShowParentsStyle()} #{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getHighlightInitialStyle()}">
 
 			<!-- SIDEBAR START -->
 			<tp:toolbar>
@@ -155,6 +155,25 @@ MODIFIED: Sebastian Frank
 															class="custom-control-input" onchange="changeTags()">
 															<label class="custom-control-label"
 															for="showTagsCheckbox">Show Tags</label> </input>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</div>
+										<div class="col m-0 p-0">
+											<div class="custom-control custom-checkbox">
+												<c:choose>
+													<c:when
+														test="${sessionInfo.getCurrentProjectInfo().matrixViewInfo.getHighlightInitial()}">
+														<input type="checkbox" id="highlightInitialCheckbox"
+															class="custom-control-input" checked="true"
+															onchange="changeHighlightInitial()"> <label
+															class="custom-control-label" for="highlightInitialCheckbox">Highlight Initial</label> </input>
+													</c:when>
+													<c:otherwise>
+														<input type="checkbox" id="highlightInitialCheckbox"
+															class="custom-control-input" onchange="changeHighlightInitial()">
+															<label class="custom-control-label"
+															for="highlightInitialCheckbox">Highlight Initial</label> </input>
 													</c:otherwise>
 												</c:choose>
 											</div>

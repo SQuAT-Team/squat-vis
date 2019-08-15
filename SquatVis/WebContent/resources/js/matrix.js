@@ -122,6 +122,27 @@ function changeParents(){
 	} ]);
 }
 
+function changeHighlightInitial() {
+	const initialActiveCss = "initial-active";
+	var checkboxValue = $("#highlightInitialCheckbox").prop("checked");
+	var classes = document.getElementById("matrixOptions").classList;
+	if (checkboxValue) {
+		if (!classes.contains(initialActiveCss)) {
+			classes.add(initialActiveCss);
+		}
+	} else {
+		if (classes.contains(initialActiveCss)) {
+			classes.remove(initialActiveCss);
+		}
+	}
+
+	// notify backend
+	setHighlightInitial_application([ {
+		name : 'param',
+		value : checkboxValue
+	} ]);
+}
+
 function changeTags() {
 	const tagsActiveCss = "tags-active";
 	var checkboxValue = $("#showTagsCheckbox").prop("checked");

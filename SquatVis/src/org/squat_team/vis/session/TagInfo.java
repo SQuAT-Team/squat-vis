@@ -1,6 +1,7 @@
 package org.squat_team.vis.session;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import org.squat_team.vis.connector.style.CandidateTagCSSProvider;
 import org.squat_team.vis.data.data.Candidate;
@@ -19,15 +20,15 @@ public class TagInfo implements Serializable {
 	 */
 	private static final long serialVersionUID = -4728243877557516574L;
 
-	private OptionsInfo optionsInfo;
+	private ProjectInfo projectInfo;
 	private CandidateTagCSSProvider candidateTagMapper = new CandidateTagCSSProvider();
 
 	public TagInfo() {
 		// For Serializable
 	}
 
-	public TagInfo(OptionsInfo optionsInfo) {
-		this.optionsInfo = optionsInfo;
+	public TagInfo(ProjectInfo projectInfo) {
+		this.projectInfo = projectInfo;
 	}
 
 	public String getParetoTag(@NonNull Candidate candidate) {
@@ -48,8 +49,16 @@ public class TagInfo implements Serializable {
 	}
 
 	public String getSuggestionTag(@NonNull Candidate candidate) {
-		if (candidate.isSuggested() && optionsInfo.isShowSuggestions()) {
+		if (candidate.isSuggested() && projectInfo.getOptionsInfo().isShowSuggestions()) {
 			return candidateTagMapper.getSuggestionTag();
+		}
+		return "";
+	}
+	
+	public String getInitialTag(Candidate candidate) {
+		Set<String> initialLevelIds = projectInfo.getCandidateIdCache().get(0);
+		if(initialLevelIds != null && initialLevelIds.contains(candidate.getCandidateId().toString())) {
+			return candidateTagMapper.getInitialTag();
 		}
 		return "";
 	}

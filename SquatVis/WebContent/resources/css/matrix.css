@@ -53,7 +53,7 @@ circle.suggestion-circle {
 
 circle.current {
 	stroke: #00ffff !important;
-	stroke-width: 2px !important;
+	stroke-width: 1.5px !important;
 }
 
 circle.parent-circle{
@@ -61,12 +61,16 @@ circle.parent-circle{
 	fill-opacity:0.7;
 }
 
-.marked-active circle.marked {
-	fill: #0080ff !important;
+#matrixOptions.initial-active circle.candidate-circle.initial-on {
+	fill: #00ff00!important;
 }
 
-.selected-active circle.selected {
-	fill: #8000ff !important;
+#matrixOptions.marked-active circle.marked {
+	fill: #0080ff;
+}
+
+#matrixOptions.selected-active circle.selected {
+	fill: #8000ff;
 }
 
 .selection {

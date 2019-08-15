@@ -15,6 +15,7 @@ public class CandidateTagCSSProvider implements Serializable {
 	private static final String PARETO_UTILITY_LEVEL_TAG_CSS = "pareto-utility-level";
 	private static final String PARETO_UTILITY_POPULATION_TAG_CSS = "pareto-utility-population";
 	private static final String SUGGESTION_TAG_CSS = "suggestion-on";
+	private static final String INITIAL_TAG_CSS = "initial-on";
 
 	public String getParetoRealLevelTag() {
 		return PARETO_REAL_LEVEL_TAG_CSS;
@@ -34,6 +35,10 @@ public class CandidateTagCSSProvider implements Serializable {
 
 	public String getSuggestionTag() {
 		return SUGGESTION_TAG_CSS;
+	}
+	
+	public String getInitialTag() {
+		return INITIAL_TAG_CSS;
 	}
 
 }

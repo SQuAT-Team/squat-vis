@@ -51,7 +51,7 @@
 	color: #0080ff;
 }
 
-.candidate-pareto{
+.candidate-pareto {
 	visibility: hidden;
 }
 
@@ -67,6 +67,14 @@
 }
 
 .candidate-suggestion.suggestion-on {
+	visibility: visible;
+}
+
+.candidate-initial {
+	visibility: hidden;
+}
+
+.candidate-initial.initial-on {
 	visibility: visible;
 }
 

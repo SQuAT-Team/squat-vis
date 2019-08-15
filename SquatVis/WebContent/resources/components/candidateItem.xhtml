@@ -39,6 +39,8 @@
 				#{cc.attrs.candidate.candidateId}</div>
 			<div class="ml-auto text-center font-weight-bold d-flex">
 				<div
+					class="candidate-initial text-success px-1 #{sessionInfo.getCurrentProjectInfo().tagInfo.getInitialTag(cc.attrs.candidate)}">I</div>
+				<div
 					class="candidate-suggestion text-primary px-1 #{sessionInfo.getCurrentProjectInfo().tagInfo.getSuggestionTag(cc.attrs.candidate)}">S</div>
 				<div
 					class="candidate-pareto text-danger px-1 #{sessionInfo.getCurrentProjectInfo().tagInfo.getParetoTag(cc.attrs.candidate)}">P</div>
