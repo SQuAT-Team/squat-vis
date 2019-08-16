@@ -55,10 +55,7 @@
 	visibility: hidden;
 }
 
-.candidate-pareto.pareto-real-level
-,.candidate-pareto.pareto-utility-level
-,.candidate-pareto.pareto-real-population,
-.candidate-pareto.pareto-utility-population {
+.candidate-pareto.pareto-on {
 	visibility: visible;
 }
 

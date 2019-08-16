@@ -236,21 +236,7 @@ function starSearch(element) {
 	// search for items in all list
 	var candidateItems = $("#starDetailedContent .candidate-radar-container");
 	if(toSearch == "p"){
-		for (let i = 0; i < candidateItems.length; i++) {
-			var pareto1 = $(candidateItems[i]).find(".candidate-pareto.pareto-real-level");
-			var pareto2 = $(candidateItems[i]).find(".candidate-pareto.pareto-utility-level");
-			var pareto3 = $(candidateItems[i]).find(".candidate-pareto.pareto-real-population");
-			var pareto4 = $(candidateItems[i]).find(".candidate-pareto.pareto-utility-population");
-			var classes = candidateItems[i].classList;
-			// set correct search css class in each element
-			if (pareto1.length == 0 && pareto2.length == 0 && pareto3.length == 0 && pareto4.length == 0) {
-				if (!classes.contains(doNotShowCssClass)) {
-					classes.add(doNotShowCssClass);
-				}
-			} else {
-				classes.remove(doNotShowCssClass);
-			}
-		}	
+		hideCandidatesWithoutClass(candidateItems, "candidate-pareto.pareto-on");
 	}else if(toSearch == "s"){
 		hideCandidatesWithoutClass(candidateItems, "suggestion-on");
 	}else if(toSearch == "i"){

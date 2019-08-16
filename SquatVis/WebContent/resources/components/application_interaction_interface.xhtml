@@ -152,7 +152,10 @@
 		<pf:remoteCommand name="removeActiveParentLevel_application"
 			action="#{sessionInfo.getCurrentProjectInfo().levelInfo.removeActiveParentLevel}" />
 	</h:form>
-	
+	<h:form>
+		<pf:remoteCommand name="setParetoMode_application"
+			action="#{sessionInfo.getCurrentProjectInfo().optionsInfo.setParetoMode}" />
+	</h:form>
 	
 </composite:implementation>
 

@@ -83,9 +83,7 @@ circle.parent-circle{
 	visibility: hidden;
 }
 
-.pareto-active .pareto-circle.pareto-real-level, .pareto-active .pareto-circle.pareto-utility-level,
-	.pareto-active .pareto-circle.pareto-real-population, .pareto-active .pareto-circle.pareto-utility-population
-	{
+.pareto-active .pareto-circle.pareto-on	{
 	visibility: visible;
 }
 

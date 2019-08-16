@@ -49,6 +49,14 @@ function setLevelMode(name){
 	updateAllSelectorElements();
 }
 
+function setParetoMode(name){
+	setParetoMode_application([ {
+		name : 'param',
+		value : name
+	} ]);
+	updateAllSelectorElements();
+}
+
 function updateAllSelectorElements(){
 	updateToolbarComparisonCounter();
 	updateToolbarComparison();
@@ -63,16 +71,10 @@ function updateAllSelectorElements(){
 }
 
 function selectorAllParetoToCurrent(){
-	var paretoGroup1 = getCandidateIdsWithElement(".pareto-real-population");
-	var paretoGroup2 = getCandidateIdsWithElement(".pareto-utility-population");
-	var paretoGroup3 = getCandidateIdsWithElement(".pareto-real-level");
-	var paretoGroup4 = getCandidateIdsWithElement(".pareto-utility-level");
+	var paretoGroup = getCandidateIdsWithElement(".pareto-on");
 	
 	let idSet = new Set();
-	paretoGroup1.forEach(item => idSet.add(item));
-	paretoGroup2.forEach(item => idSet.add(item));
-	paretoGroup3.forEach(item => idSet.add(item));
-	paretoGroup4.forEach(item => idSet.add(item));
+	paretoGroup.forEach(item => idSet.add(item));
 	
 	selectorClearCurrent();
 	setAllSelectorCurrent(Array.from(idSet));
@@ -123,21 +125,7 @@ function toolbarSearch(element) {
 			.children(".candidate-item");
 	
 	if(toSearch == "p"){
-		for (let i = 0; i < candidateItems.length; i++) {
-			var pareto1 = $(candidateItems[i]).find(".candidate-pareto.pareto-real-level");
-			var pareto2 = $(candidateItems[i]).find(".candidate-pareto.pareto-utility-level");
-			var pareto3 = $(candidateItems[i]).find(".candidate-pareto.pareto-real-population");
-			var pareto4 = $(candidateItems[i]).find(".candidate-pareto.pareto-utility-population");
-			var classes = candidateItems[i].classList;
-			// set correct search css class in each element
-			if (pareto1.length == 0 && pareto2.length == 0 && pareto3.length == 0 && pareto4.length == 0) {
-				if (!classes.contains(doNotShowCssClass)) {
-					classes.add(doNotShowCssClass);
-				}
-			} else {
-				classes.remove(doNotShowCssClass);
-			}
-		}	
+		hideCandidatesWithoutClass(candidateItems, "candidate-pareto.pareto-on");
 	}else if (toSearch == "s") {
 		hideCandidatesWithoutClass(candidateItems, "suggestion-on");
 	} else if (toSearch == "i") {

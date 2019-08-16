@@ -14,7 +14,7 @@ public class TestNewLevelDataProvider {
 	private static final String MODEL_PATH = "models"+File.separator+"test-project"+File.separator;
 	
 	private static final List<Double> INITIAL_REAL_VALUES = Arrays.asList(0.9, 1.8, 350.0, 630.0);
-	private static final List<Double> INITIAL_UTILITY_VALUES = Arrays.asList(1.0, 0.6, 1.0, 0.85);
+	private static final List<Double> INITIAL_UTILITY_VALUES = Arrays.asList(0.2, 0.1, 0.3, 0.15);
 
 	private static final List<Double> LEVEL1_CANDIDATE1_REAL_VALUES = Arrays.asList(0.8, 1.2, 410.0, 640.0);
 	private static final List<Double> LEVEL1_CANDIDATE1_UTILITY_VALUES = Arrays.asList(1.0, 1.0, 0.95, 0.80);
