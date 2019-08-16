@@ -10,6 +10,10 @@
 	height: 6% !important;
 }
 
+.h-7 {
+	height: 7% !important;
+}
+
 .h-10 {
 	height: 10% !important;
 }
@@ -50,6 +54,10 @@
 	height: 90% !important;
 }
 
+.h-93 {
+	height: 93% !important;
+}
+
 .h-94 {
 	height: 94% !important;
 }
@@ -64,6 +72,10 @@
 
 .mh-6 {
 	max-height: 6% !important;
+}
+
+.mh-7 {
+	max-height: 7% !important;
 }
 
 .mh-15 {
@@ -106,6 +118,10 @@
 	max-height: 90% !important;
 }
 
+.mh-93 {
+	max-height: 93% !important;
+}
+
 .mh-94 {
 	max-height: 94% !important;
 }
@@ -120,6 +136,11 @@
 
 .mw-100 {
 	max-width: 100% !important;
+}
+
+.card.vis-card .card-body {
+	height: calc(100% - 29.6px); /* Subtract Header Height */
+	max-height: calc(100% - 29.6px); /* Subtract Header Height */
 }
 
 .scrollable {

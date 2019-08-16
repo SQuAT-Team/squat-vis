@@ -100,7 +100,7 @@ function resetAllSelectorSelected_d3(ids) {
 }
 
 function selectorLevelUp_d3(id) {
-	var candidateCircles = $("g.cell").children(candidateCircleCss_matrix + ".c" + id);
+	var circles = allCandidateCircles_matrix.filter(".c" + id);
 	for (let i = 0; i < candidateCircles.length; i++) {
 		var classList = candidateCircles[i].classList;
 		if (classList.contains("marked")) {
@@ -147,7 +147,7 @@ function selectorClearSelected_d3() {
 }
 
 function selectorMarkAllCurrent_d3() {
-	var circles = $("g.cell").children(candidateCircleCss_matrix + ".current:not(.selected)");
+	var circles = allCandidateCircles_matrix.filter(".current:not(.selected)");
 	for (let i = 0; i < circles.length; i++) {
 		var classes = circles[i].classList;
 		classes.add("marked");
@@ -160,7 +160,7 @@ function selectorMarkAllCurrent_d3() {
 }
 
 function selectorSelectAllComparison_d3() {
-	var circles = $("g.cell").children(candidateCircleCss_matrix + ".comparison");
+	var circles = allCandidateCircles_matrix.filter(".comparison");
 	for (let i = 0; i < circles.length; i++) {
 		var classes = circles[i].classList;
 		classes.remove("marked");
@@ -174,7 +174,7 @@ function selectorSelectAllComparison_d3() {
 }
 
 function selectorSelectAllMarked_d3() {
-	var circles = $("g.cell").children(candidateCircleCss_matrix + ".marked");
+	var circles = allCandidateCircles_matrix.filter(".marked");
 	for (let i = 0; i < circles.length; i++) {
 		var classes = circles[i].classList;
 		classes.remove("marked");
