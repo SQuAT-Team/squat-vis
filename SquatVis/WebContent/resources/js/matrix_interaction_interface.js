@@ -1,4 +1,5 @@
 const candidateCircleCss_matrix = "circle.candidate-circle";
+var allCandidateCircles_matrix = $("g.cell").children(candidateCircleCss_matrix);
 
 function setSelectorCurrent_d3(id) {
 	addElementToCandidate_d3(id, "current");
@@ -193,7 +194,7 @@ function selectorExportAllSelected_d3() {
 // HELPERS
 
 function addElementToCandidate_d3(id, element, remove) {
-	var candidateCircles = $("g.cell").children(candidateCircleCss_matrix + ".c" + id);
+	var candidateCircles = allCandidateCircles_matrix.filter(".c" + id);
 	for (let i = 0; i < candidateCircles.length; i++) {
 		candidateCircles[i].classList.add(element);
 		if (remove) {
@@ -204,14 +205,14 @@ function addElementToCandidate_d3(id, element, remove) {
 }
 
 function removeElementFromCandidate_d3(id, element) {
-	var candidateCircles = $("g.cell").children(candidateCircleCss_matrix + ".c" + id);
+	var candidateCircles = allCandidateCircles_matrix.filter(".c" + id);
 	for (let i = 0; i < candidateCircles.length; i++) {
 		candidateCircles[i].classList.remove(element);
 	}
 }
 
 function removeElementFromAllCandidates_d3(element) {
-	var candidateCircles = $("g.cell").children(candidateCircleCss_matrix + "." + element);
+	var candidateCircles = allCandidateCircles_matrix.filter("." + element);
 	for (let i = 0; i < candidateCircles.length; i++) {
 		candidateCircles[i].classList.remove(element);
 	}

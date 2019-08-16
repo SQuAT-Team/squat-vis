@@ -1,7 +1,18 @@
+initMoveToFront();
 initDropdown();
 updateColorMappingCss();
 drawArrowHead();
 drawParent();
+
+function initMoveToFront() {
+	var candidateCircles = $("g.cell").children("circle.candidate-circle");
+	d3.selectAll(candidateCircles.filter(".comparison")).moveToFront();
+	d3.selectAll(candidateCircles.filter(".marked")).moveToFront();
+	d3.selectAll(candidateCircles.filter(".selected")).moveToFront();
+	d3.selectAll(candidateCircles.filter(".comparison")).moveToFront();
+	d3.selectAll(candidateCircles.filter(".initial-on")).moveToFront();
+	d3.selectAll(candidateCircles.filter(".current")).moveToFront();
+}
 
 function drawArrowHead() {
 	svgBig.append("svg:defs").append("svg:marker")
