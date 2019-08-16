@@ -102,6 +102,14 @@
 	display: inline-block !important;
 }
 
+#starDetailed.suggested-active #starDetailedContent .candidate-radar-container.suggestion-on:not(.search-hide) {
+	display: inline-block !important;
+}
+
+#starDetailed.pareto-active #starDetailedContent .candidate-radar-container.pareto-on:not(.search-hide) {
+	display: inline-block !important;
+}
+
 #starDetailedContent .radarArea {
 	fill: #1F77B4;
 }

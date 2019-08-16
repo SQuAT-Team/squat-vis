@@ -33,7 +33,7 @@
 	</script>
 	<!-- CANDIDATE -->
 		<div
-		class="candidate-radar-container position-relative d-inline-block mt-1 mb-1 c#{cc.attrs.candidate.candidateId} #{sessionInfo.getCurrentProjectInfo().selectorInfo.getSelectorsType(cc.attrs.candidate.candidateId)}">
+		class="candidate-radar-container position-relative d-inline-block mt-1 mb-1 c#{cc.attrs.candidate.candidateId} #{sessionInfo.getCurrentProjectInfo().selectorInfo.getSelectorsType(cc.attrs.candidate.candidateId)}  #{sessionInfo.getCurrentProjectInfo().tagInfo.getParetoTag(cc.attrs.candidate)} #{sessionInfo.getCurrentProjectInfo().tagInfo.getSuggestionTag(cc.attrs.candidate)}">
 		
 		<!-- CANDIDATE ID -->
 		<div class="candidate-id" style="display:none">#{cc.attrs.candidate.candidateId}</div>

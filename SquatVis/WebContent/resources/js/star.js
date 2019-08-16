@@ -3,6 +3,8 @@ const currentActiveCss_star = "current-active";
 const comparisonActiveCss_star = "comparison-active";
 const markedActiveCss_star = "marked-active";
 const selectedActiveCss_star = "selected-active";
+const suggestedActiveCss_star = "suggested-active";
+const paretoActiveCss_star = "pareto-active";
 
 initDropdown();
 initDropdownBig();
@@ -18,6 +20,10 @@ function initDropdown() {
 		showSelected();
 	} else if (text === "Comparison") {
 		showComparison();
+	} else if (text === "Suggested") {
+		showSuggested();
+	} else if (text === "Pareto") {
+		showPareto();
 	}
 }
 
@@ -104,13 +110,7 @@ $(function() {
 
 function showAll() {
 	setDropdownName("All");
-	var classes = document.getElementById("starDetailed").classList;
-	classes.remove(comparisonActiveCss_star);
-	classes.remove(markedActiveCss_star);
-	classes.remove(selectedActiveCss_star);
-	if (!classes.contains(allActiveCss_star)) {
-		classes.add(allActiveCss_star);
-	}
+	addClassToShow(allActiveCss_star);
 	setMode_application([ {
 		name : 'param',
 		value : "All"
@@ -119,13 +119,7 @@ function showAll() {
 
 function showMarked() {
 	setDropdownName("Marked");
-	var classes = document.getElementById("starDetailed").classList;
-	classes.remove(comparisonActiveCss_star);
-	classes.remove(selectedActiveCss_star);
-	classes.remove(allActiveCss_star);
-	if (!classes.contains(markedActiveCss_star)) {
-		classes.add(markedActiveCss_star);
-	}
+	addClassToShow(markedActiveCss_star);
 	setMode_application([ {
 		name : 'param',
 		value : "Marked"
@@ -134,13 +128,7 @@ function showMarked() {
 
 function showSelected() {
 	setDropdownName("Selected");
-	var classes = document.getElementById("starDetailed").classList;
-	classes.remove(comparisonActiveCss_star);
-	classes.remove(markedActiveCss_star);
-	classes.remove(allActiveCss_star);
-	if (!classes.contains(selectedActiveCss_star)) {
-		classes.add(selectedActiveCss_star);
-	}
+	addClassToShow(selectedActiveCss_star);
 	setMode_application([ {
 		name : 'param',
 		value : "Selected"
@@ -149,17 +137,41 @@ function showSelected() {
 
 function showComparison() {
 	setDropdownName("Comparison");
-	var classes = document.getElementById("starDetailed").classList;
-	classes.remove(markedActiveCss_star);
-	classes.remove(selectedActiveCss_star);
-	classes.remove(allActiveCss_star);
-	if (!classes.contains(comparisonActiveCss_star)) {
-		classes.add(comparisonActiveCss_star);
-	}
+	addClassToShow(comparisonActiveCss_star);
 	setMode_application([ {
 		name : 'param',
 		value : "Comparison"
 	} ]);
+}
+
+function showSuggested() {
+	setDropdownName("Suggested");
+	addClassToShow(suggestedActiveCss_star);
+	setMode_application([ {
+		name : 'param',
+		value : "Suggested"
+	} ]);
+}
+
+function showPareto() {
+	setDropdownName("Pareto");
+	var classes = document.getElementById("starDetailed").classList;
+	addClassToShow(paretoActiveCss_star);
+	setMode_application([ {
+		name : 'param',
+		value : "Pareto"
+	} ]);
+}
+
+function addClassToShow(cssClass){
+	var classes = document.getElementById("starDetailed").classList;
+	classes.remove(comparisonActiveCss_star);
+	classes.remove(markedActiveCss_star);
+	classes.remove(selectedActiveCss_star);
+	classes.remove(allActiveCss_star);
+	classes.remove(suggestedActiveCss_star);
+	classes.remove(paretoActiveCss_star);
+	classes.add(cssClass);
 }
 
 function showCurrentBig() {
