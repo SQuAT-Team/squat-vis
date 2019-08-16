@@ -16,12 +16,14 @@
 
 <composite:implementation>
 	<nav id="sidebar" class="col-2 bg-light sidebar">
-	<div class="sidebar-sticky">
-
-		<div class="row mx-0">
-			<div class="col-12 px-1">
+	<div class="sidebar-sticky h-100 mh-100">
+		
+		<div class="h-90 mh-90">
+		<div class="row mx-0 h-100 mh-100">
+			<div class="col-12 px-1 h-100 mh-100">
 
 				<!-- TAB CONTROL -->
+				<div class="h-5 mh-5">
 				<nav>
 				<div class="nav nav-tabs btn-group btn-block" id="nav-tab"
 					role="tablist">
@@ -33,9 +35,11 @@
 						aria-controls="tab-options" aria-selected="false">Options</a>
 				</div>
 				</nav>
+				</div>
 
 				<!-- TAB CONTENT -->
-				<div class="tab-content" id="nav-tabContent">
+				<div class="h-95 mh-95 scrollbar">
+				<div class="tab-content" id="nav-tabContent mr-1">
 					<div class="tab-pane fade show active" id="tab-selectors"
 						role="tabpanel" aria-labelledby="tab-selectors-tab">
 						<!-- SELECTORS START -->
@@ -396,10 +400,21 @@
 					<!-- OPTIONS END -->
 				</div>
 			</div>
+			</div>
 			<!-- END TAB CONTENT -->
 
 		</div>
 	</div>
+	</div>
+	
+	<div class="h-10 mh-10">
+		<div class="h-70 mh-70">
+			<button type="button" onclick="location.reload();" class="btn btn-dark btn-block btn-edged h-100 mh-100">RELOAD</button>
+		</div>
+		<div class="h-30 mh-30">
+		</div>
+	</div>
+	
 	</div>
 	</nav>
 
