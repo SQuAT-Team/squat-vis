@@ -29,8 +29,8 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 	 * @param level            the received level
 	 * @param noResponse       True if the client does not expect a response.
 	 */
-	public NewLevelPostProtocolHandler(ConnectorService connectorService, ProjectConnector projectConnector, CLevel level,
-			boolean noResponse) {
+	public NewLevelPostProtocolHandler(ConnectorService connectorService, ProjectConnector projectConnector,
+			CLevel level, boolean noResponse) {
 		super(connectorService, projectConnector);
 		this.level = level;
 		this.noResponse = noResponse;
@@ -58,9 +58,9 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 			analyzeForParetoCandidates(false);
 		}
 	}
-	
+
 	private void startArchitectureAnalysis() {
-		if(project.getConfiguration().getHasArchitectures()) {
+		if (project.getConfiguration().getHasArchitectures()) {
 			PCMArchitectureAnalyzer analyzer = new PCMArchitectureAnalyzer(level, projectConnector, connectorService);
 			analyzer.analyze();
 		}
@@ -84,7 +84,10 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 		List<Candidate> allProjectParetoCandidates = getProjectParetoCandidates(project, useUtility);
 		Collection<Candidate> populationParetoCandidates = analyzer.findParetoCandidates(allProjectParetoCandidates);
 		markAsParetoCandidates(populationParetoCandidates, useUtility, true);
-		updateCandidates(populationParetoCandidates);
+		Collection<Candidate> notPopulationParetoCandidates = (new ArrayList<Candidate>(allProjectParetoCandidates));
+		notPopulationParetoCandidates.removeAll(populationParetoCandidates);
+		resetExistingPopulationPareto(notPopulationParetoCandidates, useUtility);
+		updateCandidates(allProjectParetoCandidates);
 	}
 
 	private List<Candidate> getProjectParetoCandidates(Project project, boolean useUtility) {
@@ -133,6 +136,26 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 			} else {
 				paretoCandidate.setRealValueParetoLevelBased(true);
 			}
+		}
+	}
+
+	private void resetExistingPopulationPareto(Collection<Candidate> candidates, boolean useUtility) {
+		if(useUtility) {
+			resetExistingUtilityPopulationPareto(candidates);
+		}else {
+			resetExistingRealValuePopulationPareto(candidates);
+		}
+	}
+	
+	private void resetExistingUtilityPopulationPareto(Collection<Candidate> candidates) {
+		for (Candidate candidate : candidates) {
+			candidate.setUtilityValueParetoPopulationBased(false);
+		}
+	}
+
+	private void resetExistingRealValuePopulationPareto(Collection<Candidate> candidates) {
+		for (Candidate candidate : candidates) {
+			candidate.setRealValueParetoPopulationBased(false);
 		}
 	}
 
