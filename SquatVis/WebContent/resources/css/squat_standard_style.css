@@ -146,6 +146,13 @@
 .scrollable {
 	overflow-x: auto;
 	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: #343a40 rgba(52, 58, 64, 0.08);
+}
+
+:root,body.scrollable,.list-group {
+	scrollbar-width: thin;
+	scrollbar-color: #343a40 rgba(52, 58, 64, 0.08);
 }
 
 .btn-edged {

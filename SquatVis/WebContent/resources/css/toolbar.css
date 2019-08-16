@@ -9,11 +9,6 @@
 	padding: 65px 0 0;
 }
 
-.scrollbar {
-	overflow-x: auto;
-	overflow-y: auto;
-}
-
 .current {
 	border-color: #00ffff;
 	border-width: thin;
