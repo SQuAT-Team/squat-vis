@@ -35,6 +35,7 @@ public class ProjectInfo implements Serializable {
 	private StarViewInfo starViewInfo = new StarViewInfo();
 	private GraphViewInfo graphViewInfo = new GraphViewInfo();
 	private LevelInfo levelInfo;
+	private MenuInfo menuInfo = new MenuInfo();
 
 	public ProjectInfo(Project project, List<Candidate> candidates) {
 		this.project = project;

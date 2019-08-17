@@ -1,3 +1,5 @@
+initToolbarSearch();
+
 // EXPORT BUTTON
 //<![CDATA[
 function start() {
@@ -118,10 +120,29 @@ function getCandidateIdsWithElement(element){
 	return ids;
 }
 
-function toolbarSearch(element) {
+function setSelectorMenuState(id, element){
+	var collapsed = $(element).hasClass("collapsed");	
+	setSelectorMenuState_application([ {
+		name : 'param1',
+		value : id
+	},{
+		name : 'param2',
+		value : collapsed
+	}
+	]);
+}
+
+function initToolbarSearch(){
+	var searchItems = $("#sidebar").find("div.has-search").find("input");
+	for (let i = 0; i < searchItems.length; i++) {
+		toolbarSearch(searchItems[i]);
+	}
+}
+
+function toolbarSearch(element, name) {
 	var toSearch = element.value.trim().replace(/\s+/g, ' ').toLowerCase();
 	// search for items in all list
-	var candidateItems = $("div.list-group.candidate-list.toolbarAll")
+	var candidateItems = $("#sidebar").find("div.list-group.candidate-list.toolbarAll")
 			.children(".candidate-item");
 	
 	if(toSearch == "p"){
@@ -144,6 +165,14 @@ function toolbarSearch(element) {
 		}
 	}
 	}
+	setSearchState_application([ {
+		name : 'param1',
+		value : name
+	},{
+		name : 'param2',
+		value : toSearch
+	}
+	]);
 }
 
 // Activates Right Click Menu For Candidates

@@ -157,6 +157,16 @@
 			action="#{sessionInfo.getCurrentProjectInfo().optionsInfo.setParetoMode}" />
 	</h:form>
 	
+	<!-- Menu Status -->
+	<h:form>
+		<pf:remoteCommand name="setSelectorMenuState_application"
+			action="#{sessionInfo.getCurrentProjectInfo().menuInfo.setSelectorMenuState}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setSearchState_application"
+			action="#{sessionInfo.getCurrentProjectInfo().menuInfo.setSearchState}" />
+	</h:form>
+	
 	<!-- Reload Button -->
 	<h:form>
 		<pf:remoteCommand name="reloadSelectedProject_application"

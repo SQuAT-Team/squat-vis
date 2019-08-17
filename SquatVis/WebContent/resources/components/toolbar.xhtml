@@ -47,6 +47,7 @@
 						<div class="panel-group ml-2" id="accordion">
 
 							<tp:toolbarList
+								accordionId="1"
 								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isComparison(candidate.candidateId)}"
 								heading="COMPARISON"
 								headingDescription="#{descriptionProvider.getComparisonDescription()}"
@@ -66,6 +67,7 @@
 								updateListId="toolbarComparison" comparison="true" />
 
 							<tp:toolbarList
+								accordionId="2"
 								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isCurrent(candidate.candidateId)}"
 								heading="CURRENT"
 								headingDescription="#{descriptionProvider.getCurrentDescription()}"
@@ -85,6 +87,7 @@
 								updateListId="toolbarCurrent" comparison="false" />
 
 							<tp:toolbarList
+								accordionId="3"
 								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isMarked(candidate.candidateId)}"
 								heading="MARKED"
 								headingDescription="#{descriptionProvider.getMarkedDescription()}"
@@ -104,6 +107,7 @@
 								updateListId="toolbarMarked" comparison="false" />
 
 							<tp:toolbarList
+								accordionId="4"
 								render="#{sessionInfo.getCurrentProjectInfo().selectorInfo.isSelected(candidate.candidateId)}"
 								heading="SELECTED"
 								headingDescription="#{descriptionProvider.getSelectedDescription()}"
@@ -123,6 +127,7 @@
 								updateListId="toolbarSelected" comparison="false" />
 
 							<tp:toolbarList
+								accordionId="5"
 								render="true"
 								heading="ALL"
 								headingDescription="#{descriptionProvider.getAllDescription()}"
