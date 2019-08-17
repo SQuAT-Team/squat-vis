@@ -19,12 +19,13 @@ import lombok.Data;
  */
 @Data
 public class ProjectInfo implements Serializable {
-	
+
 	/**
 	 * Generated
 	 */
 	private static final long serialVersionUID = 8781120400605216186L;
 	private Map<Integer, Set<String>> candidateIdCache = new HashMap<>();
+	private int lastUpdatedLevel = 0;
 	private Project project;
 	private SelectorInfo selectorInfo;
 	private ColorInfo colorInfo = new ColorInfo();
@@ -34,38 +35,52 @@ public class ProjectInfo implements Serializable {
 	private StarViewInfo starViewInfo = new StarViewInfo();
 	private GraphViewInfo graphViewInfo = new GraphViewInfo();
 	private LevelInfo levelInfo;
-	
+
 	public ProjectInfo(Project project, List<Candidate> candidates) {
 		this.project = project;
 		addProjectToCandidateIdCache(this.project);
 		this.levelInfo = new LevelInfo();
 		this.selectorInfo = new SelectorInfo(this, candidates);
 		this.tagInfo = new TagInfo(this);
+		lastUpdatedLevel = project.getNumberOfLevels();
 	}
 
 	private void addProjectToCandidateIdCache(Project project) {
-		for(int i = 0; i < project.getLevels().size(); i++) {
+		for (int i = 0; i < project.getLevels().size(); i++) {
 			addLevelToCandidateIdCache(i, project.getLevels().get(i));
 		}
 	}
-	
+
 	private void addLevelToCandidateIdCache(int index, Level level) {
 		Set<String> candidateIds = new HashSet<>();
-		for(Candidate candidate : level.getCandidates()) {
+		for (Candidate candidate : level.getCandidates()) {
 			candidateIds.add(candidate.getCandidateId().toString());
 		}
 		candidateIdCache.put(index, candidateIds);
 	}
-	
+
 	public void updateProject(Project project) {
 		this.project = project;
+		updateSelectedLevelsPreset(project);
+		updateCache(project);
+	}
+
+	private void updateSelectedLevelsPreset(Project project) {
+		for (int i = this.lastUpdatedLevel; i < project.getNumberOfLevels(); i++) {
+			Level uncheckedLevel = project.getLevels().get(i);
+			selectorInfo.addSuggestedCandidatesAsSelected(uncheckedLevel.getCandidates());
+		}
+		this.lastUpdatedLevel = project.getNumberOfLevels();
+	}
+
+	private void updateCache(Project project) {
 		int currentCandidateId = candidateIdCache.keySet().size();
-		while(currentCandidateId < project.getLevels().size()) {
+		while (currentCandidateId < project.getLevels().size()) {
 			addLevelToCandidateIdCache(currentCandidateId, project.getLevels().get(currentCandidateId));
 			currentCandidateId = candidateIdCache.keySet().size();
 		}
 	}
-	
+
 	public List<Candidate> getAllActiveCandidates() {
 		List<Candidate> activeCandidates = new ArrayList<>();
 		Set<Integer> activeLevelIndizes = levelInfo.getActiveLevels(project.getNumberOfLevels());

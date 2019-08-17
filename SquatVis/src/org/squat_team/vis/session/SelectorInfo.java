@@ -37,7 +37,7 @@ public class SelectorInfo implements Serializable {
 		addSuggestedCandidatesAsSelected(candidates);
 	}
 	
-	private void addSuggestedCandidatesAsSelected(List<Candidate> candidates) {
+	public void addSuggestedCandidatesAsSelected(List<Candidate> candidates) {
 		for(Candidate candidate : candidates) {
 			if(candidate.isSuggested()) {
 				selected.add(candidate.getCandidateId().toString());
