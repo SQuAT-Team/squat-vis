@@ -157,6 +157,12 @@
 			action="#{sessionInfo.getCurrentProjectInfo().optionsInfo.setParetoMode}" />
 	</h:form>
 	
+	<!-- Reload Button -->
+	<h:form>
+		<pf:remoteCommand name="reloadSelectedProject_application"
+			action="#{sessionInfo.reloadSelectedProject}" />
+	</h:form>
+	
 </composite:implementation>
 
 </html>

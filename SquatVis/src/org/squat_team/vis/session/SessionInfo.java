@@ -55,14 +55,14 @@ public class SessionInfo implements Serializable {
 	}
 
 	public List<Level> getAllLevels() {
-		if(project == null) {
+		if (project == null) {
 			return new ArrayList<>();
 		}
 		return project.getLevels();
 	}
-	
+
 	public List<Candidate> getAllCandidates() {
-		if(project == null) {
+		if (project == null) {
 			return new ArrayList<>();
 		}
 		List<Candidate> candidates = new ArrayList<>();
@@ -71,20 +71,28 @@ public class SessionInfo implements Serializable {
 		}
 		return candidates;
 	}
-	
-	public List<Candidate> getAllActiveCandidates(){
+
+	public List<Candidate> getAllActiveCandidates() {
 		return getCurrentProjectInfo().getAllActiveCandidates();
 	}
-	
-	public List<Candidate> getAllActiveParentCandidates(){
+
+	public List<Candidate> getAllActiveParentCandidates() {
 		return getCurrentProjectInfo().getAllActiveParentCandidates();
 	}
 
-	public List<Candidate> getAllActiveAndParentCandidates(){
+	public List<Candidate> getAllActiveAndParentCandidates() {
 		return getCurrentProjectInfo().getAllActiveAndParentCandidates();
 	}
-	
-	
+
+	/**
+	 * Reloads the currently active project from the database.
+	 */
+	public void reloadSelectedProject() {
+		if (project != null) {
+			setSelectedProject(this.selectedProject);
+		}
+	}
+
 	/**
 	 * Sets the project and navigates to the project page.
 	 * 
@@ -95,7 +103,7 @@ public class SessionInfo implements Serializable {
 		this.selectedProject = selectedProject;
 		this.project = projectDao.find(selectedProject);
 		ProjectInfo projectInfo = getCurrentProjectInfo();
-		if(projectInfo != null) {
+		if (projectInfo != null) {
 			projectInfo.updateProject(project);
 		}
 		return "project?faces-redirect=true";
@@ -137,7 +145,7 @@ public class SessionInfo implements Serializable {
 		resourcesExporter = new ArchitectureResourcesToCSVExporter();
 		return resourcesExporter.export(project, getCurrentProjectInfo());
 	}
-	
+
 	public String getProjectArchitectureResourcesMetadataAsCSV() {
 		return resourcesExporter.exportResourcesMetadata();
 	}
