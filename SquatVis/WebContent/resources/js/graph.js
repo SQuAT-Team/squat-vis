@@ -1,12 +1,18 @@
 updateColorMappingCss();
 initializeComparisonMode();
 initializeRadarRightClickListener();
+initMoveToFront();
 
-function initializeRadarRightClickListener(){
+function initMoveToFront() {
+	var currentLines = $("#resources-container").children("svg").children("g").children("g.lines").children(".resource-line.current");
+	d3.selectAll(currentLines).moveToFront();
+}
+
+function initializeRadarRightClickListener() {
 	d3.selectAll("path.radarArea").on("contextmenu", selectRadarCandidateAsCurrent);
 }
 
-function selectRadarCandidateAsCurrent(){
+function selectRadarCandidateAsCurrent() {
 	  // Prevent right click menu
 	  d3.event.preventDefault();
 	  var newCurrentCandidateId = this.getAttribute("candidateId");

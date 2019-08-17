@@ -1,5 +1,7 @@
 // https://www.d3-graph-gallery.com/graph/parallel_custom.html
 var svgPC;
+var svgPCLines;
+var svgPCAxis;
 
 function renderParallelCoordinates(data, metadata) {
 	if(!initializedActiveCandidates){
@@ -20,6 +22,8 @@ function renderParallelCoordinates(data, metadata) {
 	.append("g")
 	  .attr("transform",
 	        "translate(" + marginPC.left + "," + marginPC.top + ")");
+	svgPCLines = svgPC.append("g").attr("class", "lines");
+	svgPCAxis = svgPC.append("g").attr("class", "axis");
 
   // Here I set the list of dimension manually to control the order of axis:
   // For each dimension, I build a linear scale. I store all in a y object
@@ -62,7 +66,7 @@ function renderParallelCoordinates(data, metadata) {
   }
 
   // Draw the lines
-  var paths = svgPC
+  var paths = svgPCLines
     .selectAll("myPath")
     .data(data)
     .enter()
@@ -78,7 +82,8 @@ function renderParallelCoordinates(data, metadata) {
   paths.on("contextmenu", selectCandidatesAsCurrentParallelCoordinates);
 
   // Draw the axis:
-  var axisTexts = svgPC.selectAll("myAxis")
+  var axisTexts = svgPCAxis
+  	.selectAll("myAxis")
     // For each dimension of the dataset I add a 'g' element:
     .data(dimensions).enter()
     .append("g")
@@ -108,7 +113,7 @@ function renderParallelCoordinates(data, metadata) {
 }
 
 function updatePopulationForParallelCoordinates(){
-	var lines = svgPC.selectAll(".resource-line");
+	var lines = svgPCLines.selectAll(".resource-line");
 
 	// find correct group
 	var groupName = getDropdownName();
@@ -145,7 +150,7 @@ function updateParallelCoordinatesElements(){
 }
 
 function updateParallelCoordinatesCurrentElements(){
-	var lines = svgPC.selectAll(".resource-line");
+	var lines = svgPCLines.selectAll(".resource-line");
 	lines.classed("current", false);
 	activeCurrentCandidates.forEach(setLineAsCurrent);
 	
