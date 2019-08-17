@@ -30,14 +30,19 @@ public abstract class AbstractTestData {
 	private static ProjectConnector projectConnector;
 
 	public AbstractTestData(ProjectConnector projectConnector) {
-		projectConnector = projectConnector;
+		this.projectConnector = projectConnector;
 	}
 
 	protected static void makeNewProjectRequest()
 			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
+		makeNewProjectRequest("");
+	}
+
+	protected static void makeNewProjectRequest(String projectNameSuffix)
+			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		System.out.println("REQUESTING NEW PROJECT");
 		TestNewProjectDataProvider testDataProvider = new TestNewProjectDataProvider();
-		CProject project = testDataProvider.getProject();
+		CProject project = testDataProvider.getProject(projectNameSuffix);
 		CGoal goal = testDataProvider.getGoal();
 		CToolConfiguration configuration = testDataProvider.getConfiguration();
 		NewProjectClientProtocol protocol = new NewProjectClientProtocol(project, configuration, goal);
@@ -158,7 +163,7 @@ public abstract class AbstractTestData {
 		TestNewProjectDataProvider testProjectDataProvider = new TestNewProjectDataProvider();
 		TestNewLevelDataProvider testLevelDataProvider = new TestNewLevelDataProvider();
 		CsvExporter csvExporter = new CsvExporter(EXPORT_DIRECTORY_PATH);
-		csvExporter.export(testProjectDataProvider.getProject(), testProjectDataProvider.getGoal(),
+		csvExporter.export(testProjectDataProvider.getProject(""), testProjectDataProvider.getGoal(),
 				testLevelDataProvider.getAllLevels(), testProjectDataProvider.getConfiguration());
 	}
 }

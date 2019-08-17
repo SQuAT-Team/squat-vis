@@ -28,7 +28,7 @@ public class TestDataCorruptedTestClient extends AbstractTestData {
 
 	private static void runUpdateStuckProcedure() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 			InvalidRequestException, InterruptedException {
-		makeNewProjectRequest();
+		makeNewProjectRequest(" Corrupted");
 		sleep(2000);
 		makeStatusUpdate1();
 		sleep(2000);

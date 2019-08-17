@@ -28,7 +28,7 @@ public class TestDataWithResponseTestClient extends AbstractTestData {
 
 	private static void runStandardProcedureWithResponse() throws HostUnreachableException, ConnectionFailure,
 			ProtocolFailure, InvalidRequestException, InterruptedException {
-		makeNewProjectRequest();
+		makeNewProjectRequest(" With Response");
 		sleep(1000);
 		makeStatusUpdate1();
 		sleep(1000);

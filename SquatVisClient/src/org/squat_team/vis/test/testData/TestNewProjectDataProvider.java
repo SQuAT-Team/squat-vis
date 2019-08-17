@@ -7,7 +7,7 @@ import org.squat_team.vis.connector.data.CToolConfiguration;
 import org.squat_team.vis.connector.data.DefaultToolConfigurations;
 
 public class TestNewProjectDataProvider {
-	private static final String PROJECT_NAME = "Default Test Project";
+	private static final String PROJECT_NAME = "Test Project";
 
 	private static final String QUALITY_ATTRIBUTE_1_NAME = "Performance";
 	private static final String QUALITY_ATTRIBUTE_1_DESCRIPTION = "Performance";
@@ -31,8 +31,8 @@ public class TestNewProjectDataProvider {
 		return DefaultToolConfigurations.getInstance().getTestDefaultConfiguration();
 	}
 
-	public CProject getProject() {
-		CProject project = new CProject(PROJECT_NAME);
+	public CProject getProject(String suffix) {
+		CProject project = new CProject(PROJECT_NAME + suffix);
 		return project;
 	}
 
