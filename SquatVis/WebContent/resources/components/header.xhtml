@@ -80,7 +80,7 @@
 	<h:panelGroup layout="block" styleClass="selectable-element ml-3">
 	<h:panelGroup styleClass="d-none">
 	<h:form>   
-    	<pf:commandButton value="Download" ajax="false">
+    	<pf:commandButton styleClass="export-all-button" value="Download" ajax="false">
        		<pf:fileDownload value="#{selectedCandidatesDownloadService.exportAllSelectedCandidates()}" />
     	</pf:commandButton>
 	</h:form>

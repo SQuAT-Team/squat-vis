@@ -169,7 +169,9 @@ function selectorSelectAllMarked_toolbar() {
 }
 
 function selectorExportAllSelected_toolbar() {
-
+	var button = $("nav").find("button.export-all-button");
+	PrimeFaces.monitorDownload(start, stop);
+	button.click();
 }
 
 // HELPERS
