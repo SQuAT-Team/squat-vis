@@ -105,3 +105,13 @@ function selectorSelectAllMarked_d3() {
 function selectorExportAllSelected_d3() {
 
 }
+
+//Deactivated
+function updateColorMappings(){
+	// do nothing
+}
+
+//Deactivated
+function updateColorMappingCss(){
+	// do nothing
+}
