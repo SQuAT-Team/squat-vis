@@ -40,6 +40,10 @@ function initDropdownBig() {
 	}
 }
 
+function moveToFront(id){
+	// do nothing
+}
+
 // Activates Right Click Menu For Candidates
 $(function() {
 	var candidateIdCssClass = ".candidate-id";
@@ -102,7 +106,11 @@ $(function() {
 			},
 			"Export" : {
 				name : "Export",
-				disabled : true
+				disabled : false,
+				callback : function(key, opt) {
+					PrimeFaces.monitorDownload(start, stop);
+					opt.$trigger.find("button").click();
+				}
 			}
 		}
 	})

@@ -203,6 +203,15 @@ $(function() {
 					// do nothing
 				},
 				items : {
+					"Move to Front" : {
+						name : "Move to Front",
+						disabled : false,
+						callback : function(key, opt) {
+							var id = opt.$trigger.find(candidateIdCssClass).text();
+							moveToFront(id);
+						}
+					},
+					"sep1" : "---------",
 					"Current" : {
 						name : "Current",
 						disabled : function(key, opt) {
@@ -243,7 +252,7 @@ $(function() {
 							setSelectorSelected(id);
 						}
 					},
-					"sep1" : "---------",
+					"sep2" : "---------",
 					"Remove" : {
 						name : "Remove",
 						disabled : function(key, opt) {

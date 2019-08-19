@@ -3,6 +3,11 @@ initializeComparisonMode();
 initializeRadarRightClickListener();
 initMoveToFront();
 
+function moveToFront(id) {
+	var line = $("#resources-container").children("svg").children("g").children("g.lines").children(".resource-line.c"+id);
+	d3.selectAll(line).moveToFront();
+}
+
 function initMoveToFront() {
 	var currentLines = $("#resources-container").children("svg").children("g").children("g.lines").children(".resource-line.current");
 	d3.selectAll(currentLines).moveToFront();

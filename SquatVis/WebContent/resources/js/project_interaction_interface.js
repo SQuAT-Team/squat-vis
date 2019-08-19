@@ -115,3 +115,8 @@ function updateColorMappings(){
 function updateColorMappingCss(){
 	// do nothing
 }
+
+//Deactivated
+function moveToFront(id){
+	// do nothing
+}

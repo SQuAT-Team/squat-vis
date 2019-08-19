@@ -14,6 +14,11 @@ function initMoveToFront() {
 	d3.selectAll(candidateCircles.filter(".current")).moveToFront();
 }
 
+function moveToFront(id){
+	var candidateCircles = $("g.cell").children("circle.candidate-circle");
+	d3.selectAll(candidateCircles.filter(".c"+id)).moveToFront();
+}
+
 function drawArrowHead() {
 	svgBig.append("svg:defs").append("svg:marker")
 	.attr("class", "parent-line-head")
