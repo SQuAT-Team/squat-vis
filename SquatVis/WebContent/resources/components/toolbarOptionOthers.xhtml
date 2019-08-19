@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components">
+
+<composite:interface>
+</composite:interface>
+
+<composite:implementation>
+	<!-- MINIMIZED MATRIX OPTION -->
+	<div class="custom-control custom-checkbox">
+		<c:choose>
+			<c:when
+				test="${sessionInfo.getCurrentProjectInfo().optionsInfo.getUseMinimizedMatrix()}">
+				<input type="checkbox" id="useMinimizedMatrixCheckbox"
+					class="custom-control-input" checked="true"
+					onchange="changeUseMinimizedMatrix()"> <label
+					class="custom-control-label" for="useMinimizedMatrixCheckbox">Minimize
+						Matrix</label> </input>
+			</c:when>
+			<c:otherwise>
+				<input type="checkbox" id="useMinimizedMatrixCheckbox"
+					class="custom-control-input" onchange="changeUseMinimizedMatrix()">
+					<label class="custom-control-label"
+					for="useMinimizedMatrixCheckbox">Minimize Matrix</label> </input>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</composite:implementation>
+
+</html>

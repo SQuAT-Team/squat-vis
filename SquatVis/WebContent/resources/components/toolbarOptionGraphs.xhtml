@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components">
+
+<composite:interface>
+</composite:interface>
+
+<composite:implementation>
+
+	<!-- LINK LENGTH OPTION -->
+	<h:form>
+		<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
+			<h:outputText id="output1"
+				value="Link Length: #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength}"></h:outputText>
+			<h:inputHidden id="txt1"
+				value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength}"></h:inputHidden>
+			<pf:slider for="txt1" minValue="10" maxValue="200" display="output1"
+				style="width: auto;" displayTemplate="Link length: {value}">
+				<pf:ajax event="slideEnd" process="txt1" />
+			</pf:slider>
+		</h:panelGrid>
+	</h:form>
+
+	<!-- POPULATION OPACITY OPTION -->
+	<h:form>
+		<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
+			<h:outputText id="output2"
+				value="Population Opacity: #{sessionInfo.getCurrentProjectInfo().optionsInfo.populationTransparency}"></h:outputText>
+			<h:inputHidden id="txt2"
+				value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.populationTransparency}"></h:inputHidden>
+			<pf:slider for="txt2" minValue="0.00" maxValue="0.30" step="0.01"
+				display="output2" style="width: auto;"
+				displayTemplate="Population Opacity: {value}">
+				<pf:ajax event="slideEnd" process="txt2" />
+			</pf:slider>
+		</h:panelGrid>
+	</h:form>
+
+	<!-- NAME AS ID OPTION -->
+	<div class="custom-control custom-checkbox">
+		<c:choose>
+			<c:when
+				test="${sessionInfo.getCurrentProjectInfo().optionsInfo.getUseNameInsteadOfId()}">
+				<input type="checkbox" id="useUseNameInsteadOfIdCheckbox"
+					class="custom-control-input" checked="true"
+					onchange="changeUseNameInsteadOfId()"> <label
+					class="custom-control-label" for="useUseNameInsteadOfIdCheckbox">Name
+						as ID</label> </input>
+			</c:when>
+			<c:otherwise>
+				<input type="checkbox" id="useUseNameInsteadOfIdCheckbox"
+					class="custom-control-input" onchange="changeUseNameInsteadOfId()">
+					<label class="custom-control-label"
+					for="useUseNameInsteadOfIdCheckbox">Name as ID</label> </input>
+			</c:otherwise>
+		</c:choose>
+	</div>
+
+</composite:implementation>
+
+</html>

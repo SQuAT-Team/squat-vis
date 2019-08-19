@@ -15,4 +15,12 @@ public class ClassReturner {
 		}
 	}
 	
+	public String checkNot(String name, boolean check) {
+		if(!check) {
+			return name;
+		}else {
+			return "";
+		}
+	}
+	
 }

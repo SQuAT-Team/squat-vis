@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components">
+
+<composite:interface>
+</composite:interface>
+
+<composite:implementation>
+	<div>Pareto Type:</div>
+	<c:choose>
+		<c:when
+			test="#{sessionInfo.getCurrentProjectInfo().optionsInfo.getParetoMode() == 'UTILITY_LEVEL_PARETO'}">
+			<div class="custom-control custom-radio"
+				onclick="setParetoMode('UTILITY_LEVEL_PARETO')">
+				<input type="radio" class="custom-control-input" id="paretoGroup1"
+					name="paretoSelectionGroup" checked="true" /> <label
+					class="custom-control-label" for="paretoGroup1">Utility/Level</label>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="custom-control custom-radio"
+				onclick="setParetoMode('UTILITY_LEVEL_PARETO')">
+				<input type="radio" class="custom-control-input" id="paretoGroup1"
+					name="paretoSelectionGroup" /> <label class="custom-control-label"
+					for="paretoGroup1">Utility/Level</label>
+			</div>
+		</c:otherwise>
+	</c:choose>
+
+	<c:choose>
+		<c:when
+			test="#{sessionInfo.getCurrentProjectInfo().optionsInfo.getParetoMode() == 'UTILITY_POPULATION_PARETO'}">
+			<div class="custom-control custom-radio"
+				onclick="setParetoMode('UTILITY_POPULATION_PARETO')">
+				<input type="radio" class="custom-control-input" id="paretoGroup2"
+					name="paretoSelectionGroup" checked="true" /> <label
+					class="custom-control-label" for="paretoGroup2">Utility/Population</label>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="custom-control custom-radio"
+				onclick="setParetoMode('UTILITY_POPULATION_PARETO')">
+				<input type="radio" class="custom-control-input" id="paretoGroup2"
+					name="paretoSelectionGroup" /> <label class="custom-control-label"
+					for="paretoGroup2">Utility/Population</label>
+			</div>
+		</c:otherwise>
+	</c:choose>
+
+	<c:choose>
+		<c:when
+			test="#{sessionInfo.getCurrentProjectInfo().optionsInfo.getParetoMode() == 'REAL_VALUE_LEVEL_PARETO'}">
+			<div class="custom-control custom-radio"
+				onclick="setParetoMode('REAL_VALUE_LEVEL_PARETO')">
+				<input type="radio" class="custom-control-input" id="paretoGroup3"
+					name="paretoSelectionGroup" checked="true" /> <label
+					class="custom-control-label" for="paretoGroup3">Value/Level</label>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="custom-control custom-radio"
+				onclick="setParetoMode('REAL_VALUE_LEVEL_PARETO')">
+				<input type="radio" class="custom-control-input" id="paretoGroup3"
+					name="paretoSelectionGroup" /> <label class="custom-control-label"
+					for="paretoGroup3">Value/Level</label>
+			</div>
+		</c:otherwise>
+	</c:choose>
+
+	<c:choose>
+		<c:when
+			test="#{sessionInfo.getCurrentProjectInfo().optionsInfo.getParetoMode() == 'REAL_VALUE_POPULATION_PARETO'}">
+			<div class="custom-control custom-radio"
+				onclick="setParetoMode('REAL_VALUE_POPULATION_PARETO')">
+				<input type="radio" class="custom-control-input" id="paretoGroup4"
+					name="paretoSelectionGroup" checked="true" /> <label
+					class="custom-control-label" for="paretoGroup4">Value/Population</label>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="custom-control custom-radio"
+				onclick="setParetoMode('REAL_VALUE_POPULATION_PARETO')">
+				<input type="radio" class="custom-control-input" id="paretoGroup4"
+					name="paretoSelectionGroup" /> <label class="custom-control-label"
+					for="paretoGroup4">Value/Population</label>
+			</div>
+		</c:otherwise>
+	</c:choose>
+</composite:implementation>
+
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+	xmlns:tp="http://xmlns.jcp.org/jsf/composite/components">
+
+<composite:interface>
+	<composite:attribute name="accordionId" />
+	<composite:attribute name="render" />
+	<composite:attribute name="heading" />
+	<composite:attribute name="headingId" />
+	<composite:attribute name="headingDescription" />
+</composite:interface>
+
+<composite:implementation>
+	<!-- HEADING -->
+	<div class="panel-heading">
+		<span class="panel-title"> <c:choose>
+				<c:when
+					test="${sessionInfo.getCurrentProjectInfo().menuInfo.getOptionMenuState(cc.attrs.accordionId)}">
+					<h4 title="#{cc.attrs.headingDescription}" style="display: inline"
+						class="accordion-toggle font-weight-bold align-text-bottom"
+						aria-expanded="true"
+						onclick="setOptionMenuState(#{cc.attrs.accordionId},this)"
+						data-toggle="collapse" data-parent="#optionsAccordion"
+						href="#collapseToolbar#{cc.attrs.headingId}">&ensp;#{cc.attrs.heading}
+					</h4>
+				</c:when>
+				<c:otherwise>
+					<h4 title="#{cc.attrs.headingDescription}" style="display: inline"
+						class="accordion-toggle collapsed font-weight-bold align-text-bottom"
+						onclick="setOptionMenuState(#{cc.attrs.accordionId},this)"
+						data-toggle="collapse" data-parent="#optionsAccordion"
+						href="#collapseToolbar#{cc.attrs.headingId}">&ensp;#{cc.attrs.heading}
+					</h4>
+				</c:otherwise>
+			</c:choose>
+		</span>
+	</div>
+
+</composite:implementation>
+
+</html>

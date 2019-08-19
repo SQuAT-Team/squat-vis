@@ -159,8 +159,16 @@
 	
 	<!-- Menu Status -->
 	<h:form>
+		<pf:remoteCommand name="setSelectorTabActive_application"
+			action="#{sessionInfo.getCurrentProjectInfo().menuInfo.setSelectorTabActive}" />
+	</h:form>
+	<h:form>
 		<pf:remoteCommand name="setSelectorMenuState_application"
 			action="#{sessionInfo.getCurrentProjectInfo().menuInfo.setSelectorMenuState}" />
+	</h:form>
+	<h:form>
+		<pf:remoteCommand name="setOptionMenuState_application"
+			action="#{sessionInfo.getCurrentProjectInfo().menuInfo.setOptionMenuState}" />
 	</h:form>
 	<h:form>
 		<pf:remoteCommand name="setSearchState_application"

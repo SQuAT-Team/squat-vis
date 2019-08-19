@@ -27,12 +27,16 @@
 				<nav>
 				<div class="nav nav-tabs btn-group btn-block" id="nav-tab"
 					role="tablist">
-					<a class="btn btn-outline-dark active" id="tab-selectors-tab"
+					<a class="btn btn-outline-dark #{classReturner.check('active',sessionInfo.getCurrentProjectInfo().menuInfo.getSelectorTabActive())}" id="tab-selectors-tab"
 						data-toggle="tab" href="#tab-selectors" role="tab"
-						aria-controls="tab-selectors" aria-selected="true">Selectors </a>
-					<a class="btn btn-outline-dark" id="tab-options-tab"
+						aria-controls="tab-selectors" aria-selected="#{sessionInfo.getCurrentProjectInfo().menuInfo.getSelectorTabActive()}"
+						onclick="setSelectorTabActive(true)"
+						>Selectors </a>
+					<a class="btn btn-outline-dark #{classReturner.checkNot('active',sessionInfo.getCurrentProjectInfo().menuInfo.getSelectorTabActive())}" id="tab-options-tab"
 						data-toggle="tab" href="#tab-options" role="tab"
-						aria-controls="tab-options" aria-selected="false">Options</a>
+						aria-controls="tab-options" aria-selected="#{not sessionInfo.getCurrentProjectInfo().menuInfo.getSelectorTabActive()}"
+						onclick="setSelectorTabActive(false)"
+						>Options</a>
 				</div>
 				</nav>
 				</div>
@@ -40,7 +44,7 @@
 				<!-- TAB CONTENT -->
 				<div class="h-95 mh-95 scrollable">
 				<div class="tab-content" id="nav-tabContent mr-1">
-					<div class="tab-pane fade show active" id="tab-selectors"
+					<div class="tab-pane fade #{classReturner.check('active show',sessionInfo.getCurrentProjectInfo().menuInfo.getSelectorTabActive())}" id="tab-selectors"
 						role="tabpanel" aria-labelledby="tab-selectors-tab">
 						<!-- SELECTORS START -->
 
@@ -150,259 +154,78 @@
 					</div>
 					<!-- SELECTORS END -->
 				</div>
-				<div class="tab-pane fade" id="tab-options" role="tabpanel"
+				<div class="tab-pane fade #{classReturner.checkNot('active show',sessionInfo.getCurrentProjectInfo().menuInfo.getSelectorTabActive())}" id="tab-options" role="tabpanel"
 					aria-labelledby="tab-options-tab">
 					<!-- OPTIONS START -->
 
-						<!-- MINIMIZED MATRIX OPTION -->
-						<div class="custom-control custom-checkbox">
-							<c:choose>
-								<c:when
-									test="${sessionInfo.getCurrentProjectInfo().optionsInfo.getUseMinimizedMatrix()}">
-									<input type="checkbox" id="useMinimizedMatrixCheckbox"
-										class="custom-control-input" checked="true"
-										onchange="changeUseMinimizedMatrix()"> <label
-										class="custom-control-label" for="useMinimizedMatrixCheckbox">Minimize Matrix</label> </input>
-								</c:when>
-								<c:otherwise>
-									<input type="checkbox" id="useMinimizedMatrixCheckbox"
-										class="custom-control-input" onchange="changeUseMinimizedMatrix()">
-										<label class="custom-control-label"
-										for="useMinimizedMatrixCheckbox">Minimize Matrix</label> </input>
-								</c:otherwise>
-							</c:choose>
+					<div class="panel-group ml-2" id="optionsAccordion">
+
+						<!-- LEVEL FILTERS -->
+						<div class="panel panel-default mt-3 mb-3">
+							<tp:toolbarOptionHeading
+												accordionId="1"
+												render="true"
+												heading="LEVEL FILTERS"
+												headingId="Levelfilters"
+												headingDescription=""/>
+							<div id="collapseToolbarLevelfilters"
+							class="panel-collapse collapse #{classReturner.check('show',sessionInfo.getCurrentProjectInfo().menuInfo.getOptionMenuState(1))} fade in mt-1 px-2">
+								<div class="panel-body">
+									<tp:toolbarOptionLevelFilters/>
+								</div>
+							</div>
+						</div>
+
+						<!-- TAGS -->
+						<div class="panel panel-default mt-3 mb-3">
+							<tp:toolbarOptionHeading
+												accordionId="2"
+												render="true"
+												heading="TAGS"
+												headingId="Tags"
+												headingDescription=""/>
+							<div id="collapseToolbarTags"
+							class="panel-collapse collapse #{classReturner.check('show',sessionInfo.getCurrentProjectInfo().menuInfo.getOptionMenuState(2))} fade in mt-1 px-2">
+								<div class="panel-body">
+									<tp:toolbarOptionTags/>
+								</div>
+							</div>
 						</div>
 						
-						<!-- NAME AS ID OPTION -->
-						<div class="custom-control custom-checkbox">
-							<c:choose>
-								<c:when
-									test="${sessionInfo.getCurrentProjectInfo().optionsInfo.getUseNameInsteadOfId()}">
-									<input type="checkbox" id="useUseNameInsteadOfIdCheckbox"
-										class="custom-control-input" checked="true"
-										onchange="changeUseNameInsteadOfId()"> <label
-										class="custom-control-label" for="useUseNameInsteadOfIdCheckbox">Name as ID</label> </input>
-								</c:when>
-								<c:otherwise>
-									<input type="checkbox" id="useUseNameInsteadOfIdCheckbox"
-										class="custom-control-input" onchange="changeUseNameInsteadOfId()">
-										<label class="custom-control-label"
-										for="useUseNameInsteadOfIdCheckbox">Name as ID</label> </input>
-								</c:otherwise>
-							</c:choose>
+						<!-- GRAPHS -->
+						<div class="panel panel-default mt-3 mb-3">
+							<tp:toolbarOptionHeading
+												accordionId="3"
+												render="true"
+												heading="GRAPHS"
+												headingId="Graphs"
+												headingDescription=""/>
+							<div id="collapseToolbarGraphs"
+							class="panel-collapse collapse #{classReturner.check('show',sessionInfo.getCurrentProjectInfo().menuInfo.getOptionMenuState(3))} fade in mt-1 px-2">
+								<div class="panel-body">
+									<tp:toolbarOptionGraphs/>
+								</div>
+							</div>
 						</div>
 						
-						<!-- LINK LENGTH OPTION -->
-						<h:form>
-							<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
-								<h:outputText id="output1" value="Link Length: #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength}"></h:outputText>
-								<h:inputHidden id="txt1" value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength}"></h:inputHidden>
-								<pf:slider for="txt1"  minValue="10" maxValue="200" display="output1" style="width: auto;" displayTemplate="Link length: {value}">
-									<pf:ajax event="slideEnd" process="txt1" />
-								</pf:slider>
-							</h:panelGrid>
-						</h:form>
-						<h:form>
-							<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
-								<h:outputText id="output2" value="Population Opacity: #{sessionInfo.getCurrentProjectInfo().optionsInfo.populationTransparency}"></h:outputText>
-								<h:inputHidden id="txt2" value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.populationTransparency}"></h:inputHidden>
-								<pf:slider for="txt2"  minValue="0.00" maxValue="0.30" step="0.01" display="output2" style="width: auto;" displayTemplate="Population Opacity: {value}">
-									<pf:ajax event="slideEnd" process="txt2" />
-								</pf:slider>
-							</h:panelGrid>
-						</h:form>
-						
-						<!-- Level Selection -->
-						<c:choose>
-							<c:when
-								test="#{sessionInfo.getCurrentProjectInfo().levelInfo.getMode() == 'LAST'}">
-							<div class="custom-control custom-radio" onclick = "setLevelMode('LAST')">
-						  		<input type="radio" class="custom-control-input" id="defaultGroupExample1" name="levelSelectionGroup" checked="true"/>
-						  		<label class="custom-control-label" for="defaultGroupExample1">Last</label>
-							</div>
-							</c:when>
-							<c:otherwise>
-							<div class="custom-control custom-radio" onclick = "setLevelMode('LAST')">
-						  		<input type="radio" class="custom-control-input" id="defaultGroupExample1" name="levelSelectionGroup"/>
-						  		<label class="custom-control-label" for="defaultGroupExample1">Last</label>
-							</div>
-							</c:otherwise>
-						</c:choose>
-						
-						<c:choose>
-							<c:when
-								test="#{sessionInfo.getCurrentProjectInfo().levelInfo.getMode() == 'LAST_AND_PARENT'}">
-							<div class="custom-control custom-radio" onclick = "setLevelMode('LAST_AND_PARENT')">
-							  <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="levelSelectionGroup" checked="true"/>
-							  <label class="custom-control-label" for="defaultGroupExample2">Last+Parent</label>
-							</div>
-							</c:when>
-							<c:otherwise>
-							<div class="custom-control custom-radio" onclick = "setLevelMode('LAST_AND_PARENT')">
-							  <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="levelSelectionGroup"/>
-							  <label class="custom-control-label" for="defaultGroupExample2">Last+Parent</label>
-							</div>
-							</c:otherwise>
-						</c:choose>
-						
-						<c:choose>
-							<c:when
-								test="#{sessionInfo.getCurrentProjectInfo().levelInfo.getMode() == 'ALL'}">
-							<div class="custom-control custom-radio" onclick = "setLevelMode('ALL')">
-							  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="levelSelectionGroup" checked="true"/>
-							  <label class="custom-control-label" for="defaultGroupExample3">All</label>
-							</div>
-							</c:when>
-							<c:otherwise>
-							<div class="custom-control custom-radio" onclick = "setLevelMode('ALL')">
-							  <input type="radio" class="custom-control-input" id="defaultGroupExample3" name="levelSelectionGroup"/>
-							  <label class="custom-control-label" for="defaultGroupExample3">All</label>
-							</div>
-							</c:otherwise>
-						</c:choose>
-						
-						<c:choose>
-							<c:when
-								test="#{sessionInfo.getCurrentProjectInfo().levelInfo.getMode() == 'CUSTOM'}">
-							<div class="custom-control custom-radio" onclick = "setLevelMode('CUSTOM')">
-							  <input type="radio" class="custom-control-input" id="defaultGroupExample4" name="levelSelectionGroup" checked="true"/>
-							  <label class="custom-control-label" for="defaultGroupExample4">Custom</label>
-							</div>
-							</c:when>
-							<c:otherwise>
-							<div class="custom-control custom-radio" onclick = "setLevelMode('CUSTOM')">
-							  <input type="radio" class="custom-control-input" id="defaultGroupExample4" name="levelSelectionGroup"/>
-							  <label class="custom-control-label" for="defaultGroupExample4">Custom</label>
-							</div>
-							</c:otherwise>
-						</c:choose>
-						
-						<span>Custom Levels:</span>
-						<h:form>
-						<h:panelGroup layout="block"
-						styleClass="list-group level-list"
-						id="levelList">
-						<c:forEach items="${sessionInfo.getAllLevels()}" var="level" varStatus="levelStatus">
-						<h:panelGroup layout="block" styleClass="list-group-item level-entry p-1 pb-2 pl-2">
-							<c:choose>
-								<c:when
-									test="${sessionInfo.getCurrentProjectInfo().levelInfo.isActiveLevel(levelStatus.index)}">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" id="checkboxLevel${levelStatus.index}" class="custom-control-input" levelId="${levelStatus.index}" checked="true" onchange="handleLevelClick(this)">
-									<label class="custom-control-label" for="checkboxLevel#{levelStatus.index}">Level ${levelStatus.index} (Size: ${level.getNumberOfCandidates()})</label>
-									</input>
+						<!-- OTHERS -->
+						<div class="panel panel-default mt-3 mb-3">
+							<tp:toolbarOptionHeading
+												accordionId="4"
+												render="true"
+												heading="OTHERS"
+												headingId="Others"
+												headingDescription=""/>
+							<div id="collapseToolbarOthers"
+							class="panel-collapse collapse #{classReturner.check('show',sessionInfo.getCurrentProjectInfo().menuInfo.getOptionMenuState(4))} fade in mt-1 px-2">
+								<div class="panel-body">
+									<tp:toolbarOptionOthers/>
 								</div>
-								</c:when>
-								<c:otherwise>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" id="checkboxLevel${levelStatus.index}" class="custom-control-input" levelId="${levelStatus.index}" onchange="handleLevelClick(this)">
-									<label class="custom-control-label" for="checkboxLevel#{levelStatus.index}">Level ${levelStatus.index} (Size: ${level.getNumberOfCandidates()})</label>
-									</input>
-								</div>
-								</c:otherwise>
-							</c:choose>
-						</h:panelGroup>
-						</c:forEach>
-						</h:panelGroup>
-						</h:form>
-						
-						<span>Custom Parent Levels:</span>
-						<h:form>
-						<h:panelGroup layout="block"
-						styleClass="list-group parent-level-list"
-						id="parentLevelList">
-						<c:forEach items="${sessionInfo.getAllLevels()}" var="level" varStatus="levelStatus">
-						<h:panelGroup layout="block" styleClass="list-group-item level-entry p-1 pb-2 pl-2">
-							<c:choose>
-								<c:when
-									test="${sessionInfo.getCurrentProjectInfo().levelInfo.isActiveParentLevel(levelStatus.index)}">
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" id="checkboxParentLevel${levelStatus.index}" class="custom-control-input" levelId="${levelStatus.index}" checked="true" onchange="handleParentLevelClick(this)">
-									<label class="custom-control-label" for="checkboxParentLevel${levelStatus.index}">Level ${levelStatus.index} (Size: ${level.getNumberOfCandidates()})</label>
-									</input>
-								</div>
-								</c:when>
-								<c:otherwise>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" id="checkboxParentLevel${levelStatus.index}" class="custom-control-input" levelId="${levelStatus.index}" onchange="handleParentLevelClick(this)">
-									<label class="custom-control-label" for="checkboxParentLevel${levelStatus.index}">Level ${levelStatus.index} (Size: ${level.getNumberOfCandidates()})</label>
-									</input>
-								</div>
-								</c:otherwise>
-							</c:choose>
-						</h:panelGroup>
-						</c:forEach>
-						</h:panelGroup>
-						</h:form>
-						
-						
-						<!-- Pareto Selection -->
-						<span>Pareto Selection:</span>
-						<c:choose>
-							<c:when
-								test="#{sessionInfo.getCurrentProjectInfo().optionsInfo.getParetoMode() == 'UTILITY_LEVEL_PARETO'}">
-							<div class="custom-control custom-radio" onclick = "setParetoMode('UTILITY_LEVEL_PARETO')">
-						  		<input type="radio" class="custom-control-input" id="paretoGroup1" name="paretoSelectionGroup" checked="true"/>
-						  		<label class="custom-control-label" for="paretoGroup1">Utility/Level-based</label>
 							</div>
-							</c:when>
-							<c:otherwise>
-							<div class="custom-control custom-radio" onclick = "setParetoMode('UTILITY_LEVEL_PARETO')">
-						  		<input type="radio" class="custom-control-input" id="paretoGroup1" name="paretoSelectionGroup"/>
-						  		<label class="custom-control-label" for="paretoGroup1">Utility/Level-based</label>
-							</div>
-							</c:otherwise>
-						</c:choose>
-						
-						<c:choose>
-							<c:when
-								test="#{sessionInfo.getCurrentProjectInfo().optionsInfo.getParetoMode() == 'UTILITY_POPULATION_PARETO'}">
-							<div class="custom-control custom-radio" onclick = "setParetoMode('UTILITY_POPULATION_PARETO')">
-							  <input type="radio" class="custom-control-input" id="paretoGroup2" name="paretoSelectionGroup" checked="true"/>
-							  <label class="custom-control-label" for="paretoGroup2">Utility/Population-based</label>
-							</div>
-							</c:when>
-							<c:otherwise>
-							<div class="custom-control custom-radio" onclick = "setParetoMode('UTILITY_POPULATION_PARETO')">
-							  <input type="radio" class="custom-control-input" id="paretoGroup2" name="paretoSelectionGroup"/>
-							  <label class="custom-control-label" for="paretoGroup2">Utility/Population-based</label>
-							</div>
-							</c:otherwise>
-						</c:choose>
-						
-						<c:choose>
-							<c:when
-								test="#{sessionInfo.getCurrentProjectInfo().optionsInfo.getParetoMode() == 'REAL_VALUE_LEVEL_PARETO'}">
-							<div class="custom-control custom-radio" onclick = "setParetoMode('REAL_VALUE_LEVEL_PARETO')">
-							  <input type="radio" class="custom-control-input" id="paretoGroup3" name="paretoSelectionGroup" checked="true"/>
-							  <label class="custom-control-label" for="paretoGroup3">Value/Level-based</label>
-							</div>
-							</c:when>
-							<c:otherwise>
-							<div class="custom-control custom-radio" onclick = "setParetoMode('REAL_VALUE_LEVEL_PARETO')">
-							  <input type="radio" class="custom-control-input" id="paretoGroup3" name="paretoSelectionGroup"/>
-							  <label class="custom-control-label" for="paretoGroup3">Value/Level-based</label>
-							</div>
-							</c:otherwise>
-						</c:choose>
-						
-						<c:choose>
-							<c:when
-								test="#{sessionInfo.getCurrentProjectInfo().optionsInfo.getParetoMode() == 'REAL_VALUE_POPULATION_PARETO'}">
-							<div class="custom-control custom-radio" onclick = "setParetoMode('REAL_VALUE_POPULATION_PARETO')">
-							  <input type="radio" class="custom-control-input" id="paretoGroup4" name="paretoSelectionGroup" checked="true"/>
-							  <label class="custom-control-label" for="paretoGroup4">Value/Population-based</label>
-							</div>
-							</c:when>
-							<c:otherwise>
-							<div class="custom-control custom-radio" onclick = "setParetoMode('REAL_VALUE_POPULATION_PARETO')">
-							  <input type="radio" class="custom-control-input" id="paretoGroup4" name="paretoSelectionGroup"/>
-							  <label class="custom-control-label" for="paretoGroup4">Value/Population-based</label>
-							</div>
-							</c:otherwise>
-						</c:choose>
-						
+						</div>
+
 					<!-- OPTIONS END -->
+					</div>
 				</div>
 			</div>
 			</div>

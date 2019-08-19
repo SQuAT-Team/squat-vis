@@ -132,6 +132,25 @@ function setSelectorMenuState(id, element){
 	]);
 }
 
+function setOptionMenuState(id, element){
+	var collapsed = $(element).hasClass("collapsed");	
+	setOptionMenuState_application([ {
+		name : 'param1',
+		value : id
+	},{
+		name : 'param2',
+		value : collapsed
+	}
+	]);
+}
+
+function setSelectorTabActive(active){
+	setSelectorTabActive_application([ {
+		name : 'param',
+		value : active
+	} ]);
+}
+
 function initToolbarSearch(){
 	var searchItems = $("#sidebar").find("div.has-search").find("input");
 	for (let i = 0; i < searchItems.length; i++) {
