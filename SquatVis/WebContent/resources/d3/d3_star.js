@@ -359,12 +359,12 @@ function RadarChart(id, data, options, populationData) {
 		.style("fill-opacity", cfg.opacityArea)
 		.on('mouseover', function (d,i){
 			// Dim all blobs
-			d3.selectAll("."+radarAreaClass)
+			d3.selectAll("path."+radarAreaClass)
 				.transition().duration(200)
 				.style("fill-opacity", 0.1); 
 			// Bring back the hovered over blob
 			var currentCandidateId = this.getAttribute("candidateId");
-			d3.selectAll(".radarWrapper.c"+currentCandidateId).selectAll("."+radarAreaClass)
+			d3.selectAll("g.radarWrapper.c"+currentCandidateId).selectAll("path."+radarAreaClass)
 				.transition().duration(200)
 				.style("fill-opacity", 0.7);
 

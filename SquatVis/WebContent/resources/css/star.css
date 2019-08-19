@@ -188,3 +188,7 @@
 	fill: #7000cf;
 	visibility: visible;
 }
+
+.candidate-radar-container {
+	cursor: pointer;
+}

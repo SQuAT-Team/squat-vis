@@ -43,7 +43,7 @@
 				<c:choose>
     			<c:when test="${sessionInfo.getCurrentProjectInfo().menuInfo.getSelectorMenuState(cc.attrs.accordionId)}">
 					<h4 title="#{cc.attrs.headingDescription}" style="display: inline"
-						class="accordion-toggle font-weight-bold align-text-bottom"
+						class="accordion-toggle font-weight-bold align-text-bottom selectable-element"
 						aria-expanded="true" onclick="setSelectorMenuState(#{cc.attrs.accordionId},this)"
 						data-toggle="collapse" data-parent="#accordion"
 						href="#collapseToolbar#{cc.attrs.heading}">#{cc.attrs.heading}
@@ -51,7 +51,7 @@
 				</c:when>    
     			<c:otherwise>
 					<h4 title="#{cc.attrs.headingDescription}" style="display: inline"
-						class="accordion-toggle collapsed font-weight-bold align-text-bottom"
+						class="accordion-toggle collapsed font-weight-bold align-text-bottom selectable-element"
 						onclick="setSelectorMenuState(#{cc.attrs.accordionId},this)"
 						data-toggle="collapse" data-parent="#accordion"
 						href="#collapseToolbar#{cc.attrs.heading}">#{cc.attrs.heading}

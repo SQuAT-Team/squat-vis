@@ -2,10 +2,6 @@ svg {
 	font: 10px sans-serif;
 }
 
-rect {
-	cursor: default !important;
-}
-
 .axis, .frame {
 	shape-rendering: crispEdges;
 }
@@ -132,6 +128,10 @@ circle.suggestion-circle {
 
 .candidate-radar-container:hover {
 	background-color: #f8f8f8;
+}
+
+.candidate-radar-star {
+	cursor: pointer;
 }
 
 .candidate-radar-star .fa-star {

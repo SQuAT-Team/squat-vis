@@ -26,7 +26,7 @@
 				<c:when
 					test="${sessionInfo.getCurrentProjectInfo().menuInfo.getOptionMenuState(cc.attrs.accordionId)}">
 					<h4 title="#{cc.attrs.headingDescription}" style="display: inline"
-						class="accordion-toggle font-weight-bold align-text-bottom"
+						class="accordion-toggle font-weight-bold align-text-bottom selectable-element"
 						aria-expanded="true"
 						onclick="setOptionMenuState(#{cc.attrs.accordionId},this)"
 						data-toggle="collapse" data-parent="#optionsAccordion"
@@ -35,7 +35,7 @@
 				</c:when>
 				<c:otherwise>
 					<h4 title="#{cc.attrs.headingDescription}" style="display: inline"
-						class="accordion-toggle collapsed font-weight-bold align-text-bottom"
+						class="accordion-toggle collapsed font-weight-bold align-text-bottom selectable-element"
 						onclick="setOptionMenuState(#{cc.attrs.accordionId},this)"
 						data-toggle="collapse" data-parent="#optionsAccordion"
 						href="#collapseToolbar#{cc.attrs.headingId}">#{cc.attrs.heading}

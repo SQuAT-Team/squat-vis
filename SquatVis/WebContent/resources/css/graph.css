@@ -201,6 +201,10 @@ text.server-node-text {
 	visibility: hidden !important;
 }
 
+g.node {
+	cursor: move;	
+}
+
 g.nodes circle {
 	fill: rgba(0,0,0,0);
 	stroke: rgba(0,0,0,0);

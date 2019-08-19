@@ -28,7 +28,7 @@
 					value="#{sessionInfo.getCurrentProjectInfo().colorInfo.getColor(candidate.candidateId)}" />
 			</c:if>
 			<c:if test="${!cc.attrs.comparison}">
-				<div class="candidate-star px-1"
+				<div class="candidate-star px-1 selectable-element"
 					onclick="selectorLevelUp(#{cc.attrs.candidate.candidateId})">
 					<i
 						class="#{sessionInfo.getCurrentProjectInfo().selectorInfo.getCandidateStarType(cc.attrs.candidate.candidateId)} fa-star"></i>
