@@ -51,25 +51,26 @@ circle.suggestion-circle {
 	stroke-width: 1px;
 }
 
-circle.current {
+g.candidate-wrapper.current circle.candidate-circle {
 	stroke: #00ffff !important;
-	stroke-width: 1.5px !important;
+	stroke-width: 1px !important;
 }
 
-circle.parent-circle{
+g.parent-candidate-wrapper circle.parent-circle {
 	fill: #888888;
 	fill-opacity:0.7;
 }
 
-#matrixOptions.initial-active circle.candidate-circle.initial-on {
+#matrixOptions.initial-active g.candidate-wrapper.initial-on circle.candidate-circle,
+#matrixOptions.initial-active g.parent-candidate-wrapper.initial-on circle.parent-circle {
 	fill: #00ff00!important;
 }
 
-#matrixOptions.marked-active circle.marked {
+#matrixOptions.marked-active g.candidate-wrapper.marked circle.candidate-circle {
 	fill: #0080ff;
 }
 
-#matrixOptions.selected-active circle.selected {
+#matrixOptions.selected-active g.candidate-wrapper.selected circle.candidate-circle {
 	fill: #8000ff;
 }
 
@@ -79,19 +80,19 @@ circle.parent-circle{
 	stroke: #aaa;
 }
 
-.pareto-circle {
+circle.pareto-circle {
 	visibility: hidden;
 }
 
-.pareto-active .pareto-circle.pareto-on	{
+.pareto-active circle.pareto-circle.pareto-on	{
 	visibility: visible;
 }
 
-.suggestion-circle {
+circle.suggestion-circle {
 	visibility: hidden;
 }
 
-.suggestions-active .suggestion-circle.suggestion-on {
+.suggestions-active circle.suggestion-circle.suggestion-on {
 	visibility: visible;
 }
 

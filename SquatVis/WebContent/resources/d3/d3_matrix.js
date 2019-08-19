@@ -9,7 +9,7 @@ var width = 960,
     minSizeBig = 200,
     radius = 2,
     radiusBig = 3,
-    textSize = 20;
+    textSize = 30;
     n = 0;
 
     var axisTextSize = "16px";
@@ -93,16 +93,30 @@ function resizeBig(){
 	xBig.domain(domainByTrait[xTrait]);
 	yBig.domain(domainByTrait[yTrait]);
 
-    cellBig.selectAll("circle")
-    .attr("cx", function(d) {
-      return xBig(d[xTrait]);
+    cellBig.selectAll("g.parent-candidate-wrapper")
+	.attr("transform", function(d){
+		return "translate(" + xBig(d[xTrait]) + "," + yBig(d[yTrait]) + ")";
+	})
+	.attr("x", function(d) {
+    	return xBig(d[xTrait]);
     })
-	.attr("cy", function(d) {
-	  return yBig(d[yTrait]);
-	});
+    .attr("y", function(d) {
+    	return yBig(d[yTrait]);
+    });
 
     brushBig.extent([[xBig.range()[0], yBig.range()[1]], [xBig.range()[1], yBig.range()[0]]]);
     cellBig.call(brushBig);
+	
+    cellBig.selectAll("g.candidate-wrapper")
+	.attr("transform", function(d){
+		return "translate(" + xBig(d[xTrait]) + "," + yBig(d[yTrait]) + ")";
+	})
+	.attr("x", function(d) {
+    	return xBig(d[xTrait]);
+    })
+    .attr("y", function(d) {
+    	return yBig(d[yTrait]);
+    });
 
     redrawParent();
 }
@@ -294,62 +308,93 @@ function render(data, useMinimizedMatrixOption) {
 	        .attr("y", padding / 2)
 	        .attr("width", size - padding)
 	        .attr("height", size - padding);
-
-	    // Pareto Tag circle
-	    cell.selectAll(".pareto-circle")
-        .data(normalData)
-      .enter().append("circle").attr("class", function(d) {
-    	  return "pareto-circle c" + d["ID"] + " " + d["ParetoTags"];
-      	})
-        .attr("cx", function(d) {
+	    
+	    // Parent Circles
+	    var parentCircleWrapper = cell.
+	    append("g")
+	    .attr("class", "parent-circles")
+	    .selectAll(".parent-candidate-wrapper")
+        .data(parentData)
+        .enter()
+        .append("g")
+        .attr("class", function(d){
+        	return "parent-candidate-wrapper c"+d["ID"] + " " + d["InitialTags"];
+        })
+        .attr("transform", function(d){
+	    	return "translate(" + x(d[p.x]) + "," + y(d[p.y]) + ")";
+	    })
+        .attr("x", function(d) {
         	return x(d[p.x]);
        	})
-        .attr("cy", function(d) {
+        .attr("y", function(d) {
         	return y(d[p.y]);
        	})
+       	.attr("candidateId", function(d) {
+      		return d["ID"];
+      	})
+       	.attr("parent", function(d) {
+      		return d["Parent"];
+      	});
+	    
+	    parentCircleWrapper.append("circle")
+	    .attr("class", function(d) {
+    	  return "parent-circle";
+      	})
+        .attr("r", radius)
+        .style("pointer-events", "none");
+	    
+	    // Normal Circles
+	    var circleWrapper = cell.append("g").attr("class","normal-circles")
+	    .selectAll(".candidate-wrapper")
+	    .data(normalData)
+	    .enter()
+	    .append("g")
+	    .attr("class", function(d){
+	    		return "candidate-wrapper c"+d["ID"] + " " + d["SelectorTags"] + " " + d["InitialTags"];
+	    })
+	    .attr("transform", function(d){
+	    	return "translate(" + x(d[p.x]) + "," + y(d[p.y]) + ")";
+	    })
+	    .attr("x", function(d) {
+        	return x(d[p.x]);
+       	})
+        .attr("y", function(d) {
+        	return y(d[p.y]);
+       	})
+       	.attr("candidateId", function(d) {
+      		return d["ID"];
+      	})
+      	.attr("parent", function(d) {
+      		return d["Parent"];
+      	});
+	    
+	    // Pareto Tag circle
+	    circleWrapper
+	    .filter(function(d){
+        	return d["ParetoTags"] == "pareto-on";
+        })
+        .append("circle").attr("class", function(d) {
+    	  return "pareto-circle " + d["ParetoTags"];
+      	})
         .attr("r", radius+1)
         .style("pointer-events", "none");
 
 	    // Suggestion Tag circle
-	    cell.selectAll(".suggestion-circle")
-        .data(normalData)
-      .enter().append("circle").attr("class", function(d) {
-    	  return "suggestion-circle c" + d["ID"] + " " + d["SuggestionTags"];
+	    circleWrapper
+	    .filter(function(d){
+        	return d["SuggestionTags"] == "suggestion-on";
+        })
+        .append("circle").attr("class", function(d) {
+    	  return "suggestion-circle " + d["SuggestionTags"];
       	})
-        .attr("cx", function(d) {
-        	return x(d[p.x]);
-       	})
-        .attr("cy", function(d) {
-        	return y(d[p.y]);
-       	})
         .attr("r", radius+2)
         .style("pointer-events", "none");
 
-	    cell.selectAll(".candidate-circle")
-        .data(normalData)
-      .enter().append("circle").attr("class", function(d) {
-    	  return "candidate-circle c" + d["ID"] + " " + d["SelectorTags"] + " " + d["InitialTags"];
+	    // Candidate itself	    
+	    circleWrapper
+	    .append("circle").attr("class", function(d) {
+    	  return "candidate-circle";
       	})
-        .attr("cx", function(d) {
-        	return x(d[p.x]);
-       	})
-        .attr("cy", function(d) {
-        	return y(d[p.y]);
-       	})
-        .attr("r", radius)
-        .style("pointer-events", "none");
-	    
-        cell.selectAll(".parent-circle")
-        .data(parentData)
-        .enter().append("circle").attr("class", function(d) {
-    	  return "parent-circle c"+d["ID"];
-      	})
-        .attr("cx", function(d) {
-        	return x(d[p.x]);
-       	})
-        .attr("cy", function(d) {
-        	return y(d[p.y]);
-       	})
         .attr("r", radius)
         .style("pointer-events", "none");
 	  }
@@ -373,74 +418,92 @@ function render(data, useMinimizedMatrixOption) {
 	        .attr("width", sizeBig - padding)
 	        .attr("height", sizeBig - padding);
 
-	    // Pareto Tag circle
-	    cellBig.selectAll(".pareto-circle")
-        .data(normalData)
-      .enter().append("circle").attr("class", function(d) {
-    	  return "pareto-circle c"+d["ID"] + " " + d["ParetoTags"];
-      	})
-        .attr("cx", function(d) {
+	    // Parent Circles
+	    var parentCircleWrapperBig = cellBig.
+	    append("g")
+	    .attr("class", "parent-circles")
+	    .selectAll(".parent-candidate-wrapper")
+        .data(parentData)
+        .enter()
+        .append("g")
+        .attr("class", function(d){
+        	return "parent-candidate-wrapper c"+d["ID"] + " " + d["InitialTags"];
+        })
+        .attr("transform", function(d){
+	    	return "translate(" + xBig(d[p.x]) + "," + yBig(d[p.y]) + ")";
+	    })
+        .attr("x", function(d) {
         	return xBig(d[p.x]);
        	})
-        .attr("cy", function(d) {
+        .attr("y", function(d) {
         	return yBig(d[p.y]);
        	})
+       	.attr("candidateId", function(d) {
+      		return d["ID"];
+      	})
+       	.attr("parent", function(d) {
+      		return d["Parent"];
+      	});
+	    
+	    parentCircleWrapperBig.append("circle")
+	    .attr("class", function(d) {
+    	  return "parent-circle";
+      	})
+        .attr("r", radiusBig)
+        .style("pointer-events", "none");
+	    
+	    // Normal Circles
+	    var circleWrapperBig = cellBig.append("g").attr("class","normal-circles")
+	    .selectAll(".candidate-wrapper")
+	    .data(normalData)
+	    .enter()
+	    .append("g")
+	    .attr("class", function(d){
+	    		return "candidate-wrapper c"+d["ID"] + " " + d["SelectorTags"] + " " + d["InitialTags"];
+	    })
+	    .attr("transform", function(d){
+	    	return "translate(" + xBig(d[p.x]) + "," + yBig(d[p.y]) + ")";
+	    })
+	    .attr("x", function(d) {
+        	return xBig(d[p.x]);
+       	})
+        .attr("y", function(d) {
+        	return yBig(d[p.y]);
+       	})
+       	.attr("candidateId", function(d) {
+      		return d["ID"];
+      	})
+      	.attr("parent", function(d) {
+      		return d["Parent"];
+      	});
+	    
+	    // Pareto Tag circle
+	    circleWrapperBig
+	    .filter(function(d){
+        	return d["ParetoTags"] == "pareto-on";
+        })
+        .append("circle").attr("class", function(d) {
+    	  return "pareto-circle " + d["ParetoTags"];
+      	})
         .attr("r", radiusBig+1)
         .style("pointer-events", "none");
 
 	    // Suggestion Tag circle
-	    cellBig.selectAll(".suggestion-circle")
-        .data(normalData)
-      .enter().append("circle").attr("class", function(d) {
-    	  return "suggestion-circle c"+d["ID"] + " " + d["SuggestionTags"];
+	    circleWrapperBig
+	    .filter(function(d){
+        	return d["SuggestionTags"] == "suggestion-on";
+        })
+        .append("circle").attr("class", function(d) {
+    	  return "suggestion-circle " + d["SuggestionTags"];
       	})
-        .attr("cx", function(d) {
-        	return xBig(d[p.x]);
-       	})
-        .attr("cy", function(d) {
-        	return yBig(d[p.y]);
-       	})
         .attr("r", radiusBig+2)
         .style("pointer-events", "none");
 
 	    // Candidate itself	    
-	    cellBig.selectAll(".candidate-circle")
-        .data(normalData)
-      .enter().append("circle").attr("class", function(d) {
-    	  return "candidate-circle c"+d["ID"] + " " + d["SelectorTags"] + " " + d["InitialTags"];
+	    circleWrapperBig
+	    .append("circle").attr("class", function(d) {
+    	  return "candidate-circle";
       	})
-      	.attr("candidateId", function(d) {
-      		return d["ID"];
-      	})
-       	.attr("parent", function(d) {
-      		return d["Parent"];
-      	})
-        .attr("cx", function(d) {
-        	return xBig(d[p.x]);
-       	})
-        .attr("cy", function(d) {
-        	return yBig(d[p.y]);
-       	})
-        .attr("r", radiusBig)
-        .style("pointer-events", "none");
-	    
-	    cellBig.selectAll(".parent-circle")
-        .data(parentData)
-      .enter().append("circle").attr("class", function(d) {
-    	  return "parent-circle c"+d["ID"];
-      	})
-      	.attr("candidateId", function(d) {
-      		return d["ID"];
-      	})
-       	.attr("parent", function(d) {
-      		return d["Parent"];
-      	})
-        .attr("cx", function(d) {
-        	return xBig(d[p.x]);
-       	})
-        .attr("cy", function(d) {
-        	return yBig(d[p.y]);
-       	})
         .attr("r", radiusBig)
         .style("pointer-events", "none");
      }
@@ -470,19 +533,21 @@ function render(data, useMinimizedMatrixOption) {
 	var e = d3.event.selection;
     var xTrait = this.getAttribute("x-trait");
     var yTrait = this.getAttribute("y-trait");
+	var brushedCandidates = [];
     if (!e || e == null){
     	svgBig.selectAll(".current").classed("current", false);
     	selectorClearCurrent();
     }else{
-        svgBig.selectAll("circle").filter(".candidate-circle").classed("current", function(d) {
+        svgBig.selectAll("g").filter(".candidate-wrapper").classed("current", function(d) {
         	var isSelected = xBig(d[xTrait]) >= e[0][0] && e[1][0] >= xBig(d[xTrait])
             && yBig(d[yTrait]) >= e[0][1] && e[1][1] >= yBig(d[yTrait]);
             if(isSelected){
-            	setSelectorCurrent(d["ID"]);
+            	brushedCandidates.push(d["ID"]);
             }
         return isSelected;
         });
     }
+	setAllSelectorCurrent(brushedCandidates);
   }
 
   // Clear the previously-active brush, if any.
@@ -504,19 +569,21 @@ function render(data, useMinimizedMatrixOption) {
   // If the brush is empty, select all circles.
   function brushend(p) {
 	var e = d3.event.selection;
+	var brushedCandidates = [];
     if (e == null){
     	svg.selectAll(".current").classed("current", false);
     	selectorClearCurrent();
     } else {
-        svg.selectAll("circle").filter(".candidate-circle").classed("current", function(d) {
+        svg.selectAll("g").filter(".candidate-wrapper").classed("current", function(d) {
         	var isSelected = x(d[p.x]) >= e[0][0] && e[1][0] >= x(d[p.x])
             && y(d[p.y]) >= e[0][1] && e[1][1] >= y(d[p.y]);
             if(isSelected){
-            	setSelectorCurrent(d["ID"]);
+            	brushedCandidates.push(d["ID"]);
             }
         return isSelected;
         });
     }
+	setAllSelectorCurrent(brushedCandidates);
   }
 
   function selectCell(){
@@ -535,18 +602,32 @@ function render(data, useMinimizedMatrixOption) {
 	  cellBig.attr("x-trait", xTrait)
 	  .attr("y-trait", yTrait);
 
-	    cellBig.selectAll("circle")
-        .attr("cx", function(d) {
-        	return xBig(d[xTrait]);
-       	})
-        .attr("cy", function(d) {
-        	return yBig(d[yTrait]);
-       	})
+	  cellBig.selectAll("g.candidate-wrapper")
+	  .attr("transform", function(d){
+		  return "translate(" + xBig(d[xTrait]) + "," + yBig(d[yTrait]) + ")";
+	  })
+      .attr("x", function(d) {
+    	  return xBig(d[xTrait]);
+      })
+      .attr("y", function(d) {
+    	  return yBig(d[yTrait]);
+      });
+	  
+	  cellBig.selectAll("g.parent-candidate-wrapper")
+	  .attr("transform", function(d){
+		  return "translate(" + xBig(d[xTrait]) + "," + yBig(d[yTrait]) + ")";
+	  })
+      .attr("x", function(d) {
+    	  return xBig(d[xTrait]);
+      })
+      .attr("y", function(d) {
+    	  return yBig(d[yTrait]);
+      });
 
-       	svgBig.selectAll("text").filter(".x").filter(".axis").text(xTrait);
-       	svgBig.selectAll("text").filter(".y").filter(".axis").text(yTrait);
+      svgBig.selectAll("text").filter(".x").filter(".axis").text(xTrait);
+      svgBig.selectAll("text").filter(".y").filter(".axis").text(yTrait);
 
-       	redrawParent();
+      redrawParent();
   }
 }
 

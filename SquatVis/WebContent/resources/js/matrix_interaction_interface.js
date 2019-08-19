@@ -1,5 +1,5 @@
-const candidateCircleCss_matrix = "circle.candidate-circle";
-var allCandidateCircles_matrix = $("g.cell").children(candidateCircleCss_matrix);
+const candidateCircleCss_matrix = "g.candidate-wrapper";
+var allCandidateCircles_matrix = $("g.cell").children("g.normal-circles").children(candidateCircleCss_matrix);
 
 function setSelectorCurrent_d3(id) {
 	addElementToCandidate_d3(id, "current");
@@ -46,6 +46,7 @@ function resetSelectorSelected_d3(id) {
 function setAllSelectorCurrent_d3(ids) {
 	for (let i = 0; i < ids.length; i++) {
 		addElementToCandidate_d3(ids[i], "current");
+		drawParentWithId(ids[i]);
 		addSelector_star(ids[i], "current");
 	}
 }
@@ -53,6 +54,7 @@ function setAllSelectorCurrent_d3(ids) {
 function resetAllSelectorCurrent_d3(ids) {
 	for (let i = 0; i < ids.length; i++) {
 		removeElementFromCandidate_d3(ids[i], "current");
+		removeParentWithId(ids[i]);
 		removeSelector_star(ids[i], "current");
 	}
 }
@@ -101,8 +103,8 @@ function resetAllSelectorSelected_d3(ids) {
 
 function selectorLevelUp_d3(id) {
 	var circles = allCandidateCircles_matrix.filter(".c" + id);
-	for (let i = 0; i < candidateCircles.length; i++) {
-		var classList = candidateCircles[i].classList;
+	for (let i = 0; i < circles.length; i++) {
+		var classList = circles[i].classList;
 		if (classList.contains("marked")) {
 			classList.remove("marked");
 			classList.add("selected");

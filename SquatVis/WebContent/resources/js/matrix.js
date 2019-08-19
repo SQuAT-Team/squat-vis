@@ -1,3 +1,5 @@
+var candidateCircles_matrix = $("g.cell").children("g.normal-circles").children("g.candidate-wrapper");
+
 initMoveToFront();
 initDropdown();
 updateColorMappingCss();
@@ -5,18 +7,17 @@ drawArrowHead();
 drawParent();
 
 function initMoveToFront() {
-	var candidateCircles = $("g.cell").children("circle.candidate-circle");
-	d3.selectAll(candidateCircles.filter(".comparison")).moveToFront();
-	d3.selectAll(candidateCircles.filter(".marked")).moveToFront();
-	d3.selectAll(candidateCircles.filter(".selected")).moveToFront();
-	d3.selectAll(candidateCircles.filter(".comparison")).moveToFront();
-	d3.selectAll(candidateCircles.filter(".initial-on")).moveToFront();
-	d3.selectAll(candidateCircles.filter(".current")).moveToFront();
+	var candidateCircles = $("g.cell").children("g.normal-circles").children("g.candidate-wrapper");
+	d3.selectAll(candidateCircles_matrix.filter(".comparison")).moveToFront();
+	d3.selectAll(candidateCircles_matrix.filter(".marked")).moveToFront();
+	d3.selectAll(candidateCircles_matrix.filter(".selected")).moveToFront();
+	d3.selectAll(candidateCircles_matrix.filter(".comparison")).moveToFront();
+	d3.selectAll(candidateCircles_matrix.filter(".initial-on")).moveToFront();
+	d3.selectAll(candidateCircles_matrix.filter(".current")).moveToFront();
 }
 
 function moveToFront(id){
-	var candidateCircles = $("g.cell").children("circle.candidate-circle");
-	d3.selectAll(candidateCircles.filter(".c"+id)).moveToFront();
+	d3.selectAll(candidateCircles_matrix.filter(".c"+id)).moveToFront();
 }
 
 function drawArrowHead() {
@@ -34,12 +35,12 @@ function drawArrowHead() {
 }
 
 function drawParent() {
-    var circles = $("#matrixDetailedContent circle.candidate-circle.current");
-	for (let i = 0; i < circles.length; i++) {
-		var currentCircle = circles[i];
-		var parentId = circles[i].getAttribute("parent");
+    var candidateWrapper = $("#matrixDetailedContent g.candidate-wrapper.current");
+	for (let i = 0; i < candidateWrapper.length; i++) {
+		var currentCircle = candidateWrapper[i];
+		var parentId = candidateWrapper[i].getAttribute("parent");
 		if(parentId.length > 0){
-		    var parentCircle = $("circle.c"+parentId);
+		    var parentCircle = $("#matrixDetailedContent g.c"+parentId);
 		    if(parentCircle.length != 0){
 		    	var candidateId = currentCircle.getAttribute("candidateId");
 
@@ -47,10 +48,10 @@ function drawParent() {
 		    	.attr("class", "parent-line c" + candidateId)
 		    	.attr("sourceId", parentId)
 				.attr("targetId", candidateId)
-				.attr("x2", currentCircle.getAttribute("cx"))
-				.attr("y2", currentCircle.getAttribute("cy"))
-				.attr("x1", parentCircle.attr("cx"))
-				.attr("y1", parentCircle.attr("cy"))
+				.attr("x2", currentCircle.getAttribute("x"))
+				.attr("y2", currentCircle.getAttribute("y"))
+				.attr("x1", parentCircle.attr("x"))
+				.attr("y1", parentCircle.attr("y"))
 				.attr("marker-end", "url(#triangle)");
 		    }
 		}
@@ -58,12 +59,12 @@ function drawParent() {
 }
 
 function drawParentWithId(id) {
-    var circles = $("#matrixDetailedContent circle.candidate-circle.c"+id);
+    var circles = $("#matrixDetailedContent g.candidate-wrapper.c"+id);
 	for (let i = 0; i < circles.length; i++) {
 		var currentCircle = circles[i];
 		var parentId = circles[i].getAttribute("parent");
 		if(parentId.length > 0){
-		    var parentCircle = $("circle.c"+parentId);
+		    var parentCircle = $("#matrixDetailedContent g.c"+parentId);
 		    if(parentCircle.length != 0){
 		    	var candidateId = currentCircle.getAttribute("candidateId");
 
@@ -71,10 +72,10 @@ function drawParentWithId(id) {
 		    	.attr("class", "parent-line c" + candidateId)
 		    	.attr("sourceId", parentId)
 		    	.attr("targetId", candidateId)
-		    	.attr("x2", currentCircle.getAttribute("cx"))
-		    	.attr("y2", currentCircle.getAttribute("cy"))
-				.attr("x1", parentCircle.attr("cx"))
-				.attr("y1", parentCircle.attr("cy"))
+		    	.attr("x2", currentCircle.getAttribute("x"))
+		    	.attr("y2", currentCircle.getAttribute("y"))
+				.attr("x1", parentCircle.attr("x"))
+				.attr("y1", parentCircle.attr("y"))
 				.attr("marker-end", "url(#triangle)");
 		    }
 		}
@@ -87,12 +88,12 @@ function redrawParent(){
 		var line = lines[i];
 		var sourceId = line.getAttribute("sourceId");
 		var targetId = line.getAttribute("targetId");
-		var sourceCandidate = $("#matrixDetailedContent circle.candidate-circle.c"+sourceId);
-		var targetCandidate = $("#matrixDetailedContent circle.candidate-circle.c"+targetId);
-		line.setAttribute("x1",sourceCandidate.attr("cx"));
-		line.setAttribute("y1",sourceCandidate.attr("cy"));
-		line.setAttribute("x2",targetCandidate.attr("cx"));
-		line.setAttribute("y2",targetCandidate.attr("cy"));
+		var sourceCandidate = $("#matrixDetailedContent g.candidate-wrapper.c"+sourceId);
+		var targetCandidate = $("#matrixDetailedContent g.candidate-wrapper.c"+targetId);
+		line.setAttribute("x1",sourceCandidate.attr("x"));
+		line.setAttribute("y1",sourceCandidate.attr("y"));
+		line.setAttribute("x2",targetCandidate.attr("x"));
+		line.setAttribute("y2",targetCandidate.attr("y"));
 	}
 }
 

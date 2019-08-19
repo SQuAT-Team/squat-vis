@@ -76,7 +76,7 @@ MODIFIED: Sebastian Frank
 		<h:panelGroup id="colorMappingsDiv">
 				<style id="colorMappings">
 				<ui:repeat value="#{sessionInfo.getCurrentProjectInfo().colorInfo.getColorEntries()}" var="colorEntry">
-					.comparison-active .candidate-circle.comparison.c#{colorEntry.getKey()} {	fill: #{colorEntry.getValue()}!important;}
+					.comparison-active g.candidate-wrapper.comparison.c#{colorEntry.getKey()} circle.candidate-circle {	fill: #{colorEntry.getValue()}!important;}
 				</ui:repeat>
 				</style>
 			</h:panelGroup>
