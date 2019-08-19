@@ -30,7 +30,7 @@
 						aria-expanded="true"
 						onclick="setOptionMenuState(#{cc.attrs.accordionId},this)"
 						data-toggle="collapse" data-parent="#optionsAccordion"
-						href="#collapseToolbar#{cc.attrs.headingId}">&ensp;#{cc.attrs.heading}
+						href="#collapseToolbar#{cc.attrs.headingId}">#{cc.attrs.heading}
 					</h4>
 				</c:when>
 				<c:otherwise>
@@ -38,7 +38,7 @@
 						class="accordion-toggle collapsed font-weight-bold align-text-bottom"
 						onclick="setOptionMenuState(#{cc.attrs.accordionId},this)"
 						data-toggle="collapse" data-parent="#optionsAccordion"
-						href="#collapseToolbar#{cc.attrs.headingId}">&ensp;#{cc.attrs.heading}
+						href="#collapseToolbar#{cc.attrs.headingId}">#{cc.attrs.heading}
 					</h4>
 				</c:otherwise>
 			</c:choose>

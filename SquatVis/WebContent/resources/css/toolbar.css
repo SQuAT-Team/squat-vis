@@ -81,6 +81,10 @@
 	position: relative;
 }
 
+.accordion-toggle {
+	margin-left: 0.3rem;
+}
+
 .panel-heading .accordion-toggle:after {
     font-family: 'Font Awesome 5 Free';
     font-weight: 600;
