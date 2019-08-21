@@ -115,5 +115,15 @@ public class ProjectInfo implements Serializable {
 		}
 		return activeAndParentCandidates;
 	}
+	
+	public int getNumberOfLoadedArchitectures() {
+		int numberOfLoadedArchitectures = 0;
+		for(Candidate candidate : getAllActiveCandidates()) {
+			if(candidate.getStaticArchitectureAnalysisData() != null) {
+				numberOfLoadedArchitectures++;
+			}
+		}
+		return numberOfLoadedArchitectures;
+	}
 
 }

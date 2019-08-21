@@ -2,6 +2,24 @@ updateColorMappingCss();
 initializeComparisonMode();
 initializeRadarRightClickListener();
 initMoveToFront();
+setWarning();
+
+function setWarning(){
+	var numberOfAllCandidates = 0;
+	for (i = 0; i < parsedValues.length; i++) {		
+		var candidate = parsedValues[i];
+		if(candidate.LevelType != "parent"){
+			numberOfAllCandidates++;
+		}
+	}
+	
+	console.log(numberOfLoadedArchitectures);
+	console.log(numberOfAllCandidates);
+	
+	if(numberOfLoadedArchitectures < numberOfAllCandidates){
+		$("#graphInfo").text("ONLY " + numberOfLoadedArchitectures + "/" + numberOfAllCandidates + " ARCHITECTURES ARE ANALYZED. PLEASE RELOAD!" );
+	}
+}
 
 function moveToFront(id) {
 	var line = $("#resources-container").children("svg").children("g").children("g.lines").children(".resource-line.c"+id);
