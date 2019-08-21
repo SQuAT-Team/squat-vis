@@ -30,21 +30,6 @@
 		</h:panelGrid>
 	</h:form>
 
-	<!-- POPULATION OPACITY OPTION -->
-	<h:form>
-		<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
-			<h:outputText id="output2"
-				value="Population Opacity: #{sessionInfo.getCurrentProjectInfo().optionsInfo.populationTransparency}"></h:outputText>
-			<h:inputHidden id="txt2"
-				value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.populationTransparency}"></h:inputHidden>
-			<pf:slider for="txt2" minValue="0.00" maxValue="0.30" step="0.01"
-				display="output2" style="width: auto;"
-				displayTemplate="Population Opacity: {value}">
-				<pf:ajax event="slideEnd" process="txt2" />
-			</pf:slider>
-		</h:panelGrid>
-	</h:form>
-
 	<!-- NAME AS ID OPTION -->
 	<div class="custom-control custom-checkbox">
 		<c:choose>

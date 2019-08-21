@@ -207,17 +207,33 @@
 								</div>
 							</div>
 						</div>
+												
+						<!-- STARS -->
+						<div class="panel panel-default mt-3 mb-3">
+							<tp:toolbarOptionHeading
+												accordionId="4"
+												render="true"
+												heading="STARS"
+												headingId="Stars"
+												headingDescription=""/>
+							<div id="collapseToolbarStars"
+							class="panel-collapse collapse #{classReturner.check('show',sessionInfo.getCurrentProjectInfo().menuInfo.getOptionMenuState(4))} fade in mt-1 px-2">
+								<div class="panel-body">
+									<tp:toolbarOptionStars/>
+								</div>
+							</div>
+						</div>
 						
 						<!-- OTHERS -->
 						<div class="panel panel-default mt-3 mb-3">
 							<tp:toolbarOptionHeading
-												accordionId="4"
+												accordionId="5"
 												render="true"
 												heading="OTHERS"
 												headingId="Others"
 												headingDescription=""/>
 							<div id="collapseToolbarOthers"
-							class="panel-collapse collapse #{classReturner.check('show',sessionInfo.getCurrentProjectInfo().menuInfo.getOptionMenuState(4))} fade in mt-1 px-2">
+							class="panel-collapse collapse #{classReturner.check('show',sessionInfo.getCurrentProjectInfo().menuInfo.getOptionMenuState(5))} fade in mt-1 px-2">
 								<div class="panel-body">
 									<tp:toolbarOptionOthers/>
 								</div>
