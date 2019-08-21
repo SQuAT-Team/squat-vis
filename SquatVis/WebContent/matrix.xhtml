@@ -102,6 +102,7 @@ MODIFIED: Sebastian Frank
 							<button
 								class="btn btn-outline-dark dropdown-toggle w-100 mw-100" type="button"
 								id="dropdownMenuButton" data-toggle="dropdown"
+								title="#{descriptionProvider.getDropdownMatrixDescription()}"
 								aria-haspopup="true" aria-expanded="false">
 								#{sessionInfo.getCurrentProjectInfo().matrixViewInfo.getMode()}</button>
 							<div class="dropdown-menu w-100 mw-100 text-center"
@@ -121,6 +122,7 @@ MODIFIED: Sebastian Frank
 									<input type="checkbox" id="showParentsCheckbox"
 										class="custom-control-input" checked="true"
 										onchange="changeParents()"> <label
+										title="#{descriptionProvider.getShowParentsMatrixDescription()}"
 										class="custom-control-label" for="showParentsCheckbox">Show
 										Parents</label> </input>
 								</c:when>
@@ -128,6 +130,7 @@ MODIFIED: Sebastian Frank
 									<input type="checkbox" id="showParentsCheckbox"
 									class="custom-control-input" onchange="changeParents()">
 										<label class="custom-control-label"
+									title="#{descriptionProvider.getShowParentsMatrixDescription()}"
 									for="showParentsCheckbox">Show Parents</label> </input>
 								</c:otherwise>
 							</c:choose>
@@ -141,6 +144,7 @@ MODIFIED: Sebastian Frank
 									<input type="checkbox" id="showParetoCheckbox"
 										class="custom-control-input" checked="true"
 										onchange="changePareto()"> <label
+										title="#{descriptionProvider.getShowParetoMatrixDescription()}"
 										class="custom-control-label" for="showParetoCheckbox">Show
 										Pareto</label> </input>
 								</c:when>
@@ -148,6 +152,7 @@ MODIFIED: Sebastian Frank
 									<input type="checkbox" id="showParetoCheckbox"
 										class="custom-control-input" onchange="changePareto()">
 										<label class="custom-control-label"
+										title="#{descriptionProvider.getShowParetoMatrixDescription()}"
 										for="showParetoCheckbox">Show Pareto</label> </input>
 								</c:otherwise>
 							</c:choose>
@@ -161,6 +166,7 @@ MODIFIED: Sebastian Frank
 									<input type="checkbox" id="showSuggestionsCheckbox"
 										class="custom-control-input" checked="true"
 										onchange="changeSuggestions()"> <label
+										title="#{descriptionProvider.getShowSuggestionsDescription()}"
 										class="custom-control-label" for="showSuggestionsCheckbox">Show
 										Suggestions</label> </input>
 								</c:when>
@@ -168,6 +174,7 @@ MODIFIED: Sebastian Frank
 									<input type="checkbox" id="showSuggestionsCheckbox"
 										class="custom-control-input" onchange="changeSuggestions()">
 										<label class="custom-control-label"
+										title="#{descriptionProvider.getShowSuggestionsDescription()}"
 										for="showSuggestionsCheckbox">Show Suggestions</label> </input>
 								</c:otherwise>
 							</c:choose>
@@ -181,12 +188,14 @@ MODIFIED: Sebastian Frank
 									<input type="checkbox" id="highlightInitialCheckbox"
 									class="custom-control-input" checked="true"
 									onchange="changeHighlightInitial()"> <label
+									title="#{descriptionProvider.getHighlightInitialDescription()}"
 									class="custom-control-label" for="highlightInitialCheckbox">Highlight Initial</label> </input>
 								</c:when>
 								<c:otherwise>
 									<input type="checkbox" id="highlightInitialCheckbox"
 									class="custom-control-input" onchange="changeHighlightInitial()">
 										<label class="custom-control-label"
+										title="#{descriptionProvider.getHighlightInitialDescription()}"
 										for="highlightInitialCheckbox">Highlight Initial</label> </input>
 								</c:otherwise>
 							</c:choose>
@@ -197,7 +206,9 @@ MODIFIED: Sebastian Frank
 					<div id="matrixDetails" class="col-5 h-100 p-0">
 						<div class="row h-70 mh-70 m-0 p-0">
 							<div class="card vis-card w-100 mw-100 h-100 mh-100">
-								<div class="card-header font-weight-bold">DETAIL</div>
+								<div class="card-header font-weight-bold pr-1">DETAILED
+									<tp:headerHelpTag helpText="#{visualizationHelpTextProvider.getMatrixDetailedText()}"/>
+								</div>
 								<div class="card-body p-1 m-0">
 									<div id="matrixDetailedContent" class="h-100 mh-100 w-100 scrollable"></div>
 								</div>
@@ -205,7 +216,9 @@ MODIFIED: Sebastian Frank
 						</div>
 						<div class="row h-30 mh-30 p-0 m-0 pt-1">
 							<div class="card vis-card h-100 mh-100 w-100">
-								<div class="card-header font-weight-bold">CURRENT</div>
+								<div class="card-header font-weight-bold pr-1">CURRENT
+									<tp:headerHelpTag helpText="#{visualizationHelpTextProvider.getMatrixCurrentText()}"/>
+								</div>
 								<div class="card-body scrollable">
 									<div id="matrixCurrentContent" class="h-100 mh-100 w-100 scrollable">
 										<div class="d-inline-block">
@@ -227,7 +240,9 @@ MODIFIED: Sebastian Frank
 					</div>
 					<div id="matrix" class="col-7 p-0 pl-1 m-0 h-100 mh-100">
 						<div class="card vis-card w-100 h-100 mh-100">
-							<div class="card-header font-weight-bold">OVERVIEW</div>
+							<div class="card-header font-weight-bold pr-1">OVERVIEW
+								<tp:headerHelpTag helpText="#{visualizationHelpTextProvider.getMatrixOverviewText()}"/>
+							</div>
 							<div class="card-body">
 								<div class="row h-100 mh-100 p-0 m-0">
 									<div class="col h-100 mh-100 p-0 m-0">

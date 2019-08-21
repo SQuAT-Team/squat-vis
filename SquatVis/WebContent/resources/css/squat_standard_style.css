@@ -138,6 +138,32 @@
 	max-width: 100% !important;
 }
 
+span.header-badge .badge {
+	font-size: 95% !important;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #fff;
+	border-radius: 0rem!important;
+}
+
+text.tooltip {
+	pointer: none;
+	cursor: default;
+}
+
+span.header-badge .badge:hover {
+	background-color: #444;
+}
+
+.popover-header {
+    color: #fff;
+    background-color: #343a40;    
+}
+
+.popover-body {
+	text-align: justify;
+}
+
 .card.vis-card .card-body {
 	height: calc(100% - 29.6px); /* Subtract Header Height */
 	max-height: calc(100% - 29.6px); /* Subtract Header Height */

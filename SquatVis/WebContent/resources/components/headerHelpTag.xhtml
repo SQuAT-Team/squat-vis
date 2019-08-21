@@ -14,9 +14,12 @@
 </composite:interface>
 
 <composite:implementation>
-	<a tabindex="0" class="badge badge-pill badge-primary align-top mx-1"
-		role="button" data-toggle="popover" data-trigger="focus" title="Help"
-		data-content="#{cc.attrs.helpText}" style="cursor:default;">?</a>
+	<span class="float-right header-badge"> <span tabindex="0"
+		class="badge badge-pill mx-1" role="button" data-toggle="popover"
+		data-trigger="hover" title="" data-html="true"
+		data-content="#{cc.attrs.helpText}" style="cursor: default;"
+		data-original-title="Help"> ? </span>
+	</span>
 </composite:implementation>
 
 </html>

@@ -4,11 +4,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 /**
- * Provides help texts that are shown to the user.
+ * Provides help texts for project options that are shown to the user.
  */
 @Named
 @RequestScoped
-public class HelpTextProvider {
+public class OptionsHelpTextProvider {
 	private static final String REAL_VALUE_DESCRIPTION = "Real values are the meassured or predicted metrics, e.g., response time in seconds for performance.";
 	private static final String UTILITIES_DESCRIPTION = "Utility values are real values that are evaluated with respect to the architects preferences. A value of 0 represents the worst utility, while a value of 1 represents the highest utility.";
 	private static final String HAS_ARCHITECTURES_DESCRIPTION = "A candidate has an architecture, if some architectural model, e.g., an instance of the Palladio Component Model, is available and sent to the visualization tool. Otherwise only values are sent.";

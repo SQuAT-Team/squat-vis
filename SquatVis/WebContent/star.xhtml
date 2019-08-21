@@ -98,7 +98,9 @@
 				<div class="row h-100 mh-100 p-0 m-0">
 					<div id="starOverview" class="col-6 h-100 mh-100 p-0 m-0 ">
 						<div class="card vis-card h-100 mh-100">
-							<div class="card-header font-weight-bold">DETAILED</div>
+							<div class="card-header font-weight-bold pr-1">DETAILED
+								<tp:headerHelpTag helpText="#{visualizationHelpTextProvider.getStarDetailedText()}"/>
+							</div>
 							<div class="card-body m-0 p-1">
 								<div class="row mh-7 m-0 p-1 pb-2 row-bottom-line">
 									<div class="col m-0 p-0">
@@ -106,6 +108,7 @@
 											<button
 												class="btn btn-outline-dark dropdown-toggle w-100 mw-100" type="button"
 												id="dropdownMenuButtonBig" data-toggle="dropdown"
+												title="#{descriptionProvider.getDropdownDetailedStarDescription()}"
 												aria-haspopup="true" aria-expanded="false">
 												#{sessionInfo.getCurrentProjectInfo().starViewInfo.getModeBig()}</button>
 											<div class="dropdown-menu w-100 mw-100 text-center"
@@ -126,6 +129,7 @@
 													<input type="checkbox" id="showPopulationCheckbox"
 														class="custom-control-input" checked="true"
 														onchange="changePopulation()"> <label
+														title="#{descriptionProvider.getShowPopulationStarDescription()}"
 														class="custom-control-label" for="showPopulationCheckbox">Show
 															Population</label> </input>
 												</c:when>
@@ -133,6 +137,7 @@
 													<input type="checkbox" id="showPopulationCheckbox"
 														class="custom-control-input" onchange="changePopulation()">
 														<label class="custom-control-label"
+														title="#{descriptionProvider.getShowPopulationStarDescription()}"
 														for="showPopulationCheckbox">Show Population</label> </input>
 												</c:otherwise>
 											</c:choose>
@@ -155,7 +160,9 @@
 					</div>
 					<div id="starDetailed" class="col-6 h-100 mh-100 p-0 pl-1 m-0 ">
 						<div class="card vis-card h-100 mh-100">
-							<div class="card-header font-weight-bold">CANDIDATES</div>
+							<div class="card-header font-weight-bold pr-1">CANDIDATES
+								<tp:headerHelpTag helpText="#{visualizationHelpTextProvider.getStarCandidatesText()}"/>
+							</div>
 							<div class="card-body m-0 p-1 w-100 mw-100"
 								style="display: flex; flex-direction: column;">
 								<!-- CANDIDATES TOOLBAR -->
@@ -167,6 +174,7 @@
 											<button
 												class="btn btn-outline-dark dropdown-toggle w-100 mw-100" type="button"
 												id="dropdownMenuButton" data-toggle="dropdown"
+												title="#{descriptionProvider.getDropdownCandidatesStarDescription()}"
 												aria-haspopup="true" aria-expanded="false">
 												#{sessionInfo.getCurrentProjectInfo().starViewInfo.getMode()}</button>
 											<div class="dropdown-menu w-100 mw-100 text-center"
@@ -183,7 +191,8 @@
 									<div class="col">
 									
 										<!-- SEARCH BAR -->
-										<div class="has-search position-relative">
+										<div class="has-search position-relative"
+											title="#{descriptionProvider.getSearchDescription()}">
 											<span class="fa fa-search form-control-feedback"></span> <input
 												type="text" class="form-control" placeholder="Search"
 												onkeyup="starSearch(this)" />
