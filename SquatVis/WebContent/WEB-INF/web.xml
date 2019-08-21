@@ -13,7 +13,7 @@
 	<!-- CHANGE TO PRODUCTION TO DEPLOY -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
+		<param-value>Production</param-value><!-- Development -->
 	</context-param>
 
 	<!-- SKIP COMMENTS -->
