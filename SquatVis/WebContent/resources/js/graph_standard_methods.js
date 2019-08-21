@@ -9,6 +9,9 @@ function initializeActiveCandidateSets(){
 	initializedActiveCandidates = true;
 	for (i = 0; i < parsedValues.length; i++) {		
 		var candidate = parsedValues[i];
+		if(candidate.LevelType ===  "parent"){
+			continue;
+		}
 		var candidateId = candidate.ID;
 		if(candidate.SelectorTags.includes("marked")){
 			activeMarkedCandidates.add(candidateId);
@@ -31,7 +34,14 @@ function getCurrentTotalNumberOfCandidates(){
 	}
 	var groupName = getDropdownName();	
 	if(groupName === "All"){
-		return parsedValues.length;
+		var length = 0;
+		for (i = 0; i < parsedValues.length; i++) {		
+			var candidate = parsedValues[i];
+			if(candidate.LevelType !=  "parent"){
+				length++;
+			}
+		}
+		return length;
 	}
 	if(groupName === "Comparison"){
 		return activeComparisonCandidates.size;
