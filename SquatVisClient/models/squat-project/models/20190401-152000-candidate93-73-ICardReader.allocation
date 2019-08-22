@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="ASCII"?>
+<allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.1" id="_bxcIYGV8EeeuRPZPL8BAyA" entityName="defaultAllocation">
+  <targetResourceEnvironment_Allocation href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#/"/>
+  <system_Allocation href="20190401-152000-candidate93-73-ICardReader.system#_35Lu0Ai5EeefyagWuy0aqA"/>
+  <allocationContexts_Allocation id="_oT9SYHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_2r-F4GfREeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_q7ptYHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_2vFHcGfVEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_sA2a4Hr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_4_LpMGfSEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_tZXtAHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_55s8cGftEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_ujsLEHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_5i9mUGe_EeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_v7C_kHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_5uwZ4GevEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_w3v4YHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_5vesoGfxEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_yOqoAHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_7G7jYGfTEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_zI2_YHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_7GAQIGfwEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_0Od8kHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_7xsAUGfCEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_1a7IoHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_aDLS8GfxEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_2QhT4Hr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_ARijsGerEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_4aOLUHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_AYzKAGfyEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_5aMakHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_CXyhsGevEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_6hD8AHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_d1Sx8GeqEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_7g62gHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_D6KxEGfIEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_8dnvUHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_E9NG8Ge-EeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_-Psw8Hr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_FvN6EGe7EeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="__B3NsHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_Ge0BoGfUEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="__7lrAHr0Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_GNxxQGeuEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_GkgfwHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_h32DkGe5EeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_IFKaMHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_I4nXIGe_EeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_JhHa0Hr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_jP8kgGfxEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_vj5OYHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_yy7KAGfMEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_MBUtwHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_KbRYgGfGEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_NG7D4Hr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_KIofcGe9EeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_OmnVAHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_Ko8LoGfHEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_PASZQHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_krLhgGfzEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_Rrc_AHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_lEwM0GerEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_UQB0kHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_LFrxAGfSEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_UgZy4Hr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_PfCMUGfREeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_YgY2gHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_pg7n8GfREeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_Yv8VcHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_qdLtQGevEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_ZHTFgHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_QN0bYGfFEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_dRFlYHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_R43cMGeqEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_dxqi4Hr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_R4EYsGevEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_eH7t0Hr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_rAtJ4GfXEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_h3zR0Hr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_rugW8GfKEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_H1uviFR1EemZuarsnt1qow" entityName="Allocation_Assembly_org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-A &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-A> &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-A>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_H1mMqFR1EemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_isOYYHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_VXitEGerEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_jO19QHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_WdDT4Ge8EeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_oeWIAHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_X6lfUGewEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_o_0dYHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_Xu0g8GfAEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_pcNecHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_Xy2nMGfSEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_urveYHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_y3yXsGfTEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_vJM2cHr1Eeek77WF10mCCg">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_YOGPMGfGEeeGEfrQKW056w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_H1uvgFR1EemZuarsnt1qow" entityName="Allocation_Assembly_org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-I &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-I> &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-I>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_H1mMoFR1EemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_H1uvgVR1EemZuarsnt1qow" entityName="Allocation_Assembly_org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-H &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-H> &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-H>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_H1mMoVR1EemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_H1uvglR1EemZuarsnt1qow" entityName="Allocation_Assembly_org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-G &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-G> &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-G>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_H1mMolR1EemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_H1uvg1R1EemZuarsnt1qow" entityName="Allocation_Assembly_org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-F &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-F> &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-F>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_H1mMo1R1EemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_H1uvhFR1EemZuarsnt1qow" entityName="Allocation_Assembly_org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-E &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-E> &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-E>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_H1mMpFR1EemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_H1uvhVR1EemZuarsnt1qow" entityName="Allocation_Assembly_org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-D &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-D> &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-D>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_H1mMpVR1EemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_H1uvhlR1EemZuarsnt1qow" entityName="Allocation_Assembly_org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-C &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-C> &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-C>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_H1mMplR1EemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_H1uvh1R1EemZuarsnt1qow" entityName="Allocation_Assembly_org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-B &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-B> &lt;org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler-B>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_H1mMp1R1EemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_ndCfklTlEemZuarsnt1qow" entityName="Allocation_Assembly_ICardReader-Wrapper &lt;ICardReader-Wrapper> &lt;ICardReader-Wrapper>">
+    <resourceContainer_AllocationContext href="20190401-152000-candidate93-73-ICardReader.resourceenvironment#_FM6FMK2VEeaxN4gXuIkS2A"/>
+    <assemblyContext_AllocationContext href="20190401-152000-candidate93-73-ICardReader.system#_ndB4gFTlEemZuarsnt1qow"/>
+  </allocationContexts_Allocation>
+</allocation:Allocation>
