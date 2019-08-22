@@ -50,9 +50,7 @@ public class SquatImporter implements IImporter {
 	}
 
 	public CToolConfiguration importConfiguration() {
-		CToolConfiguration configuration = DefaultToolConfigurations.getInstance().getSquatDefaultConfiguration();
-		configuration.setHasArchitectures(false);
-		return configuration;
+		return DefaultToolConfigurations.getInstance().getSquatDefaultConfiguration();
 	}
 
 	public List<CLevel> importLevels() throws IOException {
