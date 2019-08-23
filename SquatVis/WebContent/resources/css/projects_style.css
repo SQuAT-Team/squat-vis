@@ -176,6 +176,7 @@ body {
   width: 100%;
   padding: 15px;
   border-top: 1px solid #eee;
+  cursor: pointer;
 }
 .grid .survey-progress {
   display: block;
