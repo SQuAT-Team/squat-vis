@@ -275,14 +275,16 @@ public class PCMArchitectureAnalyzer {
 		for (Connector connector : system.getConnectors__ComposedStructure()) {
 			if (connector instanceof AssemblyConnector) {
 				AssemblyConnector assemblyConnector = (AssemblyConnector) connector;
-				ArchitectureComponentLink architectureLink = new ArchitectureComponentLink();
-				ArchitectureComponent sourceComponent = requiredInterfaceMappings
-						.get(assemblyConnector.getRequiredRole_AssemblyConnector().getId());
-				architectureLink.setSource(sourceComponent);
-				ArchitectureComponent providedComponent = providedInterfaceMappings
-						.get(assemblyConnector.getProvidedRole_AssemblyConnector().getId());
-				architectureLink.setTarget(providedComponent);
-				architectureLinks.add(architectureLink);
+				if (assemblyConnector.getRequiredRole_AssemblyConnector() != null) {
+					ArchitectureComponentLink architectureLink = new ArchitectureComponentLink();
+					ArchitectureComponent sourceComponent = requiredInterfaceMappings
+							.get(assemblyConnector.getRequiredRole_AssemblyConnector().getId());
+					architectureLink.setSource(sourceComponent);
+					ArchitectureComponent providedComponent = providedInterfaceMappings
+							.get(assemblyConnector.getProvidedRole_AssemblyConnector().getId());
+					architectureLink.setTarget(providedComponent);
+					architectureLinks.add(architectureLink);
+				}
 			}
 		}
 		return architectureLinks;
@@ -370,15 +372,19 @@ public class PCMArchitectureAnalyzer {
 			Map<String, ArchitectureContainerResource> resources, Map<String, ArchitectureComponent> components) {
 		List<ArchitectureComponentAllocation> componentAllocations = new ArrayList<>();
 		for (AllocationContext allocationContext : allocation.getAllocationContexts_Allocation()) {
-			ArchitectureComponentAllocation componentAllocation = new ArchitectureComponentAllocation();
-			String resourceContainerId = allocationContext.getResourceContainer_AllocationContext().getId();
-			ArchitectureContainerResource allocationLocation = resources.get(resourceContainerId);
-			String allocatedComponentId = allocationContext.getAssemblyContext_AllocationContext()
-					.getEncapsulatedComponent__AssemblyContext().getId();
-			ArchitectureComponent allocatedComponent = components.get(allocatedComponentId);
-			componentAllocation.setComponent(allocatedComponent);
-			componentAllocation.setContainer(allocationLocation);
-			componentAllocations.add(componentAllocation);
+			if (allocationContext != null && allocationContext.getResourceContainer_AllocationContext() != null) {
+				ArchitectureComponentAllocation componentAllocation = new ArchitectureComponentAllocation();
+				String resourceContainerId = allocationContext.getResourceContainer_AllocationContext().getId();
+				ArchitectureContainerResource allocationLocation = resources.get(resourceContainerId);
+				String allocatedComponentId = allocationContext.getAssemblyContext_AllocationContext()
+						.getEncapsulatedComponent__AssemblyContext().getId();
+				ArchitectureComponent allocatedComponent = components.get(allocatedComponentId);
+				if(allocatedComponent != null && allocationLocation != null) {
+					componentAllocation.setComponent(allocatedComponent);
+					componentAllocation.setContainer(allocationLocation);
+					componentAllocations.add(componentAllocation);	
+				}
+			}
 		}
 		return componentAllocations;
 	}
