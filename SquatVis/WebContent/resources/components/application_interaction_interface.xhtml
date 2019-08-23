@@ -178,7 +178,7 @@
 	<!-- Reload Button -->
 	<h:form>
 		<pf:remoteCommand name="reloadSelectedProject_application"
-			action="#{sessionInfo.reloadSelectedProject}" />
+			action="#{sessionInfo.reloadSelectedProject}" oncomplete="location.reload(true);" />
 	</h:form>
 	
 </composite:implementation>

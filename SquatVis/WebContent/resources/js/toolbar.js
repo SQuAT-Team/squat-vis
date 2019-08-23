@@ -11,6 +11,10 @@ function stop() {
 }
 //]]>
 
+function reloadButton(){
+	reloadSelectedProject_application();
+}
+
 function handleLevelClick(element){
 	var levelId = element.getAttribute("levelid");
 	if(element.checked){
