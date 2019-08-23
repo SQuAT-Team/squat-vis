@@ -79,7 +79,9 @@
 }
 
 .d3-tip {
-	background-color: rgba(180, 180, 180, 0.4);
+	font-weight: 600;
+	background-color: rgba(180, 180, 180, 0.75);
+	color: #ff8000;
 	padding: 5px;
 }
 
