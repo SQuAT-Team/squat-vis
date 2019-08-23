@@ -13,9 +13,6 @@ function setWarning(){
 		}
 	}
 	
-	console.log(numberOfLoadedArchitectures);
-	console.log(numberOfAllCandidates);
-	
 	if(numberOfLoadedArchitectures < numberOfAllCandidates){
 		$("#graphInfo").text("ONLY " + numberOfLoadedArchitectures + "/" + numberOfAllCandidates + " ARCHITECTURES ARE ANALYZED. PLEASE RELOAD!" );
 	}
