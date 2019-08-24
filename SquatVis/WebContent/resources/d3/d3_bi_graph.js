@@ -201,7 +201,7 @@ function renderBiGraph(nodes, serverNodes, links){
 
   simulationBiGraph.force("link")
       .links(origLinksBiGraph)
-      .distance(function(d) { return linkDistanceBiGraph;});
+      .distance(function(d) { return linkDistanceBiGraph;}).strength(linkStrengthBiGraph);
   
   markReducedBiGraph(linkBiGraph, currentLinkBiGraph, selectLinkBiGraph, comparisonLinkBiGraph, nodeBiGraph, servers, numberOfCandidates);
   

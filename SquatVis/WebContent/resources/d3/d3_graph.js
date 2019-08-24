@@ -163,7 +163,7 @@ function render(nodes, links){
 
   simulation.force("link")
       .links(origLinks)
-      .distance(function(d) { return linkDistance;}).strength(0.7);
+      .distance(function(d) { return linkDistance;}).strength(linkStrength);
 
   // Link arrow heads
   createArrowHeads(minRadius, maxRadius, svg);

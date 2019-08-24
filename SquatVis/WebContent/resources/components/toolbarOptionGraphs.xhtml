@@ -16,16 +16,58 @@
 
 <composite:implementation>
 
-	<!-- LINK LENGTH OPTION -->
+	<!-- LINK LENGTH OPTIONS -->
 	<h:form>
 		<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
-			<h:outputText id="output1"
-				value="Link Length: #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength}"></h:outputText>
-			<h:inputHidden id="txt1"
+			<h:outputText id="outputLinkLength"
+				value="Link Length Components: #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength}"></h:outputText>
+			<h:inputHidden id="txtLinkLength"
 				value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength}"></h:inputHidden>
-			<pf:slider for="txt1" minValue="10" maxValue="200" display="output1"
-				style="width: auto;" displayTemplate="Link length: {value}">
-				<pf:ajax event="slideEnd" process="txt1" />
+			<pf:slider for="txtLinkLength" minValue="10" maxValue="200" display="outputLinkLength"
+				style="width: auto;" displayTemplate="Link length Components: {value}">
+				<pf:ajax event="slideEnd" process="txtLinkLength" />
+			</pf:slider>
+		</h:panelGrid>
+	</h:form>
+	
+	<h:form>
+		<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
+			<h:outputText id="outputLinkLengthAllocation"
+				value="Link Length Allocation: #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLengthAllocation}"></h:outputText>
+			<h:inputHidden id="txtLinkStrengthAllcoation"
+				value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLengthAllocation}"></h:inputHidden>
+			<pf:slider for="txtLinkStrengthAllcoation" minValue="10" maxValue="200" display="outputLinkLengthAllocation"
+				style="width: auto;" displayTemplate="Link length Allocation: {value}">
+				<pf:ajax event="slideEnd" process="txtLinkStrengthAllcoation" />
+			</pf:slider>
+		</h:panelGrid>
+	</h:form>
+	
+	<!-- LINK STRENGTH OPTIONS -->
+	<h:form>
+		<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
+			<h:outputText id="outputLinkStrength"
+				value="Link Strength Components: #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkStrength}"></h:outputText>
+			<h:inputHidden id="txtLinkStrength"
+				value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.linkStrength}"></h:inputHidden>
+			<pf:slider for="txtLinkStrength" minValue="0.00" maxValue="1.00" step="0.01"
+				display="outputLinkStrength" style="width: auto;"
+				displayTemplate="Link Strength Components: {value}">
+				<pf:ajax event="slideEnd" process="txtLinkStrength" />
+			</pf:slider>
+		</h:panelGrid>
+	</h:form>
+	
+	<h:form>
+		<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
+			<h:outputText id="outputLinkStrengthAllocation"
+				value="Link Strength Allocation: #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkStrengthAllocation}"></h:outputText>
+			<h:inputHidden id="txtLinkStrengthAllocation"
+				value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.linkStrengthAllocation}"></h:inputHidden>
+			<pf:slider for="txtLinkStrengthAllocation" minValue="0.00" maxValue="1.00" step="0.01"
+				display="outputLinkStrengthAllocation" style="width: auto;"
+				displayTemplate="Link Strength Allocation: {value}">
+				<pf:ajax event="slideEnd" process="txtLinkStrengthAllocation" />
 			</pf:slider>
 		</h:panelGrid>
 	</h:form>

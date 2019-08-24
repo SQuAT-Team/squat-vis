@@ -28,6 +28,9 @@ public class OptionsInfo implements Serializable {
 	private int smallElementsFilterSize = 0;
 	private int bigElementsFilterSize = 0;
 	private int linkLength = 75;
+	private int linkLengthAllocation = 75;
+	private float linkStrength = 0.5f;
+	private float linkStrengthAllocation = 0.5f;
 	private float populationTransparency = 0.15f;
 	
 	public void setParetoMode() {

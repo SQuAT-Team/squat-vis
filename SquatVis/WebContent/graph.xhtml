@@ -100,7 +100,9 @@
 		var parsedAllocations = d3.csvParse(architectureAllocations);
 		
 		var linkDistance = #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength};
-		var linkDistanceBiGraph = #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLength};
+		var linkDistanceBiGraph = #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkLengthAllocation};
+		var linkStrength = #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkStrength};
+		var linkStrengthBiGraph = #{sessionInfo.getCurrentProjectInfo().optionsInfo.linkStrengthAllocation};
 		var shortenName = #{sessionInfo.getCurrentProjectInfo().optionsInfo.shortenName};
 		var smallElementsFilter = #{sessionInfo.getCurrentProjectInfo().optionsInfo.smallElementsFilterSize};
 		var bigElementsFilter = #{sessionInfo.getCurrentProjectInfo().optionsInfo.bigElementsFilterSize};
