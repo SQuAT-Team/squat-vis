@@ -126,6 +126,10 @@ public class SquatImporter implements IImporter {
 		// set utility value
 		Double utilityValue = Double.parseDouble(getUtility(lineEntries));
 		candidate.getUtilityValues().set(currentGoalIndex, utilityValue);
+		
+		// suggestion
+		Boolean isSuggested = Boolean.parseBoolean(getSuggested(lineEntries));
+		candidate.setSuggested(isSuggested);
 	}
 
 	private void setParents() {
@@ -202,6 +206,10 @@ public class SquatImporter implements IImporter {
 
 	private String getLevel(String[] lineEntries) {
 		return lineEntries[5];
+	}
+
+	private String getSuggested(String[] lineEntries) {
+		return lineEntries[7];
 	}
 
 	private String getUtility(String[] lineEntries) {
