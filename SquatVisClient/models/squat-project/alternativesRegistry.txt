@@ -1,4 +1,12 @@
 BotName,QA,ResponseType,Value,ArchitecturalAlternative,Level,Generator,Negotiated,Utility,Father
+m1;Modifiability;Complexity;2248.5;cocome-cloud;0;initial;false;1.0;initial
+m2;Modifiability;Complexity;798.0;cocome-cloud;0;initial;false;0.8296;initial
+m3;Modifiability;Complexity;176.5;cocome-cloud;0;initial;false;0.85794115;initial
+m4;Modifiability;Complexity;2166.5;cocome-cloud;0;initial;false;1.0;initial
+p1;Performance;Latency;2.2994905;cocome-cloud;0;initial;false;0.19325745;initial
+p2;Performance;Latency;7.206541;cocome-cloud;0;initial;false;0.0;initial
+p3;Performance;Latency;2.0165496;cocome-cloud;0;initial;false;0.29368877;initial
+p4;Performance;Latency;19.409355;cocome-cloud;0;initial;false;0.0;initial
 m1;Modifiability;Complexity;2262.0;cocome-cloud-14-org.cocome.tradingsystem.cashdeskline.cashdesk.UserDisplayEventHandler;1;modifiability;false;1.0;cocome-cloud
 m1;Modifiability;Complexity;2289.0;cocome-cloud-8-org.cocome.tradingsystem.cashdeskline.cashdesk.CashDeskEventHandler;1;modifiability;false;0.89079285;cocome-cloud
 m1;Modifiability;Complexity;2305.5;cocome-cloud-14-CreditCardScannedEvent;1;modifiability;false;0.88279736;cocome-cloud
