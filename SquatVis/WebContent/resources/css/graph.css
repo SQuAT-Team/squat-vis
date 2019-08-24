@@ -215,6 +215,10 @@ g.node {
 	cursor: move;	
 }
 
+line.select-link {
+	cursor: pointer;
+}
+
 g.nodes circle {
 	fill: rgba(0,0,0,0);
 	stroke: rgba(0,0,0,0);
