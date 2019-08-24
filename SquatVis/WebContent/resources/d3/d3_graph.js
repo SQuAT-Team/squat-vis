@@ -301,7 +301,7 @@ function updateGraphComparisonLinks(){
 	}
 		
 	linkContainer
-		.selectAll("comparison-link")
+		.selectAll(".comparison-link")
 		.data(origLinks)
 		.enter()
 		.each(function(d,i){
