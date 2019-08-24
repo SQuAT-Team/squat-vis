@@ -168,6 +168,7 @@ body {
   content: 'Updated:\00a0\00a0';
 }
 .grid .select-button {
+  background-color: #343a40;
   display: block;
   position: absolute;
   bottom: 0;
@@ -177,6 +178,9 @@ body {
   padding: 15px;
   border-top: 1px solid #eee;
   cursor: pointer;
+}
+.grid .select-button:hover {
+	background-color: #444a50;
 }
 .grid .survey-progress {
   display: block;
