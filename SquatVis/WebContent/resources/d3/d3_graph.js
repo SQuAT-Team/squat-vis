@@ -405,7 +405,9 @@ function updateGraphCurrentNodes(){
 }
 
 function markReduced(links, currentLinks, selectLinks, comparisonLinks, nodes, maxValue){
-	nodes.classed("visibleNode", false);
+	nodes.classed("visibleNode", function(d){
+		return getCurrentNumberOfCandidates(d) < maxValue;
+	});
 	links.classed("visibleLink", false);
 	currentLinks.classed("visibleLink", false);
 	selectLinks.classed("visibleLink", false);	

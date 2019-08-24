@@ -427,7 +427,9 @@ function updateBiGraphCurrentNodes(){
 
 function markReducedBiGraph(links, currentLinks, selectLinks, comparisonLinks, nodes, servers, maxValue){	
 	links.classed("visibleLink", false);
-	nodes.classed("visibleNode", false);
+	nodes.classed("visibleNode", function(d){
+		return getCurrentNumberOfCandidates(d) < maxValue;
+	});
 	servers.classed("visibleNode", false);
 	currentLinks.classed("visibleLink", false);
 	selectLinks.classed("visibleLink", false);
