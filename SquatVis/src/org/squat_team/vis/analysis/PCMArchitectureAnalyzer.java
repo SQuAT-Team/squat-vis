@@ -7,9 +7,11 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.palladiosimulator.pcm.allocation.Allocation;
 import org.palladiosimulator.pcm.allocation.AllocationContext;
@@ -86,7 +88,7 @@ public class PCMArchitectureAnalyzer {
 						"Error during static analysis of candidate " + candidate.getCandidateId(), e);
 			}
 			try {
-				analyzeCandidateDynamic(candidate);
+				//analyzeCandidateDynamic(candidate);
 			} catch (Exception e) {
 				log.log(java.util.logging.Level.SEVERE,
 						"Error during dynamic analysis of candidate " + candidate.getCandidateId(), e);
@@ -271,7 +273,7 @@ public class PCMArchitectureAnalyzer {
 	private List<ArchitectureComponentLink> createArchitectureLinks(org.palladiosimulator.pcm.system.System system,
 			Map<String, ArchitectureComponent> requiredInterfaceMappings,
 			Map<String, ArchitectureComponent> providedInterfaceMappings) {
-		List<ArchitectureComponentLink> architectureLinks = new ArrayList<>();
+		Set<ArchitectureComponentLink> architectureLinks = new HashSet<>();
 		for (Connector connector : system.getConnectors__ComposedStructure()) {
 			if (connector instanceof AssemblyConnector) {
 				AssemblyConnector assemblyConnector = (AssemblyConnector) connector;
@@ -287,7 +289,7 @@ public class PCMArchitectureAnalyzer {
 				}
 			}
 		}
-		return architectureLinks;
+		return new ArrayList<ArchitectureComponentLink>(architectureLinks);
 	}
 
 	private Map<String, ArchitectureContainerResource> createContainerResources(
