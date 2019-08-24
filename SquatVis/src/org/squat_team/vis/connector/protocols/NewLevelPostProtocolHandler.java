@@ -18,8 +18,11 @@ import org.squat_team.vis.data.data.Project;
  * This handler should be called after the import of a new level of search.
  */
 public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProtocolHandler {
+	private Project project;
 	private CLevel level;
 	private boolean noResponse;
+	private CandidateDao candidateDao;
+
 
 	/**
 	 * Creates a new handler.
@@ -32,8 +35,10 @@ public class NewLevelPostProtocolHandler extends AbstractStatusUpdatingPostProto
 	public NewLevelPostProtocolHandler(ConnectorService connectorService, ProjectConnector projectConnector,
 			CLevel level, boolean noResponse) {
 		super(connectorService, projectConnector);
+		this.project = projectDao.find(projectConnector.getProjectId());
 		this.level = level;
 		this.noResponse = noResponse;
+		this.candidateDao = connectorService.getCandidateDao();
 	}
 
 	@Override

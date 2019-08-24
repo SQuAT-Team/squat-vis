@@ -13,34 +13,34 @@ import org.squat_team.vis.data.data.Status;
 public abstract class AbstractStatusUpdatingPostProtocolHandler extends AbstractPostProtocolHandler {
 	protected ProjectDao projectDao;
 	private StatusLogDao statusLogDao;
-	protected Project project;
 
 	public AbstractStatusUpdatingPostProtocolHandler(ConnectorService connectorService,
 			ProjectConnector projectConnector) {
 		super(connectorService, projectConnector);
 		this.projectDao = connectorService.getProjectDao();
 		this.statusLogDao = connectorService.getStatusLogDao();
-		this.project = projectDao.find(projectConnector.getProjectId());
 	}
 
 	/**
 	 * Notifies the status of the project that a new level will be created.
 	 */
 	protected void updateStatusStartLevel() {
+		Project project = projectDao.find(projectConnector.getProjectId());
 		Status status = project.getStatus();
 		status.notifyNewLevel();
 		projectDao.update(project);
-		updateDatabaseStatusLog();
+		updateDatabaseStatusLog(project);
 	}
 
 	/**
 	 * Notifies the status of the project that all post import tasks are finished.
 	 */
 	protected void updateStatusFinishLevelImport() {
+		Project project = projectDao.find(projectConnector.getProjectId());
 		Status status = project.getStatus();
 		status.notifyLevelImported();
 		projectDao.update(project);
-		updateDatabaseStatusLog();
+		updateDatabaseStatusLog(project);
 	}
 
 	/**
@@ -48,13 +48,14 @@ public abstract class AbstractStatusUpdatingPostProtocolHandler extends Abstract
 	 * analyzed.
 	 */
 	protected void updateStatusFinishLevel() {
+		Project project = projectDao.find(projectConnector.getProjectId());
 		Status status = project.getStatus();
 		status.notifyLevelFinished();
 		projectDao.update(project);
-		updateDatabaseStatusLog();
+		updateDatabaseStatusLog(project);
 	}
 
-	private void updateDatabaseStatusLog() {
+	private void updateDatabaseStatusLog(Project project) {
 		statusLogDao.update(project.getStatus().getStatusLog());
 	}
 
