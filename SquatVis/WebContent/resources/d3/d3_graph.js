@@ -163,7 +163,7 @@ function render(nodes, links){
 
   simulation.force("link")
       .links(origLinks)
-      .distance(function(d) { return linkDistance;});
+      .distance(function(d) { return linkDistance;}).strength(0.7);
 
   // Link arrow heads
   createArrowHeads(minRadius, maxRadius, svg);
@@ -406,7 +406,7 @@ function updateGraphCurrentNodes(){
 
 function markReduced(links, currentLinks, selectLinks, comparisonLinks, nodes, maxValue){
 	nodes.classed("visibleNode", function(d){
-		return getCurrentNumberOfCandidates(d) < maxValue;
+		return shouldBeVisible(d, maxValue);
 	});
 	links.classed("visibleLink", false);
 	currentLinks.classed("visibleLink", false);
@@ -415,7 +415,7 @@ function markReduced(links, currentLinks, selectLinks, comparisonLinks, nodes, m
 
 	links.filter(":not(.zero-element)")
 	.classed("visibleLink", function(d){
-		if (getCurrentNumberOfCandidates(d) < maxValue) {
+		if (shouldBeVisible(d, maxValue)) {
 			nodes.filter("#" + nodeComponentPrefix + d.source.ID)
 			.classed("visibleNode", true);
 			nodes.filter("#" + nodeComponentPrefix + d.target.ID)

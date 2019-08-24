@@ -29,6 +29,34 @@
 			</pf:slider>
 		</h:panelGrid>
 	</h:form>
+	
+	<!-- SMALL ELEMENTS FILTER OPTION -->
+	<h:form>
+		<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
+			<h:outputText id="outputSmallFilter"
+				value="Small Elements Filter: #{sessionInfo.getCurrentProjectInfo().optionsInfo.smallElementsFilterSize} Candidates"></h:outputText>
+			<h:inputHidden id="txtSmallFilter"
+				value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.smallElementsFilterSize}"></h:inputHidden>
+			<pf:slider for="txtSmallFilter" minValue="0" maxValue="100" display="outputSmallFilter"
+				style="width: auto;" displayTemplate="Small Elements Filter: {value} Candidates">
+				<pf:ajax event="slideEnd" process="txtSmallFilter" />
+			</pf:slider>
+		</h:panelGrid>
+	</h:form>
+	
+	<!-- BIG ELEMENTS FILTER OPTION -->
+	<h:form>
+		<h:panelGrid columns="1" style="margin-bottom: 10px; width: 100%;">
+			<h:outputText id="outputBigFilter"
+				value="Big Elements Filter: #{sessionInfo.getCurrentProjectInfo().optionsInfo.bigElementsFilterSize} Candidates"></h:outputText>
+			<h:inputHidden id="txtBigFilter"
+				value="#{sessionInfo.getCurrentProjectInfo().optionsInfo.bigElementsFilterSize}"></h:inputHidden>
+			<pf:slider for="txtBigFilter" minValue="0" maxValue="100" display="outputBigFilter"
+				style="width: auto;" displayTemplate="Big Elements Filter: {value} Candidates">
+				<pf:ajax event="slideEnd" process="txtBigFilter" />
+			</pf:slider>
+		</h:panelGrid>
+	</h:form>
 
 	<!-- NAME AS ID OPTION -->
 	<div class="custom-control custom-checkbox">

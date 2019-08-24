@@ -428,7 +428,7 @@ function updateBiGraphCurrentNodes(){
 function markReducedBiGraph(links, currentLinks, selectLinks, comparisonLinks, nodes, servers, maxValue){	
 	links.classed("visibleLink", false);
 	nodes.classed("visibleNode", function(d){
-		return getCurrentNumberOfCandidates(d) < maxValue;
+		return shouldBeVisible(d, maxValue);
 	});
 	servers.classed("visibleNode", false);
 	currentLinks.classed("visibleLink", false);
@@ -437,7 +437,7 @@ function markReducedBiGraph(links, currentLinks, selectLinks, comparisonLinks, n
 	
 	links.filter(":not(.zero-element)")
 	.classed("visibleLink", function(d){
-		if (getCurrentNumberOfCandidates(d) < maxValue) {
+		if (shouldBeVisible(d, maxValue)) {
 			nodes.filter("#" + nodeComponentPrefixBiGraph + d.source.ID)
 			.classed("visibleNode", true);
 			servers.filter("#" + nodeServerPrefixBiGraph + d.target.ID)

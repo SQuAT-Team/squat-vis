@@ -15,7 +15,7 @@ public class DescriptionProvider {
 	private static final String MARKED_DESCRIPTION = "These candidates are 'interesting' from the user's perspecitve, but not completely evaluated yet. These candidates are usually potential selected candidates.";
 	private static final String SELECTED_DESCRIPTION = "Candidates that should be taken to the next level of optimization or exported as final results.";
 	private static final String ALL_DESCRIPTION = "All (visible) candidates are listed here.";
-	private static final String REDUCE_GRAPH_DESCRIPTION = "Nodes and links used by all candidates are hidden. Thus, only differences become visible.";
+	private static final String REDUCE_GRAPH_DESCRIPTION = "Nodes and links used by all candidates are hidden. Thus, only differences become visible. Also applies the other filters specified in the options.";
 	private static final String SHOW_POPULATION_STAR_DESCRIPTION = "The available candidates are shown in the background of the star plot. Allows a rough comparison with the population.";
 	private static final String SHOW_PARENTS_MATRIX_DESCRIPTION = "Shows parent relation in the matrix view for current candidates.";
 	private static final String SHOW_PARETO_MATRIX_DESCRIPTION = "Shows red circles around Pareto candidates.";

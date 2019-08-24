@@ -188,3 +188,8 @@ function setActiveServer(){
 	var elementStatus = element.classed("selected-server");
 	d3.selectAll(".server-id-" + id).classed("selected-server", function(d){return !elementStatus});
 }
+
+function shouldBeVisible(d, maxValue){
+	var nodesCurrentNumberOfCandidates = getCurrentNumberOfCandidates(d);
+	return nodesCurrentNumberOfCandidates < (maxValue - bigElementsFilter) && nodesCurrentNumberOfCandidates > smallElementsFilter;
+}

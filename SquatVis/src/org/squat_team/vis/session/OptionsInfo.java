@@ -26,6 +26,7 @@ public class OptionsInfo implements Serializable {
 	private boolean useMinimizedMatrix = true;
 	private boolean shortenName = true;
 	private int smallElementsFilterSize = 0;
+	private int bigElementsFilterSize = 0;
 	private int linkLength = 75;
 	private float populationTransparency = 0.15f;
 	
