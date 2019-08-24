@@ -167,6 +167,14 @@ text.server-node-text {
 	visibility: visible;
 }
 
+#graphOptions.reduce-graph-active line.select-link {
+	visibility: hidden;
+}
+
+#graphOptions.reduce-graph-active line.select-link.visibleLink {
+	visibility: visible;
+}
+
 #graphOptions.reduce-graph-active line.current-link {
 	visibility: hidden;
 }
