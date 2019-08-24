@@ -49,6 +49,25 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	
+	<!--SHORTEN NAME OPTION -->
+	<div class="custom-control custom-checkbox">
+		<c:choose>
+			<c:when
+				test="${sessionInfo.getCurrentProjectInfo().optionsInfo.getShortenName()}">
+				<input type="checkbox" id="shortenNameCheckbox"
+					class="custom-control-input" checked="true"
+					onchange="changeShortenName()"> <label
+					class="custom-control-label" for="shortenNameCheckbox">Short Component Names</label> </input>
+			</c:when>
+			<c:otherwise>
+				<input type="checkbox" id="shortenNameCheckbox"
+					class="custom-control-input" onchange="changeShortenName()">
+					<label class="custom-control-label"
+					for="shortenNameCheckbox">Short Component Names</label> </input>
+			</c:otherwise>
+		</c:choose>
+	</div>
 
 </composite:implementation>
 

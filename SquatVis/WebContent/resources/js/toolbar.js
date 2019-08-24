@@ -109,6 +109,15 @@ function changeUseNameInsteadOfId(){
 	} ]);
 }
 
+function changeShortenName(){
+	var checkboxValue = $("#shortenNameCheckbox").prop("checked");
+	// notify backend
+	setShortenName_application([ {
+		name : 'param',
+		value : checkboxValue
+	} ]);
+}
+
 function getCandidateIdsWithElement(element){
 	var candidateItems = $("div.list-group.candidate-list.toolbarAll")
 	.children(".candidate-item");

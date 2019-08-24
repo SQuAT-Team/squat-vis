@@ -146,7 +146,12 @@ function render(nodes, links){
   lables = node.append("text")
   	  .attr("class", "component-node-text")
       .text(function(d) {
-        return d.Name;
+      	if(shortenName){
+      	  var nameParts = d.Name.split(".");
+      	  return nameParts[nameParts.length-1];
+      	}else{
+      	  return d.Name;
+      	}
       })
       .attr('x', 0)
       .attr('y', function(d){return d.currentRadius + textMargin;})

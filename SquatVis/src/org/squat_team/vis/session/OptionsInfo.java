@@ -24,6 +24,8 @@ public class OptionsInfo implements Serializable {
 	private boolean showSuggestions = true;
 	private boolean useNameInsteadOfId = true;
 	private boolean useMinimizedMatrix = true;
+	private boolean shortenName = true;
+	private int smallElementsFilterSize = 0;
 	private int linkLength = 75;
 	private float populationTransparency = 0.15f;
 	
@@ -61,6 +63,15 @@ public class OptionsInfo implements Serializable {
 	
 	public boolean getUseMinimizedMatrix() {
 		return this.useMinimizedMatrix;
+	}
+	
+	public void setShortenName() {
+		String newState = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("param");
+		this.shortenName = Boolean.parseBoolean(newState);
+	}
+	
+	public boolean getShortenName() {
+		return this.shortenName;
 	}
 	
 	public enum ParetoMode {
