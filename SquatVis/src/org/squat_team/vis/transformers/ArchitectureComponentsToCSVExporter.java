@@ -10,6 +10,7 @@ import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.session.ProjectInfo;
+import org.squat_team.vis.util.IdentifierFormatter;
 
 import lombok.extern.java.Log;
 
@@ -17,6 +18,7 @@ import lombok.extern.java.Log;
 public class ArchitectureComponentsToCSVExporter extends AbstractExporter {
 	private static final String CANDIDATE_SEPARATOR = " + ";
 	private Map<String, Entry> components = new HashMap<>();
+	private IdentifierFormatter formatter = new IdentifierFormatter();
 	private boolean useNameInsteadOfId;
 	
 	public String export(Project project, ProjectInfo projectInfo) {
@@ -97,16 +99,15 @@ public class ArchitectureComponentsToCSVExporter extends AbstractExporter {
 	}
 
 	private String getIdFrom(ArchitectureComponent component) {
+		String id;
 		if (useNameInsteadOfId) {
-			return replaceAllWhitespaces(component.getName());
+			id = component.getName();
 		} else {
-			return component.getComponentId();
+			id = component.getComponentId();
 		}
+		return formatter.format(id);
 	}
 
-	private String replaceAllWhitespaces(String name) {
-		return name.replaceAll("\\s+", "-");
-	}
 	private class Entry {
 		private ArchitectureComponent component;
 		private String candidates = "";

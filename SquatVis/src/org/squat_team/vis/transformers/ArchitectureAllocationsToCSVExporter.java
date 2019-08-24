@@ -11,10 +11,12 @@ import org.squat_team.vis.data.data.Candidate;
 import org.squat_team.vis.data.data.Level;
 import org.squat_team.vis.data.data.Project;
 import org.squat_team.vis.session.ProjectInfo;
+import org.squat_team.vis.util.IdentifierFormatter;
 
 public class ArchitectureAllocationsToCSVExporter extends AbstractExporter {
 	private static final String CANDIDATE_SEPARATOR = " + ";
 	private Map<String, Entry> allocations = new HashMap<>();
+	private IdentifierFormatter formatter = new IdentifierFormatter();
 	private boolean useNameInsteadOfId;
 	
 	public String export(Project project, ProjectInfo projectInfo) {
@@ -98,15 +100,13 @@ public class ArchitectureAllocationsToCSVExporter extends AbstractExporter {
 	}
 
 	private String getIdFrom(ArchitectureComponent component) {
+		String id;
 		if (useNameInsteadOfId) {
-			return replaceAllWhitespaces(component.getName());
+			id = component.getName();
 		} else {
-			return component.getComponentId();
+			id = component.getComponentId();
 		}
-	}
-
-	private String replaceAllWhitespaces(String name) {
-		return name.replaceAll("\\s+", "-");
+		return formatter.format(id);
 	}
 
 	private class Entry {
