@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>SquatVis</groupId>
 	<artifactId>SquatVis</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>war</packaging>
 	<properties>
 		<powermock.version>2.0.2</powermock.version>
@@ -318,7 +318,7 @@
 		<dependency>
 			<groupId>org.squat_team.vis.connector</groupId>
 			<artifactId>SquatVisToolConnector</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 			<scope>compile</scope>
 		</dependency>
 		<!-- AUTOMATIC GETTERS AND SETTERS -->
