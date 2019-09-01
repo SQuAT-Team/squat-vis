@@ -43,7 +43,7 @@ public class ColorInfo implements Serializable {
 	}
 
 	private String getDefaultColor() {
-		String defaultColor = defaultColors[defaultColorsIndex];
+		String defaultColor = defaultColors[defaultColorsIndex % defaultColors.length];
 		defaultColorsIndex++;
 		return defaultColor;
 	}
