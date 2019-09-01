@@ -14,3 +14,7 @@ More details: [About the Connector Interface](https://github.com/SQuAT-Team/squa
 ## Install Instructions / Development
 
 See [Installation & Development](https://github.com/SQuAT-Team/squat-vis/wiki/Installation-&-Development).
+
+## Video Tutorial
+
+There is a [video tutorial](https://www.youtube.com/watch?v=ZZtjrj2e_ms&list=PLJGDPyV4M90uorucX4koZnHMj_eq5pl77) (~20 minutes) that explains how to use the tool.
