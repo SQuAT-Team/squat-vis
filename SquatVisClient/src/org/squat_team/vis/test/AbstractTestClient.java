@@ -1,5 +1,6 @@
 package org.squat_team.vis.test;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.squat_team.vis.connector.ProjectConnector;
@@ -14,9 +15,14 @@ import org.squat_team.vis.connector.exceptions.ProtocolFailure;
 import org.squat_team.vis.connector.protocols.NewLevelClientProtocol;
 import org.squat_team.vis.connector.protocols.NewProjectClientProtocol;
 import org.squat_team.vis.connector.protocols.ProjectTerminatedClientProtocol;
+import org.squat_team.vis.test.exporter.CsvExporter;
 import org.squat_team.vis.test.importer.IImporter;
+import org.squat_team.vis.test.testData.TestNewLevelDataProvider;
+import org.squat_team.vis.test.testData.TestNewProjectDataProvider;
 
 public abstract class AbstractTestClient {
+	private static final String EXPORT_DIRECTORY_PATH = "." + File.separator + "SquatVisExports";
+
 	private ProjectConnector projectConnector;
 
 	protected abstract IImporter getImporter();
@@ -28,7 +34,7 @@ public abstract class AbstractTestClient {
 	public void run() throws HostUnreachableException, ConnectionFailure, ProtocolFailure,
 			InvalidRequestException, IOException, InterruptedException {
 		System.out.println("STARTING SQUAT TEST CLIENT");
-		sendData();
+		exportData();
 		System.out.println("SHUTTING DOWN SQUAT TEST CLIENT");
 	}
 
@@ -39,6 +45,17 @@ public abstract class AbstractTestClient {
 		sendLevels();
 		terminateProject();
 	}
+	
+
+	protected void exportData() throws IOException {
+		System.out.println("EXPORT TO OTHER FORMATS");
+		//TestNewProjectDataProvider testProjectDataProvider = new TestNewProjectDataProvider();
+		//TestNewLevelDataProvider testLevelDataProvider = new TestNewLevelDataProvider();
+		IImporter importer = getImporter();
+		CsvExporter csvExporter = new CsvExporter(EXPORT_DIRECTORY_PATH);
+		csvExporter.export(importer.importProject(), importer.importGoals(),
+				importer.importLevels(), importer.importConfiguration());
+	}
 
 	private void makeNewProjectRequest()
 			throws HostUnreachableException, ConnectionFailure, ProtocolFailure, InvalidRequestException, IOException {
@@ -47,9 +64,9 @@ public abstract class AbstractTestClient {
 		CGoal goal = getImporter().importGoals();
 		CToolConfiguration configuration = getImporter().importConfiguration();
 		NewProjectClientProtocol protocol = new NewProjectClientProtocol(project, configuration, goal);
-		projectConnector = protocol.call();
+		//projectConnector = protocol.call();
 		System.out.println("FINSIHED REQUEST");
-		System.out.println("RECEIVED CONNECTION WITH ID: " + projectConnector.getProjectId());
+		//System.out.println("RECEIVED CONNECTION WITH ID: " + projectConnector.getProjectId());
 	}
 
 	private void sleep(long timeInMillis) throws InterruptedException {
@@ -64,8 +81,8 @@ public abstract class AbstractTestClient {
 				getLevelEndIndex())) {
 			System.out.println("SEND NEW LEVEL");
 			NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector, true);
-			boolean success = protocol.call();
-			System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
+			//boolean success = protocol.call();
+			//System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
 			sleep(10000);
 		}
 	}
@@ -73,7 +90,7 @@ public abstract class AbstractTestClient {
 	private void terminateProject() throws ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		System.out.println("TERMINATE PROJECT");
 		ProjectTerminatedClientProtocol protocol = new ProjectTerminatedClientProtocol(projectConnector);
-		boolean success = protocol.call();
-		System.out.println("TERMINATE PROJECT SUCCESSFUL: " + success);
+		//boolean success = protocol.call();
+		//System.out.println("TERMINATE PROJECT SUCCESSFUL: " + success);
 	}
 }

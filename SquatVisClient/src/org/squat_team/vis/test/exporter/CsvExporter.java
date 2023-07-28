@@ -12,6 +12,8 @@ import org.squat_team.vis.connector.data.CGoal;
 import org.squat_team.vis.connector.data.CLevel;
 import org.squat_team.vis.connector.data.CProject;
 import org.squat_team.vis.connector.data.CToolConfiguration;
+import org.squat_team.vis.test.analysis.ArchitectureAnalysisData;
+import org.squat_team.vis.test.analysis.PCMArchitectureAnalyzer;
 
 /**
  * Exports the files as a csv file. It contains columns for the candidate's id,
@@ -21,6 +23,7 @@ import org.squat_team.vis.connector.data.CToolConfiguration;
 public class CsvExporter implements IExporter {
 	private static final String FILE_EXTENSION = ".csv";
 	private String exportDirectoryPath;
+	private PCMArchitectureAnalyzer analyzer;
 
 	public CsvExporter(String exportDirectoryPath) {
 		this.exportDirectoryPath = exportDirectoryPath;
@@ -33,6 +36,7 @@ public class CsvExporter implements IExporter {
 		StringBuilder contentBuilder = new StringBuilder();
 		exportNameHeader(contentBuilder);
 		exportGoals(goal, contentBuilder, toolConfiguration);
+		exportArchitecture(contentBuilder);
 		exportLevels(levels, contentBuilder, toolConfiguration);
 		exportFile(contentBuilder.toString(), filePath);
 	}
@@ -40,11 +44,12 @@ public class CsvExporter implements IExporter {
 	private void exportNameHeader(StringBuilder contentBuilder) {
 		contentBuilder.append("Candidate ID");
 		endValue(contentBuilder);
+		contentBuilder.append("Candidate Filename");
+		endValue(contentBuilder);
 	}
 
 	private void exportGoals(CGoal rootGoal, StringBuilder contentBuilder, CToolConfiguration toolConfiguration) {
 		exportGoal(rootGoal, contentBuilder, toolConfiguration);
-		endLine(contentBuilder);
 	}
 
 	private void exportGoal(CGoal goal, StringBuilder contentBuilder, CToolConfiguration toolConfiguration) {
@@ -66,6 +71,12 @@ public class CsvExporter implements IExporter {
 		}
 	}
 
+	// TODO:
+	private void exportArchitecture(StringBuilder contentBuilder) {
+		contentBuilder.append("Component Number");
+		endLine(contentBuilder);
+	}
+
 	private void exportLevels(List<CLevel> levels, StringBuilder contentBuilder, CToolConfiguration toolConfiguration) {
 		for (CLevel level : levels) {
 			exportLevel(level, contentBuilder, toolConfiguration);
@@ -73,6 +84,7 @@ public class CsvExporter implements IExporter {
 	}
 
 	private void exportLevel(CLevel level, StringBuilder contentBuilder, CToolConfiguration toolConfiguration) {
+		analyzer = new PCMArchitectureAnalyzer(level);
 		for (CCandidate candidate : level.getCandidates()) {
 			exportCandidate(candidate, contentBuilder, toolConfiguration);
 		}
@@ -80,12 +92,27 @@ public class CsvExporter implements IExporter {
 
 	private void exportCandidate(CCandidate candidate, StringBuilder contentBuilder,
 			CToolConfiguration toolConfiguration) {
+		System.out.println("Print Candidate " + candidate.getCandidateId());
+		ArchitectureAnalysisData analysisData = null;
+		try {
+			analysisData = analyzer.analyzeCandidateStatic(candidate);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		exportCandidateId(candidate, contentBuilder);
+		exportCandidatePath(candidate, contentBuilder);
+
 		int numberOfValues = Math.max(candidate.getRealValues().size(), candidate.getUtilityValues().size());
 		for (int i = 0; i < numberOfValues; i++) {
 			exportCandidateValue(candidate, i, contentBuilder, toolConfiguration);
 		}
+		exportCandidateArchitecture(candidate, contentBuilder, analysisData);
 		endLine(contentBuilder);
+	}
+
+	private void exportCandidatePath(CCandidate candidate, StringBuilder contentBuilder) {
+		contentBuilder.append(candidate.getArchitecture().getRepository().getPath());
+		endValue(contentBuilder);
 	}
 
 	private void exportCandidateId(CCandidate candidate, StringBuilder contentBuilder) {
@@ -103,6 +130,13 @@ public class CsvExporter implements IExporter {
 			contentBuilder.append(candidate.getRealValues().get(i));
 			endValue(contentBuilder);
 		}
+	}
+
+	// TODO:
+	private void exportCandidateArchitecture(CCandidate candidate, StringBuilder contentBuilder,
+			ArchitectureAnalysisData data) {
+		contentBuilder.append(data.getComponents().size());
+		endValue(contentBuilder);
 	}
 
 	private void exportFile(String content, String filePath) throws IOException {

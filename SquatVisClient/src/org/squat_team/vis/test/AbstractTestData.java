@@ -46,74 +46,54 @@ public abstract class AbstractTestData {
 		CGoal goal = testDataProvider.getGoal();
 		CToolConfiguration configuration = testDataProvider.getConfiguration();
 		NewProjectClientProtocol protocol = new NewProjectClientProtocol(project, configuration, goal);
-		projectConnector = protocol.call();
+		//projectConnector = protocol.call();
 		System.out.println("FINSIHED REQUEST");
 		System.out.println("RECEIVED CONNECTION WITH ID: " + projectConnector.getProjectId());
 	}
 
 	protected static void makeStatusUpdate1() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
-		try {
-			System.out.println("UPDATING STATUS");
-			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-			CStatus status = testDataProvider.getStatus1of5();
-			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-			boolean success = protocol.call();
-			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
-		} catch (InvalidRequestException e) {
-			e.printStackTrace();
-		}
+		System.out.println("UPDATING STATUS");
+		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+		CStatus status = testDataProvider.getStatus1of5();
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+		//boolean success = protocol.call();
+		//System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
 
 	protected static void makeStatusUpdate2() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
-		try {
-			System.out.println("UPDATING STATUS");
-			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-			CStatus status = testDataProvider.getStatus2of5();
-			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-			boolean success = protocol.call();
-			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
-		} catch (InvalidRequestException e) {
-			e.printStackTrace();
-		}
+		System.out.println("UPDATING STATUS");
+		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+		CStatus status = testDataProvider.getStatus2of5();
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+		//boolean success = protocol.call();
+		//System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
 
 	protected static void makeStatusUpdate3() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
-		try {
-			System.out.println("UPDATING STATUS");
-			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-			CStatus status = testDataProvider.getStatus3of5();
-			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-			boolean success = protocol.call();
-			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
-		} catch (InvalidRequestException e) {
-			e.printStackTrace();
-		}
+		System.out.println("UPDATING STATUS");
+		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+		CStatus status = testDataProvider.getStatus3of5();
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+		//boolean success = protocol.call();
+		//System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
 
 	protected static void makeStatusUpdate4() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
-		try {
-			System.out.println("UPDATING STATUS");
-			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-			CStatus status = testDataProvider.getStatus4of5();
-			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-			boolean success = protocol.call();
-			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
-		} catch (InvalidRequestException e) {
-			e.printStackTrace();
-		}
+		System.out.println("UPDATING STATUS");
+		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+		CStatus status = testDataProvider.getStatus4of5();
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+		//boolean success = protocol.call();
+		//System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
 
 	protected static void makeStatusUpdate5() throws HostUnreachableException, ConnectionFailure, ProtocolFailure {
-		try {
-			System.out.println("UPDATING STATUS");
-			TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
-			CStatus status = testDataProvider.getStatus5of5();
-			UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
-			boolean success = protocol.call();
-			System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
-		} catch (InvalidRequestException e) {
-			e.printStackTrace();
-		}
+		System.out.println("UPDATING STATUS");
+		TestStatusUpdateDataProvider testDataProvider = new TestStatusUpdateDataProvider();
+		CStatus status = testDataProvider.getStatus5of5();
+		UpdateStatusClientProtocol protocol = new UpdateStatusClientProtocol(status, projectConnector);
+		//boolean success = protocol.call();
+		//System.out.println("UPDATE STATUS SUCCESSFUL: " + success);
 	}
 
 	protected static void sleep(long timeInMillis) throws InterruptedException {
@@ -128,8 +108,8 @@ public abstract class AbstractTestData {
 		TestNewLevelDataProvider testDataProvider = new TestNewLevelDataProvider();
 		CLevel level = testDataProvider.getLevel0();
 		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector, noResponse);
-		boolean success = protocol.call();
-		System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
+		//boolean success = protocol.call();
+		//System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
 	}
 
 	protected static void sendLevel1(boolean noResponse)
@@ -138,24 +118,24 @@ public abstract class AbstractTestData {
 		TestNewLevelDataProvider testDataProvider = new TestNewLevelDataProvider();
 		CLevel level = testDataProvider.getLevel1();
 		NewLevelClientProtocol protocol = new NewLevelClientProtocol(level, projectConnector, noResponse);
-		boolean success = protocol.call();
-		System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
+		//boolean success = protocol.call();
+		//System.out.println("SENDING LEVEL SUCCESSFUL: " + success);
 	}
 
 	protected static void terminateProject() throws ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		System.out.println("TERMINATE PROJECT");
 		ProjectTerminatedClientProtocol protocol = new ProjectTerminatedClientProtocol(projectConnector);
-		boolean success = protocol.call();
-		System.out.println("TERMINATE PROJECT SUCCESSFUL: " + success);
+		//boolean success = protocol.call();
+		//System.out.println("TERMINATE PROJECT SUCCESSFUL: " + success);
 	}
 
 	protected static void waitForResponse(int levelNumber)
 			throws ConnectionFailure, ProtocolFailure, InvalidRequestException {
 		System.out.println("WAIT FOR RESPONSE");
 		LevelResponseClientProtocol protocol = new LevelResponseClientProtocol(levelNumber, projectConnector);
-		List<Long> success = protocol.call();
+		//List<Long> success = protocol.call();
 		System.out.println("RECEIVED RESPONSE");
-		System.out.println("LEVEL RESPONSES: " + success);
+		//System.out.println("LEVEL RESPONSES: " + success);
 	}
 
 	protected static void exportData() throws IOException {
