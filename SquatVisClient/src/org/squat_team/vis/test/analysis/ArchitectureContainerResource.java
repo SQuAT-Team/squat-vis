@@ -3,8 +3,11 @@ package org.squat_team.vis.test.analysis;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import lombok.Data;
 
+@XmlRootElement
 @Data
 public class ArchitectureContainerResource {
 	private Long id;

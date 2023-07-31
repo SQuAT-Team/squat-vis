@@ -24,6 +24,7 @@ public class CsvExporter implements IExporter {
 	private static final String FILE_EXTENSION = ".csv";
 	private String exportDirectoryPath;
 	private PCMArchitectureAnalyzer analyzer;
+	private XmlExporter exporter = new XmlExporter();
 
 	public CsvExporter(String exportDirectoryPath) {
 		this.exportDirectoryPath = exportDirectoryPath;
@@ -137,6 +138,8 @@ public class CsvExporter implements IExporter {
 			ArchitectureAnalysisData data) {
 		contentBuilder.append(data.getComponents().size());
 		endValue(contentBuilder);
+		
+		exporter.jaxbObjectToXML(data);
 	}
 
 	private void exportFile(String content, String filePath) throws IOException {

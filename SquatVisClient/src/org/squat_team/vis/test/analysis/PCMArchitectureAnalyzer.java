@@ -186,6 +186,7 @@ public class PCMArchitectureAnalyzer {
 		List<ArchitectureComponentAllocation> allocations = createComponentAllocations(allocation, resources,
 				components);
 
+		architectureAnalysis.setId(candidate.getCandidateId());
 		architectureAnalysis.getComponents().addAll(components.values());
 		architectureAnalysis.setComponentLinks(componentLinks);
 		architectureAnalysis.getResourcesContainers().addAll(resources.values());
